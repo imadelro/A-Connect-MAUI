@@ -1,0 +1,86 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="A_Connect.Views.LoginPage"
+             BackgroundColor="White"
+             Title="Login">
+
+        <VerticalStackLayout Padding="20" 
+                             Spacing="12" 
+                             VerticalOptions="CenterAndExpand"
+                             HorizontalOptions="Center">
+            
+            <!-- Back Button -->
+            <ImageButton x:Name="backButton"
+                         Source="backbtn"
+                         WidthRequest="{OnIdiom Phone=50, Tablet=70, Desktop=80}"
+                         HeightRequest="{OnIdiom Phone=50, Tablet=70, Desktop=80}"
+                         HorizontalOptions="Start"
+                         Clicked="OnBackClicked"/>
+            
+            <!-- App Title -->
+            <Label Text="A-Connect"
+                   FontSize="{OnIdiom Phone=24, Tablet=30, Desktop=36}"
+                   FontFamily="Inter-Black"
+                   TextColor="{StaticResource MidBlue}"
+                   HorizontalOptions="Center"
+                   Padding="0,10,0,0"/>
+
+            <!-- Account Icon -->
+            <Image Source="account_icon"
+                   WidthRequest="{OnIdiom Phone=50, Tablet=70, Desktop=90}"
+                   HeightRequest="{OnIdiom Phone=50, Tablet=70, Desktop=90}"
+                   Margin="0,0,0,15"
+                   HorizontalOptions="Center"/>
+
+            <!-- Login Card -->
+            <Frame CornerRadius="0"
+                   HasShadow="True"
+                   WidthRequest="250"
+                   Padding="20"
+                   HorizontalOptions="Center">
+                
+                <VerticalStackLayout Spacing="10">
+                    
+                    <!-- Login Title -->
+                    <Label Text="Log In"
+                           FontSize="{OnIdiom Phone=20, Tablet=26, Desktop=32}"
+                           FontFamily="Inter-SemiBold"
+                           HorizontalOptions="Center"/>
+
+                    <!-- Email Label -->
+                    <Label Text="Email/ID Number"
+                           FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=18}"
+                           FontFamily="Inter-Regular"/>
+
+                    <!-- Email Input -->
+                    <Entry x:Name="emailIDnum"
+                           Placeholder="juan.delacruz@student.ateneo.edu"
+                           Keyboard="Email"
+                           FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=18}"/>
+
+                    <!-- Password Label -->
+                    <Label Text="Password"
+                           FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=18}"
+                           FontFamily="Inter-Regular"/>
+
+                    <!-- Password Input -->
+                    <Entry x:Name="passwordEntry"
+                           Placeholder="************"
+                           IsPassword="True"
+                           FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=18}"/>
+
+                    <!-- Login Button -->
+                    <Button x:Name="btnLogin"
+                            Text="Login"
+                            WidthRequest="200"
+                            BackgroundColor="{StaticResource MidBlue}"
+                            Clicked="OnLoginClicked"
+                            FontFamily="Inter-Regular"
+                            FontSize="{OnIdiom Phone=16, Tablet=18, Desktop=20}"
+                            HorizontalOptions="Center"/>
+                    
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+</ContentPage>

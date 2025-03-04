@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <Shell
     x:Class="A_Connect.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:A_Connect"
-    Shell.FlyoutBehavior="Flyout"
+    xmlns:local="clr-namespace:A_Connect.Views"
+    Shell.FlyoutBehavior="Disabled"
     Title="A_Connect">
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Title="Login"
+        ContentTemplate="{DataTemplate local:LoginPage}"
+        Route="LoginPage" />
 
 </Shell>
