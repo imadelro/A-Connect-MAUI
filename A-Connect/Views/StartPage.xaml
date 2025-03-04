@@ -5,28 +5,28 @@
              Padding="0,50,0,50"
              Title="A-Connect">
 
-    <VerticalStackLayout HorizontalOptions="Center"
+<VerticalStackLayout HorizontalOptions="Center"
                          VerticalOptions="Center"
                          Spacing="10">
-        
+
         <!-- Logo -->
-        <Image Source="logo.png"
-               WidthRequest="150"
+        <Image Source="logo"
+               WidthRequest="10"
                HeightRequest="108"
                Margin="0,0,0,10"/>
 
         <!-- A-Connect Title -->
         <Label Text="A-Connect"
-               TextColor="{StaticResource LightGold}"
+               TextColor="{StaticResource Yellow}"
                FontSize="30"
-               FontFamily="Inter-Black"
+               FontFamily="Intern-Black"
                HorizontalOptions="Center"/>
 
         <!-- Tagline -->
         <Label Text="Where Ateneans come to connect."
-               FontFamily="montsemibolditalic"
+               FontFamily="Inter-Regular"
                TextColor="White"
-               FontSize="18"
+               FontSize="16"
                FontAttributes="Italic"
                HorizontalOptions="Center"
                Margin="0,0,0,40"/>
@@ -34,17 +34,19 @@
         <!-- Login Button -->
         <Button x:Name="btnLogin"
                 Text="Login"
-                WidthRequest="150"
+                WidthRequest="200"
                 BackgroundColor="{StaticResource MidBlue}"
-                FontFamily="Intern-Regular"
+                FontFamily="Inter-Regular"
+                CornerRadius="100"
                 Clicked="OnLoginClicked"/>
 
         <!-- Register Button -->
         <Button x:Name="btnRegister"
                 Text="Register"
                 WidthRequest="200"
-                BackgroundColor="Black"
-                FontFamily="Intern-Regular"
+                BackgroundColor="{StaticResource DarkBlue}"
+                FontFamily="Inter-Regular"
+                CornerRadius="100"
                 Clicked="OnRegisterClicked"/>
 
     </VerticalStackLayout>

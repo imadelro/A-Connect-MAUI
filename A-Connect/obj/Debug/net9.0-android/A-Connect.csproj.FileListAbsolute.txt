@@ -1349,6 +1349,9 @@ C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MA
 C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\obj\Debug\net9.0-android\resizetizer\f\account_icon.png
 C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\obj\Debug\net9.0-android\resizetizer\r\drawable\backbtn.png
 C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\obj\Debug\net9.0-android\assets\account_icon.png
+C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\obj\Debug\net9.0-android\resizetizer\f\Inter-Italic.otf
+C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\obj\Debug\net9.0-android\assets\Inter-Italic.otf
+C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\obj\Debug\net9.0-android\resizetizer\r\drawable\logo.png
 C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\bin\Debug\net9.0-android\Microsoft.Maui.Controls.HotReload.Forms.dll
 C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\bin\Debug\net9.0-android\Microsoft.VisualStudio.DesignTools.MobileTapContracts.dll
 C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\bin\Debug\net9.0-android\Microsoft.VisualStudio.DesignTools.TapContract.dll

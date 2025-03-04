@@ -7,7 +7,7 @@ namespace A_Connect.Views
     {
         public StartPage()
         {
-     
+             InitializeComponent();
         }
 
         private async void OnLoginClicked(object sender, EventArgs e)
