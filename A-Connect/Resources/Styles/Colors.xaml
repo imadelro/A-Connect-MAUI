@@ -42,4 +42,22 @@
     <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+
+
+    <!-- PROJECT COLORS -->
+    <Color x:Key="MidBlue">#3da9fc</Color>
+    <Color x:Key="DarkBlue">#094067</Color>
+    <Color x:Key="Gray">#5f6c7b</Color>
+    <Color x:Key="Yellow">#FFEDCA78</Color>
+    <Color x:Key="Red">#ef4565</Color>
+
+    <LinearGradientBrush x:Key="MainGradient" StartPoint="0,1" EndPoint="0,0">
+    <GradientStop Color="#2A6BB4" Offset="0.0" />
+    <GradientStop Color="#A4C7FF" Offset="1.0" />
+</LinearGradientBrush>
+
+
+
+    
+    
 </ResourceDictionary>
