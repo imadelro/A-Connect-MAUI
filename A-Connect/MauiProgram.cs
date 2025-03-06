@@ -1,24 +1,25 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Maui;
+using Microsoft.Maui.Hosting;
+using A_Connect;
 
-namespace A_Connect;
-
-public static class MauiProgram
+namespace A_Connect
 {
-	public static MauiApp CreateMauiApp()
-	{
-		var builder = MauiApp.CreateBuilder();
-		builder
-			.UseMauiApp<App>()
-			.ConfigureFonts(fonts =>
-			{
-				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			});
+    public static class MauiProgram
+    {
+        public static MauiApp CreateMauiApp()
+        {
+            var builder = MauiApp.CreateBuilder();
+            builder
+                .UseMauiApp<App>()
+                .ConfigureFonts(fonts =>
+                {
+                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                });
 
-#if DEBUG
-		builder.Logging.AddDebug();
-#endif
+            // Register the database service
+            builder.Services.AddSingleton<IDatabaseService, DatabaseService>();
 
-		return builder.Build();
-	}
+            return builder.Build();
+        }
+    }
 }

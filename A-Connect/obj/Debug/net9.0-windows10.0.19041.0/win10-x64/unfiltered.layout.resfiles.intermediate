@@ -1,6 +1,7 @@
 runtimes\win-x64\native\WebView2Loader.dll
 FluentUI.cs
 Inter-Black.otf
+Inter-Italic.otf
 Inter-Regular.otf
 Inter-SemiBold.otf
 OpenSans-Regular.ttf
@@ -59,6 +60,7 @@ dotnet_bot.scale-150.png
 dotnet_bot.scale-200.png
 dotnet_bot.scale-400.png
 icon_logo.scale-100.png
+logo.scale-100.png
 splashSplashScreen.scale-100.png
 splashSplashScreen.scale-125.png
 splashSplashScreen.scale-150.png
