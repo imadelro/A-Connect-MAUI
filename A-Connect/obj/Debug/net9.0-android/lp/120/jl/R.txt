@@ -1,2 +1,2 @@
-int[] styleable ViewPager2 { 0x10100c4 }
-int styleable ViewPager2_android_orientation 0
+int id report_drawn 0x0
+int id view_tree_on_back_pressed_dispatcher_owner 0x0
