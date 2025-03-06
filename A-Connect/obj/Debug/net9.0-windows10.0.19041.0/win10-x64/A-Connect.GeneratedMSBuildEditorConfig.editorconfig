@@ -58,6 +58,18 @@ build_metadata.AdditionalFiles.ManifestResourceName = A_Connect.Views.LoginPage.
 build_metadata.AdditionalFiles.TargetPath = Views\LoginPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\LoginPage.xaml
 
+[C:/Users/gersh/OneDrive/Desktop/aconnect/A-Connect/Views/ScheduleTradingFormPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = A_Connect.Views.ScheduleTradingFormPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ScheduleTradingFormPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ScheduleTradingFormPage.xaml
+
+[C:/Users/gersh/OneDrive/Desktop/aconnect/A-Connect/Views/ScheduleTradingPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = A_Connect.Views.ScheduleTradingPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ScheduleTradingPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ScheduleTradingPage.xaml
+
 [C:/Users/gersh/OneDrive/Desktop/aconnect/A-Connect/Views/StartPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = A_Connect.Views.StartPage.xaml

@@ -1,5 +1,6 @@
 ﻿using A_Connect.Services;
 using Microsoft.Extensions.Logging;
+using SQLite;
 
 namespace A_Connect;
 
@@ -18,6 +19,11 @@ public static class MauiProgram
         // register the UserDatabase.
         string dbPath = Path.Combine(FileSystem.AppDataDirectory, "users.db3");
         builder.Services.AddSingleton<UserDatabase>(s => new UserDatabase(dbPath));
+
+        // Register ScheduleTradingService with its own database
+        string scheddbPath = Path.Combine(FileSystem.AppDataDirectory, "scheduleTrading.db3");
+        var connection = new SQLiteAsyncConnection(scheddbPath);
+        builder.Services.AddSingleton(new ScheduleTradingService(connection));
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

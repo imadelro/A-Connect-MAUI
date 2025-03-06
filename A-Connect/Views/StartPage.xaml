@@ -48,7 +48,8 @@
                 FontFamily="Inter-Regular"
                 CornerRadius="100"
                 Clicked="OnRegisterClicked"/>
-
+        <Button Text="Go to Schedule Trading"
+                Clicked="OnScheduleTradingClicked" />
     </VerticalStackLayout>
 
 </ContentPage>
