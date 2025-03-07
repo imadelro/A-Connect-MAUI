@@ -80,6 +80,14 @@
               "target": "Package",
               "version": "[9.0.1, )",
               "autoReferenced": true
+            },
+            "SQLite": {
+              "target": "Package",
+              "version": "[3.13.0, )"
+            },
+            "sqlite-net-pcl": {
+              "target": "Package",
+              "version": "[1.9.172, )"
             }
           },
           "imports": [
@@ -119,6 +127,14 @@
               "target": "Package",
               "version": "[9.0.1, )",
               "autoReferenced": true
+            },
+            "SQLite": {
+              "target": "Package",
+              "version": "[3.13.0, )"
+            },
+            "sqlite-net-pcl": {
+              "target": "Package",
+              "version": "[1.9.172, )"
             }
           },
           "imports": [
@@ -158,6 +174,14 @@
               "target": "Package",
               "version": "[9.0.1, )",
               "autoReferenced": true
+            },
+            "SQLite": {
+              "target": "Package",
+              "version": "[3.13.0, )"
+            },
+            "sqlite-net-pcl": {
+              "target": "Package",
+              "version": "[1.9.172, )"
             }
           },
           "imports": [
@@ -192,6 +216,14 @@
             "Microsoft.Maui.Controls": {
               "target": "Package",
               "version": "[9.0.14, )"
+            },
+            "SQLite": {
+              "target": "Package",
+              "version": "[3.13.0, )"
+            },
+            "sqlite-net-pcl": {
+              "target": "Package",
+              "version": "[1.9.172, )"
             }
           },
           "imports": [
