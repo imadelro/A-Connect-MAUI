@@ -8,7 +8,7 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = A_Connect
-build_property.ProjectDir = C:\Users\gersh\OneDrive\Desktop\aconnect\A-Connect\
+build_property.ProjectDir = C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.CsWinRTAotOptimizerEnabled = true
@@ -22,43 +22,49 @@ build_property.CsWinRTUseWindowsUIXamlProjections = false
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/gersh/OneDrive/Desktop/aconnect/A-Connect/App.xaml]
+[C:/Users/Malena del Rosario/Documents/Ateneo/3rd Year/SEM 2/CSCI 42/A-Connect-MAUI/A-Connect/App.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = A_Connect.App.xaml
 build_metadata.AdditionalFiles.TargetPath = App.xaml
 build_metadata.AdditionalFiles.RelativePath = App.xaml
 
-[C:/Users/gersh/OneDrive/Desktop/aconnect/A-Connect/AppShell.xaml]
+[C:/Users/Malena del Rosario/Documents/Ateneo/3rd Year/SEM 2/CSCI 42/A-Connect-MAUI/A-Connect/AppShell.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = A_Connect.AppShell.xaml
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
 
-[C:/Users/gersh/OneDrive/Desktop/aconnect/A-Connect/MainPage.xaml]
+[C:/Users/Malena del Rosario/Documents/Ateneo/3rd Year/SEM 2/CSCI 42/A-Connect-MAUI/A-Connect/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = A_Connect.MainPage.xaml
 build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
 build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
 
-[C:/Users/gersh/OneDrive/Desktop/aconnect/A-Connect/Resources/Styles/Colors.xaml]
+[C:/Users/Malena del Rosario/Documents/Ateneo/3rd Year/SEM 2/CSCI 42/A-Connect-MAUI/A-Connect/Resources/Styles/Colors.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = A_Connect.Resources.Styles.Colors.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Colors.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Colors.xaml
 
-[C:/Users/gersh/OneDrive/Desktop/aconnect/A-Connect/Resources/Styles/Styles.xaml]
+[C:/Users/Malena del Rosario/Documents/Ateneo/3rd Year/SEM 2/CSCI 42/A-Connect-MAUI/A-Connect/Resources/Styles/Styles.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = A_Connect.Resources.Styles.Styles.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
 
-[C:/Users/gersh/OneDrive/Desktop/aconnect/A-Connect/Views/LoginPage.xaml]
+[C:/Users/Malena del Rosario/Documents/Ateneo/3rd Year/SEM 2/CSCI 42/A-Connect-MAUI/A-Connect/Views/HomePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = A_Connect.Views.HomePage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\HomePage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\HomePage.xaml
+
+[C:/Users/Malena del Rosario/Documents/Ateneo/3rd Year/SEM 2/CSCI 42/A-Connect-MAUI/A-Connect/Views/LoginPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = A_Connect.Views.LoginPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Views\LoginPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\LoginPage.xaml
 
-[C:/Users/gersh/OneDrive/Desktop/aconnect/A-Connect/Views/StartPage.xaml]
+[C:/Users/Malena del Rosario/Documents/Ateneo/3rd Year/SEM 2/CSCI 42/A-Connect-MAUI/A-Connect/Views/StartPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = A_Connect.Views.StartPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Views\StartPage.xaml

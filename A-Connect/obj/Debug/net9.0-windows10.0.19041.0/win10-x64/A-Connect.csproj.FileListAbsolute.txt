@@ -985,3 +985,18 @@ C:\Users\gersh\OneDrive\Desktop\aconnect\A-Connect\obj\Debug\net9.0-windows10.0.
 C:\Users\gersh\OneDrive\Desktop\aconnect\A-Connect\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\qualifiers.txt
 C:\Users\gersh\OneDrive\Desktop\aconnect\A-Connect\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\qualifiers.txt.intermediate
 C:\Users\gersh\OneDrive\Desktop\aconnect\A-Connect\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\MultipleQualifiersPerDimensionFound.txt
+C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\A-Connect.csproj.AssemblyReference.cache
+C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\mauiimage.inputs
+C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\mauifont.inputs
+C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\mauisplash.inputs
+C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\mauimanifest.stamp
+C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\Platforms\Windows\App.g.i.cs
+C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\Platforms\Windows\App.g.cs
+C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\XamlTypeInfo.g.cs
+C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\Platforms\Windows\App.xaml
+C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\Platforms\Windows\App.xbf
+C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\XamlSaveStateFile.xml
+C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\A-Connect.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\A-Connect.dll
+C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\refint\A-Connect.dll
+C:\Users\Malena del Rosario\Documents\Ateneo\3rd Year\SEM 2\CSCI 42\A-Connect-MAUI\A-Connect\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\A-Connect.pdb

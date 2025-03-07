@@ -1,26 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gersh\\OneDrive\\Desktop\\aconnect\\A-Connect\\A-Connect.csproj": {}
+    "C:\\Users\\Malena del Rosario\\Documents\\Ateneo\\3rd Year\\SEM 2\\CSCI 42\\A-Connect-MAUI\\A-Connect\\A-Connect.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gersh\\OneDrive\\Desktop\\aconnect\\A-Connect\\A-Connect.csproj": {
+    "C:\\Users\\Malena del Rosario\\Documents\\Ateneo\\3rd Year\\SEM 2\\CSCI 42\\A-Connect-MAUI\\A-Connect\\A-Connect.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gersh\\OneDrive\\Desktop\\aconnect\\A-Connect\\A-Connect.csproj",
+        "projectUniqueName": "C:\\Users\\Malena del Rosario\\Documents\\Ateneo\\3rd Year\\SEM 2\\CSCI 42\\A-Connect-MAUI\\A-Connect\\A-Connect.csproj",
         "projectName": "A-Connect",
-        "projectPath": "C:\\Users\\gersh\\OneDrive\\Desktop\\aconnect\\A-Connect\\A-Connect.csproj",
-        "packagesPath": "C:\\Users\\gersh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gersh\\OneDrive\\Desktop\\aconnect\\A-Connect\\obj\\",
+        "projectPath": "C:\\Users\\Malena del Rosario\\Documents\\Ateneo\\3rd Year\\SEM 2\\CSCI 42\\A-Connect-MAUI\\A-Connect\\A-Connect.csproj",
+        "packagesPath": "C:\\Users\\Malena del Rosario\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Malena del Rosario\\Documents\\Ateneo\\3rd Year\\SEM 2\\CSCI 42\\A-Connect-MAUI\\A-Connect\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\gersh\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Malena del Rosario\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0-android",
@@ -29,7 +24,6 @@
           "net9.0-windows10.0.19041.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -38,11 +32,11 @@
             "targetAlias": "net9.0-android",
             "projectReferences": {}
           },
-          "net9.0-ios18.1": {
+          "net9.0-ios18.2": {
             "targetAlias": "net9.0-ios",
             "projectReferences": {}
           },
-          "net9.0-maccatalyst18.1": {
+          "net9.0-maccatalyst18.2": {
             "targetAlias": "net9.0-maccatalyst",
             "projectReferences": {}
           },
@@ -61,7 +55,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0-android35.0": {
@@ -78,7 +72,7 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.1, )",
+              "version": "[9.0.2, )",
               "autoReferenced": true
             },
             "SQLite": {
@@ -109,9 +103,9 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         },
-        "net9.0-ios18.1": {
+        "net9.0-ios18.2": {
           "targetAlias": "net9.0-ios",
           "dependencies": {
             "Microsoft.Extensions.Logging.Debug": {
@@ -125,7 +119,7 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.1, )",
+              "version": "[9.0.2, )",
               "autoReferenced": true
             },
             "SQLite": {
@@ -156,9 +150,9 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         },
-        "net9.0-maccatalyst18.1": {
+        "net9.0-maccatalyst18.2": {
           "targetAlias": "net9.0-maccatalyst",
           "dependencies": {
             "Microsoft.Extensions.Logging.Debug": {
@@ -172,7 +166,7 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.1, )",
+              "version": "[9.0.2, )",
               "autoReferenced": true
             },
             "SQLite": {
@@ -204,7 +198,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         },
         "net9.0-windows10.0.19041": {
           "targetAlias": "net9.0-windows10.0.19041.0",
@@ -251,7 +245,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200\\RuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {
