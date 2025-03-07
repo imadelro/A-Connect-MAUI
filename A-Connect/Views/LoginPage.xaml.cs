@@ -38,7 +38,7 @@ namespace A_Connect.Views
             {
                 
                 await DisplayAlert("Success", "Logged in successfully", "OK");
-                //await Shell.Current.GoToAsync("//MainPage"); this is where we redirect but unavailable pa rn
+                await Shell.Current.GoToAsync("HomePage");
             }
             else
             {
