@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="A_Connect.Views.LoginPage"
+             x:Class="A_Connect.Views.RegisterPage"
              BackgroundColor="White"
-             Title="Login">
+             Title="Register">
 
     <VerticalStackLayout Padding="20" 
                          Spacing="12" 
@@ -25,31 +25,42 @@
                    Margin="0,0,0,50"/>
         </Grid>
 
-        <!-- Login Card -->
+        <!-- Register Card -->
         <Frame BackgroundColor="White"
                CornerRadius="25"
                Padding="20"
                HasShadow="True"
                WidthRequest="300"
                HorizontalOptions="Center">
-            
+
             <Frame.Shadow>
                 <Shadow Brush="Black" Opacity="0.14" Radius="8"/>
             </Frame.Shadow>
 
             <VerticalStackLayout Spacing="15">
-                <Label Text="Log In"
+                <Label Text="Register"
                        FontFamily="Inter-Black"
                        FontSize="{OnIdiom Phone=30, Tablet=24, Desktop=26}"
                        HorizontalOptions="Center"/>
 
-                <!-- ID Number Label -->
-                <Label Text="ID Number"
+                <!-- Email Label -->
+                <Label Text="Ateneo Email"
                        FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=18}"
                        FontFamily="Inter-Regular"/>
 
-                <!-- ID Number Entry -->
-                <Entry x:Name="emailIDnum"
+                <!-- Email Entry -->
+                <Entry x:Name="email"
+                       Placeholder="juan.delacruz@student.ateneo.edu"
+                       Keyboard="Numeric"
+                       FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=18}"/>
+
+				<!-- ID Label -->
+				<Label Text="ID Number"
+                       FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=18}"
+                       FontFamily="Inter-Regular"/>
+
+				<!-- ID Num Entry -->
+				<Entry x:Name="IDNum"
                        Placeholder="223144"
                        Keyboard="Numeric"
                        FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=18}"/>
@@ -58,6 +69,7 @@
                 <Label Text="Password"
                        FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=18}"
                        FontFamily="Inter-Regular"/>
+				
 
                 <!-- Password Entry -->
                 <Entry x:Name="passwordEntry"
@@ -65,33 +77,18 @@
                        IsPassword="True"
                        FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=18}"/>
 
-                <Label Text="Ready to connect?"
-                       FontSize="14"
-                       FontAttributes="Italic"
-                       HorizontalOptions="Center"
-                       TextColor="Gray"/>
-
-                <!-- Login Button -->
-                <Button x:Name="btnLogin"
-                        Text="CONNECT"
+                <!-- Register Button -->
+                <Button x:Name="btnRegister"
+						Text="SIGN UP"
                         WidthRequest="200"
                         CornerRadius="35"
                         BackgroundColor="{StaticResource DarkBlue}"
-                        Clicked="OnLoginClicked"
-                        FontFamily="Inter-Regular"
-                        FontSize="{OnIdiom Phone=16, Tablet=18, Desktop=20}"
-                        HorizontalOptions="Center"/>
-
-                <!-- Register Button 
-                <Button x:Name="btnRegister"
-                        Text="Register"
-                        WidthRequest="200"
-                        BackgroundColor="{StaticResource LightBlue}"
                         Clicked="OnRegisterClicked"
                         FontFamily="Inter-Regular"
                         FontSize="{OnIdiom Phone=16, Tablet=18, Desktop=20}"
                         HorizontalOptions="Center"/>
-                -->
+				
+				
             </VerticalStackLayout>
         </Frame>
 
