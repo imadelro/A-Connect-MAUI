@@ -51,9 +51,9 @@
     <Color x:Key="Yellow">#FFEDCA78</Color>
     <Color x:Key="Red">#ef4565</Color>
 
-    <LinearGradientBrush x:Key="MainGradient" StartPoint="0,1" EndPoint="0,0">
-    <GradientStop Color="#2A6BB4" Offset="0.0" />
-    <GradientStop Color="#A4C7FF" Offset="1.0" />
+    <LinearGradientBrush x:Key="MainGradient" StartPoint="0,0" EndPoint="0,1.5">
+        <GradientStop Color="#4982CD" Offset="0.0" />
+        <GradientStop Color="#9ABFEF" Offset="1.0" />
 </LinearGradientBrush>
 
 

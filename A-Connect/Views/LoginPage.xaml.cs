@@ -38,7 +38,7 @@ namespace A_Connect.Views
             {
                 
                 await DisplayAlert("Success", "Logged in successfully", "OK");
-                await Shell.Current.GoToAsync("HomePage");
+                await Shell.Current.GoToAsync("//HomePage");
             }
             else
             {
