@@ -1,38 +1,81 @@
-using Microsoft.Maui.Controls;
-using System;
+using A_Connect.Services;
+using A_Connect.Models;
 
 namespace A_Connect.Views
 {
     public partial class LoginPage : ContentPage
     {
-        public LoginPage()
+        private readonly UserDatabase _userDatabase;
+
+        
+        public LoginPage(UserDatabase userDatabase)
         {
             InitializeComponent();
-        }
-
-        private async void OnLoginClicked(object sender, EventArgs e)
-        {
-            string email = emailIDnum.Text;
-            string password = passwordEntry.Text;
-
-            if (IsValidUser(email, password))
-            {
-                await Shell.Current.GoToAsync("//home");
-            }
-            else
-            {
-                await DisplayAlert("Login Failed", "Invalid email or password!", "OK");
-            }
-        }
-
-        private bool IsValidUser(string email, string password)
-        {
-            return email == "user@example.com" && password == "password123";
+            _userDatabase = userDatabase;
         }
 
         private async void OnBackClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync(".."); // Goes back to the previous page
+            // back buton
+            await Shell.Current.GoToAsync("..");
+        }
+
+        private async void OnLoginClicked(object sender, EventArgs e)
+        {
+            string username = emailIDnum.Text?.Trim();
+            string password = passwordEntry.Text;
+
+         
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                await DisplayAlert("Error", "Please enter both email and password.", "OK");
+                return;
+            }
+
+            // check ur creds
+            var user = await _userDatabase.GetUserAsync(username, password);
+            if (user != null)
+            {
+                
+                await DisplayAlert("Success", "Logged in successfully", "OK");
+                await Shell.Current.GoToAsync("//HomePage");
+            }
+            else
+            {
+                // invalid credentials
+                await DisplayAlert("Error", "Invalid credentials.", "OK");
+            }
+        }
+
+        private async void OnRegisterClicked(object sender, EventArgs e)
+        {
+            string username = emailIDnum.Text?.Trim();
+            string password = passwordEntry.Text;
+
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                await DisplayAlert("Error", "Please enter both email and password.", "OK");
+                return;
+            }
+
+            // check if user already exists
+            var existingUser = await _userDatabase.GetUserByUsernameAsync(username);
+            if (existingUser != null)
+            {
+                await DisplayAlert("Error", "User already exists. Please try a different email/ID.", "OK");
+                return;
+            }
+
+            // create and save the new user
+            var newUser = new User
+            {
+                Username = username,
+                Password = password
+            };
+            await _userDatabase.SaveUserAsync(newUser);
+
+            await DisplayAlert("Success", "Registration successful!", "OK");
+            // await Shell.Current.GoToAsync(""); this is where we redirect but unavailable pa rn
         }
     }
 }

@@ -1,0 +1,54 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="A_Connect.Views.StartPage"
+             Background="{StaticResource MainGradient}"
+             Padding="0,50,0,50"
+             Title="A-Connect">
+
+<VerticalStackLayout HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         Spacing="10">
+
+        <!-- Logo -->
+        <Image Source="logo"
+               WidthRequest="230"
+               HeightRequest="230"
+               Margin="0,0,0,50"/>
+
+        <!-- A-Connect Title -->
+        <Label Text="A-Connect"
+               TextColor="{StaticResource Yellow}"
+               FontSize="48"
+               FontFamily="Intern-Black"
+               HorizontalOptions="Center"/>
+
+        <!-- Tagline -->
+        <Label Text="Where Ateneans come to connect."
+               FontFamily="Inter-Regular"
+               TextColor="White"
+               FontSize="16"
+               FontAttributes="Italic"
+               HorizontalOptions="Center"
+               Margin="0,0,0,40"/>
+
+        <!-- Login Button -->
+        <Button x:Name="btnLogin"
+                Text="Login"
+                WidthRequest="200"
+                BackgroundColor="{StaticResource MidBlue}"
+                FontFamily="Inter-Regular"
+                CornerRadius="100"
+                Clicked="OnLoginClicked"/>
+
+        <!-- Register Button -->
+        <Button x:Name="btnRegister"
+                Text="Register"
+                WidthRequest="200"
+                BackgroundColor="{StaticResource DarkBlue}"
+                FontFamily="Inter-Regular"
+                CornerRadius="100"
+                Clicked="OnRegisterClicked"/>
+
+    </VerticalStackLayout>
+
+</ContentPage>

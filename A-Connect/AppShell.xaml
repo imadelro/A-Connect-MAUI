@@ -7,8 +7,13 @@
     Title="A_Connect">
 
     <ShellContent
-        Title="Login"
-        ContentTemplate="{DataTemplate local:LoginPage}"
-        Route="LoginPage" />
+        Title="Welcome!"
+        ContentTemplate="{DataTemplate local:StartPage}"
+        Route="StartPage" />
+    
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:Homepage}"
+        Route="HomePage" />
 
 </Shell>
