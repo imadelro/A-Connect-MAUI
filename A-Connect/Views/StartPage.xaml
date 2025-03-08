@@ -13,39 +13,43 @@
         <Image Source="logo"
                WidthRequest="230"
                HeightRequest="230"
-               Margin="0,0,0,50"/>
+               Margin="0,-100,0,-20"/>
 
         <!-- A-Connect Title -->
         <Label Text="A-Connect"
                TextColor="{StaticResource Yellow}"
                FontSize="48"
+               Margin="0,0,0,100"
                FontFamily="Intern-Black"
                HorizontalOptions="Center"/>
 
         <!-- Tagline -->
         <Label Text="Where Ateneans come to connect."
-               FontFamily="Inter-Regular"
+               FontFamily="Inter-MediumItalic"
                TextColor="White"
                FontSize="16"
-               FontAttributes="Italic"
                HorizontalOptions="Center"
-               Margin="0,0,0,40"/>
+               Margin="0,-100,0,100"/>
 
         <!-- Login Button -->
         <Button x:Name="btnLogin"
-                Text="Login"
+                Text="LOG IN"
+                FontSize="20"
                 WidthRequest="200"
-                BackgroundColor="{StaticResource MidBlue}"
-                FontFamily="Inter-Regular"
+                HeightRequest="50"
+                BackgroundColor="{StaticResource DarkBlue}"
+                FontFamily="Inter-Bold"
                 CornerRadius="100"
                 Clicked="OnLoginClicked"/>
 
         <!-- Register Button -->
         <Button x:Name="btnRegister"
-                Text="Register"
+                Text="REGISTER"
+                FontSize="20"
                 WidthRequest="200"
+                HeightRequest="50"
                 BackgroundColor="{StaticResource DarkBlue}"
-                FontFamily="Inter-Regular"
+                FontFamily="Inter-Bold"
                 CornerRadius="100"
                 Clicked="OnRegisterClicked"/>
 

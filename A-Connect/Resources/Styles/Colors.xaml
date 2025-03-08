@@ -46,7 +46,7 @@
 
     <!-- PROJECT COLORS -->
     <Color x:Key="MidBlue">#3da9fc</Color>
-    <Color x:Key="DarkBlue">#094067</Color>
+    <Color x:Key="DarkBlue">#0D508B</Color>
     <Color x:Key="Gray">#5f6c7b</Color>
     <Color x:Key="Yellow">#FFEDCA78</Color>
     <Color x:Key="Red">#ef4565</Color>
