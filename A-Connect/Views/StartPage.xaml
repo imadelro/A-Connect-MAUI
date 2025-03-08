@@ -11,14 +11,14 @@
 
         <!-- Logo -->
         <Image Source="logo"
-               WidthRequest="10"
-               HeightRequest="108"
-               Margin="0,0,0,10"/>
+               WidthRequest="230"
+               HeightRequest="230"
+               Margin="0,0,0,50"/>
 
         <!-- A-Connect Title -->
         <Label Text="A-Connect"
                TextColor="{StaticResource Yellow}"
-               FontSize="30"
+               FontSize="48"
                FontFamily="Intern-Black"
                HorizontalOptions="Center"/>
 
