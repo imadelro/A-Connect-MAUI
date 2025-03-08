@@ -13,7 +13,7 @@
         <Image Source="logo"
                WidthRequest="230"
                HeightRequest="230"
-               Margin="0,0,0,-20"/>
+               Margin="0,-100,0,-20"/>
 
         <!-- A-Connect Title -->
         <Label Text="A-Connect"
