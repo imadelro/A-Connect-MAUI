@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="A_Connect.Views.Homepage"
+             Title="Homepage">
+    
+    <Grid RowDefinitions="Auto,Auto,*,Auto">
+        <!-- CardView Equivalent -->
+        <Frame Grid.Row="0"
+               Padding="10"
+               CornerRadius="10"
+               BackgroundColor="#007BFF"
+               HorizontalOptions="Center"
+               WidthRequest="417"
+               HeightRequest="192">
+            <StackLayout>
+                <Image Source="logo.png"
+                       HeightRequest="100"
+                       WidthRequest="100"
+                       HorizontalOptions="Center" />
+                <Label Text="A-Connect"
+                       FontSize="50"
+                       TextColor="#FFD700"
+                       FontFamily="montbold"
+                       HorizontalOptions="Center" />
+            </StackLayout>
+        </Frame>
+        
+        <!-- Tools Text -->
+        <Label Grid.Row="1"
+               Text="Tools"
+               FontSize="20"
+               Padding="20,0,0,0" />
+        
+        <!-- Tools Section -->
+        <HorizontalStackLayout Grid.Row="2"
+                               Padding="10"
+                               HorizontalOptions="Center">
+            <VerticalStackLayout>
+                <ImageButton Source="qpicalculator_icon.png"
+                             WidthRequest="70"
+                             HeightRequest="70" />
+                <Label Text="QPI Calculator"
+                       FontSize="11"
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+            
+            <VerticalStackLayout>
+                <ImageButton Source="schedulemaker_icon.png"
+                             WidthRequest="70"
+                             HeightRequest="70" />
+                <Label Text="Schedule Maker"
+                       FontSize="10"
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+            
+            <VerticalStackLayout>
+                <ImageButton Source="meetingplanner_icon.png"
+                             WidthRequest="70"
+                             HeightRequest="70" />
+                <Label Text="Meeting Planner"
+                       FontSize="10"
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+        
+        <!-- Bottom Navigation Bar -->
+        <Grid Grid.Row="3" BackgroundColor="#ADD8E6">
+            <ImageButton Source="homeicon.png"
+                         WidthRequest="105"
+                         HeightRequest="70"
+                         HorizontalOptions="Center" />
+        </Grid>
+    </Grid>
+</ContentPage>

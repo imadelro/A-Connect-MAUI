@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "Bgs0HR017Qk=",
+=======
+  "dgSpecHash": "mYia10BdStE=",
+>>>>>>> 861e6a96aedeb67a64df70b8191c9256d61e584a
   "success": true,
   "projectFilePath": "C:\\Users\\Malena del Rosario\\Documents\\Ateneo\\3rd Year\\SEM 2\\CSCI 42\\A-Connect-MAUI\\A-Connect\\A-Connect.csproj",
   "expectedPackageFiles": [

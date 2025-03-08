@@ -10,5 +10,10 @@
         Title="Welcome!"
         ContentTemplate="{DataTemplate local:StartPage}"
         Route="StartPage" />
+    
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:Homepage}"
+        Route="HomePage" />
 
 </Shell>
