@@ -8,11 +8,11 @@
         <!-- CardView Equivalent -->
         <Frame Grid.Row="0"
                Padding="10"
-               CornerRadius="10"
-               BackgroundColor="#007BFF"
+               BackgroundColor="{StaticResource DarkBlue}"
                HorizontalOptions="Center"
                WidthRequest="417"
-               HeightRequest="192">
+               HeightRequest="192"
+               Margin="0,0,0,0">
             <StackLayout>
                 <Image Source="logo.png"
                        HeightRequest="100"
@@ -20,8 +20,8 @@
                        HorizontalOptions="Center" />
                 <Label Text="A-Connect"
                        FontSize="50"
-                       TextColor="#FFD700"
-                       FontFamily="montbold"
+                       TextColor="{StaticResource Yellow}"
+                       FontFamily="Inter-Bold"
                        HorizontalOptions="Center" />
             </StackLayout>
         </Frame>
@@ -34,17 +34,21 @@
         
         <!-- Tools Section -->
         <HorizontalStackLayout Grid.Row="2"
-                               Padding="10"
-                               HorizontalOptions="Center">
+                       Padding="10"
+                       HorizontalOptions="Center">
             <VerticalStackLayout>
-                <ImageButton Source="qpicalculator_icon.png"
-                             WidthRequest="70"
-                             HeightRequest="70" />
-                <Label Text="QPI Calculator"
+                <Frame BackgroundColor="Black"
+                       WidthRequest="50">
+
+                    <ImageButton Source="ptp_icon.png"
+                         WidthRequest="100"
+                         HeightRequest="70" />
+                </Frame>
+                <Label Text="Profs to Pick"
                        FontSize="11"
                        HorizontalOptions="Center" />
             </VerticalStackLayout>
-            
+
             <VerticalStackLayout>
                 <ImageButton Source="schedulemaker_icon.png"
                              WidthRequest="70"
@@ -54,14 +58,6 @@
                        HorizontalOptions="Center" />
             </VerticalStackLayout>
             
-            <VerticalStackLayout>
-                <ImageButton Source="meetingplanner_icon.png"
-                             WidthRequest="70"
-                             HeightRequest="70" />
-                <Label Text="Meeting Planner"
-                       FontSize="10"
-                       HorizontalOptions="Center" />
-            </VerticalStackLayout>
         </HorizontalStackLayout>
         
         <!-- Bottom Navigation Bar -->
