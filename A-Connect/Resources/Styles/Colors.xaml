@@ -50,6 +50,8 @@
     <Color x:Key="Gray">#5f6c7b</Color>
     <Color x:Key="Yellow">#FFEDCA78</Color>
     <Color x:Key="Red">#ef4565</Color>
+    <Color x:Key="MuteBlue">#90B4CE</Color>
+    
 
     <LinearGradientBrush x:Key="MainGradient" StartPoint="0,0" EndPoint="0,1.5">
         <GradientStop Color="#4982CD" Offset="0.0" />
