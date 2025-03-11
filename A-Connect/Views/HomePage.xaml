@@ -2,6 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="A_Connect.Views.Homepage"
              Title="Homepage">
+    
+    
 
     <Grid Padding="20">
         <Grid.RowDefinitions>
@@ -48,8 +50,9 @@
             <Frame Grid.Row="0" Grid.Column="0"
                    BackgroundColor="White"
                    WidthRequest="160" HeightRequest="160"
-                   CornerRadius="15" HasShadow="True">
-
+                   CornerRadius="15" HasShadow="True"
+                   BorderColor="White">
+                
                 <Frame.Shadow>
                     <Shadow Brush="Black" 
                             Opacity="0.30" 
@@ -68,6 +71,7 @@
             <!-- Second App (Schedule Trading) -->
             <Frame Grid.Row="0" Grid.Column="1"
                    BackgroundColor="White"
+                   BorderColor="White"
                    WidthRequest="160" HeightRequest="160"
                    CornerRadius="15" HasShadow="True">
 
@@ -92,6 +96,7 @@
             <!-- Third App -->
             <Frame Grid.Row="1" Grid.Column="0"
                    BackgroundColor="White"
+                   BorderColor="White"
                    WidthRequest="160" HeightRequest="160"
                    CornerRadius="15" HasShadow="True">
 
@@ -108,13 +113,15 @@
                     <Label Text="Markeplace"
                            FontSize="16" FontFamily="Inter-Bold"
                            TextColor="Black"
-                           HorizontalOptions="Center"/>
+                           HorizontalOptions="Center"
+                           Margin="0,-5,0,0"/>
                 </VerticalStackLayout>
             </Frame>
 
             <!-- Fourth App -->
             <Frame Grid.Row="1" Grid.Column="1"
                    BackgroundColor="White"
+                   BorderColor="White"
                    WidthRequest="160" HeightRequest="160"
                    CornerRadius="15" HasShadow="True">
 
@@ -131,13 +138,15 @@
                     <Label Text="Tutor Finder"
                            FontSize="16" FontFamily="Inter-Bold"
                            TextColor="Black"
-                           HorizontalOptions="Center"/>
+                           HorizontalOptions="Center"
+                           Margin="0,-5,0,0"/>
                 </VerticalStackLayout>
             </Frame>
 
             <!-- Fifth App (Centered in a new row) -->
             <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                    BackgroundColor="White"
+                   BorderColor="White"
                    WidthRequest="160" HeightRequest="160"
                    CornerRadius="15" HasShadow="True"
                    HorizontalOptions="Center">
