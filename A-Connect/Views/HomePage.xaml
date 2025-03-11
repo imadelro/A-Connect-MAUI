@@ -1,71 +1,165 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="A_Connect.Views.Homepage"
              Title="Homepage">
-    
-    <Grid RowDefinitions="Auto,Auto,*,Auto">
-        <!-- CardView Equivalent -->
+
+    <Grid Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Logo Frame -->
+            <RowDefinition Height="*"/>
+            <!-- Apps Grid -->
+        </Grid.RowDefinitions>
+
+        <!-- CardView Equivalent (Logo Frame) -->
         <Frame Grid.Row="0"
                Padding="10"
                BackgroundColor="{StaticResource DarkBlue}"
                HorizontalOptions="Center"
                WidthRequest="417"
                HeightRequest="192"
-               Margin="0,0,0,0">
+               Margin="0,-50,0,0">
             <StackLayout>
                 <Image Source="logo.png"
-                       HeightRequest="100"
-                       WidthRequest="100"
-                       HorizontalOptions="Center" />
-                <Label Text="A-Connect"
-                       FontSize="50"
-                       TextColor="{StaticResource Yellow}"
-                       FontFamily="Inter-Bold"
-                       HorizontalOptions="Center" />
+                       HeightRequest="120"
+                       WidthRequest="120"
+                       HorizontalOptions="Center"
+                       Margin="0,50,0,0"/>
             </StackLayout>
         </Frame>
-        
-        <!-- Tools Text -->
-        <Label Grid.Row="1"
-               Text="Tools"
-               FontSize="20"
-               Padding="20,0,0,0" />
-        
-        <!-- Tools Section -->
-        <HorizontalStackLayout Grid.Row="2"
-                       Padding="10"
-                       HorizontalOptions="Center">
-            <VerticalStackLayout>
-                <Frame BackgroundColor="Black"
-                       WidthRequest="50">
 
+        <!-- Apps Grid (Placed Below the Logo) -->
+        <Grid Grid.Row="1" Padding="20"
+              HorizontalOptions="Center"
+              RowSpacing="20"
+              ColumnSpacing="40">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/> <!-- New Row for Fifth App -->
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- First App (Profs to Pick) -->
+            <Frame Grid.Row="0" Grid.Column="0"
+                   BackgroundColor="White"
+                   WidthRequest="160" HeightRequest="160"
+                   CornerRadius="15" HasShadow="True">
+
+                <Frame.Shadow>
+                    <Shadow Brush="Black" 
+                            Opacity="0.30" 
+                            Radius="15"/>
+                </Frame.Shadow>
+                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
                     <ImageButton Source="ptp_icon.png"
-                         WidthRequest="100"
-                         HeightRequest="70" />
-                </Frame>
-                <Label Text="Profs to Pick"
-                       FontSize="11"
-                       HorizontalOptions="Center" />
-            </VerticalStackLayout>
+                                 WidthRequest="100" HeightRequest="100"/>
+                    <Label Text="Profs to Pick"
+                           FontSize="16" FontFamily="Inter-Bold"
+                           TextColor="Black"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
 
-            <VerticalStackLayout>
-                <ImageButton Source="schedulemaker_icon.png"
-                             WidthRequest="70"
-                             HeightRequest="70" />
-                <Label Text="Schedule Maker"
-                       FontSize="10"
-                       HorizontalOptions="Center" />
-            </VerticalStackLayout>
-            
-        </HorizontalStackLayout>
-        
-        <!-- Bottom Navigation Bar -->
-        <Grid Grid.Row="3" BackgroundColor="#ADD8E6">
-            <ImageButton Source="homeicon.png"
-                         WidthRequest="105"
-                         HeightRequest="70"
-                         HorizontalOptions="Center" />
+            <!-- Second App (Schedule Trading) -->
+            <Frame Grid.Row="0" Grid.Column="1"
+                   BackgroundColor="White"
+                   WidthRequest="160" HeightRequest="160"
+                   CornerRadius="15" HasShadow="True">
+
+                <Frame.Shadow>
+                    <Shadow Brush="Black" 
+                            Opacity="0.30" 
+                            Radius="15"/>
+                </Frame.Shadow>
+                
+                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                    <ImageButton Source="scheduletrading_icon.png"
+                                 WidthRequest="100" HeightRequest="90"
+                                 Margin="0,-10,0,0"/>
+                    <Label Text="Schedule Trading"
+                           FontSize="15" FontFamily="Inter-Bold"
+                           TextColor="Black"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Third App -->
+            <Frame Grid.Row="1" Grid.Column="0"
+                   BackgroundColor="White"
+                   WidthRequest="160" HeightRequest="160"
+                   CornerRadius="15" HasShadow="True">
+
+                <Frame.Shadow>
+                    <Shadow Brush="Black" 
+                            Opacity="0.30" 
+                            Radius="15"/>
+                </Frame.Shadow>
+
+                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                    <ImageButton Source="marketplace_icon.png"
+                                 WidthRequest="100" HeightRequest="100"
+                                 />
+                    <Label Text="Markeplace"
+                           FontSize="16" FontFamily="Inter-Bold"
+                           TextColor="Black"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Fourth App -->
+            <Frame Grid.Row="1" Grid.Column="1"
+                   BackgroundColor="White"
+                   WidthRequest="160" HeightRequest="160"
+                   CornerRadius="15" HasShadow="True">
+
+                <Frame.Shadow>
+                    <Shadow Brush="Black" 
+                            Opacity="0.30" 
+                            Radius="15"/>
+                </Frame.Shadow>
+
+
+                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                    <ImageButton Source="tutorfinder_icon.png"
+                                 WidthRequest="100" HeightRequest="100"/>
+                    <Label Text="Tutor Finder"
+                           FontSize="16" FontFamily="Inter-Bold"
+                           TextColor="Black"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Fifth App (Centered in a new row) -->
+            <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                   BackgroundColor="White"
+                   WidthRequest="160" HeightRequest="160"
+                   CornerRadius="15" HasShadow="True"
+                   HorizontalOptions="Center">
+
+                <Frame.Shadow>
+                    <Shadow Brush="Black" 
+                            Opacity="0.30" 
+                            Radius="15"/>
+                </Frame.Shadow>
+
+                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                    <ImageButton Source="jobsinternship_icon.png"
+                                 WidthRequest="100" HeightRequest="90"
+                                 />
+                    <Label Text="Jobs and Internships"
+                           FontSize="14" FontFamily="Inter-Bold"
+                           TextColor="Black"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           Margin="0,-10,0,0"/>
+                </VerticalStackLayout>
+            </Frame>
         </Grid>
     </Grid>
 </ContentPage>
