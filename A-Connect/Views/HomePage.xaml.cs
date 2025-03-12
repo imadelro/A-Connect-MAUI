@@ -9,5 +9,10 @@ namespace A_Connect.Views
         {
             InitializeComponent();
         }
+
+        private async void TutorFinderClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("//TutorFinderHomePage");
+        }
     }
 }

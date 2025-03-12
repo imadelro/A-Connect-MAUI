@@ -134,7 +134,8 @@
 
                 <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
                     <ImageButton Source="tutorfinder_icon.png"
-                                 WidthRequest="100" HeightRequest="100"/>
+                                 WidthRequest="100" HeightRequest="100"
+                                 Clicked="TutorFinderClicked"/>
                     <Label Text="Tutor Finder"
                            FontSize="16" FontFamily="Inter-Bold"
                            TextColor="Black"
