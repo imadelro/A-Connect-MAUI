@@ -34,6 +34,11 @@ namespace A_Connect.Views
                 await DisplayAlert("Error", "ID Number already exists", "OK");
                 return;
             }
+            if (username.Length != 6)
+            {
+                await DisplayAlert("Error", "ID Number must be 6 characters", "OK");
+                return;
+            }
             if (await _userDatabase.GetUserByEmailAsync(email) != null)
             {
                 await DisplayAlert("Error", "Email already exists", "OK");
