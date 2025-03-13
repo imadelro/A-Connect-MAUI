@@ -1,0 +1,61 @@
+<ContentPage 
+    x:Class="A_Connect.Views.PostTradePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="New Trade">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid BackgroundColor="#063970" Padding="20">
+            <Label Text="Schedule Trading"
+                   TextColor="Gold"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+        </Grid>
+
+        <!-- Form Content -->
+        <VerticalStackLayout Grid.Row="1" Padding="20" Spacing="20">
+            <!-- Card for form fields -->
+            <Frame BackgroundColor="#1F6FB7"
+                   CornerRadius="15"
+                   Padding="20">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="TRADE DETAILS"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           HorizontalOptions="Center"/>
+
+                    <Label Text="Subject:" TextColor="White"/>
+                    <Entry Text="{Binding CourseCode}" Placeholder="e.g. CSCI 30"/>
+
+                    <Label Text="Trade Offer:" TextColor="White"/>
+                    <Entry Text="{Binding TradeOffer}" Placeholder="e.g. M-TH, 2-3:30PM"/>
+
+                    <Label Text="Trade Request:" TextColor="White"/>
+                    <Entry Text="{Binding TradeRequest}" Placeholder="e.g. T-F, 12:30-1:40PM"/>
+
+                    <Label Text="Contact:" TextColor="White"/>
+                    <Entry Text="{Binding ContactInfo}" Placeholder="e.g. FB link, email, phone"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- POST button -->
+            <Button Text="POST"
+                    Command="{Binding PostTradeCommand}"
+                    BackgroundColor="#F1C40F"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    CornerRadius="25"
+                    HorizontalOptions="Center"
+                    Padding="10,5" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

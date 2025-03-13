@@ -1,0 +1,75 @@
+<ContentPage 
+    x:Class="A_Connect.Views.OwnPostsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="My Trade Posts">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid BackgroundColor="#063970" Padding="20">
+            <Label Text="Schedule Trading"
+                   TextColor="Gold"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+        </Grid>
+
+        <!-- Posts + Post button -->
+        <StackLayout Grid.Row="1" Spacing="15" Padding="20">
+            <CollectionView ItemsSource="{Binding OwnPosts}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="#555555"
+                               CornerRadius="15"
+                               Padding="15"
+                               Margin="0,10">
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="{Binding CourseCode}"
+                                       TextColor="White"
+                                       FontSize="18"
+                                       FontAttributes="Bold" />
+
+                                <!-- Offer/Request pills -->
+                                <HorizontalStackLayout Spacing="10">
+                                    <Frame BackgroundColor="#E74C3C"
+                                           CornerRadius="10"
+                                           Padding="5">
+                                        <Label Text="{Binding TradeOffer}"
+                                               TextColor="White"
+                                               FontSize="14"/>
+                                    </Frame>
+                                    <Frame BackgroundColor="#F39C12"
+                                           CornerRadius="10"
+                                           Padding="5">
+                                        <Label Text="{Binding TradeRequest}"
+                                               TextColor="White"
+                                               FontSize="14"/>
+                                    </Frame>
+                                </HorizontalStackLayout>
+
+                                <Label Text="{Binding Date, StringFormat='Date: {0:MMM d, yyyy}'}"
+                                       TextColor="White"
+                                       FontSize="12"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Post a trade"
+                    Command="{Binding PostTradeCommand}"
+                    BackgroundColor="#F1C40F"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    CornerRadius="25"
+                    HorizontalOptions="Center"
+                    Padding="10,5" />
+        </StackLayout>
+    </Grid>
+</ContentPage>

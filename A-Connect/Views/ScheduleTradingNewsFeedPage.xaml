@@ -1,0 +1,169 @@
+<ContentPage 
+    x:Class="A_Connect.Views.ScheduleTradingNewsFeedPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Schedule Trading News Feed">
+
+    <!-- Main Grid Layout -->
+    <Grid>
+        <!-- Define three rows: 
+             1) Header 
+             2) Main Content 
+             3) Bottom Nav Bar (optional) -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- 1. Blue Header -->
+        <Grid BackgroundColor="#063970" Padding="20, 40, 20, 20">
+            <Label Text="Schedule Trading"
+                   TextColor="Gold"
+                   FontAttributes="Bold"
+                   FontSize="24"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+        </Grid>
+
+        <!-- 2. Main Content: Search, Tabs, Posts, Post Button -->
+        <StackLayout Grid.Row="1" Spacing="15" Padding="20">
+
+            <!-- Custom Search Bar (Frame + Entry) -->
+            <Frame CornerRadius="25" BackgroundColor="White" Padding="0">
+                <HorizontalStackLayout Padding="10,0">
+                    <Image Source="search_icon.png"
+                           HeightRequest="20"
+                           WidthRequest="20"
+                           VerticalOptions="Center"
+                           Margin="0,0,5,0"/>
+                    <Entry Placeholder="Search"
+                           Text="{Binding SearchText}"
+                           VerticalOptions="Center"
+                           FontSize="14"
+                           Margin="0"/>
+                </HorizontalStackLayout>
+            </Frame>
+
+            <!-- Tab-like Buttons -->
+            <Grid ColumnSpacing="0" RowSpacing="0" Padding="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- "Posts by other users" -->
+                <Button Text="Posts by other users"
+                        Command="{Binding ShowOtherPostsCommand}"
+                        BackgroundColor="#F0F0F0"
+                        TextColor="Black"
+                        Grid.Column="0"
+                        CornerRadius="0"
+                        FontAttributes="Bold"/>
+
+                <!-- "Own posts" -->
+                <Button Text="Own posts"
+                        Command="{Binding ShowOwnPostsCommand}"
+                        BackgroundColor="#F0F0F0"
+                        TextColor="Black"
+                        Grid.Column="1"
+                        CornerRadius="0"
+                        FontAttributes="Bold"/>
+            </Grid>
+
+            <!-- List of trade posts -->
+            <CollectionView ItemsSource="{Binding Posts}" VerticalOptions="FillAndExpand">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Margin="0,10">
+                            <Frame BackgroundColor="#1F6FB7"
+                                   CornerRadius="15"
+                                   Padding="15">
+                                <VerticalStackLayout Spacing="5">
+                                    <!-- Course Code -->
+                                    <Label Text="{Binding CourseCode}"
+                                           TextColor="White"
+                                           FontSize="18"
+                                           FontAttributes="Bold" />
+
+                                    <!-- Offer/Request "Pills" -->
+                                    <HorizontalStackLayout Spacing="10">
+                                        <Frame BackgroundColor="#E74C3C"
+                                               CornerRadius="10"
+                                               Padding="5"
+                                               HasShadow="False">
+                                            <Label Text="{Binding TradeOffer}"
+                                                   TextColor="White"
+                                                   FontSize="14"/>
+                                        </Frame>
+                                        <Frame BackgroundColor="#F39C12"
+                                               CornerRadius="10"
+                                               Padding="5"
+                                               HasShadow="False">
+                                            <Label Text="{Binding TradeRequest}"
+                                                   TextColor="White"
+                                                   FontSize="14"/>
+                                        </Frame>
+                                    </HorizontalStackLayout>
+
+                                    <!-- Posted by and Date -->
+                                    <HorizontalStackLayout>
+                                        <Label Text="{Binding PostedBy, StringFormat='Posted by: {0}'}"
+                                               TextColor="White"
+                                               FontSize="12"/>
+                                        <Label Text="{Binding Date, StringFormat='  |  Date: {0:MMM d, yyyy}'}"
+                                               TextColor="White"
+                                               FontSize="12"/>
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- "Post a trade" Button -->
+            <Button Text="Post a trade +"
+                    Command="{Binding PostTradeCommand}"
+                    BackgroundColor="#F1C40F"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    CornerRadius="25"
+                    HorizontalOptions="Center"
+                    Padding="10,5"/>
+        </StackLayout>
+
+        <!-- 3. Bottom Nav Bar (Optional) -->
+        <Grid Grid.Row="2" BackgroundColor="#063970" HeightRequest="60">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Nav Icon 1 -->
+            <ImageButton Source="nav_icon1.png"
+                         Grid.Column="0"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         WidthRequest="30"
+                         HeightRequest="30"/>
+
+            <!-- Home Icon -->
+            <ImageButton Source="nav_home.png"
+                         Grid.Column="1"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         WidthRequest="30"
+                         HeightRequest="30"/>
+
+            <!-- Profile Icon -->
+            <ImageButton Source="nav_profile.png"
+                         Grid.Column="2"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         WidthRequest="30"
+                         HeightRequest="30"/>
+        </Grid>
+    </Grid>
+</ContentPage>

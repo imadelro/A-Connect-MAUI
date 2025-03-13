@@ -1,5 +1,4 @@
 using Microsoft.Maui.Controls;
-using  A_Connect;
 
 namespace A_Connect.Views
 {
@@ -8,6 +7,11 @@ namespace A_Connect.Views
         public Homepage()
         {
             InitializeComponent();
+        }
+
+        private async void OnScheduleTradingClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("ScheduleTradingNewsFeedPage");
         }
     }
 }

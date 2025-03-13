@@ -13,6 +13,7 @@
 		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
 		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
 
+		<RuntimeIdentifiers>android-arm;android-arm64;android-x86;android-x64</RuntimeIdentifiers>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>A_Connect</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -67,6 +68,33 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\IndividualPostPage.xaml.cs">
+	    <DependentUpon>IndividualPostPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\PostTradePage.xaml.cs">
+	    <DependentUpon>PostTradePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\OwnPostsPage.xaml.cs">
+	    <DependentUpon>OwnPostsPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\ScheduleTradingNewsFeedPage.xaml.cs">
+	    <DependentUpon>ScheduleTradingNewsFeedPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\IndividualPostPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PostTradePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\OwnPostsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ScheduleTradingNewsFeedPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\RegisterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
