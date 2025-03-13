@@ -23,7 +23,6 @@ namespace A_Connect.Views
 
         private async void OnRegisterClicked(object sender, EventArgs e)
         {
-            // Assuming you have Entry fields for Username, Password, and Email in your XAML
             string username = IDNum.Text;
             string password = passwordEntry.Text;
             string email = emailEntry.Text;
