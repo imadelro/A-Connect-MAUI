@@ -13,5 +13,12 @@ namespace A_Connect.Views
         {
             await Shell.Current.GoToAsync("ScheduleTradingNewsFeedPage");
         }
+
+        private async void OnProfsToPickClicked(object sender, EventArgs e)
+        {
+            // Navigate to the Profs to Pick News Feed page
+            // Make sure the route "ProfsToPickNewsFeedPage" is registered in AppShell.
+            await Shell.Current.GoToAsync("ProfsToPickNewsFeedPage");
+        }
     }
 }

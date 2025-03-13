@@ -57,7 +57,8 @@
                 </Frame.Shadow>
                 <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
                     <ImageButton Source="ptp_icon.png"
-                                 WidthRequest="100" HeightRequest="100"/>
+                     WidthRequest="100" HeightRequest="100"
+                     Clicked="OnProfsToPickClicked"/>
                     <Label Text="Profs to Pick"
                            FontSize="16" FontFamily="Inter-Bold"
                            TextColor="Black"

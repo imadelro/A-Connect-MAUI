@@ -18,5 +18,8 @@ public partial class AppShell : Shell
         Routing.RegisterRoute("IndividualPostPage", typeof(IndividualPostPage));
         Routing.RegisterRoute("OwnPostsPage", typeof(OwnPostsPage));
         Routing.RegisterRoute("PostTradePage", typeof(PostTradePage));
+
+        Routing.RegisterRoute("ProfsToPickNewsFeedPage", typeof(ProfsToPickNewsFeedPage));
+        Routing.RegisterRoute("ProfsToPickFormPage", typeof(ProfsToPickFormPage));
     }
 }
