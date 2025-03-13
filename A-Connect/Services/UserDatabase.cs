@@ -31,7 +31,13 @@ namespace A_Connect.Services
                 .Where(u => u.Username == username)
                 .FirstOrDefaultAsync();
         }
-        // register new users:
+
+        public Task<User> GetUserByEmailAsync(string email)
+        {
+            return _database.Table<User>()
+                .Where(u => u.Email == email)
+                .FirstOrDefaultAsync();
+        }
         public Task<int> SaveUserAsync(User user)
         {
             return _database.InsertAsync(user);

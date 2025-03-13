@@ -49,9 +49,8 @@
                        FontFamily="Inter-Regular"/>
 
                 <!-- Email Entry -->
-                <Entry x:Name="email"
+                <Entry x:Name="emailEntry"
                        Placeholder="juan.delacruz@student.ateneo.edu"
-                       Keyboard="Numeric"
                        FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=18}"/>
 
 				<!-- ID Label -->
