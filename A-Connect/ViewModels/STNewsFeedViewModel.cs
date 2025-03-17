@@ -9,7 +9,7 @@ namespace A_Connect.ViewModels
 {
     public class STNewsFeedViewModel : BaseViewModel
     {
-        public ObservableCollection<TradePost> Posts { get; set; }
+        public ObservableCollection<STForm> Posts { get; set; }
         public string SearchText { get; set; }
 
         public ICommand ShowOtherPostsCommand { get; }
@@ -19,9 +19,9 @@ namespace A_Connect.ViewModels
         public STNewsFeedViewModel()
         {
             // Sample posts for demonstration.
-            Posts = new ObservableCollection<TradePost>
+            Posts = new ObservableCollection<STForm>
             {
-                new TradePost
+                new STForm
                 {
                     CourseCode = "CS101",
                     TradeOffer = "Mon 9-11am",
@@ -30,7 +30,7 @@ namespace A_Connect.ViewModels
                     Date = DateTime.Now.AddDays(-1),
                     ContactInfo = "usera@example.com"
                 },
-                new TradePost
+                new STForm
                 {
                     CourseCode = "MATH202",
                     TradeOffer = "Tue 1-3pm",
@@ -51,7 +51,7 @@ namespace A_Connect.ViewModels
                 await Shell.Current.GoToAsync("OwnPostsPage");
             });
 
-            PostSelectedCommand = new Command<TradePost>(async (post) =>
+            PostSelectedCommand = new Command<STForm>(async (post) =>
             {
                 var navParameter = new Dictionary<string, object> { { "SelectedPost", post } };
                 await Shell.Current.GoToAsync("IndividualPostPage", navParameter);

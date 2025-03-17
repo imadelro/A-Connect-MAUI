@@ -44,7 +44,7 @@ namespace A_Connect.ViewModels
                 // Use App.CurrentUser to fill in the username.
                 var currentUsername = App.CurrentUser?.Username ?? "Unknown";
 
-                var newPost = new TradePost
+                var newPost = new STForm
                 {
                     CourseCode = CourseCode,
                     TradeOffer = TradeOffer,
