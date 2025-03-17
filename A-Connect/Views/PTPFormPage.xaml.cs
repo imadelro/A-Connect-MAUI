@@ -1,3 +1,5 @@
+using A_Connect.ViewModels;
+using A_Connect.Services;
 using Microsoft.Maui.Controls;
 
 namespace A_Connect.Views
@@ -7,7 +9,7 @@ namespace A_Connect.Views
         public ProfsToPickFormPage()
         {
             InitializeComponent();
-            // In the future, set BindingContext = new ProfsToPickFormViewModel();
+            BindingContext = new ProfsToPickFormViewModel(App.ReviewDatabase);
         }
     }
 }
