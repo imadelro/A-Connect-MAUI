@@ -19,9 +19,10 @@
         <!-- 1. Blue Header -->
         <Grid BackgroundColor="#063970" Padding="20, 40, 20, 20">
             <Label Text="Schedule Trading"
-                   TextColor="Gold"
+                   TextColor="{StaticResource Yellow}"
                    FontAttributes="Bold"
                    FontSize="24"
+                   FontFamily="Inter-Black"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"/>
         </Grid>
@@ -40,7 +41,8 @@
                     <Entry Placeholder="Search"
                            Text="{Binding SearchText}"
                            VerticalOptions="Center"
-                           FontSize="14"
+                           FontSize="18"
+                           FontFamily="Inter-SemiBold"
                            Margin="0"/>
                 </HorizontalStackLayout>
             </Frame>
@@ -58,8 +60,8 @@
                         BackgroundColor="#F0F0F0"
                         TextColor="Black"
                         Grid.Column="0"
-                        CornerRadius="0"
-                        FontAttributes="Bold"/>
+                        CornerRadius="20"
+                        FontFamily="Inter-SemiBold"/>
 
                 <!-- "Own posts" -->
                 <Button Text="Own posts"
@@ -67,8 +69,8 @@
                         BackgroundColor="#F0F0F0"
                         TextColor="Black"
                         Grid.Column="1"
-                        CornerRadius="0"
-                        FontAttributes="Bold"/>
+                        CornerRadius="20"
+                        FontFamily="Inter-SemiBold"/>
             </Grid>
 
             <!-- List of trade posts -->
@@ -76,7 +78,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Margin="0,10">
-                            <Frame BackgroundColor="#1F6FB7"
+                            <Frame BackgroundColor="{StaticResource Blue}"
                                    CornerRadius="15"
                                    Padding="15">
                                 <VerticalStackLayout Spacing="5">
@@ -84,25 +86,37 @@
                                     <Label Text="{Binding CourseCode}"
                                            TextColor="White"
                                            FontSize="18"
-                                           FontAttributes="Bold" />
+                                           FontFamily="Inter-Black" />
 
                                     <!-- Offer/Request "Pills" -->
                                     <HorizontalStackLayout Spacing="10">
-                                        <Frame BackgroundColor="#E74C3C"
+                                        <Label Text="Trade offer:"
+                                               TextColor="White"
+                                               FontFamily="Inter-SemiBold"
+                                               VerticalTextAlignment="Center"/>
+                                        <Frame BackgroundColor="{StaticResource Red}"
                                                CornerRadius="10"
                                                Padding="5"
                                                HasShadow="False">
                                             <Label Text="{Binding TradeOffer}"
                                                    TextColor="White"
-                                                   FontSize="14"/>
+                                                   FontSize="14"
+                                                   FontFamily="Inter-SemiBold"/>
                                         </Frame>
-                                        <Frame BackgroundColor="#F39C12"
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout Spacing="10">
+                                        <Label Text="Trade request:"
+                                        TextColor="White"
+                                        FontFamily="Inter-SemiBold"
+                                        VerticalTextAlignment="Center"/>
+                                        <Frame BackgroundColor="{StaticResource DarkBlue}"
                                                CornerRadius="10"
                                                Padding="5"
                                                HasShadow="False">
                                             <Label Text="{Binding TradeRequest}"
                                                    TextColor="White"
-                                                   FontSize="14"/>
+                                                   FontSize="14"
+                                                   FontFamily="Inter-SemiBold"/>
                                         </Frame>
                                     </HorizontalStackLayout>
 
@@ -110,10 +124,12 @@
                                     <HorizontalStackLayout>
                                         <Label Text="{Binding PostedBy, StringFormat='Posted by: {0}'}"
                                                TextColor="White"
-                                               FontSize="12"/>
+                                               FontSize="12"
+                                               FontFamily="Inter-Light"/>
                                         <Label Text="{Binding Date, StringFormat='  |  Date: {0:MMM d, yyyy}'}"
                                                TextColor="White"
-                                               FontSize="12"/>
+                                               FontSize="12"
+                                               FontFamily="Inter-Light"/>
                                     </HorizontalStackLayout>
                                 </VerticalStackLayout>
                             </Frame>
@@ -122,7 +138,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <!-- "Post a trade" Button -->
+            <!-- "Post a trade" Button 
             <Button Text="Post a trade +"
                     Command="{Binding PostTradeCommand}"
                     BackgroundColor="#F1C40F"
@@ -130,7 +146,7 @@
                     FontAttributes="Bold"
                     CornerRadius="25"
                     HorizontalOptions="Center"
-                    Padding="10,5"/>
+                    Padding="10,5"/> -->
         </StackLayout>
 
         <!-- 3. Bottom Nav Bar (Optional) -->

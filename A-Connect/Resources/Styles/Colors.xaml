@@ -51,15 +51,17 @@
     <Color x:Key="Yellow">#FFEDCA78</Color>
     <Color x:Key="Red">#ef4565</Color>
     <Color x:Key="MuteBlue">#90B4CE</Color>
-    
+    <Color x:Key="Blue">#4982CD</Color>
+    <Color x:Key="LightBlue">#D8EEFE</Color>
+
 
     <LinearGradientBrush x:Key="MainGradient" StartPoint="0,0" EndPoint="0,1.5">
         <GradientStop Color="#4982CD" Offset="0.0" />
         <GradientStop Color="#9ABFEF" Offset="1.0" />
-</LinearGradientBrush>
+    </LinearGradientBrush>
 
 
 
-    
-    
+
+
 </ResourceDictionary>

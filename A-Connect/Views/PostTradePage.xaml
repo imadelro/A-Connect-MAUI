@@ -11,11 +11,11 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Grid BackgroundColor="#063970" Padding="20">
+        <Grid BackgroundColor="{StaticResource DarkBlue}" Padding="20">
             <Label Text="Schedule Trading"
-                   TextColor="Gold"
+                   TextColor="{StaticResource Yellow}"
                    FontSize="20"
-                   FontAttributes="Bold"
+                   FontFamily="Inter-Black"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"/>
         </Grid>
@@ -23,39 +23,54 @@
         <!-- Form Content -->
         <VerticalStackLayout Grid.Row="1" Padding="20" Spacing="20">
             <!-- Card for form fields -->
-            <Frame BackgroundColor="#1F6FB7"
+            <Frame BackgroundColor="{StaticResource Blue}"
                    CornerRadius="15"
                    Padding="20">
                 <VerticalStackLayout Spacing="15">
                     <Label Text="TRADE DETAILS"
-                           FontSize="18"
-                           FontAttributes="Bold"
-                           TextColor="White"
+                           FontSize="22"
+                           FontFamily="Inter-Black"
+                           TextColor="{StaticResource LightBlue}"
                            HorizontalOptions="Center"/>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="SUBJECT:" FontFamily="Inter-SemiBold" TextColor="White" VerticalTextAlignment="Center"/>
+                        <Frame BackgroundColor="White" Padding="30,0">
+                            <Entry Text="{Binding CourseCode}" Placeholder="e.g. CSCI 30"/>
+                        </Frame>
+                    </HorizontalStackLayout>
 
-                    <Label Text="Subject:" TextColor="White"/>
-                    <Entry Text="{Binding CourseCode}" Placeholder="e.g. CSCI 30"/>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="TRADE OFFER:" FontFamily="Inter-SemiBold" TextColor="White" VerticalTextAlignment="Center"/>
+                        <Frame BackgroundColor="White" Padding="30,0">
+                            <Entry Text="{Binding TradeOffer}" Placeholder="e.g. M-TH, 2-3:30PM"/>
+                        </Frame>
+                    </HorizontalStackLayout>
 
-                    <Label Text="Trade Offer:" TextColor="White"/>
-                    <Entry Text="{Binding TradeOffer}" Placeholder="e.g. M-TH, 2-3:30PM"/>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="TRADE REQUEST:" FontFamily="Inter-SemiBold" TextColor="White" VerticalTextAlignment="Center"/>
+                        <Frame BackgroundColor="White" Padding="20,0">
+                            <Entry Text="{Binding TradeRequest}" Placeholder="e.g. T-F, 12:30-1:40PM"/>
+                        </Frame>
+                    </HorizontalStackLayout>
 
-                    <Label Text="Trade Request:" TextColor="White"/>
-                    <Entry Text="{Binding TradeRequest}" Placeholder="e.g. T-F, 12:30-1:40PM"/>
-
-                    <Label Text="Contact:" TextColor="White"/>
-                    <Entry Text="{Binding ContactInfo}" Placeholder="e.g. FB link, email, phone"/>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="CONTACT:" FontFamily="Inter-SemiBold" TextColor="White" VerticalTextAlignment="Center"/>
+                        <Frame BackgroundColor="White" Padding="20,0">
+                            <Entry Text="{Binding ContactInfo}" Placeholder="e.g. FB link, email, phone"/>
+                        </Frame>
+                    </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Frame>
 
             <!-- POST button -->
             <Button Text="POST"
                     Command="{Binding PostTradeCommand}"
-                    BackgroundColor="#F1C40F"
+                    BackgroundColor="{StaticResource Yellow}"
                     TextColor="Black"
-                    FontAttributes="Bold"
+                    FontFamily="Inter-Black"
                     CornerRadius="25"
                     HorizontalOptions="Center"
-                    Padding="10,5" />
+                    Padding="40,10" />
         </VerticalStackLayout>
     </Grid>
 </ContentPage>
