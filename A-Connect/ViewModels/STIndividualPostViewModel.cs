@@ -5,7 +5,7 @@ using A_Connect.Models;
 
 namespace A_Connect.ViewModels
 {
-    public class IndividualPostViewModel : BaseViewModel
+    public class STIndividualPostViewModel : BaseViewModel
     {
         private TradePost _selectedPost;
         public TradePost SelectedPost
@@ -16,7 +16,7 @@ namespace A_Connect.ViewModels
 
         public ICommand CloseCommand { get; }
 
-        public IndividualPostViewModel()
+        public STIndividualPostViewModel()
         {
             CloseCommand = new Command(async () =>
             {

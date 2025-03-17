@@ -5,7 +5,7 @@ using A_Connect.Models;
 
 namespace A_Connect.ViewModels
 {
-    public class PostTradeViewModel : BaseViewModel
+    public class STFormViewModel : BaseViewModel
     {
         private string _courseCode;
         public string CourseCode
@@ -37,7 +37,7 @@ namespace A_Connect.ViewModels
 
         public ICommand PostTradeCommand { get; }
 
-        public PostTradeViewModel()
+        public STFormViewModel()
         {
             PostTradeCommand = new Command(async () =>
             {

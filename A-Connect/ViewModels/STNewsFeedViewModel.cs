@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace A_Connect.ViewModels
 {
-    public class ScheduleTradingNewsFeedViewModel : BaseViewModel
+    public class STNewsFeedViewModel : BaseViewModel
     {
         public ObservableCollection<TradePost> Posts { get; set; }
         public string SearchText { get; set; }
@@ -16,7 +16,7 @@ namespace A_Connect.ViewModels
         public ICommand ShowOwnPostsCommand { get; }
         public ICommand PostSelectedCommand { get; }
 
-        public ScheduleTradingNewsFeedViewModel()
+        public STNewsFeedViewModel()
         {
             // Sample posts for demonstration.
             Posts = new ObservableCollection<TradePost>

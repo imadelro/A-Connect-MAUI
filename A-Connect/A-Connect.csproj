@@ -68,31 +68,37 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\IndividualPostPage.xaml.cs">
-	    <DependentUpon>IndividualPostPage.xaml</DependentUpon>
+	  <Compile Update="Views\PTPNewsFeedPage.xaml.cs">
+	    <DependentUpon>PTPNewsFeedPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\PostTradePage.xaml.cs">
-	    <DependentUpon>PostTradePage.xaml</DependentUpon>
+	  <Compile Update="Views\PTPFormPage.xaml.cs">
+	    <DependentUpon>PTPFormPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\OwnPostsPage.xaml.cs">
-	    <DependentUpon>OwnPostsPage.xaml</DependentUpon>
+	  <Compile Update="Views\STIndividualPostPage.xaml.cs">
+	    <DependentUpon>STIndividualPostPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\ScheduleTradingNewsFeedPage.xaml.cs">
-	    <DependentUpon>ScheduleTradingNewsFeedPage.xaml</DependentUpon>
+	  <Compile Update="Views\STFormPage.xaml.cs">
+	    <DependentUpon>STFormPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\STOwnPostPage.xaml.cs">
+	    <DependentUpon>STOwnPostPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\STNewsFeedPage.xaml.cs">
+	    <DependentUpon>STNewsFeedPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\IndividualPostPage.xaml">
+	  <MauiXaml Update="Views\STIndividualPostPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\PostTradePage.xaml">
+	  <MauiXaml Update="Views\STFormPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\OwnPostsPage.xaml">
+	  <MauiXaml Update="Views\STOwnPostPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ScheduleTradingNewsFeedPage.xaml">
+	  <MauiXaml Update="Views\STNewsFeedPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\RegisterPage.xaml">

@@ -8,7 +8,7 @@ namespace A_Connect.Views
         public ScheduleTradingNewsFeedPage()
         {
             InitializeComponent();
-            BindingContext = new ScheduleTradingNewsFeedViewModel();
+            BindingContext = new STNewsFeedViewModel();
         }
     }
 }
