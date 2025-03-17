@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="A_Connect.Views.TutorFinderFormPage"
+             Title="Create Post"
+             BackgroundColor="White">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+
+            <Label Text="Course Code" />
+            <Entry x:Name="courseCodeEntry" Placeholder="e.g. MATH 21" />
+
+            <Label Text="Category (Tutor or Tutee)" />
+            <Entry x:Name="categoryEntry" Placeholder="e.g. Tutor" />
+
+            <Label Text="Name" />
+            <Entry x:Name="nameEntry" />
+
+            <Label Text="Contact Info" />
+            <Entry x:Name="contactEntry" Placeholder="Email or phone" />
+
+            <Label Text="Additional Info" />
+            <Editor x:Name="additionalInfoEditor"
+                    AutoSize="TextChanges"
+                    Placeholder="Availability, location, etc." />
+
+            <Button Text="Submit"
+                    Clicked="OnSubmitClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

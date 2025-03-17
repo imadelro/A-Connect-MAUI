@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="A_Connect.Views.TutorFinderDetailsPage"
+             Title="Post Details"
+             BackgroundColor="White">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+
+            <Label Text="Course Code" FontAttributes="Bold" />
+            <Label x:Name="courseCodeLabel" />
+
+            <Label Text="Category" FontAttributes="Bold" />
+            <Label x:Name="categoryLabel" />
+
+            <Label Text="Name" FontAttributes="Bold" />
+            <Label x:Name="nameLabel" />
+
+            <Label Text="Contact" FontAttributes="Bold" />
+            <Label x:Name="contactLabel" />
+
+            <Label Text="Additional Info" FontAttributes="Bold" />
+            <Label x:Name="additionalInfoLabel" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

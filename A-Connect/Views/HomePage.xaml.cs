@@ -20,5 +20,9 @@ namespace A_Connect.Views
             // Make sure the route "ProfsToPickNewsFeedPage" is registered in AppShell.
             await Shell.Current.GoToAsync("ProfsToPickNewsFeedPage");
         }
+        private async void OnTutorFinderClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("TutorFinderPage");
+        }       
     }
 }
