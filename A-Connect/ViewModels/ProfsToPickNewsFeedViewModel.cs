@@ -11,9 +11,10 @@ namespace A_Connect.ViewModels
     {
         private readonly ReviewDatabase _database;
         private string _searchText;
-        private ObservableCollection<Review> _allReviews; 
+        private ObservableCollection<Review> _allReviews;
 
-        public ObservableCollection<Review> Reviews { get; set; } = new ObservableCollection<Review>();
+        public ObservableCollection<GroupedReview> GroupedReviews { get; set; }
+            = new ObservableCollection<GroupedReview>();
 
         public ProfsToPickNewsFeedViewModel(ReviewDatabase database)
         {
@@ -21,13 +22,15 @@ namespace A_Connect.ViewModels
             _allReviews = new ObservableCollection<Review>();
 
             LoadReviewsCommand = new Command(async () => await LoadReviews());
-            SearchCommand = new Command(PerformSearch); 
+            ToggleGroupCommand = new Command<GroupedReview>(ToggleGroup);
+            SearchCommand = new Command(PerformSearch);
 
             LoadReviews();
         }
 
         public Command LoadReviewsCommand { get; }
         public Command SearchCommand { get; }
+        public Command<GroupedReview> ToggleGroupCommand { get; } // Added for expand/collapse
 
         public string SearchText
         {
@@ -38,7 +41,7 @@ namespace A_Connect.ViewModels
                 {
                     _searchText = value;
                     OnPropertyChanged();
-                    PerformSearch(); 
+                    PerformSearch();
                 }
             }
         }
@@ -46,35 +49,52 @@ namespace A_Connect.ViewModels
         private async Task LoadReviews()
         {
             var reviews = await _database.GetAllReviewsAsync();
-            _allReviews = new ObservableCollection<Review>(reviews); 
-            PerformSearch(); 
+            _allReviews = new ObservableCollection<Review>(reviews);
+            GroupReviews();  // ✅ FIX: Correct method call
         }
 
-        private void PerformSearch() 
+        private void GroupReviews()
         {
-            if (string.IsNullOrWhiteSpace(SearchText))
-            {
-                
-                Reviews.Clear();
-                foreach (var review in _allReviews)
-                {
-                    Reviews.Add(review);
-                }
-            }
-            else
-            {
-               
-                var filteredReviews = _allReviews
-                    .Where(r => r.ProfessorName.Contains(SearchText, System.StringComparison.OrdinalIgnoreCase)
-                             || r.CourseCode.Contains(SearchText, System.StringComparison.OrdinalIgnoreCase))
-                    .ToList();
+            GroupedReviews.Clear();
 
-                Reviews.Clear();
-                foreach (var review in filteredReviews)
-                {
-                    Reviews.Add(review);
-                }
+            var grouped = _allReviews
+                .GroupBy(r => r.ProfessorName)
+                .Select(g => new GroupedReview(g.Key, new ObservableCollection<Review>(g.ToList())))
+                .ToList();
+
+            foreach (var group in grouped)
+            {
+                GroupedReviews.Add(group);
             }
         }
+
+        private void PerformSearch()
+        {
+            GroupedReviews.Clear();
+
+            var filteredGroups = _allReviews
+                .Where(r => string.IsNullOrWhiteSpace(SearchText) ||
+                            r.ProfessorName.Contains(SearchText, System.StringComparison.OrdinalIgnoreCase) ||
+                            r.CourseCode.Contains(SearchText, System.StringComparison.OrdinalIgnoreCase))
+                .GroupBy(r => r.ProfessorName)
+                .Select(g => new GroupedReview(g.Key, new ObservableCollection<Review>(g.ToList())))
+                .ToList();
+
+            foreach (var group in filteredGroups)
+            {
+                GroupedReviews.Add(group);
+            }
+        }
+
+        private void ToggleGroup(GroupedReview group)
+        {
+            if (group == null) return;
+
+            group.IsExpanded = !group.IsExpanded;
+            OnPropertyChanged(nameof(GroupedReviews));
+
+            System.Diagnostics.Debug.WriteLine($"Tapped: {group.ProfessorName}, Expanded: {group.IsExpanded}");
+        }
+
     }
 }

@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Profs to Pick News Feed"
+    xmlns:local="clr-namespace:A_Connect.ViewModels"
     BackgroundColor="White">
 
     <Grid>
@@ -41,79 +42,67 @@
                 </HorizontalStackLayout>
             </Frame>
 
-            <!-- Tab-like buttons -->
-            <Grid ColumnSpacing="0" RowSpacing="0" Padding="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <Button Text="Posts by other users"
-                        BackgroundColor="#F0F0F0"
-                        TextColor="Black"
-                        Grid.Column="0"
-                        CornerRadius="0"
-                        FontAttributes="Bold"/>
-                <Button Text="Own posts"
-                        BackgroundColor="#F0F0F0"
-                        TextColor="Black"
-                        Grid.Column="1"
-                        CornerRadius="0"
-                        FontAttributes="Bold"/>
-            </Grid>
-
-            <!-- 🔥 Reviews List (Dynamic) -->
+            <!-- 🔥 Grouped Reviews List -->
             <RefreshView Command="{Binding LoadReviewsCommand}">
-                <CollectionView ItemsSource="{Binding Reviews}">
+                <CollectionView ItemsSource="{Binding GroupedReviews}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout Margin="0,10">
+
+                                <!-- 🔹 Professor Header (Tappable to Expand/Collapse) -->
                                 <Frame BackgroundColor="#1F6FB7"
                                        CornerRadius="15"
-                                       Padding="15">
-                                    <VerticalStackLayout Spacing="5">
-                                        <Label Text="{Binding CourseCode}"
-                                               TextColor="White"
-                                               FontSize="16"
-                                               FontAttributes="Bold"/>
+                                       Padding="15">    
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProfsToPickNewsFeedViewModel}}, Path=ToggleGroupCommand}"
+                                                              CommandParameter="{Binding}" />
+                                    </Frame.GestureRecognizers>
 
+                                    <HorizontalStackLayout>
                                         <Label Text="{Binding ProfessorName}"
                                                TextColor="White"
+                                               FontSize="18"
+                                               FontAttributes="Bold"
+                                               VerticalOptions="Center"/>
+
+                                        <Label Text="{Binding ReviewCount, StringFormat='({0} Reviews)'}"
+                                               TextColor="Gold"
                                                FontSize="14"
-                                               FontAttributes="Bold"/>
-
-                                        <!-- Star Ratings -->
-                                        <HorizontalStackLayout>
-                                            <Image Source="star_filled.png"
-                                                   WidthRequest="16" HeightRequest="16"
-                                                   IsVisible="{Binding Rating, Converter={StaticResource RatingToStarVisibility}, ConverterParameter=1}"/>
-                                            <Image Source="star_filled.png"
-                                                   WidthRequest="16" HeightRequest="16"
-                                                   IsVisible="{Binding Rating, Converter={StaticResource RatingToStarVisibility}, ConverterParameter=2}"/>
-                                            <Image Source="star_filled.png"
-                                                   WidthRequest="16" HeightRequest="16"
-                                                   IsVisible="{Binding Rating, Converter={StaticResource RatingToStarVisibility}, ConverterParameter=3}"/>
-                                            <Image Source="star_filled.png"
-                                                   WidthRequest="16" HeightRequest="16"
-                                                   IsVisible="{Binding Rating, Converter={StaticResource RatingToStarVisibility}, ConverterParameter=4}"/>
-                                            <Image Source="star_filled.png"
-                                                   WidthRequest="16" HeightRequest="16"
-                                                   IsVisible="{Binding Rating, Converter={StaticResource RatingToStarVisibility}, ConverterParameter=5}"/>
-                                        </HorizontalStackLayout>
-
-                                        <!-- Review Content -->
-                                        <Label Text="{Binding Content}"
-                                               TextColor="White"
-                                               FontSize="12"
-                                               MaxLines="2"/>
-
-                                        <!-- Date Posted -->
-                                        <Label Text="{Binding DatePosted, StringFormat='Date: {0:MMMM dd, yyyy}'}"
-                                               TextColor="White"
-                                               FontSize="10"
-                                               HorizontalOptions="End"/>
-                                    </VerticalStackLayout>
+                                               FontAttributes="Italic"
+                                               VerticalOptions="Center"
+                                               Margin="10,0,0,0"/>  
+                                    </HorizontalStackLayout>
                                 </Frame>
+
+
+                                <CollectionView ItemsSource="{Binding Reviews}" IsVisible="{Binding IsExpanded}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame BackgroundColor="White"
+                                                   CornerRadius="10"
+                                                   Padding="10"
+                                                   Margin="10,0,10,10">
+                                                <VerticalStackLayout>
+                                                    <Label Text="{Binding CourseCode}" 
+                                                           TextColor="Black" 
+                                                           FontSize="14" 
+                                                           FontAttributes="Bold"/>
+
+                                                    <Label Text="{Binding Content}"
+                                                           TextColor="Black"
+                                                           FontSize="12"
+                                                           MaxLines="2"/>
+
+                                                    <Label Text="{Binding DatePosted, StringFormat='Date: {0:MMMM dd, yyyy}'}"
+                                                           TextColor="Gray"
+                                                           FontSize="10"
+                                                           HorizontalOptions="End"/>
+                                                </VerticalStackLayout>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
