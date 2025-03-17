@@ -5,10 +5,10 @@ using A_Connect.Models;
 
 namespace A_Connect.ViewModels
 {
-    public class IndividualPostViewModel : BaseViewModel
+    public class STIndividualPostViewModel : BaseViewModel
     {
-        private TradePost _selectedPost;
-        public TradePost SelectedPost
+        private STForm _selectedPost;
+        public STForm SelectedPost
         {
             get => _selectedPost;
             set => SetProperty(ref _selectedPost, value);
@@ -16,7 +16,7 @@ namespace A_Connect.ViewModels
 
         public ICommand CloseCommand { get; }
 
-        public IndividualPostViewModel()
+        public STIndividualPostViewModel()
         {
             CloseCommand = new Command(async () =>
             {
@@ -28,7 +28,7 @@ namespace A_Connect.ViewModels
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (query.ContainsKey("SelectedPost"))
-                SelectedPost = query["SelectedPost"] as TradePost;
+                SelectedPost = query["SelectedPost"] as STForm;
         }
     }
 }

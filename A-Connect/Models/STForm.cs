@@ -2,7 +2,7 @@
 
 namespace A_Connect.Models
 {
-    public class TradePost
+    public class STForm
     {
         public int Id { get; set; }
         public string CourseCode { get; set; }

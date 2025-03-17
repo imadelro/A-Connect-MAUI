@@ -5,7 +5,7 @@ using A_Connect.Models;
 
 namespace A_Connect.ViewModels
 {
-    public class PostTradeViewModel : BaseViewModel
+    public class STFormViewModel : BaseViewModel
     {
         private string _courseCode;
         public string CourseCode
@@ -37,14 +37,14 @@ namespace A_Connect.ViewModels
 
         public ICommand PostTradeCommand { get; }
 
-        public PostTradeViewModel()
+        public STFormViewModel()
         {
             PostTradeCommand = new Command(async () =>
             {
                 // Use App.CurrentUser to fill in the username.
                 var currentUsername = App.CurrentUser?.Username ?? "Unknown";
 
-                var newPost = new TradePost
+                var newPost = new STForm
                 {
                     CourseCode = CourseCode,
                     TradeOffer = TradeOffer,

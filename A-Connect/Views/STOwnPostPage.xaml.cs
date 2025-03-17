@@ -3,12 +3,12 @@ using A_Connect.ViewModels;
 
 namespace A_Connect.Views
 {
-    public partial class PostTradePage : ContentPage
+    public partial class OwnPostsPage : ContentPage
     {
-        public PostTradePage()
+        public OwnPostsPage()
         {
             InitializeComponent();
-            BindingContext = new PostTradeViewModel();
+            BindingContext = new STOwnPostViewModel();
         }
     }
 }
