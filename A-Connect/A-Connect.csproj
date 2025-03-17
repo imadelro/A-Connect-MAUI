@@ -68,6 +68,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\PTPNewsFeedPage.xaml.cs">
+	    <DependentUpon>PTPNewsFeedPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\PTPFormPage.xaml.cs">
+	    <DependentUpon>PTPFormPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\STIndividualPostPage.xaml.cs">
 	    <DependentUpon>STIndividualPostPage.xaml</DependentUpon>
 	  </Compile>

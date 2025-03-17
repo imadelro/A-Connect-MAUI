@@ -1,0 +1,75 @@
+<ContentPage
+    x:Class="A_Connect.Views.ProfsToPickFormPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Profs to Pick Form">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- 1. Blue Header -->
+        <Grid BackgroundColor="#063970" Padding="20,40,20,20">
+            <Label Text="Profs to Pick"
+                   TextColor="Gold"
+                   FontAttributes="Bold"
+                   FontSize="24"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+        </Grid>
+
+        <!-- 2. Form content -->
+        <VerticalStackLayout Grid.Row="1"
+                             Padding="20"
+                             Spacing="20">
+            <!-- Blue container for form -->
+            <Frame BackgroundColor="#1F6FB7"
+                   CornerRadius="15"
+                   Padding="20">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="REVIEW DETAILS"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           HorizontalOptions="Center"/>
+
+                    <Label Text="Professor Name:" TextColor="White"/>
+                    <Entry Placeholder="e.g. DUEÑAS, Lorenzo" />
+
+                    <Label Text="Subject Taken:" TextColor="White"/>
+                    <Entry Placeholder="e.g. CSCI 42" />
+
+                    <Label Text="Review:" TextColor="White"/>
+                    <!-- Editor for multiline text -->
+                    <Editor Placeholder="Share your experience..." 
+                            AutoSize="TextChanges" 
+                            HeightRequest="80"/>
+
+                    <Label Text="When did you take this subject:" TextColor="White"/>
+                    <Entry Placeholder="e.g. 1st sem AY 2024-2025" />
+
+                    <Label Text="Rating:" TextColor="White"/>
+                    <!-- 5 star placeholders -->
+                    <HorizontalStackLayout>
+                        <Image Source="star_outline.png" WidthRequest="24" HeightRequest="24"/>
+                        <Image Source="star_outline.png" WidthRequest="24" HeightRequest="24"/>
+                        <Image Source="star_outline.png" WidthRequest="24" HeightRequest="24"/>
+                        <Image Source="star_outline.png" WidthRequest="24" HeightRequest="24"/>
+                        <Image Source="star_outline.png" WidthRequest="24" HeightRequest="24"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Post button -->
+            <Button Text="POST"
+                    BackgroundColor="#F1C40F"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    CornerRadius="25"
+                    HorizontalOptions="Center"
+                    Padding="10,5"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
