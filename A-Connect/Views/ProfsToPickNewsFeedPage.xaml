@@ -14,10 +14,10 @@
         </Grid.RowDefinitions>
 
         <!-- 1. Blue Header -->
-        <Grid BackgroundColor="#063970" Padding="20,40,20,20">
+        <Grid BackgroundColor="{StaticResource DarkBlue}" Padding="20,40,20,20">
             <Label Text="Profs to Pick"
-                   TextColor="Gold"
-                   FontAttributes="Bold"
+                   TextColor="{StaticResource Yellow}"
+                   FontFamily="Inter-Black"
                    FontSize="24"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"/>
@@ -38,9 +38,84 @@
                            Placeholder="Search"
                            VerticalOptions="Center"
                            FontSize="14"
+                           FontFamily="Inter-SemiBold"
                            Margin="0"/>
                 </HorizontalStackLayout>
             </Frame>
+
+            <!-- TABS: "Posts by other users" | "Own posts" -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="40" Padding="0,10">
+
+                <!-- First Tab -->
+                <VerticalStackLayout HorizontalOptions="Center">
+                    <Label Text="Posts by other users"
+               FontSize="16"
+               FontFamily="Inter-SemiBold">
+                        <!-- DataTriggers for styling -->
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsOtherPostsSelected}" Value="True">
+                                <Setter Property="TextColor" Value="Black" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsOtherPostsSelected}" Value="False">
+                                <Setter Property="TextColor" Value="#999999" />
+                            </DataTrigger>
+                        </Label.Triggers>
+
+                        <!-- GestureRecognizers -->
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SwitchToOtherPostsCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <!-- Underline -->
+                    <BoxView HeightRequest="2">
+                        <BoxView.Triggers>
+                            <DataTrigger TargetType="BoxView" Binding="{Binding IsOtherPostsSelected}" Value="True">
+                                <Setter Property="IsVisible" Value="True" />
+                                <Setter Property="BackgroundColor" Value="Black" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="BoxView" Binding="{Binding IsOtherPostsSelected}" Value="False">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </BoxView.Triggers>
+                    </BoxView>
+                </VerticalStackLayout>
+
+                <!-- Second Tab -->
+                <VerticalStackLayout HorizontalOptions="Center">
+                    <Label Text="Own posts"
+               FontSize="16"
+               FontFamily="Inter-SemiBold">
+                        <!-- DataTriggers for styling -->
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsOwnPostsSelected}" Value="True">
+                                <Setter Property="TextColor" Value="Black" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsOwnPostsSelected}" Value="False">
+                                <Setter Property="TextColor" Value="#999999" />
+                            </DataTrigger>
+                        </Label.Triggers>
+
+                        <!-- GestureRecognizers -->
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SwitchToOwnPostsCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <!-- Underline -->
+                    <BoxView HeightRequest="2">
+                        <BoxView.Triggers>
+                            <DataTrigger TargetType="BoxView" Binding="{Binding IsOwnPostsSelected}" Value="True">
+                                <Setter Property="IsVisible" Value="True" />
+                                <Setter Property="BackgroundColor" Value="Black" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="BoxView" Binding="{Binding IsOwnPostsSelected}" Value="False">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </BoxView.Triggers>
+                    </BoxView>
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
 
             <!-- 🔥 Grouped Reviews List -->
             <RefreshView Command="{Binding LoadReviewsCommand}">
@@ -50,7 +125,7 @@
                             <StackLayout Margin="0,10">
 
                                 <!-- 🔹 Professor Header (Tappable to Expand/Collapse) -->
-                                <Frame BackgroundColor="#1F6FB7"
+                                <Frame BackgroundColor="{StaticResource Blue}"
                                        CornerRadius="15"
                                        Padding="15">    
                                     <Frame.GestureRecognizers>
@@ -58,20 +133,20 @@
                                                               CommandParameter="{Binding}" />
                                     </Frame.GestureRecognizers>
 
-                                    <HorizontalStackLayout>
+                                    <VerticalStackLayout>
                                         <Label Text="{Binding ProfessorName}"
                                                TextColor="White"
                                                FontSize="18"
-                                               FontAttributes="Bold"
+                                               FontFamily="Inter-Black"
                                                VerticalOptions="Center"/>
 
                                         <Label Text="{Binding ReviewCount, StringFormat='({0} Reviews)'}"
-                                               TextColor="Gold"
+                                               TextColor="White"
                                                FontSize="14"
-                                               FontAttributes="Italic"
+                                               FontFamily="Inter-SemiBold"
                                                VerticalOptions="Center"
-                                               Margin="10,0,0,0"/>  
-                                    </HorizontalStackLayout>
+                                               />  
+                                    </VerticalStackLayout>
                                 </Frame>
 
 
@@ -86,17 +161,19 @@
                                                     <Label Text="{Binding CourseCode}" 
                                                            TextColor="Black" 
                                                            FontSize="14" 
-                                                           FontAttributes="Bold"/>
+                                                           FontFamily="Inter-Regular"/>
 
                                                     <Label Text="{Binding Content}"
                                                            TextColor="Black"
                                                            FontSize="12"
-                                                           MaxLines="2"/>
+                                                           MaxLines="2"
+                                                           FontFamily="Inter-Light"/>
 
                                                     <Label Text="{Binding DatePosted, StringFormat='Date: {0:MMMM dd, yyyy}'}"
                                                            TextColor="Gray"
                                                            FontSize="10"
-                                                           HorizontalOptions="End"/>
+                                                           HorizontalOptions="End"
+                                                           FontFamily="Inter-Light"/>
                                                 </VerticalStackLayout>
                                             </Frame>
                                         </DataTemplate>
@@ -111,9 +188,9 @@
 
             <!-- "Post a review" button -->
             <Button Text="Post a review +"
-                    BackgroundColor="#F1C40F"
-                    TextColor="Black"
-                    FontAttributes="Bold"
+                    BackgroundColor="{StaticResource Yellow}"
+                    TextColor="{StaticResource OffBlack}"
+                    FontFamily="Inter-Black"
                     CornerRadius="25"
                     HorizontalOptions="Center"
                     Padding="10,5"

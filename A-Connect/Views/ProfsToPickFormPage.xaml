@@ -1,0 +1,65 @@
+<ContentPage
+    x:Class="A_Connect.Views.ProfsToPickFormPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:A_Connect.ViewModels"
+    Title="Profs to Pick Form"
+    x:DataType="viewModels:ProfsToPickFormViewModel">
+    <!-- Bind ViewModel -->
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid BackgroundColor="{StaticResource DarkBlue}" Padding="20,40,20,20">
+            <Label Text="Profs to Pick"
+                   TextColor="{StaticResource Yellow}"
+                   FontFamily="Inter-Black"
+                   FontSize="24"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+        </Grid>
+
+        <VerticalStackLayout Grid.Row="1" Padding="20" Spacing="20">
+            <Frame BackgroundColor="#1F6FB7" CornerRadius="15" Padding="20">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="REVIEW DETAILS" FontSize="18" FontFamily="Inter-Black" TextColor="{StaticResource LightBlue}" HorizontalOptions="Center"/>
+
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="Professor Name:" TextColor="White" FontFamily="Inter-Black" VerticalOptions="Center"/>
+                        <Frame BackgroundColor="White" Padding="20,0">
+                            <Entry Placeholder="e.g. DUEÑAS, Lorenzo" FontFamily="Inter-Light" Text="{Binding ProfessorName}"/>
+                        </Frame>
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="Subject Taken:" TextColor="White" FontFamily="Inter-Black"/>
+                        <Frame BackgroundColor="White" Padding="20,0">
+                            <Entry Placeholder="e.g. CSCI 42" FontFamily="Inter-Light" Text="{Binding CourseCode}"/>
+                        </Frame>
+                    </HorizontalStackLayout>
+
+                    <Label Text="Review:" TextColor="White" FontFamily="Inter-Black" VerticalOptions="Center"/>
+                    <Frame BackgroundColor="White" Padding="20,0">
+                        <Editor Placeholder="Share your experience..." FontFamily="Inter-Light" Text="{Binding ReviewText}" AutoSize="TextChanges" HeightRequest="80"/>
+                    </Frame>
+
+                    <Label Text="When did you take this subject:" TextColor="White" FontFamily="Inter-Black"/>
+                    <Frame BackgroundColor="White" Padding="20,0">
+                        <Entry Placeholder="e.g. 1st sem AY 2024-2025" FontFamily="Inter-Light" Text="{Binding SemesterTaken}"/>
+                    </Frame>
+
+                    <Label Text="Rating:" TextColor="White" FontFamily="Inter-Black"/>
+                    <Slider Minimum="1" Maximum="5" Value="{Binding Rating}" />
+
+                </VerticalStackLayout>
+            </Frame>
+
+            <Button Text="POST" BackgroundColor="{StaticResource Yellow}" TextColor="Black"
+                    FontFamily="Inter-Black" CornerRadius="25" HorizontalOptions="Center"
+                    Padding="40,10" Command="{Binding SubmitReviewCommand}"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
