@@ -1,36 +1,32 @@
-<ContentPage 
+<ContentPage
     x:Class="A_Connect.Views.ScheduleTradingNewsFeedPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Schedule Trading News Feed">
+    xmlns:viewModels="clr-namespace:A_Connect.ViewModels"
+    Title="Schedule Trading News Feed"
+    BackgroundColor="White">
 
-    <!-- Main Grid Layout -->
     <Grid>
-        <!-- Define three rows: 
-             1) Header 
-             2) Main Content 
-             3) Bottom Nav Bar (optional) -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!-- 1. Blue Header -->
-        <Grid BackgroundColor="#063970" Padding="20, 40, 20, 20">
+        <!-- Blue Header -->
+        <Grid BackgroundColor="#063970" Padding="20,40,20,20">
             <Label Text="Schedule Trading"
-                   TextColor="{StaticResource Yellow}"
-                   FontAttributes="Bold"
-                   FontSize="24"
+                   TextColor="Gold"
                    FontFamily="Inter-Black"
+                   FontSize="24"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"/>
         </Grid>
 
-        <!-- 2. Main Content: Search, Tabs, Posts, Post Button -->
+        <!-- Main Content -->
         <StackLayout Grid.Row="1" Spacing="15" Padding="20">
 
-            <!-- Custom Search Bar (Frame + Entry) -->
+            <!-- Search Bar -->
             <Frame CornerRadius="25" BackgroundColor="White" Padding="0">
                 <HorizontalStackLayout Padding="10,0">
                     <Image Source="search_icon.png"
@@ -47,14 +43,13 @@
                 </HorizontalStackLayout>
             </Frame>
 
-            <!-- Tab-like Buttons -->
+            <!-- Tab Buttons -->
             <Grid ColumnSpacing="0" RowSpacing="0" Padding="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <!-- "Posts by other users" -->
                 <Button Text="Posts by other users"
                         Command="{Binding ShowOtherPostsCommand}"
                         BackgroundColor="#F0F0F0"
@@ -63,7 +58,6 @@
                         CornerRadius="20"
                         FontFamily="Inter-SemiBold"/>
 
-                <!-- "Own posts" -->
                 <Button Text="Own posts"
                         Command="{Binding ShowOwnPostsCommand}"
                         BackgroundColor="#F0F0F0"
@@ -73,83 +67,94 @@
                         FontFamily="Inter-SemiBold"/>
             </Grid>
 
-            <!-- List of trade posts -->
-            <CollectionView ItemsSource="{Binding Posts}" VerticalOptions="FillAndExpand">
+            <!-- CollectionView for DisplayedPosts -->
+            <CollectionView ItemsSource="{Binding DisplayedPosts}" 
+                            VerticalOptions="FillAndExpand"
+                            SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Margin="0,10">
-                            <Frame BackgroundColor="{StaticResource Blue}"
-                                   CornerRadius="15"
-                                   Padding="15">
-                                <VerticalStackLayout Spacing="5">
-                                    <!-- Course Code -->
-                                    <Label Text="{Binding CourseCode}"
+                        <Frame BackgroundColor="#1F6FB7"
+                               CornerRadius="15"
+                               Padding="15"
+                               Margin="0,10">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer 
+Command="{Binding PostSelectedCommand}"                                    CommandParameter="{Binding}" />
+                            </Frame.GestureRecognizers>
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="{Binding CourseCode}"
+                                       TextColor="White"
+                                       FontSize="18"
+                                       FontFamily="Inter-Black" />
+
+                                <!-- Offer/Request "Pills" -->
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="Trade offer:"
                                            TextColor="White"
-                                           FontSize="18"
-                                           FontFamily="Inter-Black" />
+                                           FontFamily="Inter-SemiBold"/>
+                                    <Frame BackgroundColor="#E74C3C"
+                                           CornerRadius="10"
+                                           Padding="5"
+                                           HasShadow="False">
+                                        <Label Text="{Binding TradeOffer}"
+                                               TextColor="White"
+                                               FontSize="14"
+                                               FontFamily="Inter-SemiBold"/>
+                                    </Frame>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="Trade request:"
+                                           TextColor="White"
+                                           FontFamily="Inter-SemiBold"/>
+                                    <Frame BackgroundColor="#063970"
+                                           CornerRadius="10"
+                                           Padding="5"
+                                           HasShadow="False">
+                                        <Label Text="{Binding TradeRequest}"
+                                               TextColor="White"
+                                               FontSize="14"
+                                               FontFamily="Inter-SemiBold"/>
+                                    </Frame>
+                                </HorizontalStackLayout>
 
-                                    <!-- Offer/Request "Pills" -->
-                                    <HorizontalStackLayout Spacing="10">
-                                        <Label Text="Trade offer:"
-                                               TextColor="White"
-                                               FontFamily="Inter-SemiBold"
-                                               VerticalTextAlignment="Center"/>
-                                        <Frame BackgroundColor="{StaticResource Red}"
-                                               CornerRadius="10"
-                                               Padding="5"
-                                               HasShadow="False">
-                                            <Label Text="{Binding TradeOffer}"
-                                                   TextColor="White"
-                                                   FontSize="14"
-                                                   FontFamily="Inter-SemiBold"/>
-                                        </Frame>
-                                    </HorizontalStackLayout>
-                                    <HorizontalStackLayout Spacing="10">
-                                        <Label Text="Trade request:"
-                                        TextColor="White"
-                                        FontFamily="Inter-SemiBold"
-                                        VerticalTextAlignment="Center"/>
-                                        <Frame BackgroundColor="{StaticResource DarkBlue}"
-                                               CornerRadius="10"
-                                               Padding="5"
-                                               HasShadow="False">
-                                            <Label Text="{Binding TradeRequest}"
-                                                   TextColor="White"
-                                                   FontSize="14"
-                                                   FontFamily="Inter-SemiBold"/>
-                                        </Frame>
-                                    </HorizontalStackLayout>
-
-                                    <!-- Posted by and Date -->
-                                    <HorizontalStackLayout>
-                                        <Label Text="{Binding PostedBy, StringFormat='Posted by: {0}'}"
-                                               TextColor="White"
-                                               FontSize="12"
-                                               FontFamily="Inter-Light"/>
-                                        <Label Text="{Binding Date, StringFormat='  |  Date: {0:MMM d, yyyy}'}"
-                                               TextColor="White"
-                                               FontSize="12"
-                                               FontFamily="Inter-Light"/>
-                                    </HorizontalStackLayout>
-                                </VerticalStackLayout>
-                            </Frame>
-                        </StackLayout>
+                                <!-- Posted by and Date -->
+                                <HorizontalStackLayout>
+                                    <Label Text="{Binding PostedBy, StringFormat='Posted by: {0}'}"
+                                           TextColor="White"
+                                           FontSize="12"
+                                           FontFamily="Inter-Light"/>
+                                    <Label Text="{Binding Date, StringFormat='  |  Date: {0:MMM d, yyyy}'}"
+                                           TextColor="White"
+                                           FontSize="12"
+                                           FontFamily="Inter-Light"/>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <!-- "Post a trade" Button 
+            <!-- "Post a trade" Button (always visible or only on "Own posts") -->
             <Button Text="Post a trade +"
                     Command="{Binding PostTradeCommand}"
                     BackgroundColor="#F1C40F"
                     TextColor="Black"
-                    FontAttributes="Bold"
+                    FontFamily="Inter-Black"
                     CornerRadius="25"
                     HorizontalOptions="Center"
-                    Padding="10,5"/> -->
+                    Padding="10,5">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding IsOwnPostsSelected}" Value="True">
+                        <Setter Property="IsVisible" Value="True" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Button" Binding="{Binding IsOwnPostsSelected}" Value="False">
+                        <Setter Property="IsVisible" Value="False" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
         </StackLayout>
 
-        <!-- 3. Bottom Nav Bar (Optional) -->
+        <!-- Bottom Nav Bar (optional) -->
         <Grid Grid.Row="2" BackgroundColor="#063970" HeightRequest="60">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -157,23 +162,18 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <!-- Nav Icon 1 -->
             <ImageButton Source="nav_icon1.png"
                          Grid.Column="0"
                          HorizontalOptions="Center"
                          VerticalOptions="Center"
                          WidthRequest="30"
                          HeightRequest="30"/>
-
-            <!-- Home Icon -->
             <ImageButton Source="nav_home.png"
                          Grid.Column="1"
                          HorizontalOptions="Center"
                          VerticalOptions="Center"
                          WidthRequest="30"
                          HeightRequest="30"/>
-
-            <!-- Profile Icon -->
             <ImageButton Source="nav_profile.png"
                          Grid.Column="2"
                          HorizontalOptions="Center"
