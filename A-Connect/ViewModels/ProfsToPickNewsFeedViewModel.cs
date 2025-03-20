@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Diagnostics;
 
 namespace A_Connect.ViewModels
 {
@@ -95,15 +96,21 @@ namespace A_Connect.ViewModels
             {
                 // e.g., assume "own" means rating > 3? 
                 // Or filter by user ID if you have it:
-                // var userId = App.CurrentUserId; 
-                // filtered = filtered.Where(r => r.UserId == userId);
-                filtered = filtered.Where(r => r.Rating > 3); // EXAMPLE ONLY
+                var userId = App.CurrentUser.Username;
+                filtered = filtered.Where(r => r.AuthorID == userId);
+                //filtered = filtered.Where(r => r.Rating > 3);  // EXAMPLE ONLY
+                Console.WriteLine($"UserID: {userId}");
+                foreach (var review in _allReviews)
+                {
+                    Console.WriteLine($"AuthorID: {review.AuthorID}");
+                }
+
             }
             else
             {
                 // "Other" posts
                 // e.g., filtered = filtered.Where(r => r.UserId != userId);
-                filtered = filtered.Where(r => r.Rating <= 3); // EXAMPLE ONLY
+                //filtered = filtered.Where(r => r.Rating <= 3); // EXAMPLE ONLY
             }
 
             // 3) Filter by search text

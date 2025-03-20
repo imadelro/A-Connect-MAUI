@@ -15,6 +15,7 @@ namespace A_Connect.ViewModels
         public string ReviewText { get; set; }
         public int Rating { get; set; }
         public string SemesterTaken { get; set; }
+        public string AuthorID { get; set; }
 
         public ICommand SubmitReviewCommand { get; }
 
@@ -26,7 +27,6 @@ namespace A_Connect.ViewModels
                 await SubmitReview(); 
             });
         }
-
         private async Task SubmitReview()
         {
             if (string.IsNullOrWhiteSpace(ProfessorName) || string.IsNullOrWhiteSpace(CourseCode) || Rating <= 0)
@@ -37,6 +37,7 @@ namespace A_Connect.ViewModels
 
             var newReview = new Review
             {
+                AuthorID = AuthorID,
                 ProfessorName = ProfessorName,
                 CourseCode = CourseCode,
                 ReviewText = ReviewText,

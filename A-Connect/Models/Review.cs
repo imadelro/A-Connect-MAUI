@@ -12,6 +12,7 @@ namespace A_Connect.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+        public string AuthorID = App.CurrentUser.Username;
 
         public string ProfessorName { get; set; }
         public string CourseCode { get; set; }
