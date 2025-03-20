@@ -16,7 +16,6 @@ public partial class AppShell : Shell
         // Register Schedule Trading pages.
         Routing.RegisterRoute("ScheduleTradingNewsFeedPage", typeof(ScheduleTradingNewsFeedPage));
         Routing.RegisterRoute("IndividualPostPage", typeof(IndividualPostPage));
-        Routing.RegisterRoute("OwnPostsPage", typeof(OwnPostsPage));
         Routing.RegisterRoute("PostTradePage", typeof(PostTradePage));
     }
 }

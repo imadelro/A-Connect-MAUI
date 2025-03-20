@@ -1,61 +1,132 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
+﻿using A_Connect.Models;
 using Microsoft.Maui.Controls;
-using A_Connect.Models;
-using System.Collections.Generic;
+using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows.Input;
 
 namespace A_Connect.ViewModels
 {
     public class STNewsFeedViewModel : BaseViewModel
     {
-        public ObservableCollection<STForm> Posts { get; set; }
-        public string SearchText { get; set; }
+        private ObservableCollection<STForm> _allPosts;
+        public ObservableCollection<STForm> DisplayedPosts { get; set; }
+
+        private bool _isOtherPostsSelected = true;
+        public bool IsOtherPostsSelected
+        {
+            get => _isOtherPostsSelected;
+            set => SetProperty(ref _isOtherPostsSelected, value);
+        }
+
+        private bool _isOwnPostsSelected;
+        public bool IsOwnPostsSelected
+        {
+            get => _isOwnPostsSelected;
+            set => SetProperty(ref _isOwnPostsSelected, value);
+        }
+
+        private string _searchText;
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                if (_searchText != value)
+                {
+                    _searchText = value;
+                    OnPropertyChanged();
+                    FilterPosts();
+                }
+            }
+        }
 
         public ICommand ShowOtherPostsCommand { get; }
         public ICommand ShowOwnPostsCommand { get; }
+        public ICommand PostTradeCommand { get; }
         public ICommand PostSelectedCommand { get; }
 
         public STNewsFeedViewModel()
         {
-            // Sample posts for demonstration.
-            Posts = new ObservableCollection<STForm>
-            {
-                new STForm
-                {
-                    CourseCode = "CS101",
-                    TradeOffer = "Mon 9-11am",
-                    TradeRequest = "Wed 2-4pm",
-                    PostedBy = "UserA",
-                    Date = DateTime.Now.AddDays(-1),
-                    ContactInfo = "usera@example.com"
-                },
-                new STForm
-                {
-                    CourseCode = "MATH202",
-                    TradeOffer = "Tue 1-3pm",
-                    TradeRequest = "Thu 10-12am",
-                    PostedBy = "UserB",
-                    Date = DateTime.Now.AddDays(-2),
-                    ContactInfo = "userb@example.com"
-                }
-            };
+            // All posts
+            // After (no sample data, just an empty list)
+            _allPosts = new ObservableCollection<STForm>();
+
+
+            DisplayedPosts = new ObservableCollection<STForm>();
+
+            // Default to "Posts by other users"
+            IsOtherPostsSelected = true;
+            IsOwnPostsSelected = false;
+            FilterPosts();
 
             ShowOtherPostsCommand = new Command(() =>
             {
-                // Implementation for filtering posts by other users.
+                IsOtherPostsSelected = true;
+                IsOwnPostsSelected = false;
+                FilterPosts();
             });
 
-            ShowOwnPostsCommand = new Command(async () =>
+            ShowOwnPostsCommand = new Command(() =>
             {
-                await Shell.Current.GoToAsync("OwnPostsPage");
+                IsOtherPostsSelected = false;
+                IsOwnPostsSelected = true;
+                FilterPosts();
             });
 
+            // Navigate to post form
+            PostTradeCommand = new Command(async () =>
+            {
+                await Shell.Current.GoToAsync("PostTradePage");
+            });
+
+            // Tap on a post -> navigate to individual post
             PostSelectedCommand = new Command<STForm>(async (post) =>
             {
                 var navParameter = new Dictionary<string, object> { { "SelectedPost", post } };
                 await Shell.Current.GoToAsync("IndividualPostPage", navParameter);
             });
+
+            // Listen for new posts from STFormViewModel
+            MessagingCenter.Subscribe<STFormViewModel, STForm>(this, "NewTradePost", (sender, newPost) =>
+            {
+                _allPosts.Add(newPost);
+                FilterPosts();
+            });
+        }
+
+        private void FilterPosts()
+        {
+            DisplayedPosts.Clear();
+            var currentUser = App.CurrentUser?.Username ?? "Unknown";
+
+            // 1) Start with all
+            var filtered = _allPosts.AsEnumerable();
+
+            // 2) Tab-based filter
+            if (IsOwnPostsSelected)
+            {
+                filtered = filtered.Where(p => p.PostedBy == currentUser);
+            }
+            else
+            {
+                filtered = filtered.Where(p => p.PostedBy != currentUser);
+            }
+
+            // 3) Search filter
+            if (!string.IsNullOrWhiteSpace(SearchText))
+            {
+                filtered = filtered.Where(p =>
+                    p.CourseCode.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+                    p.TradeOffer.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+                    p.TradeRequest.Contains(SearchText, StringComparison.OrdinalIgnoreCase));
+            }
+
+            // 4) Update DisplayedPosts
+            foreach (var post in filtered)
+            {
+                DisplayedPosts.Add(post);
+            }
         }
     }
 }

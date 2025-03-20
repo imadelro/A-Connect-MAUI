@@ -74,9 +74,6 @@
 	  <Compile Update="Views\STFormPage.xaml.cs">
 	    <DependentUpon>STFormPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\STOwnPostPage.xaml.cs">
-	    <DependentUpon>STOwnPostPage.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="Views\STNewsFeedPage.xaml.cs">
 	    <DependentUpon>STNewsFeedPage.xaml</DependentUpon>
 	  </Compile>
@@ -87,9 +84,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\STFormPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\STOwnPostPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\STNewsFeedPage.xaml">
