@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Windows.Input;
 using A_Connect.Models;
 using A_Connect.Services;
@@ -15,18 +16,15 @@ namespace A_Connect.ViewModels
         public string ReviewText { get; set; }
         public int Rating { get; set; }
         public string SemesterTaken { get; set; }
-        public string AuthorID { get; set; }
 
         public ICommand SubmitReviewCommand { get; }
 
         public ProfsToPickFormViewModel(ReviewDatabase database)
         {
             _database = database;
-            SubmitReviewCommand = new Command(async() =>
-            {
-                await SubmitReview(); 
-            });
+            SubmitReviewCommand = new Command(async () => await SubmitReview());
         }
+
         private async Task SubmitReview()
         {
             if (string.IsNullOrWhiteSpace(ProfessorName) || string.IsNullOrWhiteSpace(CourseCode) || Rating <= 0)
@@ -37,7 +35,7 @@ namespace A_Connect.ViewModels
 
             var newReview = new Review
             {
-                AuthorID = AuthorID,
+                AuthorID = App.CurrentUser.Username,
                 ProfessorName = ProfessorName,
                 CourseCode = CourseCode,
                 ReviewText = ReviewText,

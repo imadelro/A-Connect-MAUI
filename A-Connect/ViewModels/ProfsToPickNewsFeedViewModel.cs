@@ -102,15 +102,6 @@ namespace A_Connect.ViewModels
                 var userId = App.CurrentUser.Username;
                 filtered = filtered.Where(r => r.AuthorID == userId);
                 //filtered = filtered.Where(r => r.Rating > 3);  // EXAMPLE ONLY
-
-                Console.WriteLine($"User ID: {App.CurrentUser.Username}");
-
-                foreach (var review in filtered)
-                {
-                    Debug.WriteLine($"Review AuthorID: {review.AuthorID}");
-                }
-
-
             }
             else
             {
