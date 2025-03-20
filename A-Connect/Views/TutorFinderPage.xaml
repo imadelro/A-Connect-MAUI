@@ -1,46 +1,140 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="A_Connect.Views.TutorFinderPage"
-             Title="Tutor Finder"
-             BackgroundColor="White">
+<ContentPage 
+    x:Class="A_Connect.Views.TutorFinderPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Tutor Finder"
+    BackgroundColor="White">
 
-	<VerticalStackLayout Padding="20" Spacing="10">
+    <!-- Use a Grid with 3 rows: 
+         1) Blue header 
+         2) Main content 
+         3) Bottom nav bar -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-		<Label Text="TUTOR FINDER"
-               FontSize="24"
-               HorizontalOptions="Center" />
+        <!-- 1. Blue Header -->
+        <Grid BackgroundColor="{StaticResource DarkBlue}" Padding="20,40,20,20">
+            <Label Text="Tutor Finder"
+                   TextColor="{StaticResource Yellow}"
+                   FontFamily="Inter-Black"
+                   FontSize="24"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+        </Grid>
 
-		<!-- Search bar -->
-		<SearchBar x:Name="searchBar"
-                   Placeholder="Search course codes or category..."
-                   TextChanged="OnSearchBarTextChanged" />
+        <!-- 2. Main Content -->
+        <StackLayout Grid.Row="1" Padding="20" Spacing="15">
 
-		<!-- Create Post button -->
-		<Button Text="Create Post"
-                Clicked="OnCreatePostClicked" />
+            <!-- Search Bar (styled like ProfsToPick) -->
+            <Frame CornerRadius="25" BackgroundColor="White" Padding="0">
+                <HorizontalStackLayout Padding="10,0">
+                    <Image Source="search_icon.png"
+                           HeightRequest="20"
+                           WidthRequest="20"
+                           VerticalOptions="Center"
+                           Margin="0,0,5,0"/>
+                    <Entry Text="{Binding SearchText, Mode=TwoWay}" 
+                           Placeholder="Search"
+                           VerticalOptions="Center"
+                           FontSize="14"
+                           FontFamily="Inter-SemiBold"
+                           Margin="0"/>
+                </HorizontalStackLayout>
+            </Frame>
 
-		<!-- List of posts -->
-		<CollectionView x:Name="postsCollectionView"
-                        SelectionChanged="OnPostSelected">
-			<CollectionView.ItemTemplate>
-				<DataTemplate>
-					<Frame BorderColor="Gray" Padding="10" Margin="5">
-						<VerticalStackLayout Spacing="3">
-							<!-- Course code and category in bold -->
-							<Label Text="{Binding CourseCode}" FontAttributes="Bold" />
-							<Label Text="{Binding Category}" FontAttributes="Bold" />
+            <!-- Create Post Button -->
+            <Button Text="Create Post"
+                    Clicked="OnCreatePostClicked"
+                    BackgroundColor="{StaticResource Yellow}"
+                    TextColor="Black"
+                    FontFamily="Inter-Black"
+                    CornerRadius="25"
+                    HorizontalOptions="Center"
+                    Padding="20,10"/>
 
-							<!-- Poster’s name and contact -->
-							<Label Text="{Binding PosterName}" />
-							<Label Text="{Binding PosterContact}" />
+            <!-- List of posts -->
+            <CollectionView x:Name="postsCollectionView"
+                            SelectionChanged="OnPostSelected">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame 
+                               Padding="10"
+                               Margin="5"
+                               CornerRadius="10"
+                               BackgroundColor="{StaticResource Blue}">
+                            <VerticalStackLayout Spacing="3">
+                                <HorizontalStackLayout Spacing="10">
+                                    <!-- Course code and category in bold -->
+                                <Label Text="{Binding CourseCode}" 
+                                       FontFamily="Inter-Black"
+                                       TextColor="White" 
+                                       VerticalTextAlignment="Center"/>
+                                    <Frame BackgroundColor="{StaticResource Red}"
+                                           Padding="10,5">
+                                        <Label Text="{Binding Category}"
+                                       FontFamily="Inter-Black"
+                                       TextColor="White" />
+                                    </Frame>
+                                </HorizontalStackLayout>
 
-							<!-- Additional info -->
-							<Label Text="{Binding AdditionalInfo}" />
-						</VerticalStackLayout>
-					</Frame>
-				</DataTemplate>
-			</CollectionView.ItemTemplate>
-		</CollectionView>
-	</VerticalStackLayout>
+                                <!-- Poster’s name and contact -->
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="Posted by:" 
+                                       FontFamily="Inter-Black"
+                                       TextColor="White"/>
+                                <Label Text="{Binding PosterName}" 
+                                       FontFamily="Inter-Regular"
+                                       TextColor="White"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="Contact Details:" 
+       FontFamily="Inter-Black"
+       TextColor="White"/>
+                                    <Label Text="{Binding PosterContact}"
+                                       FontFamily="Inter-Regular"
+                                       TextColor="White"/>
+                                </HorizontalStackLayout>
+
+                                <!-- Additional info -->
+                                <Label Text="{Binding AdditionalInfo}"
+                                       FontFamily="Inter-Light"
+                                       TextColor="White" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </StackLayout>
+
+        <!-- 3. Bottom Nav Bar (optional, matching style) -->
+        <Grid Grid.Row="2" BackgroundColor="#063970" HeightRequest="60">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ImageButton Source="nav_icon1.png"
+                         Grid.Column="0"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         WidthRequest="30" HeightRequest="30"/>
+            <ImageButton Source="nav_home.png"
+                         Grid.Column="1"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         WidthRequest="30" HeightRequest="30"/>
+            <ImageButton Source="nav_profile.png"
+                         Grid.Column="2"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         WidthRequest="30" HeightRequest="30"/>
+        </Grid>
+    </Grid>
 </ContentPage>
