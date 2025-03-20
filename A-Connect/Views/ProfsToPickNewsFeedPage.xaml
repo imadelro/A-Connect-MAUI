@@ -117,20 +117,19 @@
                 </VerticalStackLayout>
             </HorizontalStackLayout>
 
-            <!-- 🔥 Grouped Reviews List -->
+            <!-- Grouped Reviews List -->
             <RefreshView Command="{Binding LoadReviewsCommand}">
                 <CollectionView ItemsSource="{Binding GroupedReviews}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout Margin="0,10">
-
-                                <!-- 🔹 Professor Header (Tappable to Expand/Collapse) -->
+                                <!-- Professor Header -->
                                 <Frame BackgroundColor="{StaticResource Blue}"
                                        CornerRadius="15"
                                        Padding="15">    
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProfsToPickNewsFeedViewModel}}, Path=ToggleGroupCommand}"
-                                                              CommandParameter="{Binding}" />
+                                              CommandParameter="{Binding}" />
                                     </Frame.GestureRecognizers>
 
                                     <VerticalStackLayout>
@@ -144,23 +143,23 @@
                                                TextColor="White"
                                                FontSize="14"
                                                FontFamily="Inter-SemiBold"
-                                               VerticalOptions="Center"
-                                               />  
+                                               VerticalOptions="Center"/>       
                                     </VerticalStackLayout>
                                 </Frame>
 
-
+                                <!-- Reviews List -->
                                 <CollectionView ItemsSource="{Binding Reviews}" IsVisible="{Binding IsExpanded}">
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate>
+                                            <!-- Review Content -->
                                             <Frame BackgroundColor="White"
                                                    CornerRadius="10"
                                                    Padding="10"
-                                                   Margin="10,0,10,10">
+                                                   Margin="10,0,10,10"> 
                                                 <VerticalStackLayout>
-                                                    <Label Text="{Binding CourseCode}" 
-                                                           TextColor="Black" 
-                                                           FontSize="14" 
+                                                    <Label Text="{Binding CourseCode}"
+                                                           TextColor="Black"
+                                                           FontSize="14"
                                                            FontFamily="Inter-Regular"/>
 
                                                     <Label Text="{Binding Content}"
@@ -173,17 +172,27 @@
                                                            TextColor="Gray"
                                                            FontSize="10"
                                                            HorizontalOptions="End"
-                                                           FontFamily="Inter-Light"/>
+                                                           FontFamily="Inter-Light"/>   
+
+                                                    <!-- Delete Button -->
+                                                    <Button Text="Delete"
+                                                    TextColor="White"
+                                                    BackgroundColor="Red"
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProfsToPickNewsFeedViewModel}}, Path=DeleteCommand}"
+                                                    CommandParameter="{Binding .}"
+                                                    IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:ProfsToPickNewsFeedViewModel}}, Path=IsOwnPostsSelected}"
+                                                    Margin="0,5,0,0"/>      
                                                 </VerticalStackLayout>
                                             </Frame>
                                         </DataTemplate>
                                     </CollectionView.ItemTemplate>
                                 </CollectionView>
-
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
+
+
             </RefreshView>
 
             <!-- "Post a review" button -->

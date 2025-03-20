@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Diagnostics;
+using Javax.Security.Auth;
 
 namespace A_Connect.ViewModels
 {
@@ -36,7 +37,7 @@ namespace A_Connect.ViewModels
         // Add: Commands for switching tabs
         public ICommand SwitchToOtherPostsCommand { get; }
         public ICommand SwitchToOwnPostsCommand { get; }
-
+        public ICommand DeleteCommand { get; }
         public ProfsToPickNewsFeedViewModel(ReviewDatabase database)
         {
             _database = database;
@@ -45,6 +46,8 @@ namespace A_Connect.ViewModels
             LoadReviewsCommand = new Command(async () => await LoadReviews());
             ToggleGroupCommand = new Command<GroupedReview>(ToggleGroup);
             SearchCommand = new Command(PerformSearch);
+            DeleteCommand = new Command<Review>(async (review) => await DeletePost(review));
+
 
             // Initialize tab commands
             SwitchToOtherPostsCommand = new Command(() => SwitchTab(isOther: true));
@@ -99,11 +102,14 @@ namespace A_Connect.ViewModels
                 var userId = App.CurrentUser.Username;
                 filtered = filtered.Where(r => r.AuthorID == userId);
                 //filtered = filtered.Where(r => r.Rating > 3);  // EXAMPLE ONLY
-                Console.WriteLine($"UserID: {userId}");
-                foreach (var review in _allReviews)
+
+                Console.WriteLine($"User ID: {App.CurrentUser.Username}");
+
+                foreach (var review in filtered)
                 {
-                    Console.WriteLine($"AuthorID: {review.AuthorID}");
+                    Debug.WriteLine($"Review AuthorID: {review.AuthorID}");
                 }
+
 
             }
             else
@@ -151,5 +157,17 @@ namespace A_Connect.ViewModels
             // Re-apply filters
             FilterAndGroupReviews();
         }
+
+        private async Task DeletePost(Review post)
+        {
+            bool confirm = await Application.Current.MainPage.DisplayAlert("Confirm Delete", "Are you sure you want to delete this post?", "Yes", "No");
+            if (confirm)
+            {
+                _allReviews.Remove(post);
+                await _database.DeleteReviewAsync(post);
+                FilterAndGroupReviews();
+            }
+        }
+
     }
 }

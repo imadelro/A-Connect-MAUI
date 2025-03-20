@@ -48,6 +48,7 @@ namespace A_Connect.ViewModels
 
             await _database.SaveReviewAsync(newReview);
             await Application.Current.MainPage.DisplayAlert("Success", "Review submitted!", "OK");
+            await Shell.Current.GoToAsync("..");
         }
     }
 }
