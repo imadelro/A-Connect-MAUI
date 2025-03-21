@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using A_Connect.Services;
 using A_Connect.Models;
@@ -9,8 +9,9 @@ namespace A_Connect;
 public partial class App : Application
 {
     // Store the logged-in user
-    public static User CurrentUser { get; set; }
 
+    public static A_Connect.Models.User CurrentUser { get; set; }
+    public static A_Connect.Services.STFormDatabase STDB { get; private set; }
     // Initialize ReviewDatabase
     private static ReviewDatabase _reviewDatabase;
     public static ReviewDatabase ReviewDatabase
@@ -29,7 +30,11 @@ public partial class App : Application
     public App()
     {
         InitializeComponent();
+        string STdbPath = Path.Combine(FileSystem.AppDataDirectory, "STForms.db3");
+    // Initialize the database
+        STDB = new STFormDatabase(STdbPath);
     }
+    
 
     protected override Window CreateWindow(IActivationState? activationState)
     {

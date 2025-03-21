@@ -16,8 +16,11 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
         // register the UserDatabase.
-        string dbPath = Path.Combine(FileSystem.AppDataDirectory, "users.db3");
-        builder.Services.AddSingleton<UserDatabase>(s => new UserDatabase(dbPath));
+        string userDbPath = Path.Combine(FileSystem.AppDataDirectory, "users.db3");
+        builder.Services.AddSingleton<UserDatabase>(s => new UserDatabase(userDbPath));
+        // register the tutorFinder database
+        string tutorFinderDbPath = Path.Combine(FileSystem.AppDataDirectory, "tutorFinder.db3");
+        builder.Services.AddSingleton<TutorFinderDatabase>(s => new TutorFinderDatabase(tutorFinderDbPath));
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

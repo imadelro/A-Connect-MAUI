@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    x:Class="A_Connect.Views.TutorFinderPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Tutor Finder"
+    BackgroundColor="White">
+
+    <!-- Grid with 3 rows: 
+         1) Blue header 
+         2) Main content 
+         3) Bottom nav bar -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- 1. Blue Header -->
+        <Grid BackgroundColor="{StaticResource DarkBlue}" Padding="20,40,20,20">
+            <Label Text="Tutor Finder"
+                   TextColor="{StaticResource Yellow}"
+                   FontFamily="Inter-Black"
+                   FontSize="24"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+        </Grid>
+
+        <!-- 2. Main Content -->
+        <StackLayout Grid.Row="1" Padding="20" Spacing="15">
+
+            <!-- Search Bar (Frame + Entry) -->
+            <Frame CornerRadius="25" BackgroundColor="White" Padding="0">
+                <HorizontalStackLayout Padding="10,0">
+                    <Image Source="search_icon.png"
+                           HeightRequest="20"
+                           WidthRequest="20"
+                           VerticalOptions="Center"
+                           Margin="0,0,5,0"/>
+                    <Entry x:Name="searchEntry"
+                           Placeholder="Search"
+                           VerticalOptions="Center"
+                           FontSize="14"
+                           FontFamily="Inter-SemiBold"
+                           Margin="0"
+                           TextChanged="OnSearchTextChanged"/>
+                </HorizontalStackLayout>
+            </Frame>
+
+            <!-- Tab Buttons: "Posts by others" | "Own posts" -->
+            <Grid ColumnSpacing="0" RowSpacing="0" Padding="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Text="Posts by other users"
+                        Clicked="OnOtherPostsClicked"
+                        BackgroundColor="#F0F0F0"
+                        TextColor="Black"
+                        Grid.Column="0"
+                        CornerRadius="20"
+                        FontFamily="Inter-SemiBold"/>
+
+                <Button Text="Own posts"
+                        Clicked="OnOwnPostsClicked"
+                        BackgroundColor="#F0F0F0"
+                        TextColor="Black"
+                        Grid.Column="1"
+                        CornerRadius="20"
+                        FontFamily="Inter-SemiBold"/>
+            </Grid>
+
+            <!-- Create Post Button -->
+            <Button Text="Create Post"
+                    Clicked="OnCreatePostClicked"
+                    BackgroundColor="{StaticResource Yellow}"
+                    TextColor="Black"
+                    FontFamily="Inter-Black"
+                    CornerRadius="25"
+                    HorizontalOptions="Center"
+                    Padding="20,10"/>
+
+            <!-- List of posts -->
+            <CollectionView x:Name="postsCollectionView"
+                            SelectionChanged="OnPostSelected">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10"
+                               Margin="5"
+                               CornerRadius="10"
+                               BackgroundColor="{StaticResource Blue}">
+                            <VerticalStackLayout Spacing="3">
+                                <HorizontalStackLayout Spacing="10">
+                                    <!-- Course code and category "pill" -->
+                                    <Label Text="{Binding CourseCode}" 
+                                           FontFamily="Inter-Black"
+                                           TextColor="White" 
+                                           VerticalTextAlignment="Center"/>
+                                    <Frame BackgroundColor="{StaticResource Red}"
+                                           Padding="10,5"
+                                           CornerRadius="10">
+                                        <Label Text="{Binding Category}"
+                                               FontFamily="Inter-Black"
+                                               TextColor="White" />
+                                    </Frame>
+                                </HorizontalStackLayout>
+
+                                <!-- Poster’s name and contact -->
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="Posted by:" 
+                                           FontFamily="Inter-Black"
+                                           TextColor="White"/>
+                                    <Label Text="{Binding PosterName}" 
+                                           FontFamily="Inter-Regular"
+                                           TextColor="White"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="Contact Details:" 
+                                           FontFamily="Inter-Black"
+                                           TextColor="White"/>
+                                    <Label Text="{Binding PosterContact}"
+                                           FontFamily="Inter-Regular"
+                                           TextColor="White"/>
+                                </HorizontalStackLayout>
+
+                                <!-- Additional info + Date -->
+                                <Label Text="{Binding AdditionalInfo}"
+                                       FontFamily="Inter-Light"
+                                       TextColor="White" />
+                                <Label Text="{Binding Date, StringFormat='Date: {0:MMM d, yyyy}'}"
+                                       FontFamily="Inter-Light"
+                                       FontSize="10"
+                                       TextColor="White"
+                                       HorizontalOptions="End"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+
+        <!-- 3. Bottom Nav Bar -->
+        <Grid Grid.Row="2" BackgroundColor="#063970" HeightRequest="60">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ImageButton Source="nav_icon1.png"
+                         Grid.Column="0"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         WidthRequest="30" HeightRequest="30"/>
+            <ImageButton Source="nav_home.png"
+                         Grid.Column="1"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         WidthRequest="30" HeightRequest="30"/>
+            <ImageButton Source="nav_profile.png"
+                         Grid.Column="2"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         WidthRequest="30" HeightRequest="30"/>
+        </Grid>
+    </Grid>
+</ContentPage>

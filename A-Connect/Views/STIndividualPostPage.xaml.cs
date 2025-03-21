@@ -12,7 +12,6 @@ namespace A_Connect.Views
             BindingContext = new STIndividualPostViewModel();
         }
 
-        // This method is called automatically by Shell navigation.
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (BindingContext is STIndividualPostViewModel vm)

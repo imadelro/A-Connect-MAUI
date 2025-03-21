@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="A_Connect.Views.TutorFinderDetailsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Post Details"
+    BackgroundColor="White">
+
+    <!-- Use a Grid with 3 rows: 
+         1) Blue header 
+         2) Main content 
+         3) Bottom nav bar (optional) -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 1. Blue Header -->
+        <Grid BackgroundColor="{StaticResource DarkBlue}" Padding="20,40,20,20">
+            <Label Text="Tutor Finder"
+                   TextColor="{StaticResource Yellow}"
+                   FontFamily="Inter-Black"
+                   FontSize="24"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+        </Grid>
+
+        <!-- 2. Main Content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20" Spacing="10">
+
+                <!-- Course Code -->
+                <Label Text="Course Code" 
+                       FontAttributes="Bold" 
+                       TextColor="Black"
+                       FontFamily="Inter-Black"/>
+                <Label x:Name="courseCodeLabel"
+                       TextColor="Gray"
+                       FontFamily="Inter-Regular" />
+
+                <!-- Category -->
+                <Label Text="Category" 
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                       FontFamily="Inter-Black"/>
+                <Label x:Name="categoryLabel"
+                       TextColor="Gray"
+                       FontFamily="Inter-Regular"/>
+
+                <!-- Name -->
+                <Label Text="Name"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                       FontFamily="Inter-Black"/>
+                <Label x:Name="nameLabel"
+                       TextColor="Gray"
+                       FontFamily="Inter-Regular"/>
+
+                <!-- Contact -->
+                <Label Text="Contact"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                       FontFamily="Inter-Black"/>
+                <Label x:Name="contactLabel"
+                       TextColor="Gray"
+                       FontFamily="Inter-Regular"/>
+
+                <!-- Additional Info -->
+                <Label Text="Additional Info"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                       FontFamily="Inter-Black"/>
+                <Label x:Name="additionalInfoLabel"
+                       TextColor="Gray"
+                       FontFamily="Inter-Light"/>
+
+                <Label Text="Date" 
+       FontAttributes="Bold"
+       TextColor="Black"
+       FontFamily="Inter-Black"/>
+                <Label x:Name="dateLabel"
+       TextColor="Gray"
+       FontFamily="Inter-Regular"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- 3. Bottom Nav Bar (optional) -->
+        <Grid Grid.Row="2" BackgroundColor="#063970" HeightRequest="60">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ImageButton Source="nav_icon1.png"
+                         Grid.Column="0"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         WidthRequest="30" HeightRequest="30"/>
+            <ImageButton Source="nav_home.png"
+                         Grid.Column="1"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         WidthRequest="30" HeightRequest="30"/>
+            <ImageButton Source="nav_profile.png"
+                         Grid.Column="2"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         WidthRequest="30" HeightRequest="30"/>
+        </Grid>
+    </Grid>
+</ContentPage>

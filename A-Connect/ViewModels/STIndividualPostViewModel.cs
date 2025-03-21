@@ -24,7 +24,7 @@ namespace A_Connect.ViewModels
             });
         }
 
-        // Called when navigating via Shell query parameters.
+        // Shell query parameters
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (query.ContainsKey("SelectedPost"))
