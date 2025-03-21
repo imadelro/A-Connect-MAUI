@@ -5,6 +5,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 
+// ADDED
+using A_Connect;                // for App.STDB
+using System.Threading.Tasks;   // if needed for async
+
 namespace A_Connect.ViewModels
 {
     public class STNewsFeedViewModel : BaseViewModel
@@ -52,8 +56,16 @@ namespace A_Connect.ViewModels
             // After (no sample data, just an empty list)
             _allPosts = new ObservableCollection<STForm>();
 
-
             DisplayedPosts = new ObservableCollection<STForm>();
+
+            // 1) LOAD from DB immediately (added lines)
+            var dbPosts = App.STDB.GetAllPostsAsync().Result;
+            // This .Result usage is for simplicity; 
+            // you could use async/await if you prefer.
+            foreach (var post in dbPosts)
+            {
+                _allPosts.Add(post);
+            }
 
             // Default to "Posts by other users"
             IsOtherPostsSelected = true;
@@ -88,10 +100,14 @@ namespace A_Connect.ViewModels
             });
 
             // Listen for new posts from STFormViewModel
-            MessagingCenter.Subscribe<STFormViewModel, STForm>(this, "NewTradePost", (sender, newPost) =>
+            MessagingCenter.Subscribe<STFormViewModel, STForm>(this, "NewTradePost", async (sender, newPost) =>
             {
+                // Original code:
                 _allPosts.Add(newPost);
                 FilterPosts();
+
+                // ADDED: Also save to DB
+                await App.STDB.SavePostAsync(newPost);
             });
         }
 
