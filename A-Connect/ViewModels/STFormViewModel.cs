@@ -3,6 +3,7 @@ using System.Windows.Input;
 using Microsoft.Maui.Controls;
 using A_Connect.Models;
 
+
 namespace A_Connect.ViewModels
 {
     public class STFormViewModel : BaseViewModel
@@ -54,10 +55,10 @@ namespace A_Connect.ViewModels
                     Date = DateTime.Now
                 };
 
-                // Send the new post to OwnPostsViewModel via MessagingCenter.
+                // Send the new post to the news feed via MessagingCenter.
                 MessagingCenter.Send(this, "NewTradePost", newPost);
 
-                // Navigate back after posting.
+                // Navigate back to the previous page (News Feed).
                 await Shell.Current.GoToAsync("..");
             });
         }
