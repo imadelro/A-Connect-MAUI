@@ -1,0 +1,234 @@
+<ContentPage
+    x:Class="A_Connect.Views.ProfsToPickNewsFeedPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Profs to Pick News Feed"
+    xmlns:local="clr-namespace:A_Connect.ViewModels"
+    BackgroundColor="White">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 1. Blue Header -->
+        <Grid BackgroundColor="{StaticResource DarkBlue}" Padding="20,40,20,20">
+            <Label Text="Profs to Pick"
+                   TextColor="{StaticResource Yellow}"
+                   FontFamily="Inter-Black"
+                   FontSize="24"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+        </Grid>
+
+        <!-- 2. Main Content -->
+        <StackLayout Grid.Row="1" Spacing="15" Padding="20">
+
+            <!-- Search Bar -->
+            <Frame CornerRadius="25" BackgroundColor="White" Padding="0">
+                <HorizontalStackLayout Padding="10,0">
+                    <Image Source="search_icon.png"
+                           HeightRequest="20"
+                           WidthRequest="20"
+                           VerticalOptions="Center"
+                           Margin="0,0,5,0"/>
+                    <Entry Text="{Binding SearchText, Mode=TwoWay}" 
+                           Placeholder="Search"
+                           VerticalOptions="Center"
+                           FontSize="14"
+                           FontFamily="Inter-SemiBold"
+                           Margin="0"/>
+                </HorizontalStackLayout>
+            </Frame>
+
+            <!-- TABS: "Posts by other users" | "Own posts" -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="40" Padding="0,10">
+
+                <!-- First Tab -->
+                <VerticalStackLayout HorizontalOptions="Center">
+                    <Label Text="Posts by other users"
+               FontSize="16"
+               FontFamily="Inter-SemiBold">
+                        <!-- DataTriggers for styling -->
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsOtherPostsSelected}" Value="True">
+                                <Setter Property="TextColor" Value="Black" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsOtherPostsSelected}" Value="False">
+                                <Setter Property="TextColor" Value="#999999" />
+                            </DataTrigger>
+                        </Label.Triggers>
+
+                        <!-- GestureRecognizers -->
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SwitchToOtherPostsCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <!-- Underline -->
+                    <BoxView HeightRequest="2">
+                        <BoxView.Triggers>
+                            <DataTrigger TargetType="BoxView" Binding="{Binding IsOtherPostsSelected}" Value="True">
+                                <Setter Property="IsVisible" Value="True" />
+                                <Setter Property="BackgroundColor" Value="Black" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="BoxView" Binding="{Binding IsOtherPostsSelected}" Value="False">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </BoxView.Triggers>
+                    </BoxView>
+                </VerticalStackLayout>
+
+                <!-- Second Tab -->
+                <VerticalStackLayout HorizontalOptions="Center">
+                    <Label Text="Own posts"
+               FontSize="16"
+               FontFamily="Inter-SemiBold">
+                        <!-- DataTriggers for styling -->
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsOwnPostsSelected}" Value="True">
+                                <Setter Property="TextColor" Value="Black" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsOwnPostsSelected}" Value="False">
+                                <Setter Property="TextColor" Value="#999999" />
+                            </DataTrigger>
+                        </Label.Triggers>
+
+                        <!-- GestureRecognizers -->
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SwitchToOwnPostsCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <!-- Underline -->
+                    <BoxView HeightRequest="2">
+                        <BoxView.Triggers>
+                            <DataTrigger TargetType="BoxView" Binding="{Binding IsOwnPostsSelected}" Value="True">
+                                <Setter Property="IsVisible" Value="True" />
+                                <Setter Property="BackgroundColor" Value="Black" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="BoxView" Binding="{Binding IsOwnPostsSelected}" Value="False">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </BoxView.Triggers>
+                    </BoxView>
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+
+            <!-- Grouped Reviews List -->
+            <RefreshView Command="{Binding LoadReviewsCommand}">
+                <CollectionView ItemsSource="{Binding GroupedReviews}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Margin="0,10">
+                                <!-- Professor Header -->
+                                <Frame BackgroundColor="{StaticResource Blue}"
+                                       CornerRadius="15"
+                                       Padding="15">    
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProfsToPickNewsFeedViewModel}}, Path=ToggleGroupCommand}"
+                                              CommandParameter="{Binding}" />
+                                    </Frame.GestureRecognizers>
+
+                                    <VerticalStackLayout>
+                                        <Label Text="{Binding ProfessorName}"
+                                               TextColor="White"
+                                               FontSize="18"
+                                               FontFamily="Inter-Black"
+                                               VerticalOptions="Center"/>
+
+                                        <Label Text="{Binding ReviewCount, StringFormat='({0} Reviews)'}"
+                                               TextColor="White"
+                                               FontSize="14"
+                                               FontFamily="Inter-SemiBold"
+                                               VerticalOptions="Center"/>       
+                                    </VerticalStackLayout>
+                                </Frame>
+
+                                <!-- Reviews List -->
+                                <CollectionView ItemsSource="{Binding Reviews}" IsVisible="{Binding IsExpanded}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <!-- Review Content -->
+                                            <Frame BackgroundColor="White"
+                                                   CornerRadius="10"
+                                                   Padding="10"
+                                                   Margin="10,0,10,10"> 
+                                                <VerticalStackLayout>
+                                                    <Label Text="{Binding CourseCode}"
+                                                           TextColor="Black"
+                                                           FontSize="14"
+                                                           FontFamily="Inter-Regular"/>
+
+                                                    <Label Text="{Binding Content}"
+                                                           TextColor="Black"
+                                                           FontSize="12"
+                                                           MaxLines="2"
+                                                           FontFamily="Inter-Light"/>
+
+                                                    <Label Text="{Binding DatePosted, StringFormat='Date: {0:MMMM dd, yyyy}'}"
+                                                           TextColor="Gray"
+                                                           FontSize="10"
+                                                           HorizontalOptions="End"
+                                                           FontFamily="Inter-Light"/>   
+
+                                                    <!-- Delete Button -->
+                                                    <Button Text="Delete"
+                                                    TextColor="White"
+                                                    BackgroundColor="Red"
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProfsToPickNewsFeedViewModel}}, Path=DeleteCommand}"
+                                                    CommandParameter="{Binding .}"
+                                                    IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:ProfsToPickNewsFeedViewModel}}, Path=IsOwnPostsSelected}"
+                                                    Margin="0,5,0,0"/>      
+                                                </VerticalStackLayout>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+
+            </RefreshView>
+
+            <!-- "Post a review" button -->
+            <Button Text="Post a review +"
+                    BackgroundColor="{StaticResource Yellow}"
+                    TextColor="{StaticResource OffBlack}"
+                    FontFamily="Inter-Black"
+                    CornerRadius="25"
+                    HorizontalOptions="Center"
+                    Padding="10,5"
+                    Clicked="OnPostReviewClicked"/>
+        </StackLayout>
+
+        <!-- 3. Bottom Nav Bar -->
+        <Grid Grid.Row="2" BackgroundColor="#063970" HeightRequest="60">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ImageButton Source="nav_icon1.png"
+                         Grid.Column="0"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         WidthRequest="30" HeightRequest="30"/>
+            <ImageButton Source="nav_home.png"
+                         Grid.Column="1"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         WidthRequest="30" HeightRequest="30"/>
+            <ImageButton Source="nav_profile.png"
+                         Grid.Column="2"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         WidthRequest="30" HeightRequest="30"/>
+        </Grid>
+    </Grid>
+</ContentPage>

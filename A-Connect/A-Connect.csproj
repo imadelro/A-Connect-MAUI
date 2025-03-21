@@ -69,11 +69,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\PTPNewsFeedPage.xaml.cs">
-	    <DependentUpon>PTPNewsFeedPage.xaml</DependentUpon>
+	  <Compile Update="Views\ProfsToPickNewsFeedPage.xaml.cs">
+	    <DependentUpon>ProfsToPickNewsFeedPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\PTPFormPage.xaml.cs">
-	    <DependentUpon>PTPFormPage.xaml</DependentUpon>
+	  <Compile Update="Views\ProfsToPickFormPage.xaml.cs">
+	    <DependentUpon>ProfsToPickFormPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\STIndividualPostPage.xaml.cs">
 	    <DependentUpon>STIndividualPostPage.xaml</DependentUpon>

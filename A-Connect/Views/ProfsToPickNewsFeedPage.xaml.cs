@@ -1,4 +1,5 @@
 using Microsoft.Maui.Controls;
+using A_Connect.ViewModels;
 
 namespace A_Connect.Views
 {
@@ -7,15 +8,12 @@ namespace A_Connect.Views
         public ProfsToPickNewsFeedPage()
         {
             InitializeComponent();
-            // No real logic yet. 
-            // In the future, you might set BindingContext = new ProfsToPickViewModel();
+            BindingContext = new ProfsToPickNewsFeedViewModel(App.ReviewDatabase);
         }
 
-        // "Post a review" button click
         private async void OnPostReviewClicked(object sender, EventArgs e)
         {
-            // Navigate to the form page
-            await Shell.Current.GoToAsync("ProfsToPickFormPage");
+            await Navigation.PushAsync(new ProfsToPickFormPage());
         }
     }
 }
