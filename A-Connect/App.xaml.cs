@@ -20,7 +20,7 @@ public partial class App : Application
         {
             if (_reviewDatabase == null)
             {
-                string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "reviews.db3");
+                string dbPath = Path.Combine(FileSystem.AppDataDirectory, "reviews.db3");
                 _reviewDatabase = new ReviewDatabase(dbPath);
             }
             return _reviewDatabase;
