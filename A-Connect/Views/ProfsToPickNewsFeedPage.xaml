@@ -43,20 +43,20 @@
                 </HorizontalStackLayout>
             </Frame>
 
-            <!-- TABS: "Posts by other users" | "Own posts" -->
+            <!-- TABS: "All posts" | "Own posts" -->
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="40" Padding="0,10">
 
                 <!-- First Tab -->
                 <VerticalStackLayout HorizontalOptions="Center">
-                    <Label Text="Posts by other users"
+                    <Label Text="All posts"
                FontSize="16"
                FontFamily="Inter-SemiBold">
                         <!-- DataTriggers for styling -->
                         <Label.Triggers>
-                            <DataTrigger TargetType="Label" Binding="{Binding IsOtherPostsSelected}" Value="True">
+                            <DataTrigger TargetType="Label" Binding="{Binding allPostsSelected}" Value="True">
                                 <Setter Property="TextColor" Value="Black" />
                             </DataTrigger>
-                            <DataTrigger TargetType="Label" Binding="{Binding IsOtherPostsSelected}" Value="False">
+                            <DataTrigger TargetType="Label" Binding="{Binding allPostsSelected}" Value="False">
                                 <Setter Property="TextColor" Value="#999999" />
                             </DataTrigger>
                         </Label.Triggers>
@@ -70,11 +70,11 @@
                     <!-- Underline -->
                     <BoxView HeightRequest="2">
                         <BoxView.Triggers>
-                            <DataTrigger TargetType="BoxView" Binding="{Binding IsOtherPostsSelected}" Value="True">
+                            <DataTrigger TargetType="BoxView" Binding="{Binding allPostsSelected}" Value="True">
                                 <Setter Property="IsVisible" Value="True" />
                                 <Setter Property="BackgroundColor" Value="Black" />
                             </DataTrigger>
-                            <DataTrigger TargetType="BoxView" Binding="{Binding IsOtherPostsSelected}" Value="False">
+                            <DataTrigger TargetType="BoxView" Binding="{Binding allPostsSelected}" Value="False">
                                 <Setter Property="IsVisible" Value="False" />
                             </DataTrigger>
                         </BoxView.Triggers>

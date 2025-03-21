@@ -16,11 +16,11 @@ namespace A_Connect.ViewModels
         private ObservableCollection<Review> _allReviews;
 
         // Add: Booleans for tab selection
-        private bool _isOtherPostsSelected = true; // default
-        public bool IsOtherPostsSelected
+        private bool _allPostsSelected = true; // default
+        public bool allPostsSelected
         {
-            get => _isOtherPostsSelected;
-            set { SetProperty(ref _isOtherPostsSelected, value); }
+            get => _allPostsSelected;
+            set { SetProperty(ref _allPostsSelected, value); }
         }
 
         private bool _isOwnPostsSelected;
@@ -142,7 +142,7 @@ namespace A_Connect.ViewModels
         private void SwitchTab(bool isOther)
         {
             // Switch tab booleans
-            IsOtherPostsSelected = isOther;
+            allPostsSelected = isOther;
             IsOwnPostsSelected = !isOther;
 
             // Re-apply filters

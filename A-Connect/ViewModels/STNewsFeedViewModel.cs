@@ -16,11 +16,11 @@ namespace A_Connect.ViewModels
         private ObservableCollection<STForm> _allPosts;
         public ObservableCollection<STForm> DisplayedPosts { get; set; }
 
-        private bool _isOtherPostsSelected = true;
-        public bool IsOtherPostsSelected
+        private bool _allPostsSelected = true;
+        public bool allPostsSelected
         {
-            get => _isOtherPostsSelected;
-            set => SetProperty(ref _isOtherPostsSelected, value);
+            get => _allPostsSelected;
+            set => SetProperty(ref _allPostsSelected, value);
         }
 
         private bool _isOwnPostsSelected;
@@ -68,20 +68,20 @@ namespace A_Connect.ViewModels
             }
 
             // Default to "Posts by other users"
-            IsOtherPostsSelected = true;
+            allPostsSelected = true;
             IsOwnPostsSelected = false;
             FilterPosts();
 
             ShowOtherPostsCommand = new Command(() =>
             {
-                IsOtherPostsSelected = true;
+                allPostsSelected = true;
                 IsOwnPostsSelected = false;
                 FilterPosts();
             });
 
             ShowOwnPostsCommand = new Command(() =>
             {
-                IsOtherPostsSelected = false;
+                allPostsSelected = false;
                 IsOwnPostsSelected = true;
                 FilterPosts();
             });
