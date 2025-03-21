@@ -48,6 +48,8 @@ namespace A_Connect.Views
             nameLabel.Text = post.PosterName;
             contactLabel.Text = post.PosterContact;
             additionalInfoLabel.Text = post.AdditionalInfo;
+            dateLabel.Text = post.Date.ToString("MMM d, yyyy");
+
         }
     }
 }

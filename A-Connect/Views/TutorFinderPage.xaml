@@ -6,7 +6,7 @@
     Title="Tutor Finder"
     BackgroundColor="White">
 
-    <!-- Use a Grid with 3 rows: 
+    <!-- Grid with 3 rows: 
          1) Blue header 
          2) Main content 
          3) Bottom nav bar -->
@@ -30,7 +30,7 @@
         <!-- 2. Main Content -->
         <StackLayout Grid.Row="1" Padding="20" Spacing="15">
 
-            <!-- Search Bar (styled like ProfsToPick) -->
+            <!-- Search Bar (Frame + Entry) -->
             <Frame CornerRadius="25" BackgroundColor="White" Padding="0">
                 <HorizontalStackLayout Padding="10,0">
                     <Image Source="search_icon.png"
@@ -38,14 +38,39 @@
                            WidthRequest="20"
                            VerticalOptions="Center"
                            Margin="0,0,5,0"/>
-                    <Entry Text="{Binding SearchText, Mode=TwoWay}" 
+                    <Entry x:Name="searchEntry"
                            Placeholder="Search"
                            VerticalOptions="Center"
                            FontSize="14"
                            FontFamily="Inter-SemiBold"
-                           Margin="0"/>
+                           Margin="0"
+                           TextChanged="OnSearchTextChanged"/>
                 </HorizontalStackLayout>
             </Frame>
+
+            <!-- Tab Buttons: "Posts by others" | "Own posts" -->
+            <Grid ColumnSpacing="0" RowSpacing="0" Padding="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Text="Posts by other users"
+                        Clicked="OnOtherPostsClicked"
+                        BackgroundColor="#F0F0F0"
+                        TextColor="Black"
+                        Grid.Column="0"
+                        CornerRadius="20"
+                        FontFamily="Inter-SemiBold"/>
+
+                <Button Text="Own posts"
+                        Clicked="OnOwnPostsClicked"
+                        BackgroundColor="#F0F0F0"
+                        TextColor="Black"
+                        Grid.Column="1"
+                        CornerRadius="20"
+                        FontFamily="Inter-SemiBold"/>
+            </Grid>
 
             <!-- Create Post Button -->
             <Button Text="Create Post"
@@ -62,57 +87,61 @@
                             SelectionChanged="OnPostSelected">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame 
-                               Padding="10"
+                        <Frame Padding="10"
                                Margin="5"
                                CornerRadius="10"
                                BackgroundColor="{StaticResource Blue}">
                             <VerticalStackLayout Spacing="3">
                                 <HorizontalStackLayout Spacing="10">
-                                    <!-- Course code and category in bold -->
-                                <Label Text="{Binding CourseCode}" 
-                                       FontFamily="Inter-Black"
-                                       TextColor="White" 
-                                       VerticalTextAlignment="Center"/>
+                                    <!-- Course code and category "pill" -->
+                                    <Label Text="{Binding CourseCode}" 
+                                           FontFamily="Inter-Black"
+                                           TextColor="White" 
+                                           VerticalTextAlignment="Center"/>
                                     <Frame BackgroundColor="{StaticResource Red}"
-                                           Padding="10,5">
+                                           Padding="10,5"
+                                           CornerRadius="10">
                                         <Label Text="{Binding Category}"
-                                       FontFamily="Inter-Black"
-                                       TextColor="White" />
+                                               FontFamily="Inter-Black"
+                                               TextColor="White" />
                                     </Frame>
                                 </HorizontalStackLayout>
 
                                 <!-- Poster’s name and contact -->
                                 <HorizontalStackLayout Spacing="10">
                                     <Label Text="Posted by:" 
-                                       FontFamily="Inter-Black"
-                                       TextColor="White"/>
-                                <Label Text="{Binding PosterName}" 
-                                       FontFamily="Inter-Regular"
-                                       TextColor="White"/>
+                                           FontFamily="Inter-Black"
+                                           TextColor="White"/>
+                                    <Label Text="{Binding PosterName}" 
+                                           FontFamily="Inter-Regular"
+                                           TextColor="White"/>
                                 </HorizontalStackLayout>
                                 <HorizontalStackLayout Spacing="10">
                                     <Label Text="Contact Details:" 
-       FontFamily="Inter-Black"
-       TextColor="White"/>
+                                           FontFamily="Inter-Black"
+                                           TextColor="White"/>
                                     <Label Text="{Binding PosterContact}"
-                                       FontFamily="Inter-Regular"
-                                       TextColor="White"/>
+                                           FontFamily="Inter-Regular"
+                                           TextColor="White"/>
                                 </HorizontalStackLayout>
 
-                                <!-- Additional info -->
+                                <!-- Additional info + Date -->
                                 <Label Text="{Binding AdditionalInfo}"
                                        FontFamily="Inter-Light"
                                        TextColor="White" />
+                                <Label Text="{Binding Date, StringFormat='Date: {0:MMM d, yyyy}'}"
+                                       FontFamily="Inter-Light"
+                                       FontSize="10"
+                                       TextColor="White"
+                                       HorizontalOptions="End"/>
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
         </StackLayout>
 
-        <!-- 3. Bottom Nav Bar (optional, matching style) -->
+        <!-- 3. Bottom Nav Bar -->
         <Grid Grid.Row="2" BackgroundColor="#063970" HeightRequest="60">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

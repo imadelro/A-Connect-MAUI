@@ -38,57 +38,49 @@
                         <!-- Course Code -->
                         <HorizontalStackLayout Spacing="10">
                             <Label Text="SUBJECT:" 
-                               TextColor="White"
-                               FontFamily="Inter-Black"
-                               VerticalTextAlignment="Center"/>
-                        <Frame BackgroundColor="White" Padding="20,0">
-                            <Entry x:Name="courseCodeEntry"
-                                   Placeholder="e.g. MATH 21"
-                                   FontFamily="Inter-Light"/>
-                        </Frame>
+                                   TextColor="White"
+                                   FontFamily="Inter-Black"
+                                   VerticalTextAlignment="Center"/>
+                            <Frame BackgroundColor="White" Padding="20,0">
+                                <Entry x:Name="courseCodeEntry"
+                                       Placeholder="e.g. MATH 21"
+                                       FontFamily="Inter-Light"/>
+                            </Frame>
                         </HorizontalStackLayout>
 
-                        <!-- Category -->
+                        <!-- Category Picker -->
                         <HorizontalStackLayout Spacing="10">
-                            <Label Text="Category (Tutor or Tutee):" 
-                               TextColor="White"
-                               FontFamily="Inter-Black"
+                            <Label Text="Category:" 
+                                   TextColor="White"
+                                   FontFamily="Inter-Black"
                                    VerticalTextAlignment="Center"/>
-                        <Frame BackgroundColor="White" Padding="20,0">
-                            <Entry x:Name="categoryEntry"
-                                   Placeholder="e.g. Tutor"
-                                   FontFamily="Inter-Light"/>
-                        </Frame>
-                        </HorizontalStackLayout>
-
-                        <!-- Name -->
-                        <HorizontalStackLayout Spacing="10">
-                            <Label Text="Name:" 
-                               TextColor="White"
-                               FontFamily="Inter-Black"
-                                   VerticalTextAlignment="Center"/>
-                        <Frame BackgroundColor="White" Padding="20,0">
-                            <Entry x:Name="nameEntry"
-                                   Placeholder="e.g. Ima del Rosario"
-                                   FontFamily="Inter-Light"
-                                   />
-                        </Frame>
+                            <Frame BackgroundColor="White" Padding="20,0">
+                                <Picker x:Name="categoryPicker"
+                                        FontFamily="Inter-Light">
+                                    <Picker.ItemsSource>
+                                        <x:Array Type="{x:Type x:String}">
+                                            <x:String>Tutor</x:String>
+                                            <x:String>Tutee</x:String>
+                                        </x:Array>
+                                    </Picker.ItemsSource>
+                                </Picker>
+                            </Frame>
                         </HorizontalStackLayout>
 
                         <!-- Contact Info -->
                         <HorizontalStackLayout Spacing="10">
                             <Label Text="Contact Details:" 
-                               TextColor="White"
-                               FontFamily="Inter-Black"
+                                   TextColor="White"
+                                   FontFamily="Inter-Black"
                                    VerticalTextAlignment="Center"/>
-                        <Frame BackgroundColor="White" Padding="20,0">
-                            <Entry x:Name="contactEntry"
-                                   Placeholder="Email or phone"
-                                   FontFamily="Inter-Light"/>
-                        </Frame>
-                                </HorizontalStackLayout>
+                            <Frame BackgroundColor="White" Padding="20,0">
+                                <Entry x:Name="contactEntry"
+                                       Placeholder="Email or phone"
+                                       FontFamily="Inter-Light"/>
+                            </Frame>
+                        </HorizontalStackLayout>
 
-                                <!-- Additional Info -->
+                        <!-- Additional Info -->
                         <Label Text="Additional Info:" 
                                TextColor="White"
                                FontFamily="Inter-Black"/>
