@@ -23,6 +23,11 @@ namespace A_Connect.Views
         private async void OnTutorFinderClicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync("TutorFinderPage");
-        }       
+        }
+
+        private async void OnMarketplaceClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("MarketplaceFormPage");
+        }
     }
 }
