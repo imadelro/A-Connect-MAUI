@@ -102,7 +102,7 @@
                 <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
                     <ImageButton Source="marketplace_icon.png"
                                  WidthRequest="100" HeightRequest="100"
-                                 />
+                                 Clicked="OnMarketplaceClicked"/>
                     <Label Text="Markeplace"
                            FontSize="16" FontFamily="Inter-Bold"
                            TextColor="Black"
