@@ -27,7 +27,7 @@ namespace A_Connect.Views
 
         private async void OnMarketplaceClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("MarketplaceFormPage");
+            await Shell.Current.GoToAsync(nameof(MarketplaceNewsFeedPage));
         }
     }
 }

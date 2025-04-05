@@ -26,6 +26,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(TutorFinderDetailsPage), typeof(TutorFinderDetailsPage));
 
         // Register Marketplace Pages.
-        Routing.RegisterRoute("MarketplaceFormPage", typeof(MarketplaceFormPage));
+        Routing.RegisterRoute(nameof(MarketplaceNewsFeedPage), typeof(MarketplaceNewsFeedPage));
+        Routing.RegisterRoute(nameof(MarketplaceFormPage), typeof(MarketplaceFormPage));
     }
 }

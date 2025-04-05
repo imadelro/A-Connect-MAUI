@@ -1,0 +1,156 @@
+<ContentPage
+    x:Class="A_Connect.Views.MarketplaceNewsFeedPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Marketplace"
+    BackgroundColor="White">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid BackgroundColor="#063970" Padding="20,40,20,20">
+            <Label Text="Marketplace"
+                   TextColor="#FFCC00"
+                   FontSize="24"
+                   FontFamily="Inter-Black"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+        </Grid>
+
+        <!-- Main Content -->
+        <ScrollView Grid.Row="1">
+            <StackLayout Spacing="20" Padding="20">
+
+                <!-- Search Bar -->
+                <Frame CornerRadius="25" BackgroundColor="White" Padding="10">
+                    <HorizontalStackLayout>
+                        <Image Source="search_icon.png"
+                               HeightRequest="20"
+                               WidthRequest="20"
+                               VerticalOptions="Center"
+                               Margin="0,0,5,0"/>
+                        <Entry Placeholder="Search items"
+                               FontSize="14"
+                               FontFamily="Inter-SemiBold"
+                               VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+                </Frame>
+
+                <!-- Tabs -->
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="40">
+                    <Label Text="All Listings"
+                           FontSize="16"
+                           FontFamily="Inter-SemiBold"
+                           TextColor="Black"/>
+                    <Label Text="My Listings"
+                           FontSize="16"
+                           FontFamily="Inter-SemiBold"
+                           TextColor="Gray"/>
+                </HorizontalStackLayout>
+
+                <!-- Sample Item Listing -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="10"
+                       Padding="15"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="10">
+
+                        <!-- Title -->
+                        <Label Text="iPhone 13 for Sale"
+                               FontSize="18"
+                               FontFamily="Inter-Black"
+                               TextColor="Black"/>
+
+                        <!-- Image Placeholder -->
+                        <Image Source="sample_item.png"
+                               HeightRequest="150"
+                               Aspect="AspectFill"
+                               Margin="0,5"/>
+
+                        <!-- Tags: Buyer/Seller + Condition -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Frame BackgroundColor="#d1ecf1"
+                                   Padding="5,2"
+                                   CornerRadius="10">
+                                <Label Text="Seller"
+                                       TextColor="#0c5460"
+                                       FontSize="12"
+                                       FontFamily="Inter-SemiBold"/>
+                            </Frame>
+                            <Frame BackgroundColor="#d4edda"
+                                   Padding="5,2"
+                                   CornerRadius="10">
+                                <Label Text="Lightly Used"
+                                       TextColor="#155724"
+                                       FontSize="12"
+                                       FontFamily="Inter-SemiBold"/>
+                            </Frame>
+                        </HorizontalStackLayout>
+
+                        <!-- Description -->
+                        <Label Text="Selling my iPhone 13. Lightly used, no scratches. Includes original box and charger."
+                               FontSize="13"
+                               FontFamily="Inter-Regular"
+                               TextColor="Black"/>
+
+                        <!-- Contact Info -->
+                        <Label Text="Contact: 0917-123-4567"
+                               FontSize="12"
+                               TextColor="Gray"
+                               FontFamily="Inter-Light"/>
+
+                        <!-- Delete Button (if owned) -->
+                        <Button Text="Delete"
+                                TextColor="White"
+                                BackgroundColor="Red"
+                                Margin="0,5,0,0"
+                                CornerRadius="10"
+                                FontSize="13"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Add more mock items below as needed -->
+
+                <!-- Post Button -->
+                <Button Text="Post an Item +"
+                        BackgroundColor="#FFCC00"
+                        TextColor="#111111"
+                        FontFamily="Inter-Black"
+                        CornerRadius="25"
+                        HorizontalOptions="Center"
+                        Padding="10,5"
+			            Clicked="OnPostListingClicked"/>
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Bottom Navigation -->
+        <Grid Grid.Row="2" BackgroundColor="#063970" HeightRequest="60">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ImageButton Source="nav_icon1.png"
+                         Grid.Column="0"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         WidthRequest="30" HeightRequest="30"/>
+            <ImageButton Source="nav_home.png"
+                         Grid.Column="1"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         WidthRequest="30" HeightRequest="30"/>
+            <ImageButton Source="nav_profile.png"
+                         Grid.Column="2"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         WidthRequest="30" HeightRequest="30"/>
+        </Grid>
+    </Grid>
+</ContentPage>

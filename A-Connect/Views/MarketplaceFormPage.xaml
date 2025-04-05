@@ -30,7 +30,7 @@
                         <!-- Image Upload Section -->
                         <Frame BackgroundColor="LightGray" CornerRadius="15" Padding="10">
                             <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnUploadImageTapped"/>
+                               <!-- <TapGestureRecognizer Tapped="OnUploadImageTapped"/> -->
                             </Frame.GestureRecognizers>
 
                             <VerticalStackLayout Spacing="10">
@@ -56,8 +56,7 @@
                                         TextColor="Black"
                                         FontFamily="Inter-Black"
                                         CornerRadius="25"
-                                        HorizontalOptions="Center"
-                                        Clicked="OnUploadImageTapped"/>
+                                        HorizontalOptions="Center"/>
                             </VerticalStackLayout>
                         </Frame>
 
