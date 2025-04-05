@@ -10,5 +10,10 @@ namespace A_Connect.Views
             InitializeComponent();
             BindingContext = new STFormViewModel();
         }
+        private async void OnCreatePostClicked(object sender, EventArgs e)
+        {
+            // Navigate to form page
+            await Shell.Current.GoToAsync(nameof(InternNJobsFormPage));
+        }
     }
 }

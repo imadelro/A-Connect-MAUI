@@ -150,7 +150,7 @@
                 <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
                     <ImageButton Source="jobsinternship_icon.png"
                                  WidthRequest="100" HeightRequest="90"
-                                 />
+                                 Clicked="OnInternNJobsClicked"/>
                     <Label Text="Jobs and Internships"
                            FontSize="14" FontFamily="Inter-Bold"
                            TextColor="Black"
