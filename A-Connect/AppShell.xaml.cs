@@ -24,5 +24,9 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(TutorFinderPage), typeof(TutorFinderPage));
         Routing.RegisterRoute(nameof(TutorFinderFormPage), typeof(TutorFinderFormPage));
         Routing.RegisterRoute(nameof(TutorFinderDetailsPage), typeof(TutorFinderDetailsPage));
+
+        // Register Marketplace Pages.
+        Routing.RegisterRoute(nameof(MarketplaceNewsFeedPage), typeof(MarketplaceNewsFeedPage));
+        Routing.RegisterRoute(nameof(MarketplaceFormPage), typeof(MarketplaceFormPage));
     }
 }
