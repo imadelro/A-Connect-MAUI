@@ -21,6 +21,11 @@ public static class MauiProgram
         // register the tutorFinder database
         string tutorFinderDbPath = Path.Combine(FileSystem.AppDataDirectory, "tutorFinder.db3");
         builder.Services.AddSingleton<TutorFinderDatabase>(s => new TutorFinderDatabase(tutorFinderDbPath));
+        // Register marketplace
+        string marketplaceDbPath = Path.Combine(FileSystem.AppDataDirectory, "marketplace.db3");
+        builder.Services.AddSingleton<MarketplaceDatabase>(s => new MarketplaceDatabase(marketplaceDbPath));
+
+
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

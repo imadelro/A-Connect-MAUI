@@ -12,6 +12,8 @@ public partial class App : Application
 
     public static A_Connect.Models.User CurrentUser { get; set; }
     public static A_Connect.Services.STFormDatabase STDB { get; private set; }
+    public static MarketplaceDatabase MarketplaceDB { get; private set; }
+
     // Initialize ReviewDatabase
     private static ReviewDatabase _reviewDatabase;
     public static ReviewDatabase ReviewDatabase
@@ -30,11 +32,13 @@ public partial class App : Application
     public App()
     {
         InitializeComponent();
-        string STdbPath = Path.Combine(FileSystem.AppDataDirectory, "STForms.db3");
-    // Initialize the database
+        string STdbPath = Path.Combine(FileSystem.AppDataDirectory, "STForms.db3");        
+        string marketplaceDbPath = Path.Combine(FileSystem.AppDataDirectory, "marketplace.db3"); ;
+
         STDB = new STFormDatabase(STdbPath);
+        MarketplaceDB = new MarketplaceDatabase(marketplaceDbPath);
+
     }
-    
 
     protected override Window CreateWindow(IActivationState? activationState)
     {

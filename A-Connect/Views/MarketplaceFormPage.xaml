@@ -150,7 +150,8 @@
                         FontFamily="Inter-Black"
                         CornerRadius="25"
                         HorizontalOptions="Center"
-                        Padding="40,10"/>
+                        Padding="40,10"
+                        Clicked="OnSubmitClicked"/>
             </VerticalStackLayout>
         </ScrollView>
     </Grid>
