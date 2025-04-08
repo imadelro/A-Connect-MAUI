@@ -43,15 +43,14 @@
                 </HorizontalStackLayout>
             </Frame>
 
-            <!-- TABS: "All posts" | "Own posts" -->
+            <!-- Tabs -->
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="40" Padding="0,10">
 
-                <!-- First Tab -->
+                <!-- All Posts Tab -->
                 <VerticalStackLayout HorizontalOptions="Center">
                     <Label Text="All posts"
-               FontSize="16"
-               FontFamily="Inter-SemiBold">
-                        <!-- DataTriggers for styling -->
+                           FontSize="16"
+                           FontFamily="Inter-SemiBold">
                         <Label.Triggers>
                             <DataTrigger TargetType="Label" Binding="{Binding allPostsSelected}" Value="True">
                                 <Setter Property="TextColor" Value="Black" />
@@ -60,14 +59,10 @@
                                 <Setter Property="TextColor" Value="#999999" />
                             </DataTrigger>
                         </Label.Triggers>
-
-                        <!-- GestureRecognizers -->
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding SwitchToOtherPostsCommand}" />
                         </Label.GestureRecognizers>
                     </Label>
-
-                    <!-- Underline -->
                     <BoxView HeightRequest="2">
                         <BoxView.Triggers>
                             <DataTrigger TargetType="BoxView" Binding="{Binding allPostsSelected}" Value="True">
@@ -81,12 +76,11 @@
                     </BoxView>
                 </VerticalStackLayout>
 
-                <!-- Second Tab -->
+                <!-- Own Posts Tab -->
                 <VerticalStackLayout HorizontalOptions="Center">
                     <Label Text="Own posts"
-               FontSize="16"
-               FontFamily="Inter-SemiBold">
-                        <!-- DataTriggers for styling -->
+                           FontSize="16"
+                           FontFamily="Inter-SemiBold">
                         <Label.Triggers>
                             <DataTrigger TargetType="Label" Binding="{Binding IsOwnPostsSelected}" Value="True">
                                 <Setter Property="TextColor" Value="Black" />
@@ -95,14 +89,10 @@
                                 <Setter Property="TextColor" Value="#999999" />
                             </DataTrigger>
                         </Label.Triggers>
-
-                        <!-- GestureRecognizers -->
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding SwitchToOwnPostsCommand}" />
                         </Label.GestureRecognizers>
                     </Label>
-
-                    <!-- Underline -->
                     <BoxView HeightRequest="2">
                         <BoxView.Triggers>
                             <DataTrigger TargetType="BoxView" Binding="{Binding IsOwnPostsSelected}" Value="True">
@@ -117,8 +107,9 @@
                 </VerticalStackLayout>
             </HorizontalStackLayout>
 
-            <!-- Grouped Reviews List -->
-            <RefreshView Command="{Binding LoadReviewsCommand}">
+            <!-- Scrollable Posts List -->
+            <ScrollView HeightRequest="400">
+                <!-- Adjust height as needed -->
                 <CollectionView ItemsSource="{Binding GroupedReviews}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
@@ -126,10 +117,10 @@
                                 <!-- Professor Header -->
                                 <Frame BackgroundColor="{StaticResource Blue}"
                                        CornerRadius="15"
-                                       Padding="15">    
+                                       Padding="15">
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProfsToPickNewsFeedViewModel}}, Path=ToggleGroupCommand}"
-                                              CommandParameter="{Binding}" />
+                                                              CommandParameter="{Binding}" />
                                     </Frame.GestureRecognizers>
 
                                     <VerticalStackLayout>
@@ -139,11 +130,13 @@
                                                FontFamily="Inter-Black"
                                                VerticalOptions="Center"/>
 
+                                        <!-- Optional average rating here -->
+
                                         <Label Text="{Binding ReviewCount, StringFormat='({0} Reviews)'}"
                                                TextColor="White"
                                                FontSize="14"
                                                FontFamily="Inter-SemiBold"
-                                               VerticalOptions="Center"/>       
+                                               VerticalOptions="Center"/>
                                     </VerticalStackLayout>
                                 </Frame>
 
@@ -151,11 +144,10 @@
                                 <CollectionView ItemsSource="{Binding Reviews}" IsVisible="{Binding IsExpanded}">
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate>
-                                            <!-- Review Content -->
                                             <Frame BackgroundColor="White"
                                                    CornerRadius="10"
                                                    Padding="10"
-                                                   Margin="10,0,10,10"> 
+                                                   Margin="10,0,10,10">
                                                 <VerticalStackLayout>
                                                     <Label Text="{Binding CourseCode}"
                                                            TextColor="Black"
@@ -172,16 +164,16 @@
                                                            TextColor="Gray"
                                                            FontSize="10"
                                                            HorizontalOptions="End"
-                                                           FontFamily="Inter-Light"/>   
+                                                           FontFamily="Inter-Light"/>
 
                                                     <!-- Delete Button -->
                                                     <Button Text="Delete"
-                                                    TextColor="White"
-                                                    BackgroundColor="Red"
-                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProfsToPickNewsFeedViewModel}}, Path=DeleteCommand}"
-                                                    CommandParameter="{Binding .}"
-                                                    IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:ProfsToPickNewsFeedViewModel}}, Path=IsOwnPostsSelected}"
-                                                    Margin="0,5,0,0"/>      
+                                                            TextColor="White"
+                                                            BackgroundColor="Red"
+                                                            Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProfsToPickNewsFeedViewModel}}, Path=DeleteCommand}"
+                                                            CommandParameter="{Binding .}"
+                                                            IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:ProfsToPickNewsFeedViewModel}}, Path=IsOwnPostsSelected}"
+                                                            Margin="0,5,0,0"/>
                                                 </VerticalStackLayout>
                                             </Frame>
                                         </DataTemplate>
@@ -191,11 +183,9 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
+            </ScrollView>
 
-
-            </RefreshView>
-
-            <!-- "Post a review" button -->
+            <!-- Post Review Button -->
             <Button Text="Post a review +"
                     BackgroundColor="{StaticResource Yellow}"
                     TextColor="{StaticResource OffBlack}"

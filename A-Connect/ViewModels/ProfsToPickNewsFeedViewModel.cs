@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Diagnostics;
-using Javax.Security.Auth;
 
 namespace A_Connect.ViewModels
 {
