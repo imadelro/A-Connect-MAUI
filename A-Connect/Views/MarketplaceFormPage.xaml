@@ -79,6 +79,19 @@
                             </Frame>
                         </HorizontalStackLayout>
 
+                        <!-- Price -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Price:" 
+                                   TextColor="White"
+                                   FontFamily="Inter-Black"
+                                   VerticalTextAlignment="Center"/>    
+                            <Frame BackgroundColor="White" Padding="20,0">
+                                <Entry x:Name="PriceEntry"
+                                       Placeholder="Price of your listing"
+                                       FontFamily="Inter-Light"/>
+                            </Frame>
+                        </HorizontalStackLayout>
+
                         <!-- Category Picker -->
                         <HorizontalStackLayout Spacing="10">
                             <Label Text="Category:" 

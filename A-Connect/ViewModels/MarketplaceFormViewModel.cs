@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using A_Connect.Models;
@@ -33,46 +29,35 @@ namespace A_Connect.ViewModels
         public string ContactDetails { get; set; }
         public string Description { get; set; }
 
-        private async Task SubmitListing()
+        // The SubmitListing method is the one that handles the actual posting
+        public async Task SubmitListing()
         {
-            var newPost = new MarketplacePost
+            // Validate the fields
+            if (string.IsNullOrEmpty(ListingTitle) || string.IsNullOrEmpty(Category) ||
+                string.IsNullOrEmpty(Condition) || string.IsNullOrEmpty(ContactDetails))
             {
-                ListingTitle = ListingTitle,
-                Category = Category,
-                Condition = Condition,
-                PosterName = _currentUser,
-                PosterContact = ContactDetails,
-                Description = Description,
-                //ImagePaths = string.Join(",", UploadedImages),
-                DatePosted = DateTime.Now
-            };
-
-            await _database.SavePostAsync(newPost);
-            await Shell.Current.GoToAsync(".."); // Go back to NewsFeed page
-        }
-        public async Task<bool> SubmitPostAsync(string title, string category, string condition, string contact, string description)
-        {
-            if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(category) || string.IsNullOrEmpty(condition) || string.IsNullOrEmpty(contact))
-            {
-                return false;
+                await Application.Current.MainPage.DisplayAlert("Error", "Please fill all required fields.", "OK");
+                return;
             }
 
             var newPost = new MarketplacePost
             {
-                ListingTitle = title.Trim(),
-                Category = category.Trim(),
-                Condition = condition.Trim(),
-                PosterName = App.CurrentUser.Username,
-                PosterContact = contact.Trim(),
-                Description = description?.Trim(),
+                ListingTitle = ListingTitle.Trim(),
+                Category = Category.Trim(),
+                Condition = Condition.Trim(),
+                PosterName = _currentUser,
+                PosterContact = ContactDetails.Trim(),
+                Description = Description?.Trim(),
                 DatePosted = DateTime.Now
             };
 
+            // Save the post to the database
             Debug.WriteLine("Saving new post to database...");
             await _database.SavePostAsync(newPost);
             Debug.WriteLine("Post saved successfully.");
-            return true;
+
+            // Navigate back to the news feed page
+            await Shell.Current.GoToAsync("..");
         }
     }
 }
-

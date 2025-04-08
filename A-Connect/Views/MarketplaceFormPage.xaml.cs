@@ -18,25 +18,17 @@ namespace A_Connect.Views
             var viewModel = BindingContext as MarketplaceFormViewModel;
             if (viewModel != null)
             {
-                bool success = await viewModel.SubmitPostAsync(
-                    ListingTitleEntry.Text,
-                    CategoryPicker.SelectedItem?.ToString(),
-                    ConditionPicker.SelectedItem?.ToString(),
-                    ContactDetailsEntry.Text,
-                    AdditionalInfoEditor.Text
-                );
+                // Call the correct method (SubmitListing instead of SubmitPostAsync)
+                await viewModel.SubmitListing();
 
-                if (success)
-                {
-                    await DisplayAlert("Success", "Your post has been created!", "OK");
-                    Debug.WriteLine("Post created successfully.");
-                    await Shell.Current.GoToAsync("..");
-                }
-                else
-                {
-                    await DisplayAlert("Error", "Please fill in all required fields.", "OK");
-                    Debug.WriteLine("Failed to create post. Missing required fields.");
-                }
+                Debug.WriteLine("Post created successfully.");
+                await DisplayAlert("Success", "Your post has been created!", "OK");
+                await Shell.Current.GoToAsync(".."); // Go back to the previous page (NewsFeed)
+            }
+            else
+            {
+                await DisplayAlert("Error", "There was an issue with your submission.", "OK");
+                Debug.WriteLine("Failed to create post.");
             }
         }
     }

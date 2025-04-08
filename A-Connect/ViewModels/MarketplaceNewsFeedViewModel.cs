@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using A_Connect.Models;
+using A_Connect.Views;
 using A_Connect.Services;
 using Microsoft.Maui.Controls;
 
@@ -46,6 +47,17 @@ namespace A_Connect.ViewModels
                 Items.Remove(post);
                 Debug.WriteLine($"Deleted post: {post.ListingTitle}");
             }
+        }
+        public ICommand ItemTappedCommand => new Command<MarketplacePost>(OnItemTapped);
+
+        private async void OnItemTapped(MarketplacePost post)
+        {
+            if (post == null) return;
+
+            await Shell.Current.GoToAsync(nameof(MarketplaceListingDetailPage), true, new Dictionary<string, object>
+    {
+        { "SelectedPost", post }
+    });
         }
     }
 }

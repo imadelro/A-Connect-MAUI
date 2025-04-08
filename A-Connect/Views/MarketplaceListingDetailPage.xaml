@@ -1,0 +1,22 @@
+﻿<ContentPage
+    x:Class="A_Connect.Views.MarketplaceListingDetailPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:A_Connect.Models"
+    Title="Listing Details"
+    BackgroundColor="White"
+    x:Name="DetailPage">
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="20">
+            <Label Text="{Binding ListingTitle}" FontSize="24" FontAttributes="Bold" />
+            <Image Source="sample_item.png" HeightRequest="200" Aspect="AspectFill" />
+            <Label Text="{Binding Description}" FontSize="16" />
+            <Label Text="{Binding Price, StringFormat='₱{0:F2}'}" FontSize="16" TextColor="Green"/>
+            <Label Text="Condition:" FontAttributes="Bold"/>
+            <Label Text="{Binding Condition}"/>
+            <Label Text="Contact:" FontAttributes="Bold"/>
+            <Label Text="{Binding PosterContact}" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

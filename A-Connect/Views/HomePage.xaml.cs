@@ -30,7 +30,7 @@ namespace A_Connect.Views
             await Shell.Current.GoToAsync("InternNJobsHomePage");
         }          
 
-        }
+       
 
         private async void OnMarketplaceClicked(object sender, EventArgs e)
         {
