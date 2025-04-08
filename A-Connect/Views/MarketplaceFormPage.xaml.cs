@@ -18,18 +18,21 @@ namespace A_Connect.Views
             var viewModel = BindingContext as MarketplaceFormViewModel;
             if (viewModel != null)
             {
-                // Call the correct method (SubmitListing instead of SubmitPostAsync)
-                await viewModel.SubmitListing();
+                // Bind the form inputs to the ViewModel properties
+                viewModel.ListingTitle = ListingTitleEntry.Text;
+                viewModel.Category = CategoryPicker.SelectedItem?.ToString();
+                viewModel.Condition = ConditionPicker.SelectedItem?.ToString();
+                viewModel.ContactDetails = ContactDetailsEntry.Text;
+                viewModel.Description = AdditionalInfoEditor.Text;
 
-                Debug.WriteLine("Post created successfully.");
-                await DisplayAlert("Success", "Your post has been created!", "OK");
-                await Shell.Current.GoToAsync(".."); // Go back to the previous page (NewsFeed)
+                // Call the SubmitListing method
+                await viewModel.SubmitListing();
             }
             else
             {
                 await DisplayAlert("Error", "There was an issue with your submission.", "OK");
-                Debug.WriteLine("Failed to create post.");
             }
         }
+
     }
 }
