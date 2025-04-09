@@ -1,24 +1,20 @@
-namespace A_Connect.Views;
-using System;
 using A_Connect.Models;
 using A_Connect.Services;
+using A_Connect.ViewModels;
 using Microsoft.Maui.Controls;
-public partial class InternNJobsFormPage : ContentPage
+using System;
+using System.IO;
+
+namespace A_Connect.Views
 {
-	public InternNJobsFormPage()
-	{
-		InitializeComponent();
-	}
+    public partial class InternNJobsFormPage : ContentPage
+    {
 
-	private void OnTypePickerSelected(object sender, EventArgs e)
-	{
-			var picker = (Picker)sender;
-			string selectedType = (string)picker.SelectedItem;  // Cast to string
+        public InternNJobsFormPage()
+        {
+            InitializeComponent();
+            BindingContext = new InternNJobsFormViewModel();
+        }
 
-			if (selectedType != null)
-			{
-					// Do something with the selected value
-					DisplayAlert("Selected", $"You chose: {selectedType}", "OK");
-			}
-	}
+    }
 }

@@ -27,10 +27,8 @@ namespace A_Connect.Views
         } 
         private async void OnInternNJobsClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("InternNJobsHomePage");
+            await Shell.Current.GoToAsync("InternNJobsNewsfeedPage");
         }          
-
-        }
 
         private async void OnMarketplaceClicked(object sender, EventArgs e)
         {
