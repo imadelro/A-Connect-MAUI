@@ -14,9 +14,9 @@
         </Grid.RowDefinitions>
 
         <!-- Blue Header -->
-        <Grid BackgroundColor="#063970" Padding="20,40,20,20">
+        <Grid BackgroundColor="{StaticResource DarkBlue}" Padding="20,40,20,20">
             <Label Text="Schedule Trading"
-                   TextColor="Gold"
+                   TextColor="{StaticResource Yellow}"
                    FontFamily="Inter-Black"
                    FontSize="24"
                    HorizontalOptions="Center"
@@ -34,38 +34,79 @@
                            WidthRequest="20"
                            VerticalOptions="Center"
                            Margin="0,0,5,0"/>
-                    <Entry Placeholder="Search"
-                           Text="{Binding SearchText}"
+                    <Entry Text="{Binding SearchText, Mode=TwoWay}" 
+                           Placeholder="Search"
                            VerticalOptions="Center"
-                           FontSize="18"
+                           FontSize="14"
                            FontFamily="Inter-SemiBold"
-                           Margin="0"/>
+                           Margin="0"
+                           WidthRequest="300"/>
                 </HorizontalStackLayout>
             </Frame>
 
-            <!-- Tab Buttons -->
-            <Grid ColumnSpacing="0" RowSpacing="0" Padding="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            <!-- Tabs -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="40" Padding="0,10">
 
-                <Button Text="Posts by other users"
-                        Command="{Binding ShowOtherPostsCommand}"
-                        BackgroundColor="#F0F0F0"
-                        TextColor="Black"
-                        Grid.Column="0"
-                        CornerRadius="20"
-                        FontFamily="Inter-SemiBold"/>
+                <!-- All Posts Tab -->
+                <VerticalStackLayout HorizontalOptions="Center">
+                    <Label Text="Posts by Other Users"
+               FontSize="16"
+               FontFamily="Inter-SemiBold">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding allPostsSelected}" Value="True">
+                                <Setter Property="TextColor" Value="Black" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding allPostsSelected}" Value="False">
+                                <Setter Property="TextColor" Value="#999999" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShowOtherPostsCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <BoxView HeightRequest="2">
+                        <BoxView.Triggers>
+                            <DataTrigger TargetType="BoxView" Binding="{Binding allPostsSelected}" Value="True">
+                                <Setter Property="IsVisible" Value="True" />
+                                <Setter Property="BackgroundColor" Value="Black" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="BoxView" Binding="{Binding allPostsSelected}" Value="False">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </BoxView.Triggers>
+                    </BoxView>
+                </VerticalStackLayout>
 
-                <Button Text="Own posts"
-                        Command="{Binding ShowOwnPostsCommand}"
-                        BackgroundColor="#F0F0F0"
-                        TextColor="Black"
-                        Grid.Column="1"
-                        CornerRadius="20"
-                        FontFamily="Inter-SemiBold"/>
-            </Grid>
+                <!-- Own Posts Tab -->
+                <VerticalStackLayout HorizontalOptions="Center">
+                    <Label Text="Own posts"
+               FontSize="16"
+               FontFamily="Inter-SemiBold">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsOwnPostsSelected}" Value="True">
+                                <Setter Property="TextColor" Value="Black" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsOwnPostsSelected}" Value="False">
+                                <Setter Property="TextColor" Value="#999999" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShowOwnPostsCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <BoxView HeightRequest="2">
+                        <BoxView.Triggers>
+                            <DataTrigger TargetType="BoxView" Binding="{Binding IsOwnPostsSelected}" Value="True">
+                                <Setter Property="IsVisible" Value="True" />
+                                <Setter Property="BackgroundColor" Value="Black" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="BoxView" Binding="{Binding IsOwnPostsSelected}" Value="False">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </BoxView.Triggers>
+                    </BoxView>
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
 
             <!-- CollectionView for DisplayedPosts -->
             <CollectionView ItemsSource="{Binding DisplayedPosts}" 
@@ -73,13 +114,14 @@
                             SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame BackgroundColor="#1F6FB7"
+                        <Frame BackgroundColor="{StaticResource Blue}"
                                CornerRadius="15"
                                Padding="15"
                                Margin="0,10">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer 
-Command="{Binding PostSelectedCommand}"                                    CommandParameter="{Binding}" />
+                                    Command="{Binding PostSelectedCommand}"                                    
+                                    CommandParameter="{Binding}" />
                             </Frame.GestureRecognizers>
                             <VerticalStackLayout Spacing="5">
                                 <Label Text="{Binding CourseCode}"
@@ -91,13 +133,16 @@ Command="{Binding PostSelectedCommand}"                                    Comma
                                 <HorizontalStackLayout Spacing="10">
                                     <Label Text="Trade offer:"
                                            TextColor="White"
-                                           FontFamily="Inter-SemiBold"/>
-                                    <Frame BackgroundColor="#E74C3C"
+                                           FontFamily="Inter-SemiBold"
+                                           VerticalOptions="Center"/>
+                                    <Frame BackgroundColor="{StaticResource Yellow}"
                                            CornerRadius="10"
                                            Padding="5"
-                                           HasShadow="False">
-                                        <Label Text="{Binding TradeOffer}"
-                                               TextColor="White"
+                                           HasShadow="False"
+                                           BorderColor="Black"
+                                           >
+                                        <Label Text="{Binding OfferDetails}"
+                                               TextColor="Black"
                                                FontSize="14"
                                                FontFamily="Inter-SemiBold"/>
                                     </Frame>
@@ -105,56 +150,86 @@ Command="{Binding PostSelectedCommand}"                                    Comma
                                 <HorizontalStackLayout Spacing="10">
                                     <Label Text="Trade request:"
                                            TextColor="White"
-                                           FontFamily="Inter-SemiBold"/>
-                                    <Frame BackgroundColor="#063970"
+                                           FontFamily="Inter-SemiBold"
+                                           VerticalOptions="Center"/>
+                                    <Frame BackgroundColor="{StaticResource DarkBlue}"
                                            CornerRadius="10"
                                            Padding="5"
                                            HasShadow="False">
-                                        <Label Text="{Binding TradeRequest}"
+                                        <Label Text="{Binding RequestDetails}"
                                                TextColor="White"
                                                FontSize="14"
                                                FontFamily="Inter-SemiBold"/>
                                     </Frame>
                                 </HorizontalStackLayout>
 
-                                <!-- Posted by and Date -->
-                                <HorizontalStackLayout>
-                                    <Label Text="{Binding PostedBy, StringFormat='Posted by: {0}'}"
-                                           TextColor="White"
-                                           FontSize="12"
-                                           FontFamily="Inter-Light"/>
-                                    <Label Text="{Binding Date, StringFormat='  |  Date: {0:MMM d, yyyy}'}"
-                                           TextColor="White"
-                                           FontSize="12"
-                                           FontFamily="Inter-Light"/>
+                                <!-- Contact Information -->
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="Contact:"
+           TextColor="White"
+           FontFamily="Inter-SemiBold"
+           VerticalOptions="Center"/>
+                                    <Label Text="{Binding ContactInfo}"
+           TextColor="White"
+           FontSize="14"
+           FontFamily="Inter-SemiBold"/>
                                 </HorizontalStackLayout>
+                                <Grid ColumnDefinitions="*,Auto"
+      VerticalOptions="End"
+      Margin="0,10,0,0">
+                                    <!-- Conditional Display: Delete Button or Posted By -->
+                                    <Grid ColumnDefinitions="*,Auto"
+      VerticalOptions="End"
+      Margin="0,10,0,0">
+                                        <!-- Delete Button -->
+                                        <Button Text="Delete"
+            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:STNewsFeedViewModel}}, Path=DeletePostCommand}"
+            CommandParameter="{Binding}"
+            BackgroundColor="{StaticResource Red}"
+            TextColor="White"
+            FontFamily="Inter-SemiBold"
+                                                CornerRadius="20"
+                                                VerticalOptions="End"
+                                                HorizontalOptions="End"
+            IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewModels:STNewsFeedViewModel}}, Path=IsOwnPostsSelected}" />
+
+                                        <!-- Posted By -->
+                                        <Label Text="{Binding PostedBy, StringFormat='Posted by: {0}'}"
+           TextColor="White"
+           FontSize="12"
+           FontFamily="Inter-Light"
+                                               HorizontalOptions="End"
+                                               VerticalOptions="End"
+           IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewModels:STNewsFeedViewModel}}, Path=allPostsSelected}" />
+                                    </Grid>
+
+                                    <!-- Date Posted -->
+                                    <Label Text="{Binding Date, StringFormat='Date Posted: {0:MMM d, yyyy}'}"
+       TextColor="White"
+       FontSize="12"
+       FontFamily="Inter-Light"
+       HorizontalOptions="Start" 
+                                           VerticalOptions="End"/>
+                                </Grid>
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <!-- "Post a trade" Button (always visible or only on "Own posts") -->
+            <!-- "Post a trade" Button  -->
             <Button Text="Post a trade +"
                     Command="{Binding PostTradeCommand}"
-                    BackgroundColor="#F1C40F"
+                    BackgroundColor="{StaticResource Yellow}"
                     TextColor="Black"
                     FontFamily="Inter-Black"
                     CornerRadius="25"
                     HorizontalOptions="Center"
                     Padding="10,5">
-                <Button.Triggers>
-                    <DataTrigger TargetType="Button" Binding="{Binding IsOwnPostsSelected}" Value="True">
-                        <Setter Property="IsVisible" Value="True" />
-                    </DataTrigger>
-                    <DataTrigger TargetType="Button" Binding="{Binding IsOwnPostsSelected}" Value="False">
-                        <Setter Property="IsVisible" Value="False" />
-                    </DataTrigger>
-                </Button.Triggers>
             </Button>
         </StackLayout>
 
-        <!-- Bottom Nav Bar (optional) -->
+        <!-- Bottom Nav Bar  -->
         <Grid Grid.Row="2" BackgroundColor="#063970" HeightRequest="60">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -172,8 +247,8 @@ Command="{Binding PostSelectedCommand}"                                    Comma
                          Grid.Column="1"
                          HorizontalOptions="Center"
                          VerticalOptions="Center"
-                         WidthRequest="30"
-                         HeightRequest="30"/>
+                         WidthRequest="30" HeightRequest="30"
+                         Command="{Binding NavigateToHomeCommand}"/>
             <ImageButton Source="nav_profile.png"
                          Grid.Column="2"
                          HorizontalOptions="Center"

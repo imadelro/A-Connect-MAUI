@@ -13,6 +13,8 @@ namespace A_Connect.ViewModels
 {
     public class STNewsFeedViewModel : BaseViewModel
     {
+        public ICommand NavigateToHomeCommand { get; }
+
         private ObservableCollection<STForm> _allPosts;
         public ObservableCollection<STForm> DisplayedPosts { get; set; }
 
@@ -50,22 +52,18 @@ namespace A_Connect.ViewModels
         public ICommand PostTradeCommand { get; }
         public ICommand PostSelectedCommand { get; }
 
+        public ICommand DeletePostCommand { get; } // Declare the DeletePostCommand property
+
         public STNewsFeedViewModel()
         {
-            // All posts
-            // After (no sample data, just an empty list)
-            _allPosts = new ObservableCollection<STForm>();
+            DeletePostCommand = new Command<STForm>(async (post) => await DeletePost(post));
 
+            NavigateToHomeCommand = new Command(async () => await NavigateToHome());
+            
+            _allPosts = new ObservableCollection<STForm>();
             DisplayedPosts = new ObservableCollection<STForm>();
 
-            // 1) LOAD from DB immediately (added lines)
-            var dbPosts = App.STDB.GetAllPostsAsync().Result;
-            // This .Result usage is for simplicity; 
-            // you could use async/await if you prefer.
-            foreach (var post in dbPosts)
-            {
-                _allPosts.Add(post);
-            }
+            Task.Run(async () => await LoadPostsFromDatabaseAsync());
 
             // Default to "Posts by other users"
             allPostsSelected = true;
@@ -92,26 +90,69 @@ namespace A_Connect.ViewModels
                 await Shell.Current.GoToAsync("PostTradePage");
             });
 
-            // Tap on a post -> navigate to individual post
-            PostSelectedCommand = new Command<STForm>(async (post) =>
-            {
-                var navParameter = new Dictionary<string, object> { { "SelectedPost", post } };
-                await Shell.Current.GoToAsync("IndividualPostPage", navParameter);
-            });
-
             // Listen for new posts from STFormViewModel
+            MessagingCenter.Unsubscribe<STFormViewModel, STForm>(this, "NewTradePost"); // Unsubscribe first to avoid duplicates
             MessagingCenter.Subscribe<STFormViewModel, STForm>(this, "NewTradePost", async (sender, newPost) =>
             {
-                // Original code:
-                _allPosts.Add(newPost);
-                FilterPosts();
+                if (!_allPosts.Any(p => p.Id == newPost.Id)) // Prevent duplicates
+                {
+                    _allPosts.Add(newPost);
+                    FilterPosts();
 
-                // ADDED: Also save to DB
-                await App.STDB.SavePostAsync(newPost);
+                    // Save the new post to the database
+                    await App.STDB.SavePostAsync(newPost);
+                }
             });
         }
 
-        private void FilterPosts()
+        private async Task DeletePost(STForm post)
+        {
+            if (post == null)
+                return;
+
+            // Confirm deletion
+            bool confirm = await Application.Current.MainPage.DisplayAlert(
+                "Confirm Delete",
+                "Are you sure you want to delete this post?",
+                "Yes",
+                "No");
+
+            if (confirm)
+            {
+                // Remove the post from the in-memory collection
+                _allPosts.Remove(post);
+                DisplayedPosts.Remove(post);
+
+                // Delete the post from the database
+                await App.STDB.DeletePostAsync(post);
+
+                // Refresh the displayed posts
+                FilterPosts();
+            }
+        }
+
+        private async Task NavigateToHome()
+        {
+            // Navigate to the HomePage
+            await Shell.Current.GoToAsync("//HomePage");
+        }
+
+        public async Task LoadPostsFromDatabaseAsync()
+        {
+            // Clear the current posts
+            _allPosts.Clear();
+
+            // Load posts from the database
+            var dbPosts = await App.STDB.GetAllPostsAsync();
+
+            // Add the posts to the in-memory collection
+            foreach (var post in dbPosts)
+            {
+                _allPosts.Add(post);
+            }
+        }
+
+        public void FilterPosts()
         {
             DisplayedPosts.Clear();
             var currentUser = App.CurrentUser?.Username ?? "Unknown";
@@ -133,9 +174,7 @@ namespace A_Connect.ViewModels
             if (!string.IsNullOrWhiteSpace(SearchText))
             {
                 filtered = filtered.Where(p =>
-                    p.CourseCode.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                    p.TradeOffer.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                    p.TradeRequest.Contains(SearchText, StringComparison.OrdinalIgnoreCase));
+                    p.CourseCode.Contains(SearchText, StringComparison.OrdinalIgnoreCase));
             }
 
             // 4) Update DisplayedPosts
