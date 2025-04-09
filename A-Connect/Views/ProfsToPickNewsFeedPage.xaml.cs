@@ -25,5 +25,11 @@ namespace A_Connect.Views
             }
         }
 
+        private async void OnHomeButtonClicked(object sender, EventArgs e)
+        {
+            // Navigate to the HomePage
+            await Shell.Current.GoToAsync("//HomePage");
+        }
+
     }
 }

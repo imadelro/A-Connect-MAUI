@@ -39,7 +39,8 @@
                            VerticalOptions="Center"
                            FontSize="14"
                            FontFamily="Inter-SemiBold"
-                           Margin="0"/>
+                           Margin="0"
+                           WidthRequest="300"/>
                 </HorizontalStackLayout>
             </Frame>
 
@@ -124,13 +125,31 @@
                                     </Frame.GestureRecognizers>
 
                                     <VerticalStackLayout>
+                                        <Label Text="{Binding CourseCodes, StringFormat='{0}'}"
+       TextColor="White"
+       FontSize="14"
+       FontFamily="Inter-SemiBold"
+       VerticalOptions="Center"/>
                                         <Label Text="{Binding ProfessorName}"
                                                TextColor="White"
                                                FontSize="18"
                                                FontFamily="Inter-Black"
                                                VerticalOptions="Center"/>
 
-                                        <!-- Optional average rating here -->
+                                        <!-- Average Rating as Stars -->
+                                        <HorizontalStackLayout Spacing="2">
+                                            <Image Source="{Binding Star1}" WidthRequest="20" HeightRequest="20"/>
+                                            <Image Source="{Binding Star2}" WidthRequest="20" HeightRequest="20"/>
+                                            <Image Source="{Binding Star3}" WidthRequest="20" HeightRequest="20"/>
+                                            <Image Source="{Binding Star4}" WidthRequest="20" HeightRequest="20"/>
+                                            <Image Source="{Binding Star5}" WidthRequest="20" HeightRequest="20"/>
+                                            <Label Text="{Binding AverageRating, StringFormat='{0} stars'}"
+       TextColor="White"
+       FontSize="14"
+       FontFamily="Inter-Regular"
+       VerticalOptions="Center"
+       Margin="5,0,0,0"/>
+                                        </HorizontalStackLayout>
 
                                         <Label Text="{Binding ReviewCount, StringFormat='({0} Reviews)'}"
                                                TextColor="White"
@@ -145,36 +164,96 @@
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate>
                                             <Frame BackgroundColor="White"
-                                                   CornerRadius="10"
-                                                   Padding="10"
-                                                   Margin="10,0,10,10">
-                                                <VerticalStackLayout>
+                   BorderColor="{StaticResource Blue}"
+                   CornerRadius="10"
+                   Padding="10"
+                   Margin="10,10,10,0">
+                                                <Grid RowDefinitions="Auto,Auto,Auto,Auto, Auto" ColumnDefinitions="*,*">
+                                                    <!-- Star Rating (Upper Left) -->
+                                                    <HorizontalStackLayout Grid.Row="0" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="End" Spacing="2">
+                                                        <Image Source="{Binding Star1}" WidthRequest="15" HeightRequest="15"/>
+                                                        <Image Source="{Binding Star2}" WidthRequest="15" HeightRequest="15"/>
+                                                        <Image Source="{Binding Star3}" WidthRequest="15" HeightRequest="15"/>
+                                                        <Image Source="{Binding Star4}" WidthRequest="15" HeightRequest="15"/>
+                                                        <Image Source="{Binding Star5}" WidthRequest="15" HeightRequest="15"/>
+                                                    </HorizontalStackLayout>
+
+                                                    <!-- Course Code (Upper Right) -->
                                                     <Label Text="{Binding CourseCode}"
-                                                           TextColor="Black"
-                                                           FontSize="14"
-                                                           FontFamily="Inter-Regular"/>
+                           Grid.Row="0" Grid.Column="0"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Start"
+                           FontSize="14"
+                           FontFamily="Inter-SemiBold"
+                           TextColor="Black"/>
 
-                                                    <Label Text="{Binding Content}"
-                                                           TextColor="Black"
-                                                           FontSize="12"
-                                                           MaxLines="2"
-                                                           FontFamily="Inter-Light"/>
+                                                    <!-- Class Taken On (Below Course Code) -->
+                                                    <Label Text="{Binding SemesterAndYear, StringFormat='Class taken on: {0}'}"
+                           Grid.Row="1" Grid.ColumnSpan="2"
+                           FontSize="10"
+                           FontFamily="Inter-Regular"
+                           TextColor="Gray"
+                           Margin="0,5,0,0"/>
 
-                                                    <Label Text="{Binding DatePosted, StringFormat='Date: {0:MMMM dd, yyyy}'}"
-                                                           TextColor="Gray"
-                                                           FontSize="10"
+                                                    <!-- Review Description (Main Text) -->
+                                                    <Label Text="{Binding ReviewText}"
+                           Grid.Row="2" Grid.ColumnSpan="2"
+                           FontSize="14"
+                           FontFamily="Inter-Light"
+                           TextColor="Black"
+                           Margin="10,10,10,10"/>
+
+                                                    <!-- Conditional "Posted by" or "Delete Button" (Bottom Left) -->
+                                                    <Label Text="{Binding AuthorID, StringFormat='Posted by: {0}'}"
+       Grid.Row="3" Grid.Column="1"
+       FontSize="10"
+       FontFamily="Inter-Regular"
+       TextColor="Gray"
                                                            HorizontalOptions="End"
-                                                           FontFamily="Inter-Light"/>
-
-                                                    <!-- Delete Button -->
+       VerticalOptions="End">
+                                                        <Label.Triggers>
+                                                            <DataTrigger TargetType="Label" Binding="{Binding Source={RelativeSource AncestorType={x:Type local:ProfsToPickNewsFeedViewModel}}, Path=IsOwnPostsSelected}" Value="True">
+                                                                <Setter Property="IsVisible" Value="False" />
+                                                            </DataTrigger>
+                                                            <DataTrigger TargetType="Label" Binding="{Binding Source={RelativeSource AncestorType={x:Type local:ProfsToPickNewsFeedViewModel}}, Path=IsOwnPostsSelected}" Value="False">
+                                                                <Setter Property="IsVisible" Value="True" />
+                                                            </DataTrigger>
+                                                        </Label.Triggers>
+                                                    </Label>
                                                     <Button Text="Delete"
-                                                            TextColor="White"
-                                                            BackgroundColor="Red"
-                                                            Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProfsToPickNewsFeedViewModel}}, Path=DeleteCommand}"
-                                                            CommandParameter="{Binding .}"
-                                                            IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:ProfsToPickNewsFeedViewModel}}, Path=IsOwnPostsSelected}"
-                                                            Margin="0,5,0,0"/>
-                                                </VerticalStackLayout>
+        TextColor="White"
+        BackgroundColor="{StaticResource Red}"
+        Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProfsToPickNewsFeedViewModel}}, Path=DeleteCommand}"
+        CommandParameter="{Binding .}"
+        Grid.Row="3" Grid.Column="1"
+        FontSize="10"
+        FontFamily="Inter-SemiBold"
+        CornerRadius="20"
+        HorizontalOptions="End"
+        VerticalOptions="End"
+        Margin="0,0,0,0">
+                                                        <Button.Triggers>
+                                                            <DataTrigger TargetType="Button" Binding="{Binding Source={RelativeSource AncestorType={x:Type local:ProfsToPickNewsFeedViewModel}}, Path=IsOwnPostsSelected}" Value="True">
+                                                                <Setter Property="IsVisible" Value="True" />
+                                                            </DataTrigger>
+                                                            <DataTrigger TargetType="Button" Binding="{Binding Source={RelativeSource AncestorType={x:Type local:ProfsToPickNewsFeedViewModel}}, Path=IsOwnPostsSelected}" Value="False">
+                                                                <Setter Property="IsVisible" Value="False" />
+                                                            </DataTrigger>
+                                                        </Button.Triggers>
+                                                    </Button>
+
+                                                    <!-- Date Posted (Bottom Right) -->
+                                                    <Label Text="{Binding DatePosted, StringFormat='Date posted: {0:MMMM dd, yyyy}'}"
+                           Grid.Row="3" Grid.Column="0"
+                           FontSize="10"
+                           FontFamily="Inter-Regular"
+                           TextColor="Gray"
+                           HorizontalOptions="Start"
+                           VerticalOptions="End"/>
+                                                    
+
+                                                </Grid>
+                                                
                                             </Frame>
                                         </DataTemplate>
                                     </CollectionView.ItemTemplate>
@@ -210,10 +289,11 @@
                          VerticalOptions="Center"
                          WidthRequest="30" HeightRequest="30"/>
             <ImageButton Source="nav_home.png"
-                         Grid.Column="1"
-                         HorizontalOptions="Center"
-                         VerticalOptions="Center"
-                         WidthRequest="30" HeightRequest="30"/>
+             Grid.Column="1"
+             HorizontalOptions="Center"
+             VerticalOptions="Center"
+             WidthRequest="30" HeightRequest="30"
+             Clicked="OnHomeButtonClicked"/>
             <ImageButton Source="nav_profile.png"
                          Grid.Column="2"
                          HorizontalOptions="Center"
