@@ -10,7 +10,12 @@
     <ScrollView>
         <StackLayout Padding="20" Spacing="20">
             <Label Text="{Binding ListingTitle}" FontSize="24" FontAttributes="Bold" />
-            <Image Source="sample_item.png" HeightRequest="200" Aspect="AspectFill" />
+            <!-- Bind the Image Source to the ImagePath property -->
+            <Image Source="{Binding ImagePath}"
+       Aspect="AspectFit"
+       HorizontalOptions="Center"
+       VerticalOptions="Center">
+            </Image>
             <Label Text="{Binding Description}" FontSize="16" />
             <Label Text="{Binding Price, StringFormat='₱{0:F2}'}" FontSize="16" TextColor="Green"/>
             <Label Text="Condition:" FontAttributes="Bold"/>

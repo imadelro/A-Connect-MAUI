@@ -30,22 +30,17 @@ namespace A_Connect.Views
             await Shell.Current.GoToAsync(nameof(MarketplaceFormPage));
         }
 
-        private async void OnItemSelected(object sender, SelectionChangedEventArgs e)
+        async void OnListingTapped(object sender, TappedEventArgs e)
         {
-            if (e.CurrentSelection.Count == 0)
-                return;
+            if (e.Parameter is MarketplacePost post)
+            {
+                var navigationParameter = new Dictionary<string, object>
+        {
+            { "SelectedPost", post }
+        };
 
-            var selectedPost = e.CurrentSelection.FirstOrDefault() as MarketplacePost;
-
-            if (selectedPost == null)
-                return;
-
-            Debug.WriteLine($"Selected item: {selectedPost.ListingTitle}");
-
-            await Shell.Current.GoToAsync($"{nameof(MarketplaceListingDetailPage)}?ListingId={selectedPost.Id}");
-
-            // Reset selection so same item can be tapped again
-            ((CollectionView)sender).SelectedItem = null;
+                await Shell.Current.GoToAsync($"{nameof(MarketplaceListingDetailPage)}", navigationParameter);
+            }
         }
     }
 }
