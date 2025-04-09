@@ -74,11 +74,15 @@
                                            FontFamily="Inter-Black"
                                            TextColor="Black"/>
 
-                                    <!-- Image Placeholder -->
-                                    <Image Source="sample_item.png"
-                                           HeightRequest="150"
-                                           Aspect="AspectFill"
-                                           Margin="0,5"/>
+                                    <!-- Image with improved display -->
+                                    <Frame BackgroundColor="WhiteSmoke" Padding="0" IsClippedToBounds="True">
+                                        <Grid HeightRequest="200">
+                                            <Image Source="{Binding ImagePath}"
+                                                   Aspect="AspectFit"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"/>
+                                        </Grid>
+                                    </Frame>
 
                                     <!-- Tags: Buyer/Seller + Condition -->
                                     <HorizontalStackLayout Spacing="10">

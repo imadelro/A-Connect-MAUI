@@ -7,32 +7,19 @@ namespace A_Connect.Views
 {
     public partial class MarketplaceFormPage : ContentPage
     {
+        private MarketplaceFormViewModel _viewModel;
+
         public MarketplaceFormPage(MarketplaceDatabase database)
         {
             InitializeComponent();
-            BindingContext = new MarketplaceFormViewModel(database, App.CurrentUser.Username);
+            _viewModel = new MarketplaceFormViewModel(database, App.CurrentUser.Username);
+            BindingContext = _viewModel;
         }
 
-        private async void OnSubmitClicked(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            var viewModel = BindingContext as MarketplaceFormViewModel;
-            if (viewModel != null)
-            {
-                // Bind the form inputs to the ViewModel properties
-                viewModel.ListingTitle = ListingTitleEntry.Text;
-                viewModel.Category = CategoryPicker.SelectedItem?.ToString();
-                viewModel.Condition = ConditionPicker.SelectedItem?.ToString();
-                viewModel.ContactDetails = ContactDetailsEntry.Text;
-                viewModel.Description = AdditionalInfoEditor.Text;
-
-                // Call the SubmitListing method
-                await viewModel.SubmitListing();
-            }
-            else
-            {
-                await DisplayAlert("Error", "There was an issue with your submission.", "OK");
-            }
+            base.OnAppearing();
+            // Initialize the view model here if needed
         }
-
     }
 }

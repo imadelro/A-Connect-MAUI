@@ -29,34 +29,40 @@
 
                         <!-- Image Upload Section -->
                         <Frame BackgroundColor="LightGray" CornerRadius="15" Padding="10">
-                            <Frame.GestureRecognizers>
-                               <!-- <TapGestureRecognizer Tapped="OnUploadImageTapped"/> -->
-                            </Frame.GestureRecognizers>
-
                             <VerticalStackLayout Spacing="10">
-                                <CollectionView x:Name="ImageCollectionView"
-                                                ItemsSource="{Binding UploadedImages}"
-                                                HeightRequest="200"
-                                                HorizontalScrollBarVisibility="Always">
-                                    <CollectionView.ItemsLayout>
-                                        <LinearItemsLayout Orientation="Horizontal"/>
-                                    </CollectionView.ItemsLayout>
-                                    <CollectionView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Image Source="{Binding .}"
-                                                   HeightRequest="200"
-                                                   WidthRequest="200"
-                                                   Aspect="AspectFill"/>
-                                        </DataTemplate>
-                                    </CollectionView.ItemTemplate>
-                                </CollectionView>
+                                <!-- Image Preview -->
+                                <Frame HeightRequest="200" IsVisible="{Binding HasSelectedImage}" Padding="0" BackgroundColor="White">
+                                    <Image Source="{Binding SelectedImagePath}"
+                                           HeightRequest="200"
+                                           Aspect="AspectFill"/>
+                                </Frame>
 
-                                <Button Text="Upload Image"
-                                        BackgroundColor="{StaticResource Yellow}"
-                                        TextColor="Black"
-                                        FontFamily="Inter-Black"
-                                        CornerRadius="25"
-                                        HorizontalOptions="Center"/>
+                                <!-- Placeholder when no image is selected -->
+                                <!--<Frame HeightRequest="200" IsVisible="{Binding HasSelectedImage, Converter={StaticResource InvertedBoolConverter}}" 
+                                       BackgroundColor="White" Padding="20">
+                                    <Label Text="No image selected" 
+                                           HorizontalOptions="Center" 
+                                           VerticalOptions="Center"
+                                           TextColor="Gray"/>
+                                </Frame>-->
+
+                                <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                                    <Button Text="Upload Image"
+                                            Command="{Binding UploadImageCommand}"
+                                            BackgroundColor="{StaticResource Yellow}"
+                                            TextColor="Black"
+                                            FontFamily="Inter-Black"
+                                            CornerRadius="25"
+                                            HorizontalOptions="Center"/>
+
+                                    <Button Text="Take Photo"
+                                            Command="{Binding TakePhotoCommand}"
+                                            BackgroundColor="{StaticResource Yellow}"
+                                            TextColor="Black"
+                                            FontFamily="Inter-Black"
+                                            CornerRadius="25"
+                                            HorizontalOptions="Center"/>
+                                </HorizontalStackLayout>
                             </VerticalStackLayout>
                         </Frame>
 
@@ -75,6 +81,7 @@
                             <Frame BackgroundColor="White" Padding="20,0">
                                 <Entry x:Name="ListingTitleEntry"
                                        Placeholder="Name of your listing"
+                                       Text="{Binding ListingTitle}"
                                        FontFamily="Inter-Light"/>
                             </Frame>
                         </HorizontalStackLayout>
@@ -84,10 +91,11 @@
                             <Label Text="Price:" 
                                    TextColor="White"
                                    FontFamily="Inter-Black"
-                                   VerticalTextAlignment="Center"/>    
+                                   VerticalTextAlignment="Center"/>
                             <Frame BackgroundColor="White" Padding="20,0">
                                 <Entry x:Name="PriceEntry"
                                        Placeholder="Price of your listing"
+                                       Text="{Binding Price}"
                                        FontFamily="Inter-Light"/>
                             </Frame>
                         </HorizontalStackLayout>
@@ -101,6 +109,7 @@
                             <Frame BackgroundColor="White" Padding="20,0">
                                 <Picker x:Name="CategoryPicker"
                                         Title="Select Category"
+                                        SelectedItem="{Binding Category}"
                                         FontFamily="Inter-Light">
                                     <Picker.Items>
                                         <x:String>Buyer</x:String>
@@ -119,6 +128,7 @@
                             <Frame BackgroundColor="White" Padding="20,0">
                                 <Picker x:Name="ConditionPicker"
                                         Title="Select Condition"
+                                        SelectedItem="{Binding Condition}"
                                         FontFamily="Inter-Light">
                                     <Picker.Items>
                                         <x:String>Brand New</x:String>
@@ -138,6 +148,7 @@
                             <Frame BackgroundColor="White" Padding="20,0">
                                 <Entry x:Name="ContactDetailsEntry"
                                        Placeholder="Email or phone"
+                                       Text="{Binding ContactDetails}"
                                        FontFamily="Inter-Light"/>
                             </Frame>
                         </HorizontalStackLayout>
@@ -149,6 +160,7 @@
                         <Frame BackgroundColor="White" Padding="20,0">
                             <Editor x:Name="AdditionalInfoEditor"
                                     AutoSize="TextChanges"
+                                    Text="{Binding Description}"
                                     Placeholder="Describe what you are selling and include any pertinent details!"
                                     FontFamily="Inter-Light"/>
                         </Frame>
@@ -157,14 +169,13 @@
 
                 <!-- Submit Button -->
                 <Button Text="Submit"
-                        x:Name="SubmitButton"
+                        Command="{Binding SubmitCommand}"
                         BackgroundColor="{StaticResource Yellow}"
                         TextColor="Black"
                         FontFamily="Inter-Black"
                         CornerRadius="25"
                         HorizontalOptions="Center"
-                        Padding="40,10"
-                        Clicked="OnSubmitClicked"/>
+                        Padding="40,10"/>
             </VerticalStackLayout>
         </ScrollView>
     </Grid>

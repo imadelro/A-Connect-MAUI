@@ -1,6 +1,8 @@
 ﻿using SQLite;
 using A_Connect.Models;
 using System.Diagnostics;
+using System.IO;
+using System;
 
 namespace A_Connect.Services
 {
@@ -22,6 +24,11 @@ namespace A_Connect.Services
             return posts;
         }
 
+        public async Task<MarketplacePost> GetPostAsync(int id)
+        {
+            return await _database.Table<MarketplacePost>().Where(p => p.Id == id).FirstOrDefaultAsync();
+        }
+
         public async Task<int> SavePostAsync(MarketplacePost post)
         {
             if (post.Id != 0)
@@ -36,9 +43,23 @@ namespace A_Connect.Services
             }
         }
 
-        public Task<int> DeletePostAsync(MarketplacePost post)
+        public async Task<int> DeletePostAsync(MarketplacePost post)
         {
-            return _database.DeleteAsync(post);
+            // Delete the associated image if it exists
+            if (!string.IsNullOrEmpty(post.ImagePath) && File.Exists(post.ImagePath))
+            {
+                try
+                {
+                    Debug.WriteLine($"Deleting image file: {post.ImagePath}");
+                    File.Delete(post.ImagePath);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Failed to delete image file: {ex.Message}");
+                }
+            }
+
+            return await _database.DeleteAsync(post);
         }
     }
 }

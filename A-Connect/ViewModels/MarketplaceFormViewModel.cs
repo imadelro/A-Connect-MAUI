@@ -4,6 +4,8 @@ using System.Windows.Input;
 using A_Connect.Models;
 using A_Connect.Services;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using Microsoft.Maui.Controls;
 
 namespace A_Connect.ViewModels
 {
@@ -12,15 +14,31 @@ namespace A_Connect.ViewModels
         private readonly MarketplaceDatabase _database;
         private readonly string _currentUser;
 
-        public ObservableCollection<string> UploadedImages { get; set; } = new ObservableCollection<string>();
+        private string _selectedImagePath;
+        public string SelectedImagePath
+        {
+            get => _selectedImagePath;
+            set
+            {
+                _selectedImagePath = value;
+                OnPropertyChanged(nameof(SelectedImagePath));
+                OnPropertyChanged(nameof(HasSelectedImage));
+            }
+        }
+
+        public bool HasSelectedImage => !string.IsNullOrEmpty(SelectedImagePath);
 
         public ICommand SubmitCommand { get; }
+        public ICommand UploadImageCommand { get; }
+        public ICommand TakePhotoCommand { get; }
 
         public MarketplaceFormViewModel(MarketplaceDatabase database, string currentUser)
         {
             _database = database;
             _currentUser = currentUser;
             SubmitCommand = new Command(async () => await SubmitListing());
+            UploadImageCommand = new Command(async () => await UploadImage());
+            TakePhotoCommand = new Command(async () => await TakePhoto());
         }
 
         public string ListingTitle { get; set; }
@@ -28,8 +46,28 @@ namespace A_Connect.ViewModels
         public string Condition { get; set; }
         public string ContactDetails { get; set; }
         public string Description { get; set; }
+        public string Price { get; set; }
 
-        // The SubmitListing method is the one that handles the actual posting
+        private async Task UploadImage()
+        {
+            string imagePath = await ImageService.PickAndSaveImageAsync();
+            if (!string.IsNullOrEmpty(imagePath))
+            {
+                SelectedImagePath = imagePath;
+                Debug.WriteLine($"Image selected: {imagePath}");
+            }
+        }
+
+        private async Task TakePhoto()
+        {
+            var photo = await ImageService.TakePhotoAsync();
+            if (photo != null)
+            {
+                SelectedImagePath = photo.FullPath;
+                Debug.WriteLine($"Photo taken: {photo.FullPath}");
+            }
+        }
+
         public async Task SubmitListing()
         {
             // Validate the fields
@@ -48,7 +86,8 @@ namespace A_Connect.ViewModels
                 PosterName = _currentUser,
                 PosterContact = ContactDetails.Trim(),
                 Description = Description?.Trim(),
-                DatePosted = DateTime.Now
+                DatePosted = DateTime.Now,
+                ImagePath = SelectedImagePath  // Store the image path
             };
 
             // Save the post to the database

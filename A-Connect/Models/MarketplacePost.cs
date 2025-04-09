@@ -14,7 +14,7 @@ namespace A_Connect.Models
         public string PosterContact { get; set; }
         public string Description { get; set; }
         public DateTime DatePosted { get; set; }
+        public string ImagePath { get; set; } // Store the path to the saved image
         public bool IsOwnedByCurrentUser => PosterName == App.CurrentUser.Username;
     }
 }
-
