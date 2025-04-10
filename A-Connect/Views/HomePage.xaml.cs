@@ -37,5 +37,22 @@ namespace A_Connect.Views
             await Shell.Current.GoToAsync(nameof(MarketplaceNewsFeedPage));
         }
 
+        private async void OnLogoutClicked(object sender, EventArgs e)
+        {
+            bool confirm = await DisplayAlert("Logout", "Are you sure you want to logout?", "Yes", "No");
+
+            if (confirm)
+            {
+                // Clear user session data
+                App.CurrentUser = null;
+
+                // Remove any stored credentials or tokens
+                Preferences.Remove("Username");
+                Preferences.Remove("IsLoggedIn");
+
+                // Navigate back to login page
+                await Shell.Current.GoToAsync("LoginPage");
+            }
+        }
     }
 }
