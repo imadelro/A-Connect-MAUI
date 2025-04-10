@@ -62,7 +62,7 @@
                         <Grid ColumnDefinitions="Auto,*" HorizontalOptions="Fill">
                             <Label Text="Semester Taken:" TextColor="White" FontFamily="Inter-Black" VerticalOptions="Center" Grid.Column="0" Margin="10"/>
                             <Frame BackgroundColor="White" Padding="0" HorizontalOptions="Fill" Grid.Column="1">
-                                <Picker ItemsSource="{Binding SemesterOptions}" SelectedItem="{Binding SemesterTaken}" FontFamily="Inter-Light" BackgroundColor="White" HorizontalOptions="Fill" WidthRequest="150"/>
+                                <Picker Title="Select Sem"  ItemsSource="{Binding SemesterOptions}" SelectedItem="{Binding SemesterTaken}" FontFamily="Inter-Light" BackgroundColor="White" HorizontalOptions="Fill" WidthRequest="150"/>
                             </Frame>
                         </Grid>
 
@@ -70,7 +70,7 @@
                         <Grid ColumnDefinitions="Auto,*" HorizontalOptions="Fill">
                             <Label Text="School Year:" TextColor="White" FontFamily="Inter-Black" VerticalOptions="Center" Grid.Column="0" Margin="10"/>
                             <Frame BackgroundColor="White" Padding="0" HorizontalOptions="Fill" Grid.Column="1">
-                                <Picker ItemsSource="{Binding SchoolYearOptions}" SelectedItem="{Binding SchoolYear}" FontFamily="Inter-Light" BackgroundColor="White" HorizontalOptions="Fill" WidthRequest="200"/>
+                                <Picker Title="Select Year" ItemsSource="{Binding SchoolYearOptions}" SelectedItem="{Binding SchoolYear}" FontFamily="Inter-Light" BackgroundColor="White" HorizontalOptions="Fill" WidthRequest="200"/>
                             </Frame>
                         </Grid>
 

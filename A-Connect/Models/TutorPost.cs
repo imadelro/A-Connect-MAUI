@@ -22,5 +22,6 @@ namespace A_Connect.Models
 
         // New: Date the post was created
         public DateTime Date { get; set; }
+        public bool IsOwnPost { get; set; }
     }
 }

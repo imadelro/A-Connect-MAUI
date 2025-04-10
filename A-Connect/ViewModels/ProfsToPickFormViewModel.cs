@@ -17,7 +17,7 @@ namespace A_Connect.ViewModels
         public string FirstName { get; set; }
         public string CourseCode { get; set; }
         public string ReviewText { get; set; }
-        private string _semesterTaken = "1st Sem";
+        private string _semesterTaken;
         public string SemesterTaken
         {
             get => _semesterTaken;
@@ -30,7 +30,7 @@ namespace A_Connect.ViewModels
                 }
             }
         }
-        private string _schoolYear = "2024-2025";
+        private string _schoolYear;
         public string SchoolYear
         {
             get => _schoolYear;
