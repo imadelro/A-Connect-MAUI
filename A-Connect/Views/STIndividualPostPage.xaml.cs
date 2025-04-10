@@ -8,7 +8,7 @@ namespace A_Connect.Views
     {
         public IndividualPostPage()
         {
-            InitializeComponent();
+            // InitializeComponent();
             BindingContext = new STIndividualPostViewModel();
         }
 
