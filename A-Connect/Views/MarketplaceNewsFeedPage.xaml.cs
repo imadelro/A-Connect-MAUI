@@ -10,7 +10,7 @@ namespace A_Connect.Views
     {
         public MarketplaceNewsFeedPage()
         {
-            InitializeComponent();
+
         }
 
         private async void OnPostListingClicked(object sender, EventArgs e)

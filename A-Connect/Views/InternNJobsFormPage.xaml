@@ -38,7 +38,7 @@
                                    FontFamily="Inter-Black"
                                    VerticalTextAlignment="Center"/>
                             <Frame BackgroundColor="White" Padding="20,0">
-                                <Entry x:Name="courseCodeEntry"
+                                <Entry Text="{Binding Title}"
                                        Placeholder=""
                                        FontFamily="Inter-Light"/>
                             </Frame>
@@ -52,6 +52,7 @@
                                    VerticalTextAlignment="Center"/>
                             <Frame BackgroundColor="White" Padding="20,0">
                                 <Picker x:Name="typePicker"
+                                        SelectedItem="{Binding Type}"
                                         FontFamily="Inter-Light">
                                     <Picker.ItemsSource>
                                         <x:Array Type="{x:Type x:String}">
@@ -71,20 +72,20 @@
                                    FontFamily="Inter-Black"
                                    VerticalTextAlignment="Center"/>
                             <Frame BackgroundColor="White" Padding="20,0">
-                                <Entry x:Name="position"
+                                <Entry Text="{Binding Position}"
                                        Placeholder="Job Position"
                                        FontFamily="Inter-Light"/>
                             </Frame>
                         </HorizontalStackLayout>
 
                         <HorizontalStackLayout Spacing="10">
-                            <Label Text="Provider:" 
+                            <Label Text="Company:" 
                                    TextColor="White"
                                    FontFamily="Inter-Black"
                                    VerticalTextAlignment="Center"/>
                             <Frame BackgroundColor="White" Padding="20,0">
-                                <Entry x:Name="contactEntry"
-                                       Placeholder="Company"
+                                <Entry Text="{Binding Company}"
+                                       Placeholder="Company Name"
                                        FontFamily="Inter-Light"/>
                             </Frame>
                         </HorizontalStackLayout>
@@ -93,7 +94,7 @@
                                TextColor="White"
                                FontFamily="Inter-Black"/>
                         <Frame BackgroundColor="White" Padding="20,0">
-                            <Editor x:Name="PostURL"
+                            <Editor Text="{Binding PostURL}"
                                     AutoSize="TextChanges"
                                     Placeholder="https://URLtoInternship/JobOpening"
                                     FontFamily="Inter-Light"/>
@@ -104,7 +105,7 @@
                                TextColor="White"
                                FontFamily="Inter-Black"/>
                         <Frame BackgroundColor="White" Padding="20,0">
-                            <Editor x:Name="additionalInfoEditor"
+                            <Editor Text="{Binding Caption}"
                                     AutoSize="TextChanges"
                                     Placeholder="Work description, work type, etc."
                                     FontFamily="Inter-Light"/>
@@ -114,8 +115,7 @@
 
                 <!-- Submit Button -->
                 <Button Text="Submit"
-                        x:Name="submitButton"
-                        Clicked="OnSubmitClicked"
+                        Command="{Binding SubmitOpportunityCommand}"
                         BackgroundColor="{StaticResource Yellow}"
                         TextColor="Black"
                         FontFamily="Inter-Black"
