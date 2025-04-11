@@ -1,7 +1,8 @@
-<ContentPage
+﻿<ContentPage
     x:Class="A_Connect.Views.MarketplaceNewsFeedPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:A_Connect.Models"
     Title="Marketplace"
     BackgroundColor="White">
 
@@ -53,68 +54,86 @@
                            TextColor="Gray"/>
                 </HorizontalStackLayout>
 
-                <!-- Sample Item Listing -->
-                <Frame BackgroundColor="White"
-                       CornerRadius="10"
-                       Padding="15"
-                       HasShadow="True">
-                    <VerticalStackLayout Spacing="10">
+                <!-- Items Listing -->
+                <CollectionView x:Name="ListingsCollectionView"
+                                ItemsSource="{Binding Items}"
+                                SelectionMode="Single">
+                    <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:MarketplacePost">
+                        <Frame BackgroundColor="White"
+                                   CornerRadius="10"
+                                   Padding="15"
+                                   HasShadow="True"
+                                   Margin="0,0,0,20">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnListingTapped" CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+                            <VerticalStackLayout Spacing="10">
 
-                        <!-- Title -->
-                        <Label Text="iPhone 13 for Sale"
-                               FontSize="18"
-                               FontFamily="Inter-Black"
-                               TextColor="Black"/>
+                                <!-- Title -->
+                                <Label Text="{Binding ListingTitle}"
+                                           FontSize="18"
+                                           FontFamily="Inter-Black"
+                                           TextColor="Black"/>
 
-                        <!-- Image Placeholder -->
-                        <Image Source="sample_item.png"
-                               HeightRequest="150"
-                               Aspect="AspectFill"
-                               Margin="0,5"/>
+                                <!-- Image with improved display and tap gesture -->
+                                <Frame BackgroundColor="WhiteSmoke" Padding="0" IsClippedToBounds="True">
+                                    <Grid HeightRequest="200">
+                                            <Image Source="{Binding ImagePath}"
+                                                   Aspect="AspectFit"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center">
+                                            </Image>
+                                    </Grid>
+                                </Frame>
 
-                        <!-- Tags: Buyer/Seller + Condition -->
-                        <HorizontalStackLayout Spacing="10">
-                            <Frame BackgroundColor="#d1ecf1"
-                                   Padding="5,2"
-                                   CornerRadius="10">
-                                <Label Text="Seller"
-                                       TextColor="#0c5460"
-                                       FontSize="12"
-                                       FontFamily="Inter-SemiBold"/>
-                            </Frame>
-                            <Frame BackgroundColor="#d4edda"
-                                   Padding="5,2"
-                                   CornerRadius="10">
-                                <Label Text="Lightly Used"
-                                       TextColor="#155724"
-                                       FontSize="12"
-                                       FontFamily="Inter-SemiBold"/>
-                            </Frame>
-                        </HorizontalStackLayout>
+                                <!-- Tags: Buyer/Seller + Condition -->
+                                <HorizontalStackLayout Spacing="10">
+                                    <Frame BackgroundColor="#d1ecf1"
+                                               Padding="5,2"
+                                               CornerRadius="10">
+                                        <Label Text="{Binding Category}"
+                                                   TextColor="#0c5460"
+                                                   FontSize="12"
+                                                   FontFamily="Inter-SemiBold"/>
+                                    </Frame>
+                                    <Frame BackgroundColor="#d4edda"
+                                               Padding="5,2"
+                                               CornerRadius="10">
+                                        <Label Text="{Binding Condition}"
+                                                   TextColor="#155724"
+                                                   FontSize="12"
+                                                   FontFamily="Inter-SemiBold"/>
+                                    </Frame>
+                                </HorizontalStackLayout>
 
-                        <!-- Description -->
-                        <Label Text="Selling my iPhone 13. Lightly used, no scratches. Includes original box and charger."
-                               FontSize="13"
-                               FontFamily="Inter-Regular"
-                               TextColor="Black"/>
+                                <!-- Description -->
+                                <Label Text="{Binding Description}"
+                                           FontSize="13"
+                                           FontFamily="Inter-Regular"
+                                           TextColor="Black"/>
 
-                        <!-- Contact Info -->
-                        <Label Text="Contact: 0917-123-4567"
-                               FontSize="12"
-                               TextColor="Gray"
-                               FontFamily="Inter-Light"/>
+                                <!-- Contact Info -->
+                                <Label Text="{Binding PosterContact}"
+                                           FontSize="12"
+                                           TextColor="Gray"
+                                           FontFamily="Inter-Light"/>
 
-                        <!-- Delete Button (if owned) -->
-                        <Button Text="Delete"
-                                TextColor="White"
-                                BackgroundColor="Red"
-                                Margin="0,5,0,0"
-                                CornerRadius="10"
-                                FontSize="13"/>
-                    </VerticalStackLayout>
-                </Frame>
-
-                <!-- Add more mock items below as needed -->
+                                <!-- Delete Button (if owned) -->
+                                <Button Text="Delete"
+                                            TextColor="White"
+                                            BackgroundColor="Red"
+                                            Margin="0,5,0,0"
+                                            CornerRadius="10"
+                                            FontSize="13"
+                                            IsVisible="{Binding IsOwnedByCurrentUser}"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteCommand}"
+                                            CommandParameter="{Binding .}"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
                 <!-- Post Button -->
                 <Button Text="Post an Item +"
@@ -124,7 +143,7 @@
                         CornerRadius="25"
                         HorizontalOptions="Center"
                         Padding="10,5"
-			            Clicked="OnPostListingClicked"/>
+                        Clicked="OnPostListingClicked"/>
             </StackLayout>
         </ScrollView>
 

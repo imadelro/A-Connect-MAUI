@@ -115,7 +115,6 @@
                 <!-- Submit Button -->
                 <Button Text="Submit"
                         x:Name="submitButton"
-                        Clicked="OnSubmitClicked"
                         BackgroundColor="{StaticResource Yellow}"
                         TextColor="Black"
                         FontFamily="Inter-Black"

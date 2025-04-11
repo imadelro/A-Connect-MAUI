@@ -125,7 +125,7 @@
                     CornerRadius="25"
                     HorizontalOptions="Center"
                     Padding="10,5"
-                    Clicked="OnCreatePostClicked"/>
+                   />
         </StackLayout>
 
         <!-- 3. Bottom Nav Bar -->
