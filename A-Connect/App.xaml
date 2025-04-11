@@ -4,7 +4,9 @@
              xmlns:local="clr-namespace:A_Connect"
              x:Class="A_Connect.App">
     <Application.Resources>
+        
         <ResourceDictionary>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="A_Connect.Views.InternNJobsFormPage"
+             Title="Create a Post">
+<Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Blue Header -->
+        <Grid BackgroundColor="{StaticResource DarkBlue}" Padding="20,40,20,20">
+            <Label Text="Jobs and Internships"
+                   TextColor="{StaticResource Yellow}"
+                   FontFamily="Inter-Black"
+                   FontSize="24"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+        </Grid>
+
+        <!-- Main Content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20" Spacing="20">
+
+                <Frame BackgroundColor="#1F6FB7" CornerRadius="15" Padding="20">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="POST DETAILS" 
+                               FontSize="18" 
+                               FontFamily="Inter-Black" 
+                               TextColor="{StaticResource LightBlue}"
+                               HorizontalOptions="Center"/>
+
+                        <!-- Course Code -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="TITLE:" 
+                                   TextColor="White"
+                                   FontFamily="Inter-Black"
+                                   VerticalTextAlignment="Center"/>
+                            <Frame BackgroundColor="White" Padding="20,0">
+                                <Entry x:Name="courseCodeEntry"
+                                       Placeholder=""
+                                       FontFamily="Inter-Light"/>
+                            </Frame>
+                        </HorizontalStackLayout>
+
+                        <!-- Category Picker -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Type:" 
+                                   TextColor="White"
+                                   FontFamily="Inter-Black"
+                                   VerticalTextAlignment="Center"/>
+                            <Frame BackgroundColor="White" Padding="20,0">
+                                <Picker x:Name="typePicker"
+                                        FontFamily="Inter-Light">
+                                    <Picker.ItemsSource>
+                                        <x:Array Type="{x:Type x:String}">
+                                            <x:String>Internship</x:String>
+                                            <x:String>Job</x:String>
+                                            <x:String>Question</x:String>
+                                        </x:Array>
+                                        
+                                    </Picker.ItemsSource>
+                                </Picker>
+                            </Frame>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Position:" 
+                                   TextColor="White"
+                                   FontFamily="Inter-Black"
+                                   VerticalTextAlignment="Center"/>
+                            <Frame BackgroundColor="White" Padding="20,0">
+                                <Entry x:Name="position"
+                                       Placeholder="Job Position"
+                                       FontFamily="Inter-Light"/>
+                            </Frame>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Provider:" 
+                                   TextColor="White"
+                                   FontFamily="Inter-Black"
+                                   VerticalTextAlignment="Center"/>
+                            <Frame BackgroundColor="White" Padding="20,0">
+                                <Entry x:Name="contactEntry"
+                                       Placeholder="Company"
+                                       FontFamily="Inter-Light"/>
+                            </Frame>
+                        </HorizontalStackLayout>
+
+                        <Label Text="Post to share:" 
+                               TextColor="White"
+                               FontFamily="Inter-Black"/>
+                        <Frame BackgroundColor="White" Padding="20,0">
+                            <Editor x:Name="PostURL"
+                                    AutoSize="TextChanges"
+                                    Placeholder="https://URLtoInternship/JobOpening"
+                                    FontFamily="Inter-Light"/>
+                        </Frame>
+
+                        <!-- Additional Info -->
+                        <Label Text="Caption:" 
+                               TextColor="White"
+                               FontFamily="Inter-Black"/>
+                        <Frame BackgroundColor="White" Padding="20,0">
+                            <Editor x:Name="additionalInfoEditor"
+                                    AutoSize="TextChanges"
+                                    Placeholder="Work description, work type, etc."
+                                    FontFamily="Inter-Light"/>
+                        </Frame>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Submit Button -->
+                <Button Text="Submit"
+                        x:Name="submitButton"
+                        BackgroundColor="{StaticResource Yellow}"
+                        TextColor="Black"
+                        FontFamily="Inter-Black"
+                        CornerRadius="25"
+                        HorizontalOptions="Center"
+                        Padding="40,10"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

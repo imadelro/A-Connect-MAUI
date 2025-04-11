@@ -36,7 +36,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/> <!-- New Row for Fifth App -->
+                <RowDefinition Height="Auto"/>
+                <!-- Row for Fifth App and Logout -->
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -49,7 +50,6 @@
                    BackgroundColor="White"
                    WidthRequest="160" HeightRequest="160"
                    CornerRadius="15" HasShadow="True">
-
                 <Frame.Shadow>
                     <Shadow Brush="Black" 
                             Opacity="0.30" 
@@ -57,8 +57,8 @@
                 </Frame.Shadow>
                 <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
                     <ImageButton Source="ptp_icon.png"
-                     WidthRequest="100" HeightRequest="100"
-                     Clicked="OnProfsToPickClicked"/>
+                                 WidthRequest="100" HeightRequest="100"
+                                 Clicked="OnProfsToPickClicked"/>
                     <Label Text="Profs to Pick"
                            FontSize="16" FontFamily="Inter-Bold"
                            TextColor="Black"
@@ -68,22 +68,22 @@
 
             <!-- Second App (Schedule Trading) -->
             <Frame Grid.Row="0" Grid.Column="1"
-       BackgroundColor="White"
-       WidthRequest="160" HeightRequest="160"
-       CornerRadius="15" HasShadow="True">
+                   BackgroundColor="White"
+                   WidthRequest="160" HeightRequest="160"
+                   CornerRadius="15" HasShadow="True">
                 <Frame.Shadow>
                     <Shadow Brush="Black" Opacity="0.30" Radius="15"/>
                 </Frame.Shadow>
                 <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
                     <ImageButton Source="scheduletrading_icon.png"
-                     WidthRequest="100" HeightRequest="90"
-                     Margin="0,-10,0,0"
-                     Clicked="OnScheduleTradingClicked"/>
+                                 WidthRequest="100" HeightRequest="90"
+                                 Margin="0,-10,0,0"
+                                 Clicked="OnScheduleTradingClicked"/>
                     <Label Text="Schedule Trading"
-               FontSize="15" FontFamily="Inter-Bold"
-               TextColor="Black"
-               HorizontalOptions="Center"
-               HorizontalTextAlignment="Center"/>
+                           FontSize="15" FontFamily="Inter-Bold"
+                           TextColor="Black"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
             </Frame>
 
@@ -92,18 +92,16 @@
                    BackgroundColor="White"
                    WidthRequest="160" HeightRequest="160"
                    CornerRadius="15" HasShadow="True">
-
                 <Frame.Shadow>
                     <Shadow Brush="Black" 
                             Opacity="0.30" 
                             Radius="15"/>
                 </Frame.Shadow>
-
                 <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
                     <ImageButton Source="marketplace_icon.png"
                                  WidthRequest="100" HeightRequest="100"
                                  Clicked="OnMarketplaceClicked"/>
-                    <Label Text="Markeplace"
+                    <Label Text="Marketplace"
                            FontSize="16" FontFamily="Inter-Bold"
                            TextColor="Black"
                            HorizontalOptions="Center"/>
@@ -115,14 +113,11 @@
                    BackgroundColor="White"
                    WidthRequest="160" HeightRequest="160"
                    CornerRadius="15" HasShadow="True">
-
                 <Frame.Shadow>
                     <Shadow Brush="Black" 
                             Opacity="0.30" 
                             Radius="15"/>
                 </Frame.Shadow>
-
-
                 <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
                     <ImageButton Source="tutorfinder_icon.png"
                                  WidthRequest="100" HeightRequest="100"
@@ -134,24 +129,46 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- Fifth App (Centered in a new row) -->
-            <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+            <!-- Fifth App (Jobs and Internships) -->
+            <Frame Grid.Row="2" Grid.Column="0"
                    BackgroundColor="White"
                    WidthRequest="160" HeightRequest="160"
                    CornerRadius="15" HasShadow="True"
                    HorizontalOptions="Center">
-
                 <Frame.Shadow>
                     <Shadow Brush="Black" 
                             Opacity="0.30" 
                             Radius="15"/>
                 </Frame.Shadow>
-
                 <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
                     <ImageButton Source="jobsinternship_icon.png"
                                  WidthRequest="100" HeightRequest="90"
-                                 />
+                                 Clicked="OnInternNJobsClicked"/>
                     <Label Text="Jobs and Internships"
+                           FontSize="14" FontFamily="Inter-Bold"
+                           TextColor="Black"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           Margin="0,-10,0,0"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Logout Button -->
+            <Frame Grid.Row="2" Grid.Column="1"
+                   BackgroundColor="White"
+                   WidthRequest="160" HeightRequest="160"
+                   CornerRadius="15" HasShadow="True"
+                   HorizontalOptions="Center">
+                <Frame.Shadow>
+                    <Shadow Brush="Black" 
+                            Opacity="0.30" 
+                            Radius="15"/>
+                </Frame.Shadow>
+                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                    <ImageButton Source="logout_icon.png"
+                                 WidthRequest="100" HeightRequest="90"
+                                 Clicked="OnLogoutClicked"/>
+                    <Label Text="Logout"
                            FontSize="14" FontFamily="Inter-Bold"
                            TextColor="Black"
                            HorizontalOptions="Center"
