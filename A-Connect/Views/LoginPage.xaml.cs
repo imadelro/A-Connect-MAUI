@@ -29,6 +29,9 @@ namespace A_Connect.Views
             {
                 // Save the logged-in user globally.
                 App.CurrentUser = user;
+                // Store credentials or tokens
+                Preferences.Set("Username", username);
+                Preferences.Set("IsLoggedIn", true);
                 await DisplayAlert("Success", "Logged in successfully", "OK");
                 await Shell.Current.GoToAsync("//HomePage");
             }
