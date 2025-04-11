@@ -1,12 +1,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="A_Connect.Views.Homepage"
+             Shell.NavBarIsVisible="False"
              Title="Homepage">
 
     <Grid Padding="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <!-- Logo Frame -->
+            <RowDefinition Height="Auto"/>
+            <!-- Welcome Message -->
             <RowDefinition Height="*"/>
             <!-- Apps Grid -->
         </Grid.RowDefinitions>
@@ -28,11 +31,25 @@
             </StackLayout>
         </Frame>
 
+        <!-- Welcome Message -->
+        <Frame Grid.Row="1"
+               Margin="0,10,0,5"
+               BackgroundColor="{StaticResource DarkBlue}"
+               CornerRadius="10"
+               HasShadow="True">
+            <Label x:Name="WelcomeLabel"
+                   TextColor="White"
+                   FontSize="18"
+                   FontFamily="Inter-Bold"
+                   HorizontalOptions="Center"/>
+        </Frame>
+
         <!-- Apps Grid (Placed Below the Logo) -->
-        <Grid Grid.Row="1" Padding="20"
+        <Grid Grid.Row="2" Padding="20"
               HorizontalOptions="Center"
               RowSpacing="20"
               ColumnSpacing="40">
+            <!-- Rest of the apps grid content remains unchanged -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -155,27 +172,29 @@
 
             <!-- Logout Button -->
             <Frame Grid.Row="2" Grid.Column="1"
-                   BackgroundColor="White"
-                   WidthRequest="160" HeightRequest="160"
-                   CornerRadius="15" HasShadow="True"
-                   HorizontalOptions="Center">
+                BackgroundColor="{StaticResource Gray}"
+       WidthRequest="160" HeightRequest="160"
+       CornerRadius="15" HasShadow="True"
+       HorizontalOptions="Center">
                 <Frame.Shadow>
                     <Shadow Brush="Black" 
-                            Opacity="0.30" 
-                            Radius="15"/>
+                Opacity="0.40" 
+                Radius="15"/>
                 </Frame.Shadow>
                 <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
                     <ImageButton Source="logout_icon.png"
-                                 WidthRequest="100" HeightRequest="90"
-                                 Clicked="OnLogoutClicked"/>
+                     WidthRequest="100" HeightRequest="90"
+                     Clicked="OnLogoutClicked"
+                     BackgroundColor="Transparent"/>
                     <Label Text="Logout"
-                           FontSize="14" FontFamily="Inter-Bold"
-                           TextColor="Black"
-                           HorizontalOptions="Center"
-                           HorizontalTextAlignment="Center"
-                           Margin="0,-10,0,0"/>
+               FontSize="14" FontFamily="Inter-Bold"
+               TextColor="White"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Center"
+               Margin="0,-10,0,0"/>
                 </VerticalStackLayout>
             </Frame>
+
         </Grid>
     </Grid>
 </ContentPage>
