@@ -42,6 +42,10 @@ namespace A_Connect.Services
                 .Where(o => o.Position == position)
                 .ToListAsync();
         }
+        public async Task<Opportunity> GetOpportunityByIdAsync(int id)
+        {
+            return await _database.Table<Opportunity>().FirstOrDefaultAsync(o => o.Id == id);
+        }
 
         // Delete an opportunity
         public Task<int> DeleteOpportunityAsync(Opportunity opportunity)

@@ -32,7 +32,7 @@
                                HorizontalOptions="Center"/>
 
                         <!-- Course Code -->
-                        <HorizontalStackLayout Spacing="10">
+                        <StackLayout Spacing="10">
                             <Label Text="TITLE:" 
                                    TextColor="White"
                                    FontFamily="Inter-Black"
@@ -42,7 +42,7 @@
                                        Placeholder=""
                                        FontFamily="Inter-Light"/>
                             </Frame>
-                        </HorizontalStackLayout>
+                        </StackLayout>
 
                         <!-- Category Picker -->
                         <HorizontalStackLayout Spacing="10">
@@ -58,7 +58,6 @@
                                         <x:Array Type="{x:Type x:String}">
                                             <x:String>Internship</x:String>
                                             <x:String>Job</x:String>
-                                            <x:String>Question</x:String>
                                         </x:Array>
                                         
                                     </Picker.ItemsSource>
@@ -74,6 +73,18 @@
                             <Frame BackgroundColor="White" Padding="20,0">
                                 <Entry Text="{Binding Position}"
                                        Placeholder="Job Position"
+                                       FontFamily="Inter-Light"/>
+                            </Frame>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Location:" 
+                                   TextColor="White"
+                                   FontFamily="Inter-Black"
+                                   VerticalTextAlignment="Center"/>
+                            <Frame BackgroundColor="White" Padding="20,0">
+                                <Entry Text="{Binding Location}"
+                                       Placeholder="Job Location"
                                        FontFamily="Inter-Light"/>
                             </Frame>
                         </HorizontalStackLayout>

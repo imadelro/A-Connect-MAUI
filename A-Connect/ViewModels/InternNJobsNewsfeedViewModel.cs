@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows.Input;
 using A_Connect.Models;
 using A_Connect.Services;
@@ -22,13 +23,13 @@ namespace A_Connect.ViewModels
             set => SetProperty(ref _searchText, value);
         }
 
-        public bool AllPostsSelected
+        public bool allPostsSelected
         {
             get => _allPostsSelected;
             set => SetProperty(ref _allPostsSelected, value);
         }
 
-        public bool IsOwnPostsSelected
+        public bool isOwnPostsSelected
         {
             get => _isOwnPostsSelected;
             set => SetProperty(ref _isOwnPostsSelected, value);
@@ -37,6 +38,9 @@ namespace A_Connect.ViewModels
         public ICommand SwitchToAllPostsCommand { get; }
         public ICommand SwitchToOwnPostsCommand { get; }
         public ICommand SwitchToCreatePostCommand { get; }
+        public ICommand PostTappedCommand { get; }
+        public ICommand DeletePostCommand { get; }
+
 
         public InternNJobsNewsfeedViewModel()
         {
@@ -46,19 +50,46 @@ namespace A_Connect.ViewModels
             SwitchToAllPostsCommand = new Command(SwitchToAllPosts);
             SwitchToOwnPostsCommand = new Command(SwitchToOwnPosts);
             SwitchToCreatePostCommand = new Command(SwitchToCreatePost);
+            PostTappedCommand = new Command<Opportunity>(OnPostTapped);
+            DeletePostCommand = new Command<Opportunity>(async (opportunity) => await DeletePost(opportunity));
+
         }
 
         private void SwitchToAllPosts()
         {
-            AllPostsSelected = true;
-            IsOwnPostsSelected = false;
+            allPostsSelected = true;
+            isOwnPostsSelected = false;
+            UpdateDisplayedPosts();
         }
 
         private void SwitchToOwnPosts()
         {
-            AllPostsSelected = false;
-            IsOwnPostsSelected = true;
+            allPostsSelected = false;
+            isOwnPostsSelected = true;
+            UpdateDisplayedPosts();
         }
+
+        private ObservableCollection<Opportunity> _displayedPosts;
+        public ObservableCollection<Opportunity> DisplayedPosts
+        {
+            get => _displayedPosts;
+            set => SetProperty(ref _displayedPosts, value);
+        }
+
+        private void UpdateDisplayedPosts()
+        {
+            var CurrentUser = App.CurrentUser.Username;
+
+            if (_allPostsSelected)
+            {
+                DisplayedPosts = new ObservableCollection<Opportunity>(_opportunities.Where(o => o.PostedBy != CurrentUser));
+            }
+            else if (_isOwnPostsSelected)
+            {
+                DisplayedPosts = new ObservableCollection<Opportunity>(_opportunities.Where(o => o.PostedBy == CurrentUser));
+            }
+        }
+
 
         private async void SwitchToCreatePost()
         {
@@ -76,22 +107,30 @@ namespace A_Connect.ViewModels
         {
             var opportunities = await _database.GetAllOpportunitiesAsync(); // Fetch the updated opportunities list
 
-            if (opportunities.Count > 0)
-            {
-                // Print each opportunity's details (e.g., Title, Position, Company, etc.)
-                foreach (var opportunity in opportunities)
-                {
-                    Console.WriteLine($"Title: {opportunity.Title}, Position: {opportunity.Position}, Company: {opportunity.Company}, Caption: {opportunity.Caption}, Type: {opportunity.Type}, Post URL: {opportunity.PostURL}");
-                }
-            }
-            else
-            {
-                Console.WriteLine("No opportunities found in the database.");
-            }
-
             Opportunities = new ObservableCollection<Opportunity>(opportunities);
+            UpdateDisplayedPosts();
 
+        }
 
+        private async void OnPostTapped(Opportunity selectedPost)
+        {
+            if (selectedPost == null) return;
+
+            // Navigate to a detail page (you'll need to have this page created)
+            Console.WriteLine("PostTapped Working");
+            await Shell.Current.GoToAsync($"{nameof(InternNJobsIndivPage)}?PostId={selectedPost.Id}");
+        }
+
+        private async Task DeletePost(Opportunity post)
+        {
+            if (post == null) return;
+
+            bool confirm = await Application.Current.MainPage.DisplayAlert("Confirm Delete", "Are you sure you want to delete this post?", "Yes", "No");
+            if (confirm)
+            {
+                await _database.DeleteOpportunityAsync(post);
+                Opportunities.Remove(post);
+            }
         }
 
     }
