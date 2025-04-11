@@ -15,5 +15,21 @@ namespace A_Connect.Views
         {
             await Navigation.PushAsync(new ProfsToPickFormPage());
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (BindingContext is ProfsToPickNewsFeedViewModel vm)
+            {
+                vm.LoadReviewsCommand.Execute(null);
+            }
+        }
+
+        private async void OnHomeButtonClicked(object sender, EventArgs e)
+        {
+            // Navigate to the HomePage
+            await Shell.Current.GoToAsync("//HomePage");
+        }
+
     }
 }

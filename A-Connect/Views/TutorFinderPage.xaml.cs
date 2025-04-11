@@ -3,7 +3,7 @@ using A_Connect.Models;
 using A_Connect.Services;
 using System.Collections.Generic;
 using System.Linq;
-using System;
+using System.Windows.Input;
 
 namespace A_Connect.Views
 {
@@ -14,13 +14,69 @@ namespace A_Connect.Views
         // Keep all posts in memory
         private List<TutorPost> _allPosts = new List<TutorPost>();
 
+        // Commands for navigation and tab switching
+        public ICommand NavigateToHomeCommand { get; }
+        public ICommand ShowOtherPostsCommand { get; }
+        public ICommand ShowOwnPostsCommand { get; }
+        public ICommand DeletePostCommand { get; }
+
         // Track which tab is selected
-        private bool _showOwnPosts = false;
+        private bool _allPostsSelected = true;
+        public bool allPostsSelected
+        {
+            get => _allPostsSelected;
+            set
+            {
+                if (_allPostsSelected != value)
+                {
+                    _allPostsSelected = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private bool _isOwnPostsSelected;
+        public bool IsOwnPostsSelected
+        {
+            get => _isOwnPostsSelected;
+            set
+            {
+                if (_isOwnPostsSelected != value)
+                {
+                    _isOwnPostsSelected = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public TutorFinderPage(TutorFinderDatabase database)
         {
             InitializeComponent();
             _database = database;
+
+            // Initialize commands
+            NavigateToHomeCommand = new Command(async () =>
+            {
+                await Shell.Current.GoToAsync("//HomePage");
+            });
+
+            ShowOtherPostsCommand = new Command(() =>
+            {
+                allPostsSelected = true;
+                IsOwnPostsSelected = false;
+                FilterPosts();
+            });
+
+            ShowOwnPostsCommand = new Command(() =>
+            {
+                allPostsSelected = false;
+                IsOwnPostsSelected = true;
+                FilterPosts();
+            });
+
+            DeletePostCommand = new Command<TutorPost>(async (post) => await DeletePost(post));
+
+            BindingContext = this; // Set the BindingContext to the page itself
         }
 
         protected override async void OnAppearing()
@@ -33,18 +89,6 @@ namespace A_Connect.Views
 
         private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
         {
-            FilterPosts();
-        }
-
-        private void OnOtherPostsClicked(object sender, EventArgs e)
-        {
-            _showOwnPosts = false;
-            FilterPosts();
-        }
-
-        private void OnOwnPostsClicked(object sender, EventArgs e)
-        {
-            _showOwnPosts = true;
             FilterPosts();
         }
 
@@ -67,6 +111,50 @@ namespace A_Connect.Views
             }
         }
 
+        private async Task DeletePost(TutorPost post)
+        {
+            if (post == null)
+                return;
+
+            // Confirm deletion
+            bool confirm = await Application.Current.MainPage.DisplayAlert(
+                "Confirm Delete",
+                "Are you sure you want to delete this post?",
+                "Yes",
+                "No");
+
+            if (confirm)
+            {
+                // Remove the post from the in-memory collection
+                _allPosts.Remove(post);
+
+                // Delete the post from the database
+                await _database.DeletePostAsync(post);
+
+                // Refresh the displayed posts
+                FilterPosts();
+            }
+        }
+
+        private async void OnDeleteButtonClicked(object sender, EventArgs e)
+        {
+            if (sender is Button button && button.BindingContext is TutorPost post)
+            {
+                bool confirm = await DisplayAlert("Confirm Delete", "Are you sure you want to delete this post?", "Yes", "No");
+                if (confirm)
+                {
+                    // Remove the post from the in-memory collection
+                    _allPosts.Remove(post);
+
+                    // Delete the post from the database
+                    await _database.DeletePostAsync(post);
+
+                    // Refresh the displayed posts
+                    FilterPosts();
+                }
+            }
+        }
+
         private void FilterPosts()
         {
             var currentUser = App.CurrentUser?.Username ?? "UnknownUser";
@@ -74,8 +162,8 @@ namespace A_Connect.Views
             // Start with all posts
             IEnumerable<TutorPost> filtered = _allPosts;
 
-            // 1) Tab-based filter
-            if (_showOwnPosts)
+            // Tab-based filter
+            if (IsOwnPostsSelected)
             {
                 // Show only posts by the logged-in user
                 filtered = filtered.Where(p => p.PosterName == currentUser);
@@ -86,7 +174,7 @@ namespace A_Connect.Views
                 filtered = filtered.Where(p => p.PosterName != currentUser);
             }
 
-            // 2) Search filter
+            // Search filter
             var searchText = searchEntry.Text?.Trim().ToLower() ?? "";
             if (!string.IsNullOrEmpty(searchText))
             {
@@ -94,6 +182,11 @@ namespace A_Connect.Views
                     (p.CourseCode?.ToLower().Contains(searchText) ?? false)
                     || (p.Category?.ToLower().Contains(searchText) ?? false)
                     || (p.AdditionalInfo?.ToLower().Contains(searchText) ?? false));
+            }
+
+            foreach (var post in filtered)
+            {
+                post.IsOwnPost = post.PosterName == currentUser;
             }
 
             // Update the collection

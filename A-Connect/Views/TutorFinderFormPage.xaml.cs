@@ -25,12 +25,18 @@ namespace A_Connect.Views
                 return;
             }
 
+            if (!courseCodeEntry.Text.Contains(" "))
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Course code subject and number must be separated by a space.", "OK");
+                return;
+            }
+
             // PosterName is automatically the logged-in user's name
             var posterName = App.CurrentUser?.Username ?? "UnknownUser";
 
             var newPost = new TutorPost
             {
-                CourseCode = courseCodeEntry.Text.Trim(),
+                CourseCode = courseCodeEntry.Text.Trim().ToUpper(),
                 Category = categoryPicker.SelectedItem.ToString().Trim(),
                 PosterName = posterName,
                 PosterContact = contactEntry.Text?.Trim(),

@@ -11,10 +11,10 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Grid BackgroundColor="{StaticResource DarkBlue}" Padding="20">
+        <Grid BackgroundColor="{StaticResource DarkBlue}" Padding="20,40,20,20">
             <Label Text="Schedule Trading"
                    TextColor="{StaticResource Yellow}"
-                   FontSize="20"
+                   FontSize="24"
                    FontFamily="Inter-Black"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"/>
@@ -33,32 +33,52 @@
                            TextColor="{StaticResource LightBlue}"
                            HorizontalOptions="Center"/>
                     <HorizontalStackLayout Spacing="10">
-                        <Label Text="SUBJECT:" FontFamily="Inter-SemiBold" TextColor="White" VerticalTextAlignment="Center"/>
-                        <Frame BackgroundColor="White" Padding="30,0">
-                            <Entry Text="{Binding CourseCode}" Placeholder="e.g. CSCI 30"/>
-                        </Frame>
-                    </HorizontalStackLayout>
-
-                    <HorizontalStackLayout Spacing="10">
-                        <Label Text="TRADE OFFER:" FontFamily="Inter-SemiBold" TextColor="White" VerticalTextAlignment="Center"/>
-                        <Frame BackgroundColor="White" Padding="30,0">
-                            <Entry Text="{Binding TradeOffer}" Placeholder="e.g. M-TH, 2-3:30PM"/>
-                        </Frame>
-                    </HorizontalStackLayout>
-
-                    <HorizontalStackLayout Spacing="10">
-                        <Label Text="TRADE REQUEST:" FontFamily="Inter-SemiBold" TextColor="White" VerticalTextAlignment="Center"/>
+                        <Label Text="Course Code:" FontFamily="Inter-Black" TextColor="White" VerticalTextAlignment="Center"/>
                         <Frame BackgroundColor="White" Padding="20,0">
-                            <Entry Text="{Binding TradeRequest}" Placeholder="e.g. T-F, 12:30-1:40PM"/>
+                            <Entry Text="{Binding CourseCode}" Placeholder="e.g. CSCI 30" WidthRequest="180"/>
                         </Frame>
                     </HorizontalStackLayout>
 
+                    <Label Text="Trade Offer Details:" FontFamily="Inter-Black" TextColor="White" VerticalTextAlignment="Center"/>
+
                     <HorizontalStackLayout Spacing="10">
-                        <Label Text="CONTACT:" FontFamily="Inter-SemiBold" TextColor="White" VerticalTextAlignment="Center"/>
+                        <Label Text="Day:" FontFamily="Inter-Black" TextColor="White" VerticalTextAlignment="Center"/>
                         <Frame BackgroundColor="White" Padding="20,0">
-                            <Entry Text="{Binding ContactInfo}" Placeholder="e.g. FB link, email, phone"/>
+                            <Picker Title="Select Day"
+        ItemsSource="{Binding DayOptions}"
+        SelectedItem="{Binding SelectedOfferDay}" WidthRequest="30"/>
+                        </Frame>
+
+                        <Label Text="Time:" FontFamily="Inter-Black" TextColor="White" VerticalTextAlignment="Center"/>
+                        <Frame BackgroundColor="White" Padding="20,0">
+                            <Picker Title="Select Time"
+ItemsSource="{Binding TimeOptions}"
+SelectedItem="{Binding SelectedOfferTime}" WidthRequest="100"/>
                         </Frame>
                     </HorizontalStackLayout>
+
+                    <Label Text="Trade Request Details:" FontFamily="Inter-Black" TextColor="White" VerticalTextAlignment="Center"/>
+
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="Day:" FontFamily="Inter-Black" TextColor="White" VerticalTextAlignment="Center"/>
+                        <Frame BackgroundColor="White" Padding="20,0">
+                            <Picker Title="Select Day"
+        ItemsSource="{Binding DayOptions}"
+        SelectedItem="{Binding SelectedRequestDay}" WidthRequest="30"/>
+                        </Frame>
+
+                        <Label Text="Time:" FontFamily="Inter-Black" TextColor="White" VerticalTextAlignment="Center"/>
+                        <Frame BackgroundColor="White" Padding="20,0">
+                            <Picker Title="Select Time"
+ItemsSource="{Binding TimeOptions}"
+SelectedItem="{Binding SelectedRequestTime}" WidthRequest="100" />
+                        </Frame>
+                    </HorizontalStackLayout>
+
+                    <Label Text="Contact Information:" FontFamily="Inter-Black" TextColor="White" VerticalTextAlignment="Center"/>
+                        <Frame BackgroundColor="White" Padding="20,0">
+                            <Editor Text="{Binding ContactInfo}" Placeholder="e.g. FB link, email, phone" AutoSize="TextChanges"/>
+                        </Frame>
                 </VerticalStackLayout>
             </Frame>
 
