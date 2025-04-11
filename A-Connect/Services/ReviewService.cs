@@ -17,6 +17,7 @@ namespace A_Connect.Services
         public async Task<bool> SubmitReviewAsync(Review newReview)
         {
             newReview.DatePosted = DateTime.Now;
+            newReview.Rating = newReview.Rating; // Ensure the rating is set
             await _database.SaveReviewAsync(newReview);
             return true; // Successfully saved
         }

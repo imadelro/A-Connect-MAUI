@@ -1,4 +1,4 @@
-﻿using A_Connect.Models;
+using A_Connect.Models;
 using A_Connect.Services;
 using System.Collections.ObjectModel;
 using System.Linq;

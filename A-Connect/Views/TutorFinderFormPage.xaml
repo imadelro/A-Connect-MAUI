@@ -27,7 +27,7 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="20" Spacing="20">
 
-                <Frame BackgroundColor="#1F6FB7" CornerRadius="15" Padding="20">
+                <Frame BackgroundColor="{StaticResource Blue}" CornerRadius="15" Padding="20">
                     <VerticalStackLayout Spacing="15">
                         <Label Text="POST DETAILS" 
                                FontSize="18" 
@@ -37,14 +37,14 @@
 
                         <!-- Course Code -->
                         <HorizontalStackLayout Spacing="10">
-                            <Label Text="SUBJECT:" 
+                            <Label Text="Course Code:" 
                                    TextColor="White"
                                    FontFamily="Inter-Black"
                                    VerticalTextAlignment="Center"/>
                             <Frame BackgroundColor="White" Padding="20,0">
                                 <Entry x:Name="courseCodeEntry"
                                        Placeholder="e.g. MATH 21"
-                                       FontFamily="Inter-Light"/>
+                                       FontFamily="Inter-Light" WidthRequest="175"/>
                             </Frame>
                         </HorizontalStackLayout>
 
@@ -55,8 +55,8 @@
                                    FontFamily="Inter-Black"
                                    VerticalTextAlignment="Center"/>
                             <Frame BackgroundColor="White" Padding="20,0">
-                                <Picker x:Name="categoryPicker"
-                                        FontFamily="Inter-Light">
+                                <Picker Title="Select Category" x:Name="categoryPicker"
+                                        FontFamily="Inter-Light" WidthRequest="200">
                                     <Picker.ItemsSource>
                                         <x:Array Type="{x:Type x:String}">
                                             <x:String>Tutor</x:String>
@@ -76,7 +76,7 @@
                             <Frame BackgroundColor="White" Padding="20,0">
                                 <Entry x:Name="contactEntry"
                                        Placeholder="Email or phone"
-                                       FontFamily="Inter-Light"/>
+                                       FontFamily="Inter-Light" WidthRequest="160"/>
                             </Frame>
                         </HorizontalStackLayout>
 

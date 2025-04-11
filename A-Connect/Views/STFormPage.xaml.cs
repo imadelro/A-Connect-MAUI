@@ -8,7 +8,7 @@ namespace A_Connect.Views
         public PostTradePage()
         {
             InitializeComponent();
-            BindingContext = new STFormViewModel();
+            BindingContext = new STFormViewModel(App.STDB);
         }
         private async void OnCreatePostClicked(object sender, EventArgs e)
         {

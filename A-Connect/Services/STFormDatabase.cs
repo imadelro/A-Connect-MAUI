@@ -18,15 +18,29 @@ namespace A_Connect.Services
         }
 
         // Insert a new post
-        public Task<int> SavePostAsync(STForm post)
+        public async Task<int> SavePostAsync(STForm post)
         {
-            return _db.InsertAsync(post);
+            // Check if the post already exists in the database
+            var existingPost = await _db.Table<STForm>().FirstOrDefaultAsync(p => p.Id == post.Id);
+            if (existingPost != null)
+            {
+                return 0; // Do not insert duplicate
+            }
+
+            return await _db.InsertAsync(post);
         }
+
 
         // Retrieve all posts
         public Task<List<STForm>> GetAllPostsAsync()
         {
             return _db.Table<STForm>().ToListAsync();
         }
+
+        public async Task<int> DeletePostAsync(STForm post)
+        {
+            return await _db.DeleteAsync(post);
+        }
+
     }
 }

@@ -33,6 +33,7 @@ public partial class AppShell : Shell
         // Register Marketplace Pages.
         Routing.RegisterRoute(nameof(MarketplaceNewsFeedPage), typeof(MarketplaceNewsFeedPage));
         Routing.RegisterRoute(nameof(MarketplaceFormPage), typeof(MarketplaceFormPage));
+        Routing.RegisterRoute(nameof(MarketplaceListingDetailPage), typeof(MarketplaceListingDetailPage));
 
     }
 }
