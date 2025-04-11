@@ -115,17 +115,7 @@
                     </BoxView>
                 </VerticalStackLayout>
             </HorizontalStackLayout>
-
-            <!-- "Post" button -->
-            <Button Text="Post +"
-                    BackgroundColor="{StaticResource Yellow}"
-                    TextColor="{StaticResource OffBlack}"
-                    FontFamily="Inter-Black"
-                    CornerRadius="25"
-                    HorizontalOptions="Center"
-                    Padding="10,5"
-                    Command="{Binding SwitchToCreatePostCommand}"/>
-
+            
             <!-- "Post a trade" button -->
             <Button Text="Post a trade +"
                     Command="{Binding PostTradeCommand}"
@@ -145,19 +135,19 @@
                         <Setter Property="IsVisible" Value="False" />
                     </DataTrigger>
                 </Button.Triggers>
-            </Button>
-
+            </Button> 
+            
             <CollectionView ItemsSource="{Binding Opportunities}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame BackgroundColor="White" CornerRadius="15" Padding="15" Margin="0,5">
+                        <Frame BackgroundColor="{StaticResource Blue}" CornerRadius="15" Padding="15" Margin="0,5">
                             <VerticalStackLayout>
-                                <Label Text="{Binding Title}" FontSize="18" FontFamily="Inter-Black" TextColor="Black"/>
-                                <Label Text="{Binding Position}" FontSize="16" FontFamily="Inter-SemiBold" TextColor="Gray"/>
-                                <Label Text="{Binding Company}" FontSize="14" TextColor="#555"/>
-                                <Label Text="{Binding Caption}" FontSize="13" TextColor="#777"/>
-                                <Label Text="{Binding Type}" FontSize="12" TextColor="#888"/>
-                                <Label Text="{Binding PostURL}" FontSize="12" TextColor="Blue"/>
+                                <Label Text="{Binding Title}" FontSize="18" FontFamily="Inter-Black" TextColor="White"/>
+                                <Label Text="{Binding Position}" FontSize="16" FontFamily="Inter-SemiBold" TextColor="White"/>
+                                <Label Text="{Binding Company}" FontSize="14" TextColor="White"/>
+                                <Label Text="{Binding Caption}" FontSize="13" TextColor="White"/>
+                                <Label Text="{Binding Type}" FontSize="12" TextColor="White"/>
+                                <Label Text="{Binding PostURL}" FontSize="12" TextColor="White"/>
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>
