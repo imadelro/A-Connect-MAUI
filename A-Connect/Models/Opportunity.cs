@@ -10,6 +10,7 @@ namespace A_Connect.Models {
         public string PostedBy { get; set; }
         public string Title { get; set; }
         public string Type { get; set; }  // "Job" or "Internship"
+        public string JobField { get; set; } 
         public string Position { get; set; }
         public string Location { get; set; }
         public string Company { get; set; }

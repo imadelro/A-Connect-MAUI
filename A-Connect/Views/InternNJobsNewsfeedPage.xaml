@@ -152,31 +152,18 @@
                    Margin="0,10">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer 
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:InternNJobsNewsfeedViewModel}}, Path=PostTappedCommand}"
-CommandParameter="{Binding}"/>
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:InternNJobsNewsfeedViewModel}}, Path=PostTappedCommand}"
+                        CommandParameter="{Binding}"/>
                             </Frame.GestureRecognizers>
                             <VerticalStackLayout Spacing="5">
-                                <!-- Title and Type Tag -->
-                                <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,10">
-                                    <!-- Title -->
-                                    <Label Text="{Binding Title}"
-                                           TextColor="White"
-                                           FontSize="18"
-                                           FontFamily="Inter-Black"
-                                           VerticalOptions="Center"
-                                           LineBreakMode="WordWrap"
-                                           MaxLines="3"
-                                           HorizontalOptions="Start"
-                                           Grid.Column="0"/>
 
+                                <!-- Type above Title -->
+                                <VerticalStackLayout Spacing="5" Margin="0,5,0,0">
                                     <!-- Type Tag -->
                                     <Frame Padding="5,2"
                                            CornerRadius="10"
                                            HasShadow="False"
-                                           VerticalOptions="Center"
-                                           HorizontalOptions="End"
-                                           Grid.Column="1">
-
+                                           HorizontalOptions="Start">
                                         <Frame.Triggers>
                                             <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Internship">
                                                 <Setter Property="BackgroundColor" Value="{StaticResource LightBlue}" />
@@ -186,7 +173,6 @@ CommandParameter="{Binding}"/>
                                                 <Setter Property="BackgroundColor" Value="{StaticResource DarkBlue}" />
                                             </DataTrigger>
                                         </Frame.Triggers>
-
                                         <Label Text="{Binding Type}"
                                                FontSize="14"
                                                FontFamily="Inter-SemiBold"
@@ -202,36 +188,55 @@ CommandParameter="{Binding}"/>
                                             </Label.Triggers>
                                         </Label>
                                     </Frame>
-                                </Grid>
 
+                                    <Frame BackgroundColor="{StaticResource Red}"
+                                           CornerRadius="10"
+                                           Padding="5"
+                                           HasShadow="False">
+                                        <Label Text="{Binding JobField}"
+                                               TextColor="White"
+                                               FontSize="14"
+                                               FontFamily="Inter-SemiBold"/>
+                                    </Frame>
+
+                                    <!-- Title -->
+                                    <Label Text="{Binding Title}"
+                               TextColor="White"
+                               FontSize="18"
+                               FontFamily="Inter-Black"
+                               VerticalOptions="Center"
+                               LineBreakMode="WordWrap"
+                               MaxLines="3"
+                               HorizontalOptions="Start"/>
+                                </VerticalStackLayout>
 
                                 <!-- Position -->
                                 <HorizontalStackLayout Spacing="10">
                                     <Label Text="Position Available:"
-                                            TextColor="White"
-                                            FontFamily="Inter-SemiBold"
-                                            VerticalOptions="Center"/>
+                               TextColor="White"
+                               FontFamily="Inter-SemiBold"
+                               VerticalOptions="Center"/>
                                     <Frame BackgroundColor="{StaticResource Red}"
-                                            CornerRadius="10"
-                                            Padding="5"
-                                            HasShadow="False">
+                               CornerRadius="10"
+                               Padding="5"
+                               HasShadow="False">
                                         <Label Text="{Binding Position}"
-                                                TextColor="White"
-                                                FontSize="14"
-                                                FontFamily="Inter-SemiBold"/>
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="Inter-SemiBold"/>
                                     </Frame>
                                 </HorizontalStackLayout>
 
                                 <!-- Company Information -->
                                 <HorizontalStackLayout Spacing="10">
                                     <Label Text="Company:"
-                                           TextColor="White"
-                                           FontFamily="Inter-SemiBold"
-                                           VerticalOptions="Center"/>
+                               TextColor="White"
+                               FontFamily="Inter-SemiBold"
+                               VerticalOptions="Center"/>
                                     <Label Text="{Binding Company}"
-                                           TextColor="White"
-                                           FontSize="14"
-                                           FontFamily="Inter-SemiBold"/>
+                               TextColor="White"
+                               FontSize="14"
+                               FontFamily="Inter-SemiBold"/>
                                 </HorizontalStackLayout>
 
                                 <!-- Location-->
@@ -277,12 +282,12 @@ CommandParameter="{Binding}"/>
                                HorizontalOptions="Start" 
                                VerticalOptions="End"/>
                                 </Grid>
+
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
 
             <!-- "Post" Button  -->
             <Button Text="Post +"

@@ -159,6 +159,7 @@ namespace A_Connect.ViewModels
                 filtered = filtered.Where(o =>
                     o.Company.Contains(_searchText, System.StringComparison.OrdinalIgnoreCase) ||
                     o.Location.Contains(_searchText, System.StringComparison.OrdinalIgnoreCase));
+                
             }
 
             DisplayedPosts = new ObservableCollection<Opportunity>(filtered);

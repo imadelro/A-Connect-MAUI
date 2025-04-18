@@ -31,23 +31,30 @@
                         <!-- Title and Close Button -->
                         <Grid ColumnDefinitions="*, Auto">
                             <Label Text="{Binding SelectedPost.Title}"
-           TextColor="White"
-           FontSize="24"
-           FontFamily="Inter-Black"
-           LineBreakMode="WordWrap"
-           HorizontalOptions="FillAndExpand"
-           VerticalOptions="Center"
-           MaxLines="3"
-           Grid.Column="0"/>
+                                   TextColor="White"
+                                   FontSize="24"
+                                   FontFamily="Inter-Black"
+                                   LineBreakMode="WordWrap"
+                                   HorizontalOptions="FillAndExpand"
+                                   VerticalOptions="Center"
+                                   MaxLines="3"
+                                   Grid.Column="0"/>
 
                             <Button Text="X"
-            BackgroundColor="Transparent"
-            TextColor="White"
-            Clicked="OnCloseClicked"
-            HorizontalOptions="End"
-            VerticalOptions="Start"
-            Grid.Column="1"/>
+                                    BackgroundColor="Transparent"
+                                    TextColor="White"
+                                    Clicked="OnCloseClicked"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Start"
+                                    Grid.Column="1"/>
                         </Grid>
+
+                        <Frame BackgroundColor="{StaticResource White}" CornerRadius="10" Padding="15" HasShadow="True">
+                            <Label Text="{Binding SelectedPost.JobField}"
+                                   TextColor="{StaticResource DarkBlue}"
+                                   FontSize="14"
+                                   LineBreakMode="WordWrap"/>
+                        </Frame>
                         <!-- Type inside a box -->
                         <Frame CornerRadius="10" Padding="15" HasShadow="True" BackgroundColor="White">
                             <Frame.Triggers>

@@ -23,6 +23,7 @@ namespace A_Connect.ViewModels
         public async Task LoadPostAsync(int postId)
         {
             SelectedPost = await _database.GetOpportunityByIdAsync(postId);
+            Console.WriteLine(SelectedPost.JobField);
         }
     }
 }
