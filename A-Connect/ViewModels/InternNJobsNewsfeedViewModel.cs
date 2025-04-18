@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
-using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using A_Connect.Models;
 using A_Connect.Services;
@@ -10,7 +11,6 @@ namespace A_Connect.ViewModels
 {
     public class InternNJobsNewsfeedViewModel : BaseViewModel
     {
-
         private readonly OpportunityDatabase _database;
         private ObservableCollection<Opportunity> _allOpportunities;
         private string _searchText;
@@ -19,6 +19,8 @@ namespace A_Connect.ViewModels
         private bool _showOnlyInternships;
         private bool _showOnlyJobs;
         private bool _isAllSelected = true;
+        private string _selectedJobField = "All";
+
 
         public string SearchText
         {
@@ -27,10 +29,22 @@ namespace A_Connect.ViewModels
             {
                 if (SetProperty(ref _searchText, value))
                 {
-                    UpdateDisplayedPosts();
+                    LoadOpportunitiesAsync();  // Update the opportunities based on the search text
                 }
             }
         }
+        public string SelectedJobField
+        {
+            get => _selectedJobField;
+            set
+            {
+                if (SetProperty(ref _selectedJobField, value))
+                {
+                    LoadOpportunitiesAsync();  // Reload the opportunities based on the selected job field
+                }
+            }
+        }
+        public ObservableCollection<string> JobFields { get; set; }  // List of job fields (to bind to Picker)
 
         public bool allPostsSelected
         {
@@ -50,7 +64,6 @@ namespace A_Connect.ViewModels
         public ICommand PostTappedCommand { get; }
         public ICommand DeletePostCommand { get; }
 
-
         public InternNJobsNewsfeedViewModel()
         {
             _database = DependencyService.Get<OpportunityDatabase>();
@@ -65,20 +78,26 @@ namespace A_Connect.ViewModels
             allPostsSelected = true;
             isOwnPostsSelected = false;
 
+            JobFields = new ObservableCollection<string>
+            {
+                "All", "Administration", "Business Development / Strategy", "Creative / Design", "Customer Service", 
+                "Engineering / Technical", "Executive / Leadership", "Finance", "Human Resources (HR)", "Information Technology (IT)", 
+                "Legal / Compliance", "Marketing", "Operations / Logistics", "Product / Project Management", "Research & Development (R&D)", "Sales"
+            };
         }
 
         private void SwitchToAllPosts()
         {
             allPostsSelected = true;
             isOwnPostsSelected = false;
-            UpdateDisplayedPosts();
+            LoadOpportunitiesAsync();
         }
 
         private void SwitchToOwnPosts()
         {
             allPostsSelected = false;
             isOwnPostsSelected = true;
-            UpdateDisplayedPosts();
+            LoadOpportunitiesAsync();
         }
 
         public bool ShowAllOpportunities
@@ -95,6 +114,7 @@ namespace A_Connect.ViewModels
                         ShowOnlyJobs = false;
                         ShowOnlyInternships = false;
                     }
+                    LoadOpportunitiesAsync();  // Reload opportunities when this changes
                 }
             }
         }
@@ -106,7 +126,7 @@ namespace A_Connect.ViewModels
             {
                 if (SetProperty(ref _showOnlyJobs, value))
                 {
-                    UpdateDisplayedPosts(); // This will filter the posts whenever the checkbox is toggled
+                    LoadOpportunitiesAsync();  // Reload opportunities when this changes
                 }
             }
         }
@@ -118,7 +138,7 @@ namespace A_Connect.ViewModels
             {
                 if (SetProperty(ref _showOnlyInternships, value))
                 {
-                    UpdateDisplayedPosts(); // This will filter the posts whenever the checkbox is toggled
+                    LoadOpportunitiesAsync();  // Reload opportunities when this changes
                 }
             }
         }
@@ -130,39 +150,63 @@ namespace A_Connect.ViewModels
             set => SetProperty(ref _displayedPosts, value);
         }
 
-        private void UpdateDisplayedPosts()
+        private ObservableCollection<Opportunity> _opportunities;
+        public ObservableCollection<Opportunity> Opportunities
         {
-            var CurrentUser = App.CurrentUser.Username;
+            get => _opportunities;
+            set => SetProperty(ref _opportunities, value);
+        }
 
-            var filtered = _opportunities.AsEnumerable();
+        // Load the opportunities asynchronously
+        public async Task LoadOpportunitiesAsync()
+        {
+            List<Opportunity> opportunities;
 
+            // Get all opportunities initially
+            opportunities = await _database.GetAllOpportunitiesAsync();
+
+            // Apply user filters if selected
             if (isOwnPostsSelected)
             {
-                filtered = filtered.Where(r => r.PostedBy == CurrentUser);
-                
-            }
-            else
-            {
+                opportunities = opportunities
+                    .Where(o => o.PostedBy == App.CurrentUser.Username)
+                    .ToList();
             }
 
+            // Apply type filters if selected
             if (_showOnlyJobs)
             {
-                filtered = filtered.Where(o => o.Type == "Job");
+                opportunities = opportunities
+                    .Where(o => o.Type == "Job")
+                    .ToList();
             }
-            if (_showOnlyInternships)
+            else if (_showOnlyInternships)
             {
-                filtered = filtered.Where(o => o.Type == "Internship");
+                opportunities = opportunities
+                    .Where(o => o.Type == "Internship")
+                    .ToList();
             }
 
+            // Apply job field filter if selected (and not 'All')
+            if (!string.IsNullOrEmpty(SelectedJobField) && SelectedJobField != "All")
+            {
+                opportunities = opportunities
+                    .Where(o => o.JobField == SelectedJobField)
+                    .ToList();
+            }
+
+            // Apply search filter
             if (!string.IsNullOrWhiteSpace(_searchText))
             {
-                filtered = filtered.Where(o =>
-                    o.Company.Contains(_searchText, System.StringComparison.OrdinalIgnoreCase) ||
-                    o.Location.Contains(_searchText, System.StringComparison.OrdinalIgnoreCase));
-                
+                opportunities = opportunities
+                    .Where(o => o.Company.Contains(_searchText, System.StringComparison.OrdinalIgnoreCase) ||
+                                o.Location.Contains(_searchText, System.StringComparison.OrdinalIgnoreCase))
+                    .ToList();
             }
 
-            DisplayedPosts = new ObservableCollection<Opportunity>(filtered);
+            // Update the displayed posts
+            Opportunities = new ObservableCollection<Opportunity>(opportunities);
+            DisplayedPosts = Opportunities;
         }
 
 
@@ -171,27 +215,11 @@ namespace A_Connect.ViewModels
             await Shell.Current.GoToAsync(nameof(InternNJobsFormPage));
         }
 
-        private ObservableCollection<Opportunity> _opportunities;
-        public ObservableCollection<Opportunity> Opportunities
-        {
-            get => _opportunities;
-            set => SetProperty(ref _opportunities, value);
-        }
-
-        public async Task LoadOpportunitiesAsync()
-        {
-            var opportunities = await _database.GetAllOpportunitiesAsync(); // Fetch the updated opportunities list
-
-            Opportunities = new ObservableCollection<Opportunity>(opportunities);
-            UpdateDisplayedPosts();
-
-        }
-
         private async void OnPostTapped(Opportunity selectedPost)
         {
             if (selectedPost == null) return;
 
-            // Navigate to a detail page (you'll need to have this page created)
+            // Navigate to the detail page for the selected post
             Console.WriteLine("PostTapped Working");
             await Shell.Current.GoToAsync($"{nameof(InternNJobsIndivPage)}?PostId={selectedPost.Id}");
         }
@@ -207,6 +235,5 @@ namespace A_Connect.ViewModels
                 Opportunities.Remove(post);
             }
         }
-
     }
 }

@@ -26,23 +26,35 @@
         <!-- Main Content -->
         <StackLayout Grid.Row="1" Spacing="15" Padding="20">
 
-            <!-- Search Bar -->
             <Frame CornerRadius="25" BackgroundColor="White" Padding="0">
-                <HorizontalStackLayout Padding="10,0">
-                    <Image Source="search_icon.png"
-                           HeightRequest="20"
-                           WidthRequest="20"
-                           VerticalOptions="Center"
-                           Margin="0,0,5,0"/>
-                    <Entry Text="{Binding SearchText, Mode=TwoWay}" 
-       Placeholder="Search"
-       VerticalOptions="Center"
-       FontSize="14"
-       FontFamily="Inter-SemiBold"
-       Margin="0"
-       WidthRequest="300"/>
-                </HorizontalStackLayout>
+                <StackLayout Orientation="Horizontal" Padding="10" Spacing="10">
+
+                    <!-- Search Bar -->
+                    <HorizontalStackLayout Padding="0" VerticalOptions="Center">
+                        <Image Source="search_icon.png"
+                   HeightRequest="20"
+                   WidthRequest="20"
+                   VerticalOptions="Center"
+                   Margin="0,0,5,0"/>
+                        <Entry Text="{Binding SearchText, Mode=TwoWay}" 
+                   Placeholder="Search"
+                   VerticalOptions="Center"
+                   FontSize="14"
+                   FontFamily="Inter-SemiBold"
+                   Margin="0"
+                   WidthRequest="150"/>
+                    </HorizontalStackLayout>
+
+                    <!-- Job Field Filter -->
+                    <Picker SelectedItem="{Binding SelectedJobField}" 
+        ItemsSource="{Binding JobFields}" 
+        Title="Select Job Field" 
+        WidthRequest="150" 
+        VerticalOptions="Center">
+                    </Picker>
+                </StackLayout>
             </Frame>
+
 
             <!-- Tabs -->
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="40" Padding="0,10">
@@ -159,6 +171,7 @@
 
                                 <!-- Type above Title -->
                                 <VerticalStackLayout Spacing="5" Margin="0,5,0,0">
+                                    <HorizontalStackLayout Spacing="10">
                                     <!-- Type Tag -->
                                     <Frame Padding="5,2"
                                            CornerRadius="10"
@@ -189,16 +202,16 @@
                                         </Label>
                                     </Frame>
 
-                                    <Frame BackgroundColor="{StaticResource Red}"
+                                        <Frame BackgroundColor="{StaticResource MidBlue}"
                                            CornerRadius="10"
                                            Padding="5"
                                            HasShadow="False">
-                                        <Label Text="{Binding JobField}"
+                                            <Label Text="{Binding JobField}"
                                                TextColor="White"
                                                FontSize="14"
                                                FontFamily="Inter-SemiBold"/>
-                                    </Frame>
-
+                                        </Frame>
+                                    </HorizontalStackLayout>
                                     <!-- Title -->
                                     <Label Text="{Binding Title}"
                                TextColor="White"
