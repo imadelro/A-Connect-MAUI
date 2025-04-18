@@ -13,6 +13,7 @@ namespace A_Connect.ViewModels
         private string PostedBy;
         private string title;
         private string type;
+        private string jobfield;
         private string position;
         private string location;
         private string company;
@@ -32,6 +33,12 @@ namespace A_Connect.ViewModels
             get => type;
             set => SetProperty(ref type, value);
         }
+        public string JobField
+        {
+            get => jobfield;
+            set => SetProperty(ref jobfield, value);
+        }
+
 
         public string Position
         {
@@ -72,7 +79,7 @@ namespace A_Connect.ViewModels
 
         private async Task SubmitOpportunity()
         {
-            if (new[] { Title, Type, Position, Location, Company, PostURL, Caption }.Any(string.IsNullOrWhiteSpace))
+            if (new[] { Title, Type, JobField, Position, Location, Company, PostURL, Caption }.Any(string.IsNullOrWhiteSpace))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Please fill all fields.", "OK");
                 return;
@@ -83,6 +90,7 @@ namespace A_Connect.ViewModels
                 PostedBy = App.CurrentUser.Username,
                 Title = Title,
                 Type = Type,
+                JobField = JobField,
                 Position = Position,
                 Location = Location,
                 Company = Company,
@@ -91,7 +99,7 @@ namespace A_Connect.ViewModels
             };
 
             await _database.SaveOpportunityAsync(newOpportunity);
-            await Application.Current.MainPage.DisplayAlert("Success", "Review submitted!", "OK");
+            await Application.Current.MainPage.DisplayAlert("Success", "Post submitted!", "OK");
             var newsfeedViewModel = DependencyService.Get<InternNJobsNewsfeedViewModel>();
             await newsfeedViewModel.LoadOpportunitiesAsync();
             await Shell.Current.GoToAsync("..");
