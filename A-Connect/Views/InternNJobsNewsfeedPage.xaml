@@ -107,8 +107,41 @@
                 </VerticalStackLayout>
             </HorizontalStackLayout>
 
+            <StackLayout HorizontalOptions="Center"
+             VerticalOptions="Center"
+             Orientation="Horizontal"
+             Margin="10"
+             Spacing="20">
+
+                <RadioButton Content="All"
+                 GroupName="PostFilter"
+                 IsChecked="{Binding ShowAllOpportunities}"
+                 VerticalOptions="Center"
+                 Padding="10,5"
+                 CornerRadius="10"
+                 FontFamily="Inter-SemiBold"/>
+
+                <RadioButton Content="Jobs"
+                 GroupName="PostFilter"
+                 IsChecked="{Binding ShowOnlyJobs}"
+                 VerticalOptions="Center"
+                 Padding="10,5"
+                 CornerRadius="10"
+                 FontFamily="Inter-SemiBold"            />
+
+                <RadioButton Content="Internships"
+                 GroupName="PostFilter"
+                 IsChecked="{Binding ShowOnlyInternships}"
+                 VerticalOptions="Center"
+                 Padding="10,5"
+                 CornerRadius="10"
+                 FontFamily="Inter-SemiBold"/>
+
+            </StackLayout>
+
+
             <!-- CollectionView for DisplayedPosts -->
-            <CollectionView ItemsSource="{Binding Opportunities}" 
+            <CollectionView ItemsSource="{Binding DisplayedPosts}" 
                 VerticalOptions="FillAndExpand"
                 SelectionMode="None">
                 <CollectionView.ItemTemplate>
@@ -127,26 +160,26 @@ CommandParameter="{Binding}"/>
                                 <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,10">
                                     <!-- Title -->
                                     <Label Text="{Binding Title}"
-           TextColor="White"
-           FontSize="18"
-           FontFamily="Inter-Black"
-           VerticalOptions="Center"
-           LineBreakMode="WordWrap"
-           MaxLines="3"
-           HorizontalOptions="Start"
-           Grid.Column="0"/>
+                                           TextColor="White"
+                                           FontSize="18"
+                                           FontFamily="Inter-Black"
+                                           VerticalOptions="Center"
+                                           LineBreakMode="WordWrap"
+                                           MaxLines="3"
+                                           HorizontalOptions="Start"
+                                           Grid.Column="0"/>
 
                                     <!-- Type Tag -->
                                     <Frame Padding="5,2"
-           CornerRadius="10"
-           HasShadow="False"
-           VerticalOptions="Center"
-           HorizontalOptions="End"
-           Grid.Column="1">
+                                           CornerRadius="10"
+                                           HasShadow="False"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="End"
+                                           Grid.Column="1">
 
                                         <Frame.Triggers>
                                             <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Internship">
-                                                <Setter Property="BackgroundColor" Value="{StaticResource Yellow}" />
+                                                <Setter Property="BackgroundColor" Value="{StaticResource LightBlue}" />
                                                 <Setter Property="BorderColor" Value="Black" />
                                             </DataTrigger>
                                             <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Job">
@@ -155,10 +188,10 @@ CommandParameter="{Binding}"/>
                                         </Frame.Triggers>
 
                                         <Label Text="{Binding Type}"
-               FontSize="14"
-               FontFamily="Inter-SemiBold"
-               VerticalOptions="Center"
-               HorizontalOptions="Center">
+                                               FontSize="14"
+                                               FontFamily="Inter-SemiBold"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Center">
                                             <Label.Triggers>
                                                 <DataTrigger TargetType="Label" Binding="{Binding Type}" Value="Internship">
                                                     <Setter Property="TextColor" Value="Black" />
@@ -192,18 +225,13 @@ CommandParameter="{Binding}"/>
                                 <!-- Company Information -->
                                 <HorizontalStackLayout Spacing="10">
                                     <Label Text="Company:"
-                               TextColor="White"
-                               FontFamily="Inter-SemiBold"
-                               VerticalOptions="Center"/>
-                                    <Frame BackgroundColor="{StaticResource Black}"
-                               CornerRadius="10"
-                               Padding="5"
-                               HasShadow="False">
-                                        <Label Text="{Binding Company}"
-                                   TextColor="White"
-                                   FontSize="14"
-                                   FontFamily="Inter-SemiBold"/>
-                                    </Frame>
+                                           TextColor="White"
+                                           FontFamily="Inter-SemiBold"
+                                           VerticalOptions="Center"/>
+                                    <Label Text="{Binding Company}"
+                                           TextColor="White"
+                                           FontSize="14"
+                                           FontFamily="Inter-SemiBold"/>
                                 </HorizontalStackLayout>
 
                                 <!-- Location-->

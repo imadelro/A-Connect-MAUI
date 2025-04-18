@@ -16,11 +16,20 @@ namespace A_Connect.ViewModels
         private string _searchText;
         private bool _allPostsSelected;
         private bool _isOwnPostsSelected;
+        private bool _showOnlyInternships;
+        private bool _showOnlyJobs;
+        private bool _isAllSelected = true;
 
         public string SearchText
         {
             get => _searchText;
-            set => SetProperty(ref _searchText, value);
+            set
+            {
+                if (SetProperty(ref _searchText, value))
+                {
+                    UpdateDisplayedPosts();
+                }
+            }
         }
 
         public bool allPostsSelected
@@ -53,6 +62,9 @@ namespace A_Connect.ViewModels
             PostTappedCommand = new Command<Opportunity>(OnPostTapped);
             DeletePostCommand = new Command<Opportunity>(async (opportunity) => await DeletePost(opportunity));
 
+            allPostsSelected = true;
+            isOwnPostsSelected = false;
+
         }
 
         private void SwitchToAllPosts()
@@ -69,6 +81,48 @@ namespace A_Connect.ViewModels
             UpdateDisplayedPosts();
         }
 
+        public bool ShowAllOpportunities
+        {
+            get => _isAllSelected;
+            set
+            {
+                if (_isAllSelected != value)
+                {
+                    _isAllSelected = value;
+                    OnPropertyChanged();
+                    if (_isAllSelected)
+                    {
+                        ShowOnlyJobs = false;
+                        ShowOnlyInternships = false;
+                    }
+                }
+            }
+        }
+
+        public bool ShowOnlyJobs
+        {
+            get => _showOnlyJobs;
+            set
+            {
+                if (SetProperty(ref _showOnlyJobs, value))
+                {
+                    UpdateDisplayedPosts(); // This will filter the posts whenever the checkbox is toggled
+                }
+            }
+        }
+
+        public bool ShowOnlyInternships
+        {
+            get => _showOnlyInternships;
+            set
+            {
+                if (SetProperty(ref _showOnlyInternships, value))
+                {
+                    UpdateDisplayedPosts(); // This will filter the posts whenever the checkbox is toggled
+                }
+            }
+        }
+
         private ObservableCollection<Opportunity> _displayedPosts;
         public ObservableCollection<Opportunity> DisplayedPosts
         {
@@ -80,14 +134,34 @@ namespace A_Connect.ViewModels
         {
             var CurrentUser = App.CurrentUser.Username;
 
-            if (_allPostsSelected)
+            var filtered = _opportunities.AsEnumerable();
+
+            if (isOwnPostsSelected)
             {
-                DisplayedPosts = new ObservableCollection<Opportunity>(_opportunities.Where(o => o.PostedBy != CurrentUser));
+                filtered = filtered.Where(r => r.PostedBy == CurrentUser);
+                
             }
-            else if (_isOwnPostsSelected)
+            else
             {
-                DisplayedPosts = new ObservableCollection<Opportunity>(_opportunities.Where(o => o.PostedBy == CurrentUser));
             }
+
+            if (_showOnlyJobs)
+            {
+                filtered = filtered.Where(o => o.Type == "Job");
+            }
+            if (_showOnlyInternships)
+            {
+                filtered = filtered.Where(o => o.Type == "Internship");
+            }
+
+            if (!string.IsNullOrWhiteSpace(_searchText))
+            {
+                filtered = filtered.Where(o =>
+                    o.Company.Contains(_searchText, System.StringComparison.OrdinalIgnoreCase) ||
+                    o.Location.Contains(_searchText, System.StringComparison.OrdinalIgnoreCase));
+            }
+
+            DisplayedPosts = new ObservableCollection<Opportunity>(filtered);
         }
 
 

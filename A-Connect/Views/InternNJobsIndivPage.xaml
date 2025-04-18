@@ -49,20 +49,31 @@
             Grid.Column="1"/>
                         </Grid>
                         <!-- Type inside a box -->
-                        <Frame BackgroundColor="{StaticResource White}" CornerRadius="10" Padding="15" HasShadow="True">
+                        <Frame CornerRadius="10" Padding="15" HasShadow="True" BackgroundColor="White">
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding SelectedPost.Type}" Value="Internship">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource LightBlue}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Frame" Binding="{Binding SelectedPost.Type}" Value="Job">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource DarkBlue}" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+
                             <Label Text="{Binding SelectedPost.Type, StringFormat='TYPE: {0}'}"
-                                   TextColor="{StaticResource DarkBlue}"
+                                   TextColor="{StaticResource White}"
                                    FontSize="14"
-                                   LineBreakMode="WordWrap"/>
+                                   LineBreakMode="WordWrap">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding SelectedPost.Type}" Value="Internship">
+                                        <Setter Property="TextColor" Value="Black" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label" Binding="{Binding SelectedPost.Type}" Value="Job">
+                                        <Setter Property="TextColor" Value="White" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
                         </Frame>
 
-                        <!-- Position inside a box -->
-                        <Frame BackgroundColor="{StaticResource White}" CornerRadius="10" Padding="15" HasShadow="True">
-                            <Label Text="{Binding SelectedPost.Position, StringFormat='POSITION: {0}'}"
-                                   TextColor="{StaticResource DarkBlue}"
-                                   FontSize="14"
-                                   LineBreakMode="WordWrap"/>
-                        </Frame>
 
                         <!-- Company inside a box -->
                         <Frame BackgroundColor="{StaticResource White}" CornerRadius="10" Padding="15" HasShadow="True">
