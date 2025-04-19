@@ -15,6 +15,13 @@ namespace A_Connect.Services
             _database.CreateTableAsync<Opportunity>().Wait();
         }
 
+        public Task<List<Opportunity>> GetOpportunitiesByUserAsync(string username)
+        {
+            return _database.Table<Opportunity>()
+                .Where(o => o.PostedBy == username)
+                .ToListAsync();
+        }
+
         // Add a new opportunity (internship/job)
         public Task<int> SaveOpportunityAsync(Opportunity opportunity)
         {
@@ -42,6 +49,19 @@ namespace A_Connect.Services
                 .Where(o => o.Position == position)
                 .ToListAsync();
         }
+        public async Task<Opportunity> GetOpportunityByIdAsync(int id)
+        {
+            return await _database.Table<Opportunity>().FirstOrDefaultAsync(o => o.Id == id);
+        }
+
+        // Get opportunities by job field
+        public Task<List<Opportunity>> GetOpportunitiesByJobFieldAsync(string jobField)
+        {
+            return _database.Table<Opportunity>()
+                .Where(o => o.JobField == jobField)  // Assuming "JobField" is a column in the Opportunity table
+                .ToListAsync();
+        }
+
 
         // Delete an opportunity
         public Task<int> DeleteOpportunityAsync(Opportunity opportunity)

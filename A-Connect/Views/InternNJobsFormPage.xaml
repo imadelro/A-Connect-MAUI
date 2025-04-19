@@ -32,7 +32,7 @@
                                HorizontalOptions="Center"/>
 
                         <!-- Course Code -->
-                        <HorizontalStackLayout Spacing="10">
+                        <StackLayout Spacing="10">
                             <Label Text="TITLE:" 
                                    TextColor="White"
                                    FontFamily="Inter-Black"
@@ -42,10 +42,46 @@
                                        Placeholder=""
                                        FontFamily="Inter-Light"/>
                             </Frame>
-                        </HorizontalStackLayout>
+                        </StackLayout>
 
                         <!-- Category Picker -->
                         <HorizontalStackLayout Spacing="10">
+                            <Label Text="Job Field:" 
+                                   TextColor="White"
+                                   FontFamily="Inter-Black"
+                                   VerticalTextAlignment="Center"/>
+                            <Frame BackgroundColor="White" Padding="20,0">
+                                <Picker x:Name="jobfieldPicker"
+                                        SelectedItem="{Binding JobField}"
+                                        FontFamily="Inter-Light"
+                                        WidthRequest="210">
+                                    <Picker.ItemsSource>
+                                        <x:Array Type="{x:Type x:String}">
+                                            <x:String>Administration</x:String>
+                                            <x:String>Business Development / Strategy</x:String>
+                                            <x:String>Creative / Design</x:String>
+                                            <x:String>Customer Service</x:String>
+                                            <x:String>Engineering / Technical</x:String>
+                                            <x:String>Executive / Leadership</x:String>
+                                            <x:String>Finance</x:String>
+                                            <x:String>Human Resources (HR)</x:String>
+                                            <x:String>Information Technology (IT)</x:String>
+                                            <x:String>Legal / Compliance</x:String>
+                                            <x:String>Marketing</x:String>
+                                            <x:String>Operations / Logistics</x:String>
+                                            <x:String>Product / Project Management</x:String>
+                                            <x:String>Research &amp; Development (R&amp;D)</x:String>
+                                            <x:String>Sales</x:String>
+                                        </x:Array>
+
+
+                                    </Picker.ItemsSource>
+                                </Picker>
+                            </Frame>
+                        </HorizontalStackLayout>
+
+                        <!-- Category Picker -->
+                        <HorizontalStackLayout Spacing="40">
                             <Label Text="Type:" 
                                    TextColor="White"
                                    FontFamily="Inter-Black"
@@ -53,12 +89,12 @@
                             <Frame BackgroundColor="White" Padding="20,0">
                                 <Picker x:Name="typePicker"
                                         SelectedItem="{Binding Type}"
-                                        FontFamily="Inter-Light">
+                                        FontFamily="Inter-Light"
+                                        WidthRequest="70">
                                     <Picker.ItemsSource>
                                         <x:Array Type="{x:Type x:String}">
                                             <x:String>Internship</x:String>
                                             <x:String>Job</x:String>
-                                            <x:String>Question</x:String>
                                         </x:Array>
                                         
                                     </Picker.ItemsSource>
@@ -66,7 +102,7 @@
                             </Frame>
                         </HorizontalStackLayout>
 
-                        <HorizontalStackLayout Spacing="10">
+                        <HorizontalStackLayout Spacing="15">
                             <Label Text="Position:" 
                                    TextColor="White"
                                    FontFamily="Inter-Black"
@@ -74,6 +110,18 @@
                             <Frame BackgroundColor="White" Padding="20,0">
                                 <Entry Text="{Binding Position}"
                                        Placeholder="Job Position"
+                                       FontFamily="Inter-Light"/>
+                            </Frame>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Location:" 
+                                   TextColor="White"
+                                   FontFamily="Inter-Black"
+                                   VerticalTextAlignment="Center"/>
+                            <Frame BackgroundColor="White" Padding="20,0">
+                                <Entry Text="{Binding Location}"
+                                       Placeholder="Job Location"
                                        FontFamily="Inter-Light"/>
                             </Frame>
                         </HorizontalStackLayout>

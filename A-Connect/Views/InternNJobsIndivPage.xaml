@@ -10,52 +10,124 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!-- Header with X button -->
+        <!-- Header with the title -->
         <Grid BackgroundColor="#063970" Padding="20">
-            <Label Text="Schedule Trading"
-                   TextColor="Gold"
-                   FontSize="20"
+            <Label Text="Jobs and Internships"
+                   TextColor="{StaticResource Yellow}"
+                   FontSize="24"
                    FontFamily="Inter-Black"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"/>
-            <Button Text="X"
-                    BackgroundColor="Transparent"
-                    TextColor="White"
-                    Command="{Binding CloseCommand}"
-                    HorizontalOptions="End"
-                    VerticalOptions="Center"/>
         </Grid>
 
-        <!-- Post details in a frame -->
-        <VerticalStackLayout Grid.Row="1" Padding="20" Spacing="20">
-            <Frame BackgroundColor="#1F6FB7" CornerRadius="15" Padding="20">
-                <VerticalStackLayout Spacing="10">
-                    <Label Text="{Binding SelectedPost.CourseCode, StringFormat='SUBJECT: {0}'}"
-                           TextColor="White"
-                           FontSize="16"
-                           FontFamily="Inter-Black"/>
-                    <Label Text="{Binding SelectedPost.TradeOffer, StringFormat='TRADE OFFER: {0}'}"
-       TextColor="White"
-       FontSize="14"/>
+        <!-- Post details in a scrollable frame -->
+        <ScrollView Grid.Row="1" Padding="20">
+            <VerticalStackLayout Spacing="20">
 
-                    <Label Text="{Binding SelectedPost.TradeRequest, StringFormat='TRADE REQUEST: {0}'}"
-       TextColor="White"
-       FontSize="14"/>
+                <!-- Job Post Information -->
+                <Frame BackgroundColor="#1F6FB7" CornerRadius="15" Padding="20">
+                    <VerticalStackLayout Spacing="15">
 
-                    <Label Text="{Binding SelectedPost.ContactInfo, StringFormat='CONTACT: {0}'}"
-       TextColor="White"
-       FontSize="14"/>
+                        <!-- Title and Close Button -->
+                        <Grid ColumnDefinitions="*, Auto">
+                            <Label Text="{Binding SelectedPost.Title}"
+                                   TextColor="White"
+                                   FontSize="24"
+                                   FontFamily="Inter-Black"
+                                   LineBreakMode="WordWrap"
+                                   HorizontalOptions="FillAndExpand"
+                                   VerticalOptions="Center"
+                                   MaxLines="3"
+                                   Grid.Column="0"/>
 
-                    <HorizontalStackLayout>
-                        <Label Text="{Binding SelectedPost.PostedBy, StringFormat='Posted by: {0}'}"
-           TextColor="White"
-           FontSize="12"/>
-                        <Label Text="{Binding SelectedPost.Date, StringFormat='  |  Date: {0:MMM d, yyyy}'}"
-           TextColor="White"
-           FontSize="12"/>
-                    </HorizontalStackLayout>
-                </VerticalStackLayout>
-            </Frame>
-        </VerticalStackLayout>
+                            <Button Text="X"
+                                    BackgroundColor="Transparent"
+                                    TextColor="White"
+                                    Clicked="OnCloseClicked"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Start"
+                                    Grid.Column="1"/>
+                        </Grid>
+
+                        <Frame BackgroundColor="{StaticResource White}" CornerRadius="10" Padding="15" HasShadow="True">
+                            <Label Text="{Binding SelectedPost.JobField}"
+                                   TextColor="{StaticResource DarkBlue}"
+                                   FontSize="14"
+                                   LineBreakMode="WordWrap"/>
+                        </Frame>
+                        <!-- Type inside a box -->
+                        <Frame CornerRadius="10" Padding="15" HasShadow="True" BackgroundColor="White">
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding SelectedPost.Type}" Value="Internship">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource LightBlue}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Frame" Binding="{Binding SelectedPost.Type}" Value="Job">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource DarkBlue}" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+
+                            <Label Text="{Binding SelectedPost.Type, StringFormat='TYPE: {0}'}"
+                                   TextColor="{StaticResource White}"
+                                   FontSize="14"
+                                   LineBreakMode="WordWrap">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding SelectedPost.Type}" Value="Internship">
+                                        <Setter Property="TextColor" Value="Black" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label" Binding="{Binding SelectedPost.Type}" Value="Job">
+                                        <Setter Property="TextColor" Value="White" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                        </Frame>
+
+
+                        <!-- Company inside a box -->
+                        <Frame BackgroundColor="{StaticResource White}" CornerRadius="10" Padding="15" HasShadow="True">
+                            <Label Text="{Binding SelectedPost.Company, StringFormat='COMPANY: {0}'}"
+                                   TextColor="{StaticResource DarkBlue}"
+                                   FontSize="14"
+                                   LineBreakMode="WordWrap"/>
+                        </Frame>
+
+                        <!-- Location inside a box -->
+                        <Frame BackgroundColor="{StaticResource White}" CornerRadius="10" Padding="15" HasShadow="True">
+                            <Label Text="{Binding SelectedPost.Location, StringFormat='LOCATION: {0}'}"
+                                   TextColor="{StaticResource DarkBlue}"
+                                   FontSize="14"
+                                   LineBreakMode="WordWrap"/>
+                        </Frame>
+
+                        <!-- URL inside a box -->
+                        <Frame BackgroundColor="{StaticResource White}" CornerRadius="10" Padding="15" HasShadow="True">
+                            <Label Text="{Binding SelectedPost.PostURL, StringFormat='URL: {0}'}"
+                                   TextColor="{StaticResource DarkBlue}"
+                                   FontSize="14"
+                                   LineBreakMode="WordWrap"/>
+                        </Frame>
+
+                        <!-- Caption inside a box -->
+                        <Frame BackgroundColor="{StaticResource White}" CornerRadius="10" Padding="15" HasShadow="True">
+                            <Label Text="{Binding SelectedPost.Caption}"
+                                   TextColor="{StaticResource DarkBlue}"
+                                   FontSize="14"
+                                   LineBreakMode="WordWrap"/>
+                        </Frame>
+
+                        <!-- Posted information -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="{Binding SelectedPost.PostedBy, StringFormat='Posted by: {0}'}"
+                                   TextColor="White"
+                                   FontSize="12"/>
+                            <Label Text="{Binding SelectedPost.Date, StringFormat='  |  Date: {0:MMM d, yyyy}'}"
+                                   TextColor="White"
+                                   FontSize="12"/>
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
     </Grid>
 </ContentPage>

@@ -1,18 +1,19 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="A_Connect.Views.InternNJobsNewsfeedPage"
-             xmlns:local="clr-namespace:A_Connect.ViewModels"
-             Title="Jobs and Internships">
+<ContentPage
+    x:Class="A_Connect.Views.InternNJobsNewsfeedPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:A_Connect.ViewModels"
+    Title="Jobs and Internships News Feed"
+    BackgroundColor="White">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!-- 1. Blue Header -->
+        <!-- Blue Header -->
         <Grid BackgroundColor="{StaticResource DarkBlue}" Padding="20,40,20,20">
             <Label Text="Jobs and Internships"
                    TextColor="{StaticResource Yellow}"
@@ -22,143 +23,297 @@
                    VerticalOptions="Center"/>
         </Grid>
 
-        <!-- 2. Main Content -->
+        <!-- Main Content -->
         <StackLayout Grid.Row="1" Spacing="15" Padding="20">
 
-            <!-- Search Bar -->
             <Frame CornerRadius="25" BackgroundColor="White" Padding="0">
-                <HorizontalStackLayout Padding="10,0">
-                    <Image Source="search_icon.png"
-                           HeightRequest="20"
-                           WidthRequest="20"
-                           VerticalOptions="Center"
-                           Margin="0,0,5,0"/>
-                    <Entry Text="{Binding SearchText, Mode=TwoWay}" 
-                           Placeholder="Search"
-                           VerticalOptions="Center"
-                           FontSize="14"
-                           FontFamily="Inter-SemiBold"
-                           Margin="0"/>
-                </HorizontalStackLayout>
+                <StackLayout Orientation="Horizontal" Padding="10" Spacing="10">
+
+                    <!-- Search Bar -->
+                    <HorizontalStackLayout Padding="0" VerticalOptions="Center">
+                        <Image Source="search_icon.png"
+                   HeightRequest="20"
+                   WidthRequest="20"
+                   VerticalOptions="Center"
+                   Margin="0,0,5,0"/>
+                        <Entry Text="{Binding SearchText, Mode=TwoWay}" 
+                   Placeholder="Search"
+                   VerticalOptions="Center"
+                   FontSize="14"
+                   FontFamily="Inter-SemiBold"
+                   Margin="0"
+                   WidthRequest="150"/>
+                    </HorizontalStackLayout>
+
+                    <!-- Job Field Filter -->
+                    <Picker SelectedItem="{Binding SelectedJobField}" 
+        ItemsSource="{Binding JobFields}" 
+        Title="Select Job Field" 
+        WidthRequest="150" 
+        VerticalOptions="Center">
+                    </Picker>
+                </StackLayout>
             </Frame>
 
-            <!-- TABS: "All posts" | "Own posts" -->
-            <HorizontalStackLayout HorizontalOptions="Center" Spacing="40" Padding="0,10">
 
-                <!-- First Tab -->
+            <!-- Tabs -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="40" Padding="0,10">
+                <!-- All Posts Tab -->
                 <VerticalStackLayout HorizontalOptions="Center">
-                    <Label Text="All posts"
+                    <Label Text="All Posts"
                            FontSize="16"
                            FontFamily="Inter-SemiBold">
-                        <!-- DataTriggers for styling -->
                         <Label.Triggers>
-                            <DataTrigger TargetType="Label" Binding="{Binding AllPostsSelected}" Value="True">
+                            <DataTrigger TargetType="Label" Binding="{Binding allPostsSelected}" Value="True">
                                 <Setter Property="TextColor" Value="Black" />
                             </DataTrigger>
-                            <DataTrigger TargetType="Label" Binding="{Binding AllPostsSelected}" Value="False">
+                            <DataTrigger TargetType="Label" Binding="{Binding allPostsSelected}" Value="False">
                                 <Setter Property="TextColor" Value="#999999" />
                             </DataTrigger>
                         </Label.Triggers>
-
-                        <!-- GestureRecognizers -->
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding SwitchToAllPostsCommand}" />
                         </Label.GestureRecognizers>
                     </Label>
-
-                    <!-- Underline -->
                     <BoxView HeightRequest="2">
                         <BoxView.Triggers>
-                            <DataTrigger TargetType="BoxView" Binding="{Binding AllPostsSelected}" Value="True">
+                            <DataTrigger TargetType="BoxView" Binding="{Binding allPostsSelected}" Value="True">
                                 <Setter Property="IsVisible" Value="True" />
                                 <Setter Property="BackgroundColor" Value="Black" />
                             </DataTrigger>
-                            <DataTrigger TargetType="BoxView" Binding="{Binding AllPostsSelected}" Value="False">
+                            <DataTrigger TargetType="BoxView" Binding="{Binding allPostsSelected}" Value="False">
                                 <Setter Property="IsVisible" Value="False" />
                             </DataTrigger>
                         </BoxView.Triggers>
                     </BoxView>
                 </VerticalStackLayout>
 
-                <!-- Second Tab -->
+                <!-- Own Posts Tab -->
                 <VerticalStackLayout HorizontalOptions="Center">
                     <Label Text="Own posts"
                            FontSize="16"
                            FontFamily="Inter-SemiBold">
-                        <!-- DataTriggers for styling -->
                         <Label.Triggers>
-                            <DataTrigger TargetType="Label" Binding="{Binding IsOwnPostsSelected}" Value="True">
+                            <DataTrigger TargetType="Label" Binding="{Binding isOwnPostsSelected}" Value="True">
                                 <Setter Property="TextColor" Value="Black" />
                             </DataTrigger>
-                            <DataTrigger TargetType="Label" Binding="{Binding IsOwnPostsSelected}" Value="False">
+                            <DataTrigger TargetType="Label" Binding="{Binding isOwnPostsSelected}" Value="False">
                                 <Setter Property="TextColor" Value="#999999" />
                             </DataTrigger>
                         </Label.Triggers>
-
-                        <!-- GestureRecognizers -->
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding SwitchToOwnPostsCommand}" />
                         </Label.GestureRecognizers>
                     </Label>
-
-                    <!-- Underline -->
                     <BoxView HeightRequest="2">
                         <BoxView.Triggers>
-                            <DataTrigger TargetType="BoxView" Binding="{Binding IsOwnPostsSelected}" Value="True">
+                            <DataTrigger TargetType="BoxView" Binding="{Binding isOwnPostsSelected}" Value="True">
                                 <Setter Property="IsVisible" Value="True" />
                                 <Setter Property="BackgroundColor" Value="Black" />
                             </DataTrigger>
-                            <DataTrigger TargetType="BoxView" Binding="{Binding IsOwnPostsSelected}" Value="False">
+                            <DataTrigger TargetType="BoxView" Binding="{Binding isOwnPostsSelected}" Value="False">
                                 <Setter Property="IsVisible" Value="False" />
                             </DataTrigger>
                         </BoxView.Triggers>
                     </BoxView>
                 </VerticalStackLayout>
             </HorizontalStackLayout>
-            
-            <!-- "Post a trade" button -->
-            <Button Text="Post a trade +"
-                    Command="{Binding PostTradeCommand}"
-                    BackgroundColor="#F1C40F"
-                    TextColor="Black"
-                    FontFamily="Inter-Black"
-                    CornerRadius="25"
-                    HorizontalOptions="Center"
-                    Padding="10,5">
 
-                <!-- Visibility based on IsOwnPostsSelected -->
-                <Button.Triggers>
-                    <DataTrigger TargetType="Button" Binding="{Binding IsOwnPostsSelected}" Value="True">
-                        <Setter Property="IsVisible" Value="True" />
-                    </DataTrigger>
-                    <DataTrigger TargetType="Button" Binding="{Binding IsOwnPostsSelected}" Value="False">
-                        <Setter Property="IsVisible" Value="False" />
-                    </DataTrigger>
-                </Button.Triggers>
-            </Button> 
-            
-            <CollectionView ItemsSource="{Binding Opportunities}">
+            <StackLayout HorizontalOptions="Center"
+             VerticalOptions="Center"
+             Orientation="Horizontal"
+             Margin="10"
+             Spacing="20">
+
+                <RadioButton Content="All"
+                 GroupName="PostFilter"
+                 IsChecked="{Binding ShowAllOpportunities}"
+                 VerticalOptions="Center"
+                 Padding="10,5"
+                 CornerRadius="10"
+                 FontFamily="Inter-SemiBold"/>
+
+                <RadioButton Content="Jobs"
+                 GroupName="PostFilter"
+                 IsChecked="{Binding ShowOnlyJobs}"
+                 VerticalOptions="Center"
+                 Padding="10,5"
+                 CornerRadius="10"
+                 FontFamily="Inter-SemiBold"            />
+
+                <RadioButton Content="Internships"
+                 GroupName="PostFilter"
+                 IsChecked="{Binding ShowOnlyInternships}"
+                 VerticalOptions="Center"
+                 Padding="10,5"
+                 CornerRadius="10"
+                 FontFamily="Inter-SemiBold"/>
+
+            </StackLayout>
+
+
+            <!-- CollectionView for DisplayedPosts -->
+            <CollectionView ItemsSource="{Binding DisplayedPosts}" 
+                VerticalOptions="FillAndExpand"
+                SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame BackgroundColor="{StaticResource Blue}" CornerRadius="15" Padding="15" Margin="0,5">
-                            <VerticalStackLayout>
-                                <Label Text="{Binding Title}" FontSize="18" FontFamily="Inter-Black" TextColor="White"/>
-                                <Label Text="{Binding Position}" FontSize="16" FontFamily="Inter-SemiBold" TextColor="White"/>
-                                <Label Text="{Binding Company}" FontSize="14" TextColor="White"/>
-                                <Label Text="{Binding Caption}" FontSize="13" TextColor="White"/>
-                                <Label Text="{Binding Type}" FontSize="12" TextColor="White"/>
-                                <Label Text="{Binding PostURL}" FontSize="12" TextColor="White"/>
+                        <Frame BackgroundColor="{StaticResource Blue}"
+                   CornerRadius="15"
+                   Padding="15"
+                   Margin="0,10">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer 
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:InternNJobsNewsfeedViewModel}}, Path=PostTappedCommand}"
+                        CommandParameter="{Binding}"/>
+                            </Frame.GestureRecognizers>
+                            <VerticalStackLayout Spacing="5">
+
+                                <!-- Type above Title -->
+                                <VerticalStackLayout Spacing="5" Margin="0,5,0,0">
+                                    <HorizontalStackLayout Spacing="10">
+                                    <!-- Type Tag -->
+                                    <Frame Padding="5,2"
+                                           CornerRadius="10"
+                                           HasShadow="False"
+                                           HorizontalOptions="Start">
+                                        <Frame.Triggers>
+                                            <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Internship">
+                                                <Setter Property="BackgroundColor" Value="{StaticResource LightBlue}" />
+                                                <Setter Property="BorderColor" Value="Black" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Frame" Binding="{Binding Type}" Value="Job">
+                                                <Setter Property="BackgroundColor" Value="{StaticResource DarkBlue}" />
+                                            </DataTrigger>
+                                        </Frame.Triggers>
+                                        <Label Text="{Binding Type}"
+                                               FontSize="14"
+                                               FontFamily="Inter-SemiBold"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Center">
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding Type}" Value="Internship">
+                                                    <Setter Property="TextColor" Value="Black" />
+                                                </DataTrigger>
+                                                <DataTrigger TargetType="Label" Binding="{Binding Type}" Value="Job">
+                                                    <Setter Property="TextColor" Value="White" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                    </Frame>
+
+                                        <Frame BackgroundColor="{StaticResource MidBlue}"
+                                           CornerRadius="10"
+                                           Padding="5"
+                                           HasShadow="False">
+                                            <Label Text="{Binding JobField}"
+                                               TextColor="White"
+                                               FontSize="14"
+                                               FontFamily="Inter-SemiBold"/>
+                                        </Frame>
+                                    </HorizontalStackLayout>
+                                    <!-- Title -->
+                                    <Label Text="{Binding Title}"
+                               TextColor="White"
+                               FontSize="18"
+                               FontFamily="Inter-Black"
+                               VerticalOptions="Center"
+                               LineBreakMode="WordWrap"
+                               MaxLines="3"
+                               HorizontalOptions="Start"/>
+                                </VerticalStackLayout>
+
+                                <!-- Position -->
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="Position Available:"
+                               TextColor="White"
+                               FontFamily="Inter-SemiBold"
+                               VerticalOptions="Center"/>
+                                    <Frame BackgroundColor="{StaticResource Red}"
+                               CornerRadius="10"
+                               Padding="5"
+                               HasShadow="False">
+                                        <Label Text="{Binding Position}"
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="Inter-SemiBold"/>
+                                    </Frame>
+                                </HorizontalStackLayout>
+
+                                <!-- Company Information -->
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="Company:"
+                               TextColor="White"
+                               FontFamily="Inter-SemiBold"
+                               VerticalOptions="Center"/>
+                                    <Label Text="{Binding Company}"
+                               TextColor="White"
+                               FontSize="14"
+                               FontFamily="Inter-SemiBold"/>
+                                </HorizontalStackLayout>
+
+                                <!-- Location-->
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="Location:"
+                               TextColor="White"
+                               FontFamily="Inter-SemiBold"
+                               VerticalOptions="Center"/>
+                                    <Label Text="{Binding Location}"
+                               TextColor="White"
+                               FontSize="14"
+                               FontFamily="Inter-SemiBold"/>
+                                </HorizontalStackLayout>
+
+                                <!-- Posted By and Date -->
+                                <Grid ColumnDefinitions="*,Auto" VerticalOptions="End" Margin="0,10,0,0">
+                                    <!-- Delete Button -->
+                                    <Button Text="Delete"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:InternNJobsNewsfeedViewModel}}, Path=DeletePostCommand}"
+                                CommandParameter="{Binding}"
+                                BackgroundColor="{StaticResource Red}"
+                                TextColor="White"
+                                FontFamily="Inter-SemiBold"
+                                CornerRadius="20"
+                                VerticalOptions="End"
+                                HorizontalOptions="End"
+                                IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewModels:InternNJobsNewsfeedViewModel}}, Path=isOwnPostsSelected}" />
+
+                                    <!-- Posted By -->
+                                    <Label Text="{Binding PostedBy, StringFormat='Posted by: {0}'}"
+                               TextColor="White"
+                               FontSize="12"
+                               FontFamily="Inter-Light"
+                               HorizontalOptions="End"
+                               VerticalOptions="End"
+                               IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewModels:InternNJobsNewsfeedViewModel}}, Path=allPostsSelected}" />
+
+                                    <!-- Date Posted -->
+                                    <Label Text="{Binding Date, StringFormat='Date Posted: {0:MMM d, yyyy}'}"
+                               TextColor="White"
+                               FontSize="12"
+                               FontFamily="Inter-Light"
+                               HorizontalOptions="Start" 
+                               VerticalOptions="End"/>
+                                </Grid>
+
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
+            <!-- "Post" Button  -->
+            <Button Text="Post +"
+                    Command="{Binding SwitchToCreatePostCommand}"
+                    BackgroundColor="{StaticResource Yellow}"
+                    TextColor="Black"
+                    FontFamily="Inter-Black"
+                    CornerRadius="25"
+                    HorizontalOptions="Center"
+                    Padding="10,5"/>
         </StackLayout>
 
-       
-
-        <!-- 3. Bottom Nav Bar -->
+        <!-- Bottom Nav Bar  -->
         <Grid Grid.Row="2" BackgroundColor="#063970" HeightRequest="60">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -170,17 +325,20 @@
                          Grid.Column="0"
                          HorizontalOptions="Center"
                          VerticalOptions="Center"
-                         WidthRequest="30" HeightRequest="30"/>
+                         WidthRequest="30"
+                         HeightRequest="30"/>
             <ImageButton Source="nav_home.png"
                          Grid.Column="1"
                          HorizontalOptions="Center"
                          VerticalOptions="Center"
-                         WidthRequest="30" HeightRequest="30"/>
+                         WidthRequest="30" HeightRequest="30"
+                         Command="{Binding NavigateToHomeCommand}"/>
             <ImageButton Source="nav_profile.png"
                          Grid.Column="2"
                          HorizontalOptions="Center"
                          VerticalOptions="Center"
-                         WidthRequest="30" HeightRequest="30"/>
+                         WidthRequest="30"
+                         HeightRequest="30"/>
         </Grid>
     </Grid>
 </ContentPage>
