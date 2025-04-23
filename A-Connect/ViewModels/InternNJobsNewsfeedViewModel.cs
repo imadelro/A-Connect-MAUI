@@ -80,8 +80,8 @@ namespace A_Connect.ViewModels
 
             JobFields = new ObservableCollection<string>
             {
-                "All", "Administration", "Business Development / Strategy", "Creative / Design", "Customer Service", 
-                "Engineering / Technical", "Executive / Leadership", "Finance", "Human Resources (HR)", "Information Technology (IT)", 
+                "All", "Administration", "Business Development / Strategy", "Creative / Design", "Customer Service",
+                "Engineering / Technical", "Executive / Leadership", "Finance", "Human Resources (HR)", "Information Technology (IT)",
                 "Legal / Compliance", "Marketing", "Operations / Logistics", "Product / Project Management", "Research & Development (R&D)", "Sales"
             };
         }

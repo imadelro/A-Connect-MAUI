@@ -127,6 +127,19 @@
                     </VerticalStackLayout>
                 </Frame>
 
+                <Frame>
+                    <Button Text="Delete"
+                            Command="{Binding DeletePostCommand}"
+                            CommandParameter="{Binding SelectedPost}"
+                            BackgroundColor="Red"
+                            TextColor="White"
+                            FontFamily="Inter-Black"
+                            CornerRadius="25"
+                            HorizontalOptions="Center"
+                            Padding="40,10"
+            IsVisible="{Binding IsCurrentUserPost}" />
+                </Frame>
+
             </VerticalStackLayout>
         </ScrollView>
     </Grid>
