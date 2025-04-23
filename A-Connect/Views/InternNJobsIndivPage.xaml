@@ -137,7 +137,7 @@
                             CornerRadius="25"
                             HorizontalOptions="Center"
                             Padding="40,10"
-            IsVisible="{Binding IsCurrentUserPost}" />
+                            IsVisible="{Binding IsCurrentUserPost}" />
                 </Frame>
 
             </VerticalStackLayout>
