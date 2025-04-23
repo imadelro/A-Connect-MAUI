@@ -7,6 +7,8 @@ namespace A_Connect.Views
         public Homepage()
         {
             InitializeComponent();
+            string username = App.CurrentUser?.Username ?? "Guest";
+            WelcomeLabel.Text = $"Welcome, {username}!";
         }
 
         private async void OnScheduleTradingClicked(object sender, EventArgs e)
@@ -49,7 +51,7 @@ namespace A_Connect.Views
                 Preferences.Remove("IsLoggedIn");
 
                 // Navigate back to login page
-                await Shell.Current.GoToAsync("LoginPage");
+                await Shell.Current.GoToAsync("StartPage");
             }
         }
     }
