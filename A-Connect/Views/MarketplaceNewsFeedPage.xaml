@@ -164,7 +164,8 @@
                          Grid.Column="1"
                          HorizontalOptions="Center"
                          VerticalOptions="Center"
-                         WidthRequest="30" HeightRequest="30"/>
+                         WidthRequest="30" HeightRequest="30"
+                         Command="{Binding NavigateToHomeCommand}"/>
             <ImageButton Source="nav_profile.png"
                          Grid.Column="2"
                          HorizontalOptions="Center"
