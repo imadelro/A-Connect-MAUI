@@ -13,15 +13,13 @@ namespace A_Connect.Views
             InitializeComponent();
 
         }
-        protected override void OnAppearing()
+
+
+    protected override void OnAppearing()
         {
             base.OnAppearing();
 
             string username = App.CurrentUser?.Username ?? "Guest";
-
-            WelcomeLabel.Text = $"Welcome, {username}!";
-            BindingContext = new HomepageViewModel();
-
             string displayName = App.CurrentUser?.DisplayName;
 
 
