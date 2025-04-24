@@ -8,6 +8,12 @@ public partial class AppShell : Shell
     {
         InitializeComponent();
 
+
+        //Register SetDisplayName pages.
+        Routing.RegisterRoute(nameof(AccountDetailsPage), typeof(AccountDetailsPage));
+
+
+
         // Register existing pages.
         Routing.RegisterRoute(nameof(StartPage), typeof(StartPage));
         Routing.RegisterRoute("LoginPage", typeof(LoginPage));
@@ -28,6 +34,7 @@ public partial class AppShell : Shell
         // Register InternNJobs pages.
         Routing.RegisterRoute("InternNJobsNewsfeedPage", typeof(InternNJobsNewsfeedPage));
         Routing.RegisterRoute(nameof(InternNJobsFormPage), typeof(InternNJobsFormPage));
+        Routing.RegisterRoute(nameof(InternNJobsIndivPage), typeof(InternNJobsIndivPage));
 
 
         // Register Marketplace Pages.

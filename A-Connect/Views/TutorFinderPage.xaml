@@ -109,31 +109,103 @@
 
             <!-- CollectionView for DisplayedPosts -->
             <CollectionView x:Name="postsCollectionView"
-                            ItemsSource="{Binding DisplayedPosts}"
-                            VerticalOptions="FillAndExpand"
-                            SelectionMode="None"
-                            SelectionChanged="OnPostSelected">
+                ItemsSource="{Binding DisplayedPosts}"
+                VerticalOptions="FillAndExpand"
+                SelectionMode="None"
+                SelectionChanged="OnPostSelected">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame BackgroundColor="{StaticResource Blue}"
-                               CornerRadius="15"
-                               Padding="15"
-                               Margin="0,10">
+                   CornerRadius="15"
+                   Padding="15"
+                   Margin="0,10">
                             <VerticalStackLayout Spacing="5">
+                                <!-- Status and Action Buttons (Copied from STNewsFeed) -->
+                                <Grid ColumnDefinitions="*, Auto">
+                                    <!-- Status Tag -->
+                                    <Frame CornerRadius="10"
+                               Padding="5"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Center">
+                                        <Frame.Triggers>
+                                            <DataTrigger TargetType="Frame" Binding="{Binding IsAvailable}" Value="True">
+                                                <Setter Property="BackgroundColor" Value="{StaticResource DarkBlue}" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Frame" Binding="{Binding IsAvailable}" Value="False">
+                                                <Setter Property="BackgroundColor" Value="{StaticResource Red}" />
+                                            </DataTrigger>
+                                        </Frame.Triggers>
+                                        <Label Text="{Binding AvailabilityStatus}"
+                                   TextColor="White"
+                                   FontSize="12"
+                                   FontFamily="Inter-SemiBold"
+                                   HorizontalOptions="Center" />
+                                    </Frame>
+
+                                    <!-- Action Buttons -->
+                                    <VerticalStackLayout Grid.Column="1"
+                                             HorizontalOptions="End"
+                                             VerticalOptions="Center"
+                                             Spacing="10">
+                                        <!-- Mark as Unavailable button -->
+                                        <Button Text="Mark as Unavailable"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.MarkAsUnavailableCommand}"
+                                    CommandParameter="{Binding}"
+                                    BackgroundColor="{StaticResource Yellow}"
+                                    TextColor="Black"
+                                    FontFamily="Inter-SemiBold"
+                                    CornerRadius="20"
+                                    IsVisible="False">
+                                            <Button.Triggers>
+                                                <MultiTrigger TargetType="Button">
+                                                    <MultiTrigger.Conditions>
+                                                        <BindingCondition Binding="{Binding IsOwnPost}" Value="True" />
+                                                        <BindingCondition Binding="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.IsOwnPostsSelected}" Value="True" />
+                                                        <BindingCondition Binding="{Binding IsAvailable}" Value="True" />
+                                                    </MultiTrigger.Conditions>
+                                                    <Setter Property="IsVisible" Value="True" />
+                                                </MultiTrigger>
+                                            </Button.Triggers>
+                                        </Button>
+
+                                        <!-- Mark as Available button -->
+                                        <Button Text="Mark as Available"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.MarkAsAvailableCommand}"
+                                    CommandParameter="{Binding}"
+                                    BackgroundColor="{StaticResource DarkBlue}"
+                                    TextColor="White"
+                                    FontFamily="Inter-SemiBold"
+                                    CornerRadius="20"
+                                    IsVisible="False">
+                                            <Button.Triggers>
+                                                <MultiTrigger TargetType="Button">
+                                                    <MultiTrigger.Conditions>
+                                                        <BindingCondition Binding="{Binding IsOwnPost}" Value="True" />
+                                                        <BindingCondition Binding="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.IsOwnPostsSelected}" Value="True" />
+                                                        <BindingCondition Binding="{Binding IsAvailable}" Value="False" />
+                                                    </MultiTrigger.Conditions>
+                                                    <Setter Property="IsVisible" Value="True" />
+                                                </MultiTrigger>
+                                            </Button.Triggers>
+                                        </Button>
+                                    </VerticalStackLayout>
+                                </Grid>
+
+                                <!-- Course Code -->
                                 <Label Text="{Binding CourseCode}"
-                                       TextColor="White"
-                                       FontSize="18"
-                                       FontFamily="Inter-Black" />
+                           TextColor="White"
+                           FontSize="18"
+                           FontFamily="Inter-Black" />
 
                                 <!-- Category -->
                                 <HorizontalStackLayout Spacing="10">
                                     <Label Text="Category:"
-           TextColor="White"
-           FontFamily="Inter-SemiBold"
-           VerticalOptions="Center" />
+                               TextColor="White"
+                               FontFamily="Inter-SemiBold"
+                               VerticalOptions="Center" />
                                     <Frame CornerRadius="10"
-           Padding="5"
-           HasShadow="False">
+                               Padding="5"
+                               HasShadow="False">
                                         <Frame.Triggers>
                                             <!-- Trigger for 'Tutor' -->
                                             <DataTrigger TargetType="Frame" Binding="{Binding Category}" Value="Tutor">
@@ -146,8 +218,8 @@
                                             </DataTrigger>
                                         </Frame.Triggers>
                                         <Label Text="{Binding Category}"
-               FontSize="14"
-               FontFamily="Inter-SemiBold">
+                                   FontSize="14"
+                                   FontFamily="Inter-SemiBold">
                                             <Label.Triggers>
                                                 <!-- Trigger for 'Tutor' -->
                                                 <DataTrigger TargetType="Label" Binding="{Binding Category}" Value="Tutor">
@@ -162,70 +234,70 @@
                                     </Frame>
                                 </HorizontalStackLayout>
 
+                                <!-- Contact Details -->
                                 <HorizontalStackLayout Spacing="10">
                                     <Label Text="Contact Details:"
-                                           TextColor="White"
-                                           FontFamily="Inter-SemiBold"
-                                           VerticalOptions="Center"/>
+                               TextColor="White"
+                               FontFamily="Inter-SemiBold"
+                               VerticalOptions="Center"/>
                                     <Label Text="{Binding PosterContact}"
-                                           TextColor="White"
-                                           FontSize="14"
-                                           FontFamily="Inter-SemiBold"/>
+                               TextColor="White"
+                               FontSize="14"
+                               FontFamily="Inter-SemiBold"/>
                                 </HorizontalStackLayout>
 
                                 <!-- Additional Info -->
                                 <Label Text="{Binding AdditionalInfo}"
-                                       TextColor="White"
-                                       FontSize="14"
-                                       FontFamily="Inter-Light" />
+                           TextColor="White"
+                           FontSize="14"
+                           FontFamily="Inter-Light" />
 
                                 <!-- Poster Name or Delete Button -->
                                 <Grid ColumnDefinitions="Auto,*,Auto"
-      VerticalOptions="End"
-      Margin="0,10,0,0">
+                          VerticalOptions="End"
+                          Margin="0,10,0,0">
                                     <!-- Date Posted (Lower Left) -->
                                     <Label Text="{Binding Date, StringFormat='Date Posted: {0:MMM d, yyyy}'}"
-           TextColor="White"
-           FontSize="12"
-           FontFamily="Inter-Light"
-           Grid.Column="0"
-           HorizontalOptions="Start"
-           VerticalOptions="End" />
+                               TextColor="White"
+                               FontSize="12"
+                               FontFamily="Inter-Light"
+                               Grid.Column="0"
+                               HorizontalOptions="Start"
+                               VerticalOptions="End" />
                                     <!-- Spacer to push content to the right -->
-                                    <BoxView Grid.Column="1"
-         BackgroundColor="Transparent" />
+                                    <BoxView Grid.Column="1" BackgroundColor="Transparent" />
 
                                     <!-- Poster Name (Lower Right) -->
                                     <Label x:Name="posterNameLabel"
-       Text="{Binding PosterName, StringFormat='Posted by: {0}'}"
-       TextColor="White"
-       FontSize="12"
-       FontFamily="Inter-Light"
-       Grid.Column="2"
-       HorizontalOptions="End"
-       VerticalOptions="End" 
-                                                  IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.allPostsSelected}"
-                                           />
+                               Text="{Binding PosterName, StringFormat='Posted by: {0}'}"
+                               TextColor="White"
+                               FontSize="12"
+                               FontFamily="Inter-Light"
+                               Grid.Column="2"
+                               HorizontalOptions="End"
+                               VerticalOptions="End"
+                               IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.allPostsSelected}" />
+
                                     <!-- Delete Button (Lower Right) -->
                                     <Button x:Name="deleteButton"
-            Text="Delete"
-            TextColor="White"
-            BackgroundColor="{StaticResource Red}"
-            FontSize="12"
-            FontFamily="Inter-SemiBold"
-            CornerRadius="20"
-            Grid.Column="2"
-            HorizontalOptions="End"
-            VerticalOptions="End"
-        IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.IsOwnPostsSelected}"
-            Clicked="OnDeleteButtonClicked" />
+                                Text="Delete"
+                                TextColor="White"
+                                BackgroundColor="{StaticResource Red}"
+                                FontSize="12"
+                                FontFamily="Inter-SemiBold"
+                                CornerRadius="20"
+                                Grid.Column="2"
+                                HorizontalOptions="End"
+                                VerticalOptions="End"
+                                IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.IsOwnPostsSelected}"
+                                Clicked="OnDeleteButtonClicked" />
                                 </Grid>
-
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
 
             <!-- Create Post Button -->
             <Button Text="Create Post"

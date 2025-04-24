@@ -1,10 +1,13 @@
 using Microsoft.Maui.Controls;
 using A_Connect.ViewModels;
+using A_Connect.Models;
 
 namespace A_Connect.Views
 {
     public partial class ScheduleTradingNewsFeedPage : ContentPage
     {
+        private CollectionView postsCollectionView; 
+
         public ScheduleTradingNewsFeedPage()
         {
             InitializeComponent();

@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.Maui.Controls;
 using A_Connect.ViewModels;
 using System.Windows.Input;
@@ -10,9 +11,29 @@ namespace A_Connect.Views
         public Homepage()
         {
             InitializeComponent();
+
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
             string username = App.CurrentUser?.Username ?? "Guest";
+
             WelcomeLabel.Text = $"Welcome, {username}!";
             BindingContext = new HomepageViewModel();
+
+            string displayName = App.CurrentUser?.DisplayName;
+
+
+            if (displayName == null)
+            {
+                WelcomeLabel.Text = $"Welcome, {username}!";
+            } else
+            {
+                WelcomeLabel.Text = $"Welcome, {displayName}!";
+            }
+
+            
         }
 
 
@@ -24,6 +45,7 @@ namespace A_Connect.Views
 
         private async void OnProfsToPickClicked(object sender, EventArgs e)
         {
+
             await Shell.Current.GoToAsync("ProfsToPickNewsFeedPage");
         }
 
@@ -54,11 +76,20 @@ namespace A_Connect.Views
 
             if (confirm)
             {
+
+                // clear 
                 App.CurrentUser = null;
+                // Remove  stored credentials
+
                 Preferences.Remove("Username");
                 Preferences.Remove("IsLoggedIn");
                 await Shell.Current.GoToAsync("StartPage");
             }
+        }
+
+        private async void OnAccountClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(AccountDetailsPage));
         }
     }
 }

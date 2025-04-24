@@ -3,6 +3,7 @@
              x:Class="A_Connect.Views.StartPage"
              Background="{StaticResource MainGradient}"
              Padding="0,50,0,50"
+             Shell.NavBarIsVisible="False"
              Title="A-Connect">
 
 <VerticalStackLayout HorizontalOptions="Center"

@@ -41,7 +41,8 @@ namespace A_Connect.Views
                 PosterName = posterName,
                 PosterContact = contactEntry.Text?.Trim(),
                 AdditionalInfo = additionalInfoEditor.Text?.Trim(),
-                Date = DateTime.Now // store the submission date
+                Date = DateTime.Now, // store the submission date
+                IsAvailable = true
             };
 
             // Save to the database

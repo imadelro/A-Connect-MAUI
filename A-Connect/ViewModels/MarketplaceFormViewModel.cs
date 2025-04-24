@@ -42,11 +42,13 @@ namespace A_Connect.ViewModels
         }
 
         public string ListingTitle { get; set; }
+        public decimal Price{ get; set; }
         public string Category { get; set; }
         public string Condition { get; set; }
         public string ContactDetails { get; set; }
+        public string Location { get; set; }
+
         public string Description { get; set; }
-        public string Price { get; set; }
 
         private async Task UploadImage()
         {
@@ -81,11 +83,13 @@ namespace A_Connect.ViewModels
             var newPost = new MarketplacePost
             {
                 ListingTitle = ListingTitle.Trim(),
+                Price = Price,
                 Category = Category.Trim(),
                 Condition = Condition.Trim(),
                 PosterName = _currentUser,
                 PosterContact = ContactDetails.Trim(),
                 Description = Description?.Trim(),
+                Location = Location,
                 DatePosted = DateTime.Now,
                 ImagePath = SelectedImagePath  // Store the image path
             };

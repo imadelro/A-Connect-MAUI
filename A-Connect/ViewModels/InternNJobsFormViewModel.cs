@@ -10,9 +10,12 @@ namespace A_Connect.ViewModels
 {
     public class InternNJobsFormViewModel : BaseViewModel
     {
+        private string PostedBy;
         private string title;
         private string type;
+        private string jobfield;
         private string position;
+        private string location;
         private string company;
         private string postURL;
         private string caption;
@@ -30,6 +33,12 @@ namespace A_Connect.ViewModels
             get => type;
             set => SetProperty(ref type, value);
         }
+        public string JobField
+        {
+            get => jobfield;
+            set => SetProperty(ref jobfield, value);
+        }
+
 
         public string Position
         {
@@ -41,6 +50,11 @@ namespace A_Connect.ViewModels
         {
             get => company;
             set => SetProperty(ref company, value);
+        }
+        public string Location
+        {
+            get => location;
+            set => SetProperty(ref location, value);
         }
 
         public string PostURL
@@ -65,7 +79,7 @@ namespace A_Connect.ViewModels
 
         private async Task SubmitOpportunity()
         {
-            if (new[] { Title, Type, Position, Company, PostURL, Caption }.Any(string.IsNullOrWhiteSpace))
+            if (new[] { Title, Type, JobField, Position, Location, Company, PostURL, Caption }.Any(string.IsNullOrWhiteSpace))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Please fill all fields.", "OK");
                 return;
@@ -73,17 +87,19 @@ namespace A_Connect.ViewModels
 
             var newOpportunity = new Opportunity
             {
-                AuthorID = App.CurrentUser.Username,
+                PostedBy = App.CurrentUser.Username,
                 Title = Title,
                 Type = Type,
+                JobField = JobField,
                 Position = Position,
+                Location = Location,
                 Company = Company,
                 PostURL = PostURL,
                 Caption = Caption,
             };
 
             await _database.SaveOpportunityAsync(newOpportunity);
-            await Application.Current.MainPage.DisplayAlert("Success", "Review submitted!", "OK");
+            await Application.Current.MainPage.DisplayAlert("Success", "Post submitted!", "OK");
             var newsfeedViewModel = DependencyService.Get<InternNJobsNewsfeedViewModel>();
             await newsfeedViewModel.LoadOpportunitiesAsync();
             await Shell.Current.GoToAsync("..");

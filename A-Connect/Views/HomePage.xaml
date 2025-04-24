@@ -10,6 +10,7 @@
             <RowDefinition Height="Auto"/> <!-- Welcome Message -->
             <RowDefinition Height="*" />   <!-- Apps Grid -->
             <RowDefinition Height="Auto"/> <!-- Bottom Nav Bar -->
+
         </Grid.RowDefinitions>
 
         <!-- CardView Equivalent (Logo Frame) -->
@@ -186,6 +187,7 @@
                     <Label Text="Marketplace"
                            FontSize="16" FontFamily="Inter-Bold"
                            TextColor="Black"
+                           Margin="0,-5,0,0"
                            HorizontalOptions="Center"/>
                 </VerticalStackLayout>
             </Frame>
@@ -207,7 +209,8 @@
                     <Label Text="Tutor Finder"
                            FontSize="16" FontFamily="Inter-Bold"
                            TextColor="Black"
-                           HorizontalOptions="Center"/>
+                           HorizontalOptions="Center"
+                           Margin="0,-5,0,0"/>
                 </VerticalStackLayout>
             </Frame>
 
@@ -259,15 +262,44 @@
                 </Frame>
             </Grid>
         </ScrollView>
-
-
-        <!-- navigation page -->
-
     
 
 
         <!-- Bottom Navigation Bar -->
         <Grid Grid.Row="4" BackgroundColor="#063970" WidthRequest="411" HeightRequest="60" VerticalOptions="End" Margin="0,0,0,-20">
+
+            <!-- Logout Button -->
+            <Frame Grid.Row="2" Grid.Column="1"
+                BackgroundColor="{StaticResource White}"
+       WidthRequest="160" HeightRequest="160"
+       CornerRadius="15" HasShadow="True"
+       HorizontalOptions="Center">
+                <Frame.Shadow>
+                    <Shadow Brush="Black" 
+                Opacity="0.40" 
+                Radius="15"/>
+                </Frame.Shadow>
+                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                    <ImageButton Source="logout_icon.png"
+                     WidthRequest="100" HeightRequest="90"
+                     Clicked="OnLogoutClicked"
+                     BackgroundColor="Transparent"/>
+                    <Label Text="Logout"
+               FontSize="14" FontFamily="Inter-Bold"
+               TextColor="Black"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Center"
+               Margin="0,5,0,0"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            
+
+        </Grid>
+
+        <!-- Bottom Nav Bar  -->
+        <Grid Grid.Row="3" BackgroundColor="#063970" HeightRequest="60">
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -275,27 +307,27 @@
             </Grid.ColumnDefinitions>
 
             <ImageButton Source="nav_icon1.png"
-                         Grid.Column="0"
-                         HorizontalOptions="Center"
-                         VerticalOptions="Center"
-                         WidthRequest="30"
-                         HeightRequest="30"
-                         Clicked="OnNavIconClicked"/>
-
+                          Grid.Column="0"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Center"
+                          WidthRequest="30"
+                          HeightRequest="30"
+                          Clicked="OnNavIconClicked"/>
             <ImageButton Source="nav_home.png"
-                         Grid.Column="1"
-                         HorizontalOptions="Center"
-                         VerticalOptions="Center"
-                         WidthRequest="30"
-                         HeightRequest="30"
-                         Command="{Binding NavigateToHomeCommand}" />
-
+                          Grid.Column="1"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Center"
+                          WidthRequest="30" HeightRequest="30"
+                          Command="{Binding NavigateToHomeCommand}"/>
+          
             <ImageButton Source="nav_profile.png"
-                         Grid.Column="2"
-                         HorizontalOptions="Center"
-                         VerticalOptions="Center"
-                         WidthRequest="30"
-                         HeightRequest="30" />
+                          Grid.Column="2"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Center"
+                          WidthRequest="30"
+                          HeightRequest="30"
+                         Clicked="OnAccountClicked"/>
+
         </Grid>
     </Grid>
         

@@ -11,27 +11,22 @@ namespace A_Connect.Services
 
         public STFormDatabase(string dbPath)
         {
-            // Initialize the SQLite connection
             _db = new SQLiteAsyncConnection(dbPath);
-            // Create the table if it doesn't exist
             _db.CreateTableAsync<STForm>().Wait();
         }
 
         // Insert a new post
         public async Task<int> SavePostAsync(STForm post)
         {
-            // Check if the post already exists in the database
             var existingPost = await _db.Table<STForm>().FirstOrDefaultAsync(p => p.Id == post.Id);
             if (existingPost != null)
             {
-                return 0; // Do not insert duplicate
+                return 0; 
             }
 
             return await _db.InsertAsync(post);
         }
 
-
-        // Retrieve all posts
         public Task<List<STForm>> GetAllPostsAsync()
         {
             return _db.Table<STForm>().ToListAsync();
@@ -40,6 +35,23 @@ namespace A_Connect.Services
         public async Task<int> DeletePostAsync(STForm post)
         {
             return await _db.DeleteAsync(post);
+        }
+
+        public async Task MarkAsUnavailableAsync(STForm post)
+        {
+            post.IsAvailable = false;
+            await UpdatePostAsync(post);
+        }
+
+        public async Task MarkAsAvailableAsync(STForm post)
+        {
+            post.IsAvailable = true;
+            await UpdatePostAsync(post);
+        }
+
+        private async Task UpdatePostAsync(STForm post)
+        {
+            await _db.UpdateAsync(post); 
         }
 
     }

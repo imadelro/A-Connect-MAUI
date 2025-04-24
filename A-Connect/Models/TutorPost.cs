@@ -23,5 +23,8 @@ namespace A_Connect.Models
         // New: Date the post was created
         public DateTime Date { get; set; }
         public bool IsOwnPost { get; set; }
+        public bool IsAvailable { get; set; } = true; // Default to available
+        public string AvailabilityStatus => IsAvailable ? "Available" : "Unavailable";
+
     }
 }
