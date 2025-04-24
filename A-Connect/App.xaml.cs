@@ -35,27 +35,30 @@ public partial class App : Application
     }
 
     public App()
-    {
-        InitializeComponent();
-        string STdbPath = Path.Combine(FileSystem.AppDataDirectory, "STForms.db3");        
-        string marketplaceDbPath = Path.Combine(FileSystem.AppDataDirectory, "marketplace.db3"); ;
+{
+    InitializeComponent();
 
+    // Paths
+    string userDbPath = Path.Combine(FileSystem.AppDataDirectory, "User.db3");
+    string opportunityDbPath = Path.Combine(FileSystem.AppDataDirectory, "opportunities.db3");
+    string STdbPath = Path.Combine(FileSystem.AppDataDirectory, "STForms.db3");
+    string marketplaceDbPath = Path.Combine(FileSystem.AppDataDirectory, "marketplace.db3");
 
-        DependencyService.Register<OpportunityDatabase>();
-        DependencyService.Register<InternNJobsNewsfeedViewModel>();
+    // Init & Register Databases
+    var userDb = new UserDatabase(userDbPath);
+    DependencyService.RegisterSingleton<UserDatabase>(userDb);
 
-        string dbPath = Path.Combine(FileSystem.AppDataDirectory, "opportunities.db3");
-        OpportunityDatabase = new OpportunityDatabase(dbPath);
+    OpportunityDatabase = new OpportunityDatabase(opportunityDbPath);
+    DependencyService.RegisterSingleton<OpportunityDatabase>(OpportunityDatabase);
 
-        DependencyService.RegisterSingleton<OpportunityDatabase>(OpportunityDatabase);
+    // Other DBs
+    STDB = new STFormDatabase(STdbPath);
+    MarketplaceDB = new MarketplaceDatabase(marketplaceDbPath);
 
+    // ViewModels (optional if not resolving via DependencyService)
+    DependencyService.Register<InternNJobsNewsfeedViewModel>();
+}
 
-    // Initialize the database
-        STDB = new STFormDatabase(STdbPath);
-        MarketplaceDB = new MarketplaceDatabase(marketplaceDbPath);
-
-
-    }
 
     protected override Window CreateWindow(IActivationState? activationState)
     {

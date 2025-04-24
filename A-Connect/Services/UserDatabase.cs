@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 using SQLite;
 using A_Connect.Models;
 using System.Threading.Tasks;
+
+[assembly: Microsoft.Maui.Controls.Dependency(typeof(A_Connect.Services.UserDatabase))]
+
 namespace A_Connect.Services
 {
+
     public class UserDatabase
     {
         private readonly SQLiteAsyncConnection _database;

@@ -1,5 +1,4 @@
 ﻿using A_Connect.Models;
-using A_Connect.Views;
 using A_Connect.Services;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -11,6 +10,7 @@ namespace A_Connect.ViewModels
     {
         private OpportunityDatabase _database;
         private Opportunity _selectedPost;
+        private UserDatabase _userDatabase;
 
         private ObservableCollection<Opportunity> _opportunities;
         public ObservableCollection<Opportunity> Opportunities
@@ -25,6 +25,20 @@ namespace A_Connect.ViewModels
             get => SelectedPost != null && SelectedPost.PostedBy == App.CurrentUser.Username;
         }
 
+        private string _author;
+        public string Author
+        {
+            get => _author;
+            set => SetProperty(ref _author, value);
+        }
+
+        private string _postedByDisplayName;
+        public string PostedByDisplayName
+        {
+            get => _postedByDisplayName;
+            set => SetProperty(ref _postedByDisplayName, value);
+        }
+
         public Opportunity SelectedPost
         {
             get => _selectedPost;
@@ -32,15 +46,16 @@ namespace A_Connect.ViewModels
             {
                 SetProperty(ref _selectedPost, value);
                 OnPropertyChanged(nameof(IsCurrentUserPost));  // Ensure IsCurrentUserPost is updated when SelectedPost changes
+                LoadPostedByDisplayName(); // Load the display name when SelectedPost changes
             }
         }
 
         public ICommand DeletePostCommand { get; }
         public ICommand OpenUrlCommand { get; }
 
-
         public InternNJobsIndivViewModel()
         {
+            _userDatabase = DependencyService.Get<UserDatabase>();
             _database = DependencyService.Get<OpportunityDatabase>();
             Opportunities = new ObservableCollection<Opportunity>();
             DeletePostCommand = new Command<Opportunity>(async (opportunity) => await DeletePost(opportunity));
@@ -48,17 +63,35 @@ namespace A_Connect.ViewModels
             {
                 if (!string.IsNullOrEmpty(url))
                 {
-                   await Launcher.Default.OpenAsync(url);
+                    await Launcher.Default.OpenAsync(url);
                 }
             });
+        }
+
+        private async void LoadPostedByDisplayName()
+        {
+            if (_userDatabase == null)
+            {
+                Console.WriteLine("Database is null");
+                Console.WriteLine(SelectedPost.PostedBy);
+
+                return;
+            }
+            if (SelectedPost != null)
+            {
+
+                var user = await _userDatabase.GetUserByUsernameAsync(SelectedPost.PostedBy);
+                if (user != null)
+                {
+                    PostedByDisplayName = user.DisplayName;
+                }
+            }
         }
 
         public async Task LoadPostAsync(int postId)
         {
             SelectedPost = await _database.GetOpportunityByIdAsync(postId);
-
         }
-
 
         private async Task DeletePost(Opportunity post)
         {
@@ -73,5 +106,4 @@ namespace A_Connect.ViewModels
             }
         }
     }
-
 }
