@@ -32,4 +32,11 @@ public partial class InternNJobsIndivPage : ContentPage
     {
         await Shell.Current.GoToAsync("..");  // Navigate back to the previous page
     }
+
+    private async void OnHomeButtonClicked(object sender, EventArgs e)
+    {
+        // Navigate to the HomePage
+        await Shell.Current.GoToAsync("//HomePage");
+    }
+
 }

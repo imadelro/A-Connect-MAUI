@@ -20,5 +20,12 @@ namespace A_Connect.Views
             base.OnAppearing();
             await viewModel.LoadOpportunitiesAsync(); // Call the method on the viewModel
         }
+
+        private async void OnHomeButtonClicked(object sender, EventArgs e)
+        {
+            // Navigate to the HomePage
+            await Shell.Current.GoToAsync("//HomePage");
+        }
+
     }
 }

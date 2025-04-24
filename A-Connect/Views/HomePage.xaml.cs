@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.Maui.Controls;
 
 namespace A_Connect.Views
@@ -7,7 +8,15 @@ namespace A_Connect.Views
         public Homepage()
         {
             InitializeComponent();
+
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
             string username = App.CurrentUser?.Username ?? "Guest";
+            Debug.WriteLine("Homepage username: " + username);
+
             WelcomeLabel.Text = $"Welcome, {username}!";
         }
 
@@ -18,8 +27,7 @@ namespace A_Connect.Views
 
         private async void OnProfsToPickClicked(object sender, EventArgs e)
         {
-            // Navigate to the Profs to Pick News Feed page
-            // Make sure the route "ProfsToPickNewsFeedPage" is registered in AppShell.
+
             await Shell.Current.GoToAsync("ProfsToPickNewsFeedPage");
         }
         private async void OnTutorFinderClicked(object sender, EventArgs e)
@@ -43,14 +51,11 @@ namespace A_Connect.Views
 
             if (confirm)
             {
-                // Clear user session data
+                // clear 
                 App.CurrentUser = null;
-
-                // Remove any stored credentials or tokens
+                // Remove  stored credentials
                 Preferences.Remove("Username");
                 Preferences.Remove("IsLoggedIn");
-
-                // Navigate back to login page
                 await Shell.Current.GoToAsync("StartPage");
             }
         }
