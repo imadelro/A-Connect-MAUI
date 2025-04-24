@@ -17,6 +17,9 @@ namespace A_Connect.ViewModels
         public ObservableCollection<MarketplacePost> Items { get; set; } = new ObservableCollection<MarketplacePost>();
         public ObservableCollection<MarketplacePost> FilteredItems { get; set; } = new ObservableCollection<MarketplacePost>();
 
+        private bool _showOnlyBuyers;
+        private bool _showOnlySellers;
+        private bool _showAllItems = true;
         private string searchText;
         public string SearchText
         {
@@ -44,6 +47,59 @@ namespace A_Connect.ViewModels
             set => SetProperty(ref isMyListingsSelected, value);
         }
 
+        public bool ShowAllItems
+        {
+            get => _showAllItems;
+            set
+            {
+                if (SetProperty(ref _showAllItems, value))
+                {
+                    if (value)
+                    {
+                        _showOnlyBuyers = false;
+                        _showOnlySellers = false;
+                       
+                    }
+                    FilterItems();
+                }
+            }
+        }
+
+        public bool ShowOnlyBuyers
+        {
+            get => _showOnlyBuyers;
+            set
+            {
+                if (SetProperty(ref _showOnlyBuyers, value))
+                {
+                    if (value)
+                    {
+                        _showAllItems = false;
+                        _showOnlySellers = false;
+                 
+                    }
+                    FilterItems();
+                }
+            }
+        }
+
+        public bool ShowOnlySellers
+        {
+            get => _showOnlySellers;
+            set
+            {
+                if (SetProperty(ref _showOnlySellers, value))
+                {
+                    if (value)
+                    {
+                        _showAllItems = false;
+                        _showOnlyBuyers = false;
+
+                    }
+                    FilterItems();
+                }
+            }
+        }
         public ICommand DeleteCommand { get; }
         public ICommand AllListingsCommand { get; }
         public ICommand MyListingsCommand { get; }
@@ -60,38 +116,48 @@ namespace A_Connect.ViewModels
         {
             IsAllListingsSelected = true;
             IsMyListingsSelected = false;
-            FilterItems();
+            LoadItems();
         }
 
         private void ShowMyListings()
         {
             IsAllListingsSelected = false;
             IsMyListingsSelected = true;
-            FilterItems();
+            LoadItems();
         }
 
         private void FilterItems()
         {
             FilteredItems.Clear();
 
-            // Apply search filter
             var searchQuery = SearchText?.ToLower() ?? string.Empty;
 
             var filtered = Items.Where(item =>
-                // First apply tab filter
+                // Tab filters
                 (IsAllListingsSelected || (IsMyListingsSelected && item.IsOwnedByCurrentUser)) &&
 
-                // Then apply search filter if present
+                // Type filters (skip if ShowAllItems is true)
+                (
+                    _showAllItems ||
+                    (_showOnlyBuyers && item.Category.Equals("Buyer", StringComparison.OrdinalIgnoreCase)) ||
+                    (_showOnlySellers && item.Category.Equals("Seller", StringComparison.OrdinalIgnoreCase))
+                ) &&
+
+                // Search filter
                 (string.IsNullOrEmpty(searchQuery) ||
                  (!string.IsNullOrEmpty(item.ListingTitle) && item.ListingTitle.ToLower().Contains(searchQuery)) ||
                  (!string.IsNullOrEmpty(item.Description) && item.Description.ToLower().Contains(searchQuery)))
-            );
+            ).ToList();
 
             foreach (var item in filtered)
             {
                 FilteredItems.Add(item);
             }
         }
+
+
+
+
 
         public async Task LoadItems()
         {

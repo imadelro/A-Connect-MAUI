@@ -115,6 +115,39 @@
                     </VerticalStackLayout>
                 </HorizontalStackLayout>
 
+                <!-- Search Filter -->
+                <StackLayout HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Orientation="Horizontal"
+                             Margin="10"
+                             Spacing="20">
+
+                    <RadioButton Content="All"
+                                 GroupName="PostFilter"
+                                 IsChecked="{Binding ShowAllItems}"
+                                 VerticalOptions="Center"
+                                 Padding="10,5"
+                                 CornerRadius="10"
+                                 FontFamily="Inter-SemiBold"/>
+
+                    <RadioButton Content="Buyer Listings"
+                                 GroupName="PostFilter"
+                                 IsChecked="{Binding ShowOnlyBuyers}"
+                                 VerticalOptions="Center"
+                                 Padding="10,5"
+                                 CornerRadius="10"
+                                 FontFamily="Inter-SemiBold"/>
+
+                    <RadioButton Content="Seller Listings"
+                                 GroupName="PostFilter"
+                                 IsChecked="{Binding ShowOnlySellers}"
+                                 VerticalOptions="Center"
+                                 Padding="10,5"
+                                 CornerRadius="10"
+                                 FontFamily="Inter-SemiBold"/>
+
+                </StackLayout>
+
                 <!-- Items Listing -->
                 <CollectionView x:Name="ListingsCollectionView"
                                 ItemsSource="{Binding FilteredItems}"
