@@ -42,5 +42,13 @@ namespace A_Connect.Views
                 await Shell.Current.GoToAsync($"{nameof(MarketplaceListingDetailPage)}", navigationParameter);
             }
         }
+        private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
+        {
+            // The SearchText property is already bound with Mode=TwoWay
+            // The ViewModel will handle filtering when the property changes
+            // No additional code needed here
+        }
+
     }
+
 }
