@@ -36,12 +36,21 @@ namespace A_Connect.ViewModels
         }
 
         public ICommand DeletePostCommand { get; }
+        public ICommand OpenUrlCommand { get; }
+
 
         public InternNJobsIndivViewModel()
         {
             _database = DependencyService.Get<OpportunityDatabase>();
             Opportunities = new ObservableCollection<Opportunity>();
             DeletePostCommand = new Command<Opportunity>(async (opportunity) => await DeletePost(opportunity));
+            OpenUrlCommand = new Command<string>(async (url) =>
+            {
+                if (!string.IsNullOrEmpty(url))
+                {
+                   await Launcher.Default.OpenAsync(url);
+                }
+            });
         }
 
         public async Task LoadPostAsync(int postId)
@@ -49,6 +58,7 @@ namespace A_Connect.ViewModels
             SelectedPost = await _database.GetOpportunityByIdAsync(postId);
 
         }
+
 
         private async Task DeletePost(Opportunity post)
         {
