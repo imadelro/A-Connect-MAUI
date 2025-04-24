@@ -15,9 +15,18 @@ namespace A_Connect.Views
             base.OnAppearing();
 
             string username = App.CurrentUser?.Username ?? "Guest";
-            Debug.WriteLine("Homepage username: " + username);
+            string displayName = App.CurrentUser?.DisplayName;
 
-            WelcomeLabel.Text = $"Welcome, {username}!";
+
+            if (displayName == null)
+            {
+                WelcomeLabel.Text = $"Welcome, {username}!";
+            } else
+            {
+                WelcomeLabel.Text = $"Welcome, {displayName}!";
+            }
+
+            
         }
 
         private async void OnScheduleTradingClicked(object sender, EventArgs e)
@@ -58,6 +67,11 @@ namespace A_Connect.Views
                 Preferences.Remove("IsLoggedIn");
                 await Shell.Current.GoToAsync("StartPage");
             }
+        }
+
+        private async void OnAccountClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(AccountDetailsPage));
         }
     }
 }

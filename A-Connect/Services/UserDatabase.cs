@@ -42,5 +42,23 @@ namespace A_Connect.Services
         {
             return _database.InsertAsync(user);
         }
+
+        public async Task<User> GetUserByDisplayNameAsync(string displayName)
+        {
+            return await _database.Table<User>()
+                                  .FirstOrDefaultAsync(u => u.DisplayName == displayName);
+        }
+
+        public async Task<int> UpdateDisplayNameAsync(string email, string newDisplayName)
+        {
+            var user = await _database.Table<User>().FirstOrDefaultAsync(u => u.Email == email);
+            if (user != null)
+            {
+                user.DisplayName = newDisplayName;
+                return await _database.UpdateAsync(user); // returns # rows affected
+            }
+
+            return 0;
+        }
     }
 }

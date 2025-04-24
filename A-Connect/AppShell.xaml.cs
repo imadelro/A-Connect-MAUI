@@ -8,6 +8,12 @@ public partial class AppShell : Shell
     {
         InitializeComponent();
 
+
+        //Register SetDisplayName pages.
+        Routing.RegisterRoute(nameof(AccountDetailsPage), typeof(AccountDetailsPage));
+
+
+
         // Register existing pages.
         Routing.RegisterRoute(nameof(StartPage), typeof(StartPage));
         Routing.RegisterRoute("LoginPage", typeof(LoginPage));

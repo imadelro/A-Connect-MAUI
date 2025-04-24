@@ -12,6 +12,8 @@
             <!-- Welcome Message -->
             <RowDefinition Height="*"/>
             <!-- Apps Grid -->
+            <RowDefinition Height="Auto"/>
+            <!-- NavBar Grid -->
         </Grid.RowDefinitions>
 
         <!-- CardView Equivalent (Logo Frame) -->
@@ -197,6 +199,37 @@
                 </VerticalStackLayout>
             </Frame>
 
+            
+
+        </Grid>
+
+        <!-- Bottom Nav Bar  -->
+        <Grid Grid.Row="3" BackgroundColor="#063970" HeightRequest="60">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ImageButton Source="nav_icon1.png"
+                          Grid.Column="0"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Center"
+                          WidthRequest="30"
+                          HeightRequest="30"/>
+            <ImageButton Source="nav_home.png"
+                          Grid.Column="1"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Center"
+                          WidthRequest="30" HeightRequest="30"
+                          Command="{Binding NavigateToHomeCommand}"/>
+            <ImageButton Source="nav_profile.png"
+                          Grid.Column="2"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Center"
+                          WidthRequest="30"
+                          HeightRequest="30"
+                         Clicked="OnAccountClicked"/>
         </Grid>
     </Grid>
 </ContentPage>
