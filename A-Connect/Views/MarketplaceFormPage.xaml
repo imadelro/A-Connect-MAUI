@@ -100,6 +100,20 @@
                             </Frame>
                         </HorizontalStackLayout>
 
+                        <!-- Location -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Location:" 
+                                   TextColor="White"
+                                   FontFamily="Inter-Black"
+                                   VerticalTextAlignment="Center"/>
+                            <Frame BackgroundColor="White" Padding="20,0">
+                                <Entry x:Name="LocationEntry"
+                                       Placeholder="Name of your listing"
+                                       Text="{Binding Location}"
+                                       FontFamily="Inter-Light"/>
+                            </Frame>
+                        </HorizontalStackLayout>
+
                         <!-- Category Picker -->
                         <HorizontalStackLayout Spacing="10">
                             <Label Text="Category:" 

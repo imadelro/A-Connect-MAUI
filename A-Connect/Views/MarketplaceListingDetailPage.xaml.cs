@@ -1,43 +1,50 @@
 using A_Connect.Models;
-namespace A_Connect.Views;
+using A_Connect.ViewModels;
 
-
-[QueryProperty(nameof(SelectedPost), "SelectedPost")]
-public partial class MarketplaceListingDetailPage : ContentPage
+namespace A_Connect.Views
 {
-    private MarketplacePost selectedPost;
-    public MarketplacePost SelectedPost
+    [QueryProperty(nameof(SelectedPost), "SelectedPost")]
+    public partial class MarketplaceListingDetailPage : ContentPage
     {
-        get => selectedPost;
-        set
+        public MarketplaceListingDetailPage()
         {
-            selectedPost = value;
-            OnPropertyChanged();
-            // Set this as the BindingContext so the XAML bindings work
-            BindingContext = selectedPost;
+            InitializeComponent();
+            BindingContext = new MarketplaceListingDetailViewModel();
+        }
+
+        public MarketplacePost SelectedPost
+        {
+            set
+            {
+                if (BindingContext is MarketplaceListingDetailViewModel viewModel)
+                {
+                    viewModel.SelectedPost = value;
+                }
+            }
+        }
+
+        // Inside your MarketplaceNewsFeedPage.xaml.cs file
+        async void OnItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            if (e.Item is MarketplacePost listing)
+            {
+                // Deselect the item
+                ((ListView)sender).SelectedItem = null;
+
+                // Navigate to the detail page with the selected listing
+                var navigationParameter = new Dictionary<string, object>
+                {
+                    { "Listing", listing }
+                };
+
+                await Shell.Current.GoToAsync($"{nameof(MarketplaceListingDetailPage)}", navigationParameter);
+            }
+        }
+
+        private async void OnHomeButtonClicked(object sender, EventArgs e)
+        {
+            // Navigate to the HomePage
+            await Shell.Current.GoToAsync("//HomePage");
         }
     }
-
-    public MarketplaceListingDetailPage()
-    {
-        InitializeComponent();
-    }
-    // Inside your MarketplaceNewsFeedPage.xaml.cs file
-    async void OnItemTapped(object sender, ItemTappedEventArgs e)
-    {
-        if (e.Item is MarketplacePost listing)
-        {
-            // Deselect the item
-            ((ListView)sender).SelectedItem = null;
-
-            // Navigate to the detail page with the selected listing
-            var navigationParameter = new Dictionary<string, object>
-        {
-            { "Listing", listing }
-        };
-
-            await Shell.Current.GoToAsync($"{nameof(MarketplaceListingDetailPage)}", navigationParameter);
-        }
-    }
-
 }

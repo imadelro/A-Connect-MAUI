@@ -120,7 +120,6 @@ namespace A_Connect.ViewModels
                 await _database.DeletePostAsync(post);
                 Items.Remove(post);
                 FilteredItems.Remove(post);
-                Debug.WriteLine($"Deleted post: {post.ListingTitle}");
             }
         }
 
