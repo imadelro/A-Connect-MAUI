@@ -9,8 +9,13 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <!-- Header -->
             <RowDefinition Height="*"/>
+            <!-- Main Content -->
             <RowDefinition Height="Auto"/>
+            <!-- Post Butto -->
+            <RowDefinition Height="Auto"/>
+            <!-- Bottom Nav -->
         </Grid.RowDefinitions>
 
         <!-- Header -->
@@ -23,7 +28,7 @@
                    VerticalOptions="Center"/>
         </Grid>
 
-        <!-- Main Content -->
+        <!-- Main Content wrapped inside a ScrollView -->
         <ScrollView Grid.Row="1">
             <StackLayout Spacing="20" Padding="20">
 
@@ -146,7 +151,7 @@
                                         </Grid>
                                     </Frame>
 
-                                    <!-- Tags: Buyer/Seller + Condition -->
+                                    <!-- Tags: Buyer/Seller + Condition + Location -->
                                     <HorizontalStackLayout Spacing="10">
                                         <Frame BackgroundColor="#d1ecf1"
                                                Padding="5,2"
@@ -156,6 +161,7 @@
                                                    FontSize="12"
                                                    FontFamily="Inter-SemiBold"/>
                                         </Frame>
+
                                         <Frame BackgroundColor="#d4edda"
                                                Padding="5,2"
                                                CornerRadius="10">
@@ -164,50 +170,67 @@
                                                    FontSize="12"
                                                    FontFamily="Inter-SemiBold"/>
                                         </Frame>
+
+                                        <Frame BackgroundColor="#ebedd4"
+                                                Padding="5,2"
+                                                CornerRadius="10">
+                                            <Label Text="{Binding Location}"
+                                                   TextColor="#6d651b"
+                                                   FontSize="12"
+                                                   FontFamily="Inter-SemiBold"/>
+                                        </Frame>
+
+
                                     </HorizontalStackLayout>
 
-                                    <!-- Description -->
-                                    <Label Text="{Binding Description}"
-                                           FontSize="13"
-                                           FontFamily="Inter-Regular"
-                                           TextColor="Black"/>
+                                    <HorizontalStackLayout Spacing="10">
 
-                                    <!-- Contact Info -->
-                                    <Label Text="{Binding PosterContact}"
-                                           FontSize="12"
-                                           TextColor="Gray"
-                                           FontFamily="Inter-Light"/>
+                                        <!-- Price -->
+                                        <Label Text="{Binding Price, StringFormat='₱{0:F2}'}"
+                                               FontSize="15"
+                                               TextColor="Black"
+                                               FontFamily="Inter-Black"/>
 
-                                    <!-- Delete Button (if owned) -->
+                                    </HorizontalStackLayout>
+
+                                    <!-- Delete Button, only visible in My Listings tab -->
                                     <Button Text="Delete"
                                             TextColor="White"
-                                            BackgroundColor="{StaticResource Red}"
-                                            Margin="0,5,0,0"
+                                            BackgroundColor="Red"
                                             CornerRadius="10"
-                                            FontSize="13"
-                                            IsVisible="{Binding IsOwnedByCurrentUser}"
+                                            FontFamily="Inter-SemiBold"
                                             Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteCommand}"
-                                            CommandParameter="{Binding .}"/>
+        CommandParameter="{Binding .}"
+        IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.IsMyListingsSelected}" />
+
                                 </VerticalStackLayout>
                             </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-                <!-- Post Button -->
-                <Button Text="Post an Item +"
-                        BackgroundColor="{StaticResource Yellow}"
-                        TextColor="#111111"
-                        FontFamily="Inter-Black"
-                        CornerRadius="25"
-                        HorizontalOptions="Center"
-                        Padding="10,5"
-                        Clicked="OnPostListingClicked"/>
             </StackLayout>
         </ScrollView>
 
+        <!-- Post Button -->
+        <Grid Grid.Row="2"
+              BackgroundColor="{StaticResource White}"
+              Padding="0"
+              HeightRequest="100">
+
+            <Button Text="Post an Item +"
+                    BackgroundColor="{StaticResource Yellow}"
+                    TextColor="#111111"
+                    FontFamily="Inter-Black"
+                    CornerRadius="25"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Padding="16,10"
+                    Clicked="OnPostListingClicked"/>
+        </Grid>
+
         <!-- Bottom Navigation -->
-        <Grid Grid.Row="2" BackgroundColor="{StaticResource DarkBlue}" HeightRequest="60">
+        <Grid Grid.Row="3" BackgroundColor="{StaticResource DarkBlue}" HeightRequest="60">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -223,7 +246,8 @@
                          Grid.Column="1"
                          HorizontalOptions="Center"
                          VerticalOptions="Center"
-                         WidthRequest="30" HeightRequest="30"/>
+                         WidthRequest="30" HeightRequest="30"
+                         Clicked="OnHomeButtonClicked"/>
             <ImageButton Source="nav_profile.png"
                          Grid.Column="2"
                          HorizontalOptions="Center"
