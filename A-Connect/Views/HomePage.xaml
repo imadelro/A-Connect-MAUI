@@ -121,6 +121,7 @@
                     <Label Text="Marketplace"
                            FontSize="16" FontFamily="Inter-Bold"
                            TextColor="Black"
+                           Margin="0,-5,0,0"
                            HorizontalOptions="Center"/>
                 </VerticalStackLayout>
             </Frame>
@@ -142,7 +143,8 @@
                     <Label Text="Tutor Finder"
                            FontSize="16" FontFamily="Inter-Bold"
                            TextColor="Black"
-                           HorizontalOptions="Center"/>
+                           HorizontalOptions="Center"
+                           Margin="0,-5,0,0"/>
                 </VerticalStackLayout>
             </Frame>
 
@@ -172,7 +174,7 @@
 
             <!-- Logout Button -->
             <Frame Grid.Row="2" Grid.Column="1"
-                BackgroundColor="{StaticResource Gray}"
+                BackgroundColor="{StaticResource White}"
        WidthRequest="160" HeightRequest="160"
        CornerRadius="15" HasShadow="True"
        HorizontalOptions="Center">
@@ -188,10 +190,10 @@
                      BackgroundColor="Transparent"/>
                     <Label Text="Logout"
                FontSize="14" FontFamily="Inter-Bold"
-               TextColor="White"
+               TextColor="Black"
                HorizontalOptions="Center"
                HorizontalTextAlignment="Center"
-               Margin="0,-10,0,0"/>
+               Margin="0,5,0,0"/>
                 </VerticalStackLayout>
             </Frame>
 

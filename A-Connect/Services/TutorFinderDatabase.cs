@@ -12,6 +12,18 @@ namespace A_Connect.Services
     {
         private readonly SQLiteAsyncConnection _db;
 
+        public Task<int> MarkAsUnavailableAsync(TutorPost post)
+        {
+            post.IsAvailable = false;
+            return _db.UpdateAsync(post);
+        }
+
+        public Task<int> MarkAsAvailableAsync(TutorPost post)
+        {
+            post.IsAvailable = true;
+            return _db.UpdateAsync(post);
+        }
+
         public TutorFinderDatabase(string dbPath)
         {
             // Initialize the DB connection

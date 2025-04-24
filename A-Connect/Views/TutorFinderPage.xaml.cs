@@ -9,6 +9,8 @@ namespace A_Connect.Views
 {
     public partial class TutorFinderPage : ContentPage
     {
+        public ICommand MarkAsUnavailableCommand { get; }
+        public ICommand MarkAsAvailableCommand { get; }
         private readonly TutorFinderDatabase _database;
 
         // Keep all posts in memory
@@ -49,10 +51,27 @@ namespace A_Connect.Views
             }
         }
 
+        private List<TutorPost> _displayedPosts;
+        public List<TutorPost> DisplayedPosts
+        {
+            get => _displayedPosts;
+            set
+            {
+                if (_displayedPosts != value)
+                {
+                    _displayedPosts = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public TutorFinderPage(TutorFinderDatabase database)
         {
             InitializeComponent();
             _database = database;
+
+            MarkAsUnavailableCommand = new Command<TutorPost>(async (post) => await MarkAsUnavailable(post));
+            MarkAsAvailableCommand = new Command<TutorPost>(async (post) => await MarkAsAvailable(post));
 
             // Initialize commands
             NavigateToHomeCommand = new Command(async () =>
@@ -79,6 +98,23 @@ namespace A_Connect.Views
             BindingContext = this; // Set the BindingContext to the page itself
         }
 
+        private async Task MarkAsUnavailable(TutorPost post)
+        {
+            if (post == null) return;
+
+            post.IsAvailable = false;
+            await _database.MarkAsUnavailableAsync(post);
+            FilterPosts();
+        }
+
+        private async Task MarkAsAvailable(TutorPost post)
+        {
+            if (post == null) return;
+
+            post.IsAvailable = true;
+            await _database.MarkAsAvailableAsync(post);
+            FilterPosts();
+        }
         protected override async void OnAppearing()
         {
             base.OnAppearing();
@@ -190,7 +226,7 @@ namespace A_Connect.Views
             }
 
             // Update the collection
-            postsCollectionView.ItemsSource = filtered.ToList();
+            DisplayedPosts = filtered.ToList();
         }
     }
 }
