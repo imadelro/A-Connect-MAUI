@@ -16,16 +16,15 @@
    
         </Grid.RowDefinitions>
 
-        <!-- Header with the title -->
-        <Grid BackgroundColor="#063970" Padding="20">
+        <!-- Header -->
+        <Grid BackgroundColor="{StaticResource DarkBlue}" Padding="20,40,20,20">
             <Label Text="Jobs and Internships"
-                   TextColor="{StaticResource Yellow}"
-                   FontSize="24"
-                   FontFamily="Inter-Black"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center"/>
+           TextColor="{StaticResource Yellow}"
+           FontFamily="Inter-Black"
+           FontSize="24"
+           HorizontalOptions="Center"
+           VerticalOptions="Center"/>
         </Grid>
-
         <!-- Post details in a scrollable frame -->
         <ScrollView Grid.Row="1" Padding="20">
             <VerticalStackLayout Spacing="20">
