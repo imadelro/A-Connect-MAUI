@@ -40,5 +40,11 @@ namespace A_Connect.Views
                 await Shell.Current.GoToAsync($"{nameof(MarketplaceListingDetailPage)}", navigationParameter);
             }
         }
+
+        private async void OnHomeButtonClicked(object sender, EventArgs e)
+        {
+            // Navigate to the HomePage
+            await Shell.Current.GoToAsync("//HomePage");
+        }
     }
 }
