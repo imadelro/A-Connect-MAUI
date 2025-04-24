@@ -4,24 +4,148 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:A_Connect.Models"
     Title="Listing Details"
-    BackgroundColor="White"
-    x:Name="DetailPage">
+    BackgroundColor="White">
 
-    <ScrollView>
-        <StackLayout Padding="20" Spacing="20">
-            <Label Text="{Binding ListingTitle}" FontSize="24" FontAttributes="Bold" />
-            <!-- Bind the Image Source to the ImagePath property -->
-            <Image Source="{Binding ImagePath}"
-       Aspect="AspectFit"
-       HorizontalOptions="Center"
-       VerticalOptions="Center">
-            </Image>
-            <Label Text="{Binding Description}" FontSize="16" />
-            <Label Text="{Binding Price, StringFormat='₱{0:F2}'}" FontSize="16" TextColor="Green"/>
-            <Label Text="Condition:" FontAttributes="Bold"/>
-            <Label Text="{Binding Condition}"/>
-            <Label Text="Contact:" FontAttributes="Bold"/>
-            <Label Text="{Binding PosterContact}" />
-        </StackLayout>
-    </ScrollView>
+    <Grid>
+        <!-- Define Rows for Header and Content -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header Section -->
+        <Grid BackgroundColor="{StaticResource DarkBlue}" Padding="20,40,20,20">
+            <Label Text="Marketplace"
+           TextColor="{StaticResource Yellow}"
+           FontSize="24"
+           FontFamily="Inter-Black"
+           HorizontalOptions="Center"
+           VerticalOptions="Center"/>
+        </Grid>
+
+
+        <!-- Scrollable Content Section -->
+        <ScrollView Grid.Row="1" Padding="20">
+            <VerticalStackLayout Spacing="20">
+
+                <!-- Listing Information Frame -->
+                <Frame BackgroundColor="#1F6FB7" CornerRadius="15" Padding="20" HasShadow="True">
+                    <VerticalStackLayout Spacing="15">
+
+                        <!-- Title -->
+                        <Label Text="{Binding SelectedPost.ListingTitle}"
+                               TextColor="White"
+                               FontSize="24"
+                               FontFamily="Inter-Black"
+                               LineBreakMode="WordWrap"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="Center"
+                               MaxLines="3"/>
+
+                        <!-- Price -->
+                        <Label Text="{Binding SelectedPost.Price, StringFormat='₱{0:F2}'}"
+                                FontSize="24"
+                                FontFamily="Inter-Black"
+                                TextColor="White"
+                                HorizontalOptions="Start"/>
+
+                        <!-- Image -->
+
+                        <Image Source="{Binding SelectedPost.ImagePath}"
+                               Aspect="AspectFit"
+                               WidthRequest="300"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+
+                        <!-- Divider line -->
+                        <BoxView HeightRequest="1"
+                                 BackgroundColor="White"
+                                 Margin="0,10"/>
+
+                        <!-- Description -->
+                        <Label Text="{Binding SelectedPost.Description}"
+                               TextColor="White"
+                               FontSize="16"
+                               FontFamily="Inter-SemiBold"
+                               LineBreakMode="WordWrap"/>
+
+                        <!-- Divider line -->
+                        <BoxView HeightRequest="1"
+                                 BackgroundColor="White"
+                                 Margin="0,10"/>
+
+
+                        <!-- Condition Frame -->
+                        <Frame BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="Location:"
+                                       TextColor="#1F6FB7"
+                                       FontSize="14"
+                                       FontAttributes="Bold"
+                                       FontFamily="Inter-SemiBold"
+                                       LineBreakMode="WordWrap"/>
+                                <Label Text="{Binding SelectedPost.Location}"
+                                       TextColor="#1F6FB7"
+                                       FontSize="14"
+                                       FontFamily="Inter-SemiBold"
+                                       LineBreakMode="WordWrap"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <!-- Condition Frame -->
+                        <Frame BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="Condition:"
+                                       TextColor="#1F6FB7"
+                                       FontSize="14"
+                                       FontAttributes="Bold"
+                                       FontFamily="Inter-SemiBold"
+                                       LineBreakMode="WordWrap"/>
+                                <Label Text="{Binding SelectedPost.Condition}"
+                                       TextColor="#1F6FB7"
+                                       FontSize="14"
+                                       FontFamily="Inter-SemiBold"
+                                       LineBreakMode="WordWrap"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <!-- Contact Information Frame -->
+                        <Frame BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="Contact:"
+                                       TextColor="#1F6FB7"
+                                       FontSize="14"
+                                       FontFamily="Inter-SemiBold"
+                                       FontAttributes="Bold"
+                                       LineBreakMode="WordWrap"/>
+                                <Label Text="{Binding SelectedPost.PosterContact}"
+                                       TextColor="#1F6FB7"
+                                       FontSize="14"
+                                       FontFamily="Inter-SemiBold"
+                                       LineBreakMode="WordWrap"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Delete Button -->
+                <Frame>
+                    <Button Text="Delete"
+                            Command="{Binding DeletePostCommand}"
+                            CommandParameter="{Binding SelectedPost}"
+                            BackgroundColor="Red"
+                            TextColor="White"
+                            FontFamily="Inter-Black"
+                            CornerRadius="25"
+                            HorizontalOptions="Center"
+                            Padding="40,10"
+                            IsVisible="{Binding IsCurrentUserPost}" />
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+
 </ContentPage>

@@ -146,7 +146,7 @@
                                         </Grid>
                                     </Frame>
 
-                                    <!-- Tags: Buyer/Seller + Condition -->
+                                    <!-- Tags: Buyer/Seller + Condition + Location -->
                                     <HorizontalStackLayout Spacing="10">
                                         <Frame BackgroundColor="#d1ecf1"
                                                Padding="5,2"
@@ -156,6 +156,7 @@
                                                    FontSize="12"
                                                    FontFamily="Inter-SemiBold"/>
                                         </Frame>
+                                        
                                         <Frame BackgroundColor="#d4edda"
                                                Padding="5,2"
                                                CornerRadius="10">
@@ -164,30 +165,39 @@
                                                    FontSize="12"
                                                    FontFamily="Inter-SemiBold"/>
                                         </Frame>
+
+                                        <Frame BackgroundColor="#ebedd4"
+                                                Padding="5,2"
+                                                CornerRadius="10">
+                                            <Label Text="{Binding Location}"
+                                                   TextColor="#6d651b"
+                                                   FontSize="12"
+                                                   FontFamily="Inter-SemiBold"/>
+                                        </Frame>
+
+
                                     </HorizontalStackLayout>
 
-                                    <!-- Description -->
-                                    <Label Text="{Binding Description}"
-                                           FontSize="13"
-                                           FontFamily="Inter-Regular"
-                                           TextColor="Black"/>
+                                    <HorizontalStackLayout Spacing="10">
 
-                                    <!-- Contact Info -->
-                                    <Label Text="{Binding PosterContact}"
-                                           FontSize="12"
-                                           TextColor="Gray"
-                                           FontFamily="Inter-Light"/>
+                                        <!-- Price -->
+                                        <Label Text="{Binding Price, StringFormat='₱{0:F2}'}"
+                                               FontSize="15"
+                                               TextColor="Black"
+                                               FontFamily="Inter-Black"/>
 
-                                    <!-- Delete Button (if owned) -->
+                                    </HorizontalStackLayout>
+
+                                    <!-- Delete Button, only visible in My Listings tab -->
                                     <Button Text="Delete"
                                             TextColor="White"
-                                            BackgroundColor="{StaticResource Red}"
-                                            Margin="0,5,0,0"
+                                            BackgroundColor="Red"
                                             CornerRadius="10"
-                                            FontSize="13"
-                                            IsVisible="{Binding IsOwnedByCurrentUser}"
+                                            FontFamily="Inter-SemiBold"
                                             Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteCommand}"
-                                            CommandParameter="{Binding .}"/>
+        CommandParameter="{Binding .}"
+        IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.IsMyListingsSelected}" />
+
                                 </VerticalStackLayout>
                             </Frame>
                         </DataTemplate>
