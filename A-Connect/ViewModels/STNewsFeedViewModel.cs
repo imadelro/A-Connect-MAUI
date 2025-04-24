@@ -14,6 +14,9 @@ namespace A_Connect.ViewModels
     public class STNewsFeedViewModel : BaseViewModel
     {
         public ICommand NavigateToHomeCommand { get; }
+        public ICommand MarkAsUnavailableCommand { get; }
+        public ICommand MarkAsAvailableCommand { get; }
+
 
         private ObservableCollection<STForm> _allPosts;
         public ObservableCollection<STForm> DisplayedPosts { get; set; }
@@ -29,7 +32,17 @@ namespace A_Connect.ViewModels
         public bool IsOwnPostsSelected
         {
             get => _isOwnPostsSelected;
-            set => SetProperty(ref _isOwnPostsSelected, value);
+            set
+            {
+                if (SetProperty(ref _isOwnPostsSelected, value))
+                {
+                    // Notify all posts to update their ShowActionButtons property
+                    foreach (var post in _allPosts)
+                    {
+                        post.OnPropertyChanged(nameof(post.ShowActionButtons));
+                    }
+                }
+            }
         }
 
         private string _searchText;
@@ -56,6 +69,8 @@ namespace A_Connect.ViewModels
 
         public STNewsFeedViewModel()
         {
+            MarkAsUnavailableCommand = new Command<STForm>(async (post) => await MarkAsUnavailable(post));
+            MarkAsAvailableCommand = new Command<STForm>(async (post) => await MarkAsAvailable(post));
             DeletePostCommand = new Command<STForm>(async (post) => await DeletePost(post));
 
             NavigateToHomeCommand = new Command(async () => await NavigateToHome());
@@ -103,6 +118,44 @@ namespace A_Connect.ViewModels
                     await App.STDB.SavePostAsync(newPost);
                 }
             });
+        }
+
+        private async Task MarkAsUnavailable(STForm post)
+        {
+            if (post == null) return;
+
+            // Confirm marking as unavailable
+            bool confirm = await Application.Current.MainPage.DisplayAlert(
+                "Confirm Action",
+                "Are you sure you want to mark this post as unavailable?",
+                "Yes",
+                "No");
+
+            if (confirm)
+            {
+                post.IsAvailable = false;
+                await App.STDB.MarkAsUnavailableAsync(post); // Update in the database
+                FilterPosts(); // Refresh the displayed posts
+            }
+        }
+
+        private async Task MarkAsAvailable(STForm post)
+        {
+            if (post == null) return;
+
+            // Confirm marking as available
+            bool confirm = await Application.Current.MainPage.DisplayAlert(
+                "Confirm Action",
+                "Are you sure you want to mark this post as available?",
+                "Yes",
+                "No");
+
+            if (confirm)
+            {
+                post.IsAvailable = true;
+                await App.STDB.MarkAsAvailableAsync(post); // Update in the database
+                FilterPosts(); // Refresh the displayed posts
+            }
         }
 
         private async Task DeletePost(STForm post)
@@ -154,7 +207,6 @@ namespace A_Connect.ViewModels
 
         public void FilterPosts()
         {
-            DisplayedPosts.Clear();
             var currentUser = App.CurrentUser?.Username ?? "Unknown";
 
             // 1) Start with all
@@ -178,10 +230,14 @@ namespace A_Connect.ViewModels
             }
 
             // 4) Update DisplayedPosts
+            DisplayedPosts.Clear();
             foreach (var post in filtered)
             {
                 DisplayedPosts.Add(post);
             }
+
+            OnPropertyChanged(nameof(DisplayedPosts));
+
         }
     }
 }

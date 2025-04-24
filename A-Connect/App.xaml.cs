@@ -11,6 +11,8 @@ public partial class App : Application
 {
     // Store the logged-in user
 
+    public static bool IsOwnPostsSelected { get; set; }
+
     public static A_Connect.Models.User CurrentUser { get; set; }
     public static A_Connect.Services.STFormDatabase STDB { get; private set; }
     public static MarketplaceDatabase MarketplaceDB { get; private set; }
