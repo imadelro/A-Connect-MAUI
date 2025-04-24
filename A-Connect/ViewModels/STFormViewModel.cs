@@ -102,7 +102,8 @@ namespace A_Connect.ViewModels
                 RequestDay = SelectedRequestDay,
                 RequestTime = SelectedRequestTime,
                 ContactInfo = ContactInfo,
-                Date = DateTime.Now
+                Date = DateTime.Now,
+                IsAvailable = true
             };
 
             // Save the new post to the database

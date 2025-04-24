@@ -32,16 +32,20 @@ namespace A_Connect.Models
                 {
                     _isAvailable = value;
                     OnPropertyChanged(nameof(IsAvailable));
+                    OnPropertyChanged(nameof(AvailabilityStatus)); // Notify UI to update
                 }
             }
         }
+
+        public string AvailabilityStatus => IsAvailable ? "Available" : "Unavailable";
+
 
         public bool ShowActionButtons
         {
             get
             {
                 var currentUser = App.CurrentUser?.Username ?? "Unknown";
-                return PostedBy == currentUser && App.IsOwnPostsSelected;
+                return PostedBy == currentUser;
             }
         }
 
