@@ -25,15 +25,8 @@ namespace A_Connect.ViewModels
             get => SelectedPost != null && SelectedPost.PostedBy == App.CurrentUser.Username;
         }
 
-        private string _author;
-        public string Author
-        {
-            get => _author;
-            set => SetProperty(ref _author, value);
-        }
-
         private string _postedByDisplayName;
-        public string PostedByDisplayName
+        public string DisplayName
         {
             get => _postedByDisplayName;
             set => SetProperty(ref _postedByDisplayName, value);
@@ -53,9 +46,9 @@ namespace A_Connect.ViewModels
         public ICommand DeletePostCommand { get; }
         public ICommand OpenUrlCommand { get; }
 
-        public InternNJobsIndivViewModel()
+        public InternNJobsIndivViewModel(UserDatabase userDatabase)
         {
-            _userDatabase = DependencyService.Get<UserDatabase>();
+            _userDatabase = userDatabase;
             _database = DependencyService.Get<OpportunityDatabase>();
             Opportunities = new ObservableCollection<Opportunity>();
             DeletePostCommand = new Command<Opportunity>(async (opportunity) => await DeletePost(opportunity));
@@ -70,21 +63,17 @@ namespace A_Connect.ViewModels
 
         private async void LoadPostedByDisplayName()
         {
-            if (_userDatabase == null)
-            {
-                Console.WriteLine("Database is null");
-                Console.WriteLine(SelectedPost.PostedBy);
 
-                return;
-            }
             if (SelectedPost != null)
             {
 
-                var user = await _userDatabase.GetUserByUsernameAsync(SelectedPost.PostedBy);
-                if (user != null)
+                string displayname= await _userDatabase.GetDisplayNameByUsernameAsync(SelectedPost.PostedBy);
+
+                if (displayname != null)
                 {
-                    PostedByDisplayName = user.DisplayName;
+                    DisplayName = displayname;
                 }
+
             }
         }
 

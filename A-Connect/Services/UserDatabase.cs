@@ -7,8 +7,6 @@ using SQLite;
 using A_Connect.Models;
 using System.Threading.Tasks;
 
-[assembly: Microsoft.Maui.Controls.Dependency(typeof(A_Connect.Services.UserDatabase))]
-
 namespace A_Connect.Services
 {
 
@@ -51,6 +49,15 @@ namespace A_Connect.Services
         {
             return await _database.Table<User>()
                                   .FirstOrDefaultAsync(u => u.DisplayName == displayName);
+        }
+
+        public async Task<string> GetDisplayNameByUsernameAsync(string username)
+        {
+            var user = await _database.Table<User>()
+                                      .Where(u => u.Username == username)
+                                      .FirstOrDefaultAsync();
+
+            return user?.DisplayName;
         }
 
         public async Task<int> UpdateDisplayNameAsync(string email, string newDisplayName)

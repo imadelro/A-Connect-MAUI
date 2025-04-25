@@ -225,7 +225,7 @@
 
                         <!-- Posted By -->
                         <HorizontalStackLayout Spacing="10" >
-                            <Label Text="{Binding PostedByDisplayName, StringFormat='Posted by: {0}'}"
+                            <Label Text="{Binding DisplayName, StringFormat='Posted by: {0}'}"
                                    TextColor="White"
                                    FontSize="12"
                                    FontFamily="Inter-SemiBold"/>

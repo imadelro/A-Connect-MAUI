@@ -15,7 +15,7 @@ namespace A_Connect.Views
         }
 
 
-        protected override void OnAppearing()
+    protected override void OnAppearing()
         {
             base.OnAppearing();
 
