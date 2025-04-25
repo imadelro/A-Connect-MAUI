@@ -27,7 +27,7 @@
         <StackLayout Grid.Row="1" Spacing="15" Padding="20">
 
             <Frame CornerRadius="25" BackgroundColor="White" Padding="0">
-                <StackLayout Orientation="Horizontal" Padding="10" Spacing="10">
+                <StackLayout Orientation="Horizontal" Padding="10" Spacing="10" HeightRequest="60">
 
                     <!-- Search Bar -->
                     <HorizontalStackLayout Padding="0" VerticalOptions="Center">
@@ -57,7 +57,7 @@
 
 
             <!-- Tabs -->
-            <HorizontalStackLayout HorizontalOptions="Center" Spacing="40" Padding="0,10">
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="40" Padding="0,10" HeightRequest="30">
                 <!-- All Posts Tab -->
                 <VerticalStackLayout HorizontalOptions="Center">
                     <Label Text="All Posts"
@@ -123,8 +123,8 @@
              VerticalOptions="Center"
              Orientation="Horizontal"
              Margin="10"
-             Spacing="20">
-
+             Spacing="20"
+             HeightRequest="20">
                 <RadioButton Content="All"
                  GroupName="PostFilter"
                  IsChecked="{Binding ShowAllOpportunities}"
@@ -264,7 +264,7 @@
                                FontFamily="Inter-SemiBold"/>
                                 </HorizontalStackLayout>
 
-                                <!-- Posted By and Date -->
+                               
                                 <Grid ColumnDefinitions="*,Auto" VerticalOptions="End" Margin="0,10,0,0">
                                     <!-- Delete Button -->
                                     <Button Text="Delete"
@@ -277,24 +277,7 @@
                                 VerticalOptions="End"
                                 HorizontalOptions="End"
                                 IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewModels:InternNJobsNewsfeedViewModel}}, Path=isOwnPostsSelected}" />
-
-                                    <!-- Posted By -->
-                                    <Label Text="{Binding PostedBy, StringFormat='Posted by: {0}'}"
-                               TextColor="White"
-                               FontSize="12"
-                               FontFamily="Inter-Light"
-                               HorizontalOptions="End"
-                               VerticalOptions="End"
-                               IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewModels:InternNJobsNewsfeedViewModel}}, Path=allPostsSelected}" />
-
-                                    <!-- Date Posted -->
-                                    <Label Text="{Binding Date, StringFormat='Date Posted: {0:MMM d, yyyy}'}"
-                               TextColor="White"
-                               FontSize="12"
-                               FontFamily="Inter-Light"
-                               HorizontalOptions="Start" 
-                               VerticalOptions="End"/>
-                                </Grid>
+                                 </Grid>
 
                             </VerticalStackLayout>
                         </Frame>

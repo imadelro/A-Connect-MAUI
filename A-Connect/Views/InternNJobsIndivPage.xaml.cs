@@ -11,10 +11,10 @@ public partial class InternNJobsIndivPage : ContentPage
 
     public string PostId { get; set; }
 
-    public InternNJobsIndivPage()
+    public InternNJobsIndivPage(UserDatabase userDatabase)
     {
         InitializeComponent();
-        _viewModel = new InternNJobsIndivViewModel();
+        _viewModel = new InternNJobsIndivViewModel(userDatabase);
         BindingContext = _viewModel;
     }
 
