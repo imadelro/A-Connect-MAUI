@@ -30,7 +30,7 @@
                        Margin="0,50,0,0"/>
             </StackLayout>
         </Frame>
-        
+        <!-- Menu container -->
 <Grid
     x:Name="Menu_container"
     IsVisible="False"
