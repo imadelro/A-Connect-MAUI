@@ -14,11 +14,22 @@ namespace A_Connect.Views
 
             emailLabel.Text = App.CurrentUser?.Email;
             idNumberLabel.Text = App.CurrentUser?.Username;
+
+            if (App.CurrentUser?.DisplayName == null)
+            {
+                displayNameLabel.Text = App.CurrentUser?.Username;
+
+            }
+            else
+            {
+                displayNameLabel.Text = App.CurrentUser?.DisplayName;
+            } 
+                
         }
 
         private async void OnSaveClicked(object sender, EventArgs e)
         {
-            string displayName = usernameEntry.Text;
+            string displayName = displayNameEntry.Text;
             string email = emailLabel.Text;
 
             // Check if the display name already exists
@@ -42,6 +53,10 @@ namespace A_Connect.Views
 
             if (rows > 0)
             {
+
+                App.CurrentUser.DisplayName = displayName;
+                displayNameLabel.Text = displayName;
+
                 await DisplayAlert("Success", "Display name updated successfully!", "OK");
             }
             else
