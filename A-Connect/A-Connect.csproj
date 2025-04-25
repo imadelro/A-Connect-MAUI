@@ -75,6 +75,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+<<<<<<< HEAD
 	  <Compile Update="Views\ProfsToPickNewsFeedPage.xaml.cs">
 	    <DependentUpon>ProfsToPickNewsFeedPage.xaml</DependentUpon>
 	  </Compile>
@@ -124,6 +125,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\TutorFinderPage.xaml">
+=======
+	  <MauiXaml Update="Views\ScheduleTradingFormPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ScheduleTradingPage.xaml">
+>>>>>>> 1fd85c8a5cd5e51b8cec819bf599391bd6871904
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

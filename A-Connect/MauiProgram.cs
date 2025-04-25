@@ -1,5 +1,6 @@
-﻿using A_Connect.Services;
+﻿﻿using A_Connect.Services;
 using Microsoft.Extensions.Logging;
+using SQLite;
 
 namespace A_Connect;
 
@@ -16,16 +17,13 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
         // register the UserDatabase.
-        string userDbPath = Path.Combine(FileSystem.AppDataDirectory, "users.db3");
-        builder.Services.AddSingleton<UserDatabase>(s => new UserDatabase(userDbPath));
-        // register the tutorFinder database
-        string tutorFinderDbPath = Path.Combine(FileSystem.AppDataDirectory, "tutorFinder.db3");
-        builder.Services.AddSingleton<TutorFinderDatabase>(s => new TutorFinderDatabase(tutorFinderDbPath));
-        // Register marketplace
-        string marketplaceDbPath = Path.Combine(FileSystem.AppDataDirectory, "marketplace.db3");
-        builder.Services.AddSingleton<MarketplaceDatabase>(s => new MarketplaceDatabase(marketplaceDbPath));
+        string dbPath = Path.Combine(FileSystem.AppDataDirectory, "users.db3");
+        builder.Services.AddSingleton<UserDatabase>(s => new UserDatabase(dbPath));
 
-
+        // Register ScheduleTradingService with its own database
+        string scheddbPath = Path.Combine(FileSystem.AppDataDirectory, "scheduleTrading.db3");
+        var connection = new SQLiteAsyncConnection(scheddbPath);
+        builder.Services.AddSingleton(new ScheduleTradingService(connection));
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="A_Connect.Views.ScheduleTradingPage"
+             Title="Schedule Trading"
+             BackgroundColor="White">
+
+	<VerticalStackLayout Padding="20" Spacing="10">
+        
+        <!-- Page Title -->
+        <Label Text="Schedule Trading"
+               FontSize="24"
+               HorizontalOptions="Center" />
+
+        <!-- Search Bar -->
+        <SearchBar x:Name="searchBar"
+                   Placeholder="Search course codes..."
+                   TextChanged="OnSearchBarTextChanged" />
+
+        <!-- Add Post Button -->
+        <Button Text="Add Post"
+                Clicked="OnAddPostClicked" />
+
+        <!-- CollectionView to display all posts -->
+        <CollectionView x:Name="postsCollectionView">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="Gray" Padding="10" Margin="5">
+                        <VerticalStackLayout Spacing="5">
+                            
+                            <Label Text="WANT:"
+                                   FontAttributes="Bold" />
+                            <Label Text="{Binding WantedCourseCode}" />
+                            <Label Text="{Binding WantedSection}" />
+                            <Label Text="{Binding WantedSchedule}" />
+
+                            <Label Text="HAVE:"
+                                   FontAttributes="Bold" />
+                            <Label Text="{Binding HaveCourseCode}" />
+                            <Label Text="{Binding HaveSection}" />
+                            <Label Text="{Binding HaveSchedule}" />
+
+                            <Label Text="Contact Info:"
+                                   FontAttributes="Bold" />
+                            <Label Text="{Binding PosterName}" />
+                            <Label Text="{Binding PosterFacebook}" />
+                            <Label Text="{Binding PosterPhone}" />
+
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>
