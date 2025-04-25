@@ -30,7 +30,7 @@
                CornerRadius="25"
                Padding="20"
                HasShadow="True"
-               WidthRequest="300"
+               WidthRequest="340"
                HorizontalOptions="Center">
 
             <Frame.Shadow>
@@ -49,18 +49,17 @@
                        FontFamily="Inter-Regular"/>
 
                 <!-- Email Entry -->
-                <Entry x:Name="email"
+                <Entry x:Name="emailEntry"
                        Placeholder="juan.delacruz@student.ateneo.edu"
-                       Keyboard="Numeric"
                        FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=18}"/>
 
-				<!-- ID Label -->
-				<Label Text="ID Number"
+                <!-- ID Label -->
+                <Label Text="ID Number"
                        FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=18}"
                        FontFamily="Inter-Regular"/>
 
-				<!-- ID Num Entry -->
-				<Entry x:Name="IDNum"
+                <!-- ID Num Entry -->
+                <Entry x:Name="IDNum"
                        Placeholder="223144"
                        Keyboard="Numeric"
                        FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=18}"/>
@@ -69,13 +68,41 @@
                 <Label Text="Password"
                        FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=18}"
                        FontFamily="Inter-Regular"/>
-				
+
 
                 <!-- Password Entry -->
                 <Entry x:Name="passwordEntry"
                        Placeholder="************"
                        IsPassword="True"
                        FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=18}"/>
+
+                <!-- Password Requirements Box -->
+                <Frame BackgroundColor="{StaticResource LightBlue}"
+                       CornerRadius="10"
+                       Padding="8"
+                       HasShadow="False">
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="Password must include:"
+                               FontSize="12"
+                               FontFamily="Inter-Bold"
+                               TextColor="{StaticResource DarkBlue}"/>
+                        <Label Text="• At least 8 characters" 
+                               FontSize="12"
+                               TextColor="{StaticResource DarkBlue}"/>
+                        <Label Text="• One uppercase letter (A-Z)" 
+                               FontSize="12"
+                               TextColor="{StaticResource DarkBlue}"/>
+                        <Label Text="• One lowercase letter (a-z)" 
+                               FontSize="12"
+                               TextColor="{StaticResource DarkBlue}"/>
+                        <Label Text="• One number (0-9)" 
+                               FontSize="12"
+                               TextColor="{StaticResource DarkBlue}"/>
+                        <Label Text="• One special character"
+                               FontSize="12"
+                               TextColor="{StaticResource DarkBlue}"/>
+                    </VerticalStackLayout>
+                </Frame>
 
                 <!-- Register Button -->
                 <Button x:Name="btnRegister"
@@ -86,11 +113,9 @@
                         Clicked="OnRegisterClicked"
                         FontFamily="Inter-Regular"
                         FontSize="{OnIdiom Phone=16, Tablet=18, Desktop=20}"
-                        HorizontalOptions="Center"/>
-				
-				
+                        HorizontalOptions="Center"
+                        Margin="0,5,0,0"/>
             </VerticalStackLayout>
         </Frame>
-
     </VerticalStackLayout>
 </ContentPage>

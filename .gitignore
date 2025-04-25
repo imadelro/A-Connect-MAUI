@@ -1,28 +1,5 @@
-# Build artifacts
-bin/
-obj/
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
 
-# User-specific files
-.vscode/
-*.user
-*.suo
-*.userosscache
-*.sln.docstates
-
-# Logs and debug
-*.log
-*.tlog
-*.cache
-*.pdb
-
-# IDE and editor files
-.idea/
-*.iml
-*.vs/
-
-# .NET MAUI specific
-.platforms/
-AppPackages/
-BundleArtifacts/
-DerivedData/
-project.lock.json
+/.vs/A-Connect-MAUI/v17

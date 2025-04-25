@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="A_Connect.Views.LoginPage"
+             Shell.NavBarIsVisible="False"
+
              BackgroundColor="White"
              Title="Login">
 
@@ -49,7 +51,7 @@
                        FontFamily="Inter-Regular"/>
 
                 <!-- ID Number Entry -->
-                <Entry x:Name="emailIDnum"
+                <Entry x:Name="IDNum"
                        Placeholder="223144"
                        Keyboard="Numeric"
                        FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=18}"/>
@@ -90,8 +92,8 @@
                         Clicked="OnRegisterClicked"
                         FontFamily="Inter-Regular"
                         FontSize="{OnIdiom Phone=16, Tablet=18, Desktop=20}"
-                        HorizontalOptions="Center"/>
-                -->
+                        HorizontalOptions="Center"/>-->
+                
             </VerticalStackLayout>
         </Frame>
 
