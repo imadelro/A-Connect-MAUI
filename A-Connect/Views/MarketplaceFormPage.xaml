@@ -108,7 +108,7 @@
                                    VerticalTextAlignment="Center"/>
                             <Frame BackgroundColor="White" Padding="20,0">
                                 <Entry x:Name="LocationEntry"
-                                       Placeholder="Name of your listing"
+                                       Placeholder="Enter Location"
                                        Text="{Binding Location}"
                                        FontFamily="Inter-Light"/>
                             </Frame>
