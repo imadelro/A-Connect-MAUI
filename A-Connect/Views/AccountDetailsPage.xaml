@@ -60,7 +60,15 @@
                 <Label Text="Display Name"
                        FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=18}"
                        FontFamily="Inter-Bold"/>
-                <Entry x:Name="usernameEntry"
+                <Label x:Name="displayNameLabel"
+                       FontSize="{OnIdiom Phone=16, Tablet=18, Desktop=18}"
+                       FontFamily="Inter-Regular"
+                       TextColor="Black"/>
+
+                <Label Text="Set New Display Name"
+                       FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=18}"
+                       FontFamily="Inter-Bold"/>
+                <Entry x:Name="displayNameEntry"
                        Placeholder="Enter display name"
                        FontSize="{OnIdiom Phone=14, Tablet=16, Desktop=18}"
                        FontFamily="Inter-Regular"/>
