@@ -72,6 +72,9 @@ namespace A_Connect.ViewModels
                 if (displayname != null)
                 {
                     DisplayName = displayname;
+                } else
+                {
+                    DisplayName = SelectedPost.PostedBy;
                 }
 
             }

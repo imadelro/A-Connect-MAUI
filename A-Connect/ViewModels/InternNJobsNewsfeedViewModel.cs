@@ -57,7 +57,6 @@ namespace A_Connect.ViewModels
             get => _isOwnPostsSelected;
             set => SetProperty(ref _isOwnPostsSelected, value);
         }
-
         public ICommand SwitchToAllPostsCommand { get; }
         public ICommand SwitchToOwnPostsCommand { get; }
         public ICommand SwitchToCreatePostCommand { get; }
