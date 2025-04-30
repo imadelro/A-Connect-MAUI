@@ -1,4 +1,5 @@
 ﻿﻿using A_Connect.Services;
+﻿using A_Connect.ViewModels;
 using Microsoft.Extensions.Logging;
 using SQLite;
 
@@ -30,6 +31,13 @@ public static class MauiProgram
         string dbPath = Path.Combine(FileSystem.AppDataDirectory, "tutorfinder.db");
         return new TutorFinderDatabase(dbPath);
     });
+        builder.Services.AddTransient<MarketplaceListingDetailViewModel>();
+        builder.Services.AddSingleton<MarketplaceDatabase>(s =>
+        {
+            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "marketplace.db3");
+            return new MarketplaceDatabase(dbPath);
+        });
+
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

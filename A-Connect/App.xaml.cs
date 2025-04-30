@@ -13,6 +13,8 @@ public partial class App : Application
 
     public static bool IsOwnPostsSelected { get; set; }
 
+    public static UserDatabase userDb { get; set; }
+
     public static A_Connect.Models.User CurrentUser { get; set; }
     public static A_Connect.Services.STFormDatabase STDB { get; private set; }
     public static MarketplaceDatabase MarketplaceDB { get; private set; }
@@ -44,19 +46,21 @@ public partial class App : Application
     string STdbPath = Path.Combine(FileSystem.AppDataDirectory, "STForms.db3");
     string marketplaceDbPath = Path.Combine(FileSystem.AppDataDirectory, "marketplace.db3");
 
-    // Init & Register Databases
-    var userDb = new UserDatabase(userDbPath);
+        // Init & Register Databases
+    userDb = new UserDatabase(userDbPath);
     DependencyService.RegisterSingleton<UserDatabase>(userDb);
 
-    OpportunityDatabase = new OpportunityDatabase(opportunityDbPath);
+
+        OpportunityDatabase = new OpportunityDatabase(opportunityDbPath);
     DependencyService.RegisterSingleton<OpportunityDatabase>(OpportunityDatabase);
 
     // Other DBs
     STDB = new STFormDatabase(STdbPath);
     MarketplaceDB = new MarketplaceDatabase(marketplaceDbPath);
+    DependencyService.Register<MarketplaceNewsFeedViewModel>();
 
-    // ViewModels (optional if not resolving via DependencyService)
-    DependencyService.Register<InternNJobsNewsfeedViewModel>();
+
+        DependencyService.Register<InternNJobsNewsfeedViewModel>();
 }
 
 

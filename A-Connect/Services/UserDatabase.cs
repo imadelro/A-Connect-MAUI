@@ -13,11 +13,15 @@ namespace A_Connect.Services
     public class UserDatabase
     {
         private readonly SQLiteAsyncConnection _database;
+        private SQLiteAsyncConnection _connection;
+
 
         public UserDatabase(string dbPath)
         {
             _database = new SQLiteAsyncConnection(dbPath);
             _database.CreateTableAsync<User>().Wait();
+            _connection = new SQLiteAsyncConnection(dbPath);
+            _connection.CreateTableAsync<User>().Wait();
         }
 
         public Task<User> GetUserAsync(string username, string password)
@@ -71,5 +75,21 @@ namespace A_Connect.Services
 
             return 0;
         }
+
+        public async Task<List<User>> GetUsersAsync()
+        {
+            try
+            {
+                // Fetch all users from the User table
+                var users = await _connection.Table<User>().ToListAsync();
+                return users;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching users: {ex.Message}");
+                return new List<User>(); // Return an empty list in case of an error
+            }
+        }
+
     }
 }

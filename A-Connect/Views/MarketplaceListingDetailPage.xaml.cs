@@ -1,15 +1,19 @@
 using A_Connect.Models;
 using A_Connect.ViewModels;
+using A_Connect.Services;
 
 namespace A_Connect.Views
 {
     [QueryProperty(nameof(SelectedPost), "SelectedPost")]
     public partial class MarketplaceListingDetailPage : ContentPage
     {
-        public MarketplaceListingDetailPage()
+        private readonly MarketplaceListingDetailViewModel _viewModel;
+
+        public MarketplaceListingDetailPage(MarketplaceListingDetailViewModel viewModel)
         {
             InitializeComponent();
-            BindingContext = new MarketplaceListingDetailViewModel();
+            _viewModel = viewModel;
+            BindingContext = _viewModel;
         }
 
         public MarketplacePost SelectedPost
@@ -23,7 +27,6 @@ namespace A_Connect.Views
             }
         }
 
-        // Inside your MarketplaceNewsFeedPage.xaml.cs file
         async void OnItemTapped(object sender, ItemTappedEventArgs e)
         {
             if (e.Item is MarketplacePost listing)
