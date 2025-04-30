@@ -13,6 +13,8 @@ public partial class App : Application
 
     public static bool IsOwnPostsSelected { get; set; }
 
+    public static UserDatabase userDb { get; set; }
+
     public static A_Connect.Models.User CurrentUser { get; set; }
     public static A_Connect.Services.STFormDatabase STDB { get; private set; }
     public static MarketplaceDatabase MarketplaceDB { get; private set; }
@@ -35,27 +37,32 @@ public partial class App : Application
     }
 
     public App()
-    {
-        InitializeComponent();
-        string STdbPath = Path.Combine(FileSystem.AppDataDirectory, "STForms.db3");        
-        string marketplaceDbPath = Path.Combine(FileSystem.AppDataDirectory, "marketplace.db3"); ;
+{
+    InitializeComponent();
+
+    // Paths
+    string userDbPath = Path.Combine(FileSystem.AppDataDirectory, "User.db3");
+    string opportunityDbPath = Path.Combine(FileSystem.AppDataDirectory, "opportunities.db3");
+    string STdbPath = Path.Combine(FileSystem.AppDataDirectory, "STForms.db3");
+    string marketplaceDbPath = Path.Combine(FileSystem.AppDataDirectory, "marketplace.db3");
+
+        // Init & Register Databases
+    userDb = new UserDatabase(userDbPath);
+    DependencyService.RegisterSingleton<UserDatabase>(userDb);
 
 
-        DependencyService.Register<OpportunityDatabase>();
+        OpportunityDatabase = new OpportunityDatabase(opportunityDbPath);
+    DependencyService.RegisterSingleton<OpportunityDatabase>(OpportunityDatabase);
+
+    // Other DBs
+    STDB = new STFormDatabase(STdbPath);
+    MarketplaceDB = new MarketplaceDatabase(marketplaceDbPath);
+    DependencyService.Register<MarketplaceNewsFeedViewModel>();
+
+
         DependencyService.Register<InternNJobsNewsfeedViewModel>();
+}
 
-        string dbPath = Path.Combine(FileSystem.AppDataDirectory, "opportunities.db3");
-        OpportunityDatabase = new OpportunityDatabase(dbPath);
-
-        DependencyService.RegisterSingleton<OpportunityDatabase>(OpportunityDatabase);
-
-
-    // Initialize the database
-        STDB = new STFormDatabase(STdbPath);
-        MarketplaceDB = new MarketplaceDatabase(marketplaceDbPath);
-
-
-    }
 
     protected override Window CreateWindow(IActivationState? activationState)
     {

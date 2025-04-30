@@ -67,6 +67,28 @@
                             </Frame>
                         </HorizontalStackLayout>
 
+                        <!-- Views/TutorFinderFormPage.xaml - Add this after the Category Picker and before Contact Info -->
+                        <!-- Pricing Type Picker -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Pricing Type:" 
+           TextColor="White"
+           FontFamily="Inter-Black"
+           VerticalTextAlignment="Center"/>
+                            <Frame BackgroundColor="White" Padding="20,0">
+                                <Picker Title="Select Pricing Type" x:Name="pricingTypePicker"
+                FontFamily="Inter-Light" WidthRequest="200">
+                                    <Picker.ItemsSource>
+                                        <x:Array Type="{x:Type x:String}">
+                                            <x:String>Free</x:String>
+                                            <x:String>Paid</x:String>
+                                            <x:String>Service Hours</x:String>
+                                        </x:Array>
+                                    </Picker.ItemsSource>
+                                </Picker>
+                            </Frame>
+                        </HorizontalStackLayout>
+
+
                         <!-- Contact Info -->
                         <HorizontalStackLayout Spacing="10">
                             <Label Text="Contact Details:" 

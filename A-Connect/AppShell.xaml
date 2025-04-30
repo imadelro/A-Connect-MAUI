@@ -16,4 +16,9 @@
         ContentTemplate="{DataTemplate local:Homepage}"
         Route="HomePage" />
 
+    <ShellContent
+        Title="Tutor Finder"
+        ContentTemplate="{DataTemplate local:TutorFinderHomePage}"
+        Route="TutorFinderHomePage" />
+
 </Shell>

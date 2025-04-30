@@ -44,7 +44,7 @@ namespace A_Connect.ViewModels
             }
         }
         public ObservableCollection<string> SemesterOptions { get; } = new ObservableCollection<string> { "1st Sem", "2nd Sem", "Intersession" };
-        public ObservableCollection<string> SchoolYearOptions { get; } = new ObservableCollection<string>(Enumerable.Range(2000, 26).Select(year => $"{year}-{year + 1}"));
+        public ObservableCollection<string> SchoolYearOptions { get; } = new ObservableCollection<string>(Enumerable.Range(2018, 7).Select(year => $"{year}-{year + 1}"));
 
         public ICommand SubmitReviewCommand { get; }
 
@@ -87,6 +87,12 @@ namespace A_Connect.ViewModels
 
         private async Task SubmitReview()
         {
+
+            LastName = string.IsNullOrWhiteSpace(LastName) ? string.Empty : System.Text.RegularExpressions.Regex.Replace(LastName.Trim(), @"\s+", " ");
+            FirstName = string.IsNullOrWhiteSpace(FirstName) ? string.Empty : System.Text.RegularExpressions.Regex.Replace(FirstName.Trim(), @"\s+", " ");
+
+            CourseCode = string.IsNullOrWhiteSpace(CourseCode) ? string.Empty : CourseCode.Trim();
+
             if (string.IsNullOrWhiteSpace(LastName) || string.IsNullOrWhiteSpace(FirstName) ||
             string.IsNullOrWhiteSpace(CourseCode) || string.IsNullOrWhiteSpace(SemesterTaken) ||
             string.IsNullOrWhiteSpace(SchoolYear) || SelectedRating <= 0)
@@ -95,9 +101,10 @@ namespace A_Connect.ViewModels
                 return;
             }
 
-            if (!CourseCode.Contains(" "))
+            var courseCodePattern = @"^[A-Za-z]+ [0-9]+$";
+            if (!System.Text.RegularExpressions.Regex.IsMatch(CourseCode, courseCodePattern))
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Course code subject and number must be separated by a space.", "OK");
+                await Application.Current.MainPage.DisplayAlert("Error", "Course code must contain letters followed by a space and then digits (e.g., CSCI 41).", "OK");
                 return;
             }
 

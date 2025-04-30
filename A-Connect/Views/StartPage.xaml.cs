@@ -19,5 +19,10 @@ namespace A_Connect.Views
         {
             await Shell.Current.GoToAsync("RegisterPage");
         }
+        private async void OnScheduleTradingClicked(object sender, EventArgs e)
+        {
+            // Navigate to ScheduleTradingPage by route name
+            await Shell.Current.GoToAsync(nameof(ScheduleTradingPage));
+        }
     }
 }

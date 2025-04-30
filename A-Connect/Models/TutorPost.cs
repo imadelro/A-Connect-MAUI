@@ -25,6 +25,8 @@ namespace A_Connect.Models
         public bool IsOwnPost { get; set; }
         public bool IsAvailable { get; set; } = true; // Default to available
         public string AvailabilityStatus => IsAvailable ? "Available" : "Unavailable";
+        public string PricingType { get; set; } 
+        public string PricingTag => PricingType ?? "Not Specified";
 
     }
 }

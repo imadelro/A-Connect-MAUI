@@ -107,6 +107,23 @@
                 </VerticalStackLayout>
             </HorizontalStackLayout>
 
+            <!-- Category Filter Radio Buttons -->
+            <HorizontalStackLayout Spacing="10" Margin="0,10" HorizontalOptions="Center">
+                <RadioButton x:Name="AllRadioButton" 
+                 Content="All" 
+                 IsChecked="True"
+                 GroupName="CategoryFilter"
+                 CheckedChanged="OnCategoryFilterChanged"/>
+                <RadioButton x:Name="TutorRadioButton" 
+                 Content="Tutor" 
+                 GroupName="CategoryFilter"
+                 CheckedChanged="OnCategoryFilterChanged"/>
+                <RadioButton x:Name="TuteeRadioButton" 
+                 Content="Tutee" 
+                 GroupName="CategoryFilter"
+                 CheckedChanged="OnCategoryFilterChanged"/>
+            </HorizontalStackLayout>
+
             <!-- CollectionView for DisplayedPosts -->
             <CollectionView x:Name="postsCollectionView"
                 ItemsSource="{Binding DisplayedPosts}"
@@ -120,13 +137,14 @@
                    Padding="15"
                    Margin="0,10">
                             <VerticalStackLayout Spacing="5">
-                                <!-- Status and Action Buttons (Copied from STNewsFeed) -->
-                                <Grid ColumnDefinitions="*, Auto">
+                                <Grid ColumnDefinitions="Auto,Auto,*,Auto">
                                     <!-- Status Tag -->
-                                    <Frame CornerRadius="10"
-                               Padding="5"
-                               HorizontalOptions="Start"
-                               VerticalOptions="Center">
+                                    <Frame Grid.Column="0"
+           CornerRadius="10"
+           Padding="5"
+           Margin="0,0,5,0"
+           HorizontalOptions="Start"
+           VerticalOptions="Center">
                                         <Frame.Triggers>
                                             <DataTrigger TargetType="Frame" Binding="{Binding IsAvailable}" Value="True">
                                                 <Setter Property="BackgroundColor" Value="{StaticResource DarkBlue}" />
@@ -136,18 +154,51 @@
                                             </DataTrigger>
                                         </Frame.Triggers>
                                         <Label Text="{Binding AvailabilityStatus}"
-                                   TextColor="White"
-                                   FontSize="12"
-                                   FontFamily="Inter-SemiBold"
-                                   HorizontalOptions="Center" />
+               TextColor="White"
+               FontSize="12"
+               FontFamily="Inter-SemiBold"
+               HorizontalOptions="Center" />
                                     </Frame>
 
-                                    <!-- Action Buttons -->
-                                    <VerticalStackLayout Grid.Column="1"
-                                             HorizontalOptions="End"
-                                             VerticalOptions="Center"
-                                             Spacing="10">
-                                        <!-- Mark as Unavailable button -->
+                                    <!-- Pricing Type Tag -->
+                                    <Frame Grid.Column="1"
+           CornerRadius="10"
+           Padding="5"
+           HorizontalOptions="Start"
+           VerticalOptions="Center">
+                                        <Frame.Triggers>
+                                            <!-- Different background colors based on pricing type -->
+                                            <DataTrigger TargetType="Frame" Binding="{Binding PricingType}" Value="Free">
+                                                <Setter Property="BackgroundColor" Value="#4CAF50" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Frame" Binding="{Binding PricingType}" Value="Paid">
+                                                <Setter Property="BackgroundColor" Value="{StaticResource Yellow}" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Frame" Binding="{Binding PricingType}" Value="Service Hours">
+                                                <Setter Property="BackgroundColor" Value="{StaticResource MidBlue}" />
+                                            </DataTrigger>
+                                        </Frame.Triggers>
+                                        <Label Text="{Binding PricingTag}"
+               TextColor="White"
+               FontSize="12"
+               FontFamily="Inter-SemiBold"
+               HorizontalOptions="Center">
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding PricingType}" Value="Paid">
+                                                    <Setter Property="TextColor" Value="Black" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                    </Frame>
+
+                                    <!-- Spacer to push action buttons to the right -->
+                                    <BoxView Grid.Column="2" BackgroundColor="Transparent" />
+
+                                    <!-- Action Buttons - Move to column 3 -->
+                                    <VerticalStackLayout Grid.Column="3"
+                         HorizontalOptions="End"
+                         VerticalOptions="Center"
+                         Spacing="10">
                                         <Button Text="Mark as Unavailable"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.MarkAsUnavailableCommand}"
                                     CommandParameter="{Binding}"
@@ -167,8 +218,6 @@
                                                 </MultiTrigger>
                                             </Button.Triggers>
                                         </Button>
-
-                                        <!-- Mark as Available button -->
                                         <Button Text="Mark as Available"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.MarkAsAvailableCommand}"
                                     CommandParameter="{Binding}"
@@ -191,7 +240,8 @@
                                     </VerticalStackLayout>
                                 </Grid>
 
-                                <!-- Course Code -->
+
+                                        <!-- Course Code -->
                                 <Label Text="{Binding CourseCode}"
                            TextColor="White"
                            FontSize="18"
@@ -310,6 +360,70 @@
                     Clicked="OnCreatePostClicked" />
         </StackLayout>
 
+        <Grid
+    x:Name="Menu_container"
+    IsVisible="False"
+    Grid.Row="1"
+    Opacity="1"
+    ZIndex="3"
+    InputTransparent="False"
+    >
+    <Frame 
+                   BackgroundColor="#063970"
+                   WidthRequest="265" HeightRequest="525"
+                   CornerRadius="15" HasShadow="True" BorderColor="#063970"
+                   Margin="20,56,0,0" 
+                   HorizontalOptions="Start" 
+>
+        <VerticalStackLayout
+            HorizontalOptions="End"
+            VerticalOptions="Start"
+            Spacing="15"
+            Margin="0,25,90,0"
+            >
+                <Label Text="Navigation Bar"
+                    FontSize="15"
+                    HorizontalOptions="Start"
+                    TextColor="White"
+                    FontAttributes="Bold" Padding="0"/>
+                
+                
+                <Button Text="Profs To Pick"
+                        TextColor="White"
+                        BackgroundColor="#063970"
+                        Clicked="OnProfsToPickClicked" HorizontalOptions="Start"
+                        Padding="0"/>
+                <Button Text="Schedule Trading"
+                        TextColor="White"
+                        BackgroundColor="#063970"
+                        Clicked="OnScheduleTradingClicked"
+                        HorizontalOptions="Start" Padding="0"/>
+                <Button Text="Marketplace"
+                        TextColor="White"
+                        BackgroundColor="#063970"
+                        Clicked="OnMarketplaceClicked" 
+                        HorizontalOptions="Start" Padding="0"/>
+                <Button Text="Tutor Finder"
+                        TextColor="White"
+                        BackgroundColor="#063970"
+                        Clicked="OnTutorFinderClicked"
+                        HorizontalOptions="Start" Padding="0"/>
+                <Button Text="Jobs and Internships"
+                        TextColor="White"
+                        BackgroundColor="#063970"
+                        Clicked="OnInternNJobsClicked"
+                        HorizontalOptions="Start" Padding="0"
+                         />
+                <Button Text="Logout"
+                        TextColor="White"
+                        BackgroundColor="#063970"
+                        Clicked="OnLogoutClicked"
+                        HorizontalOptions="Start" Padding="0"/>
+            
+        </VerticalStackLayout>
+        </Frame>
+    </Grid>
+
         <!-- Bottom Navigation Bar -->
         <Grid Grid.Row="2" BackgroundColor="#063970" HeightRequest="60">
             <Grid.ColumnDefinitions>
@@ -323,7 +437,8 @@
                          HorizontalOptions="Center"
                          VerticalOptions="Center"
                          WidthRequest="30"
-                         HeightRequest="30" />
+                         HeightRequest="30" 
+                         Clicked="OnNavIconClicked"/>
             <ImageButton Source="nav_home.png"
                          Grid.Column="1"
                          HorizontalOptions="Center"
@@ -336,7 +451,8 @@
                          HorizontalOptions="Center"
                          VerticalOptions="Center"
                          WidthRequest="30"
-                         HeightRequest="30" />
+                         HeightRequest="30"
+                         Clicked="OnAccountClicked" />
         </Grid>
     </Grid>
 </ContentPage>

@@ -76,7 +76,7 @@
                                  Margin="0,10"/>
 
 
-                        <!-- Condition Frame -->
+                        <!-- Location Frame -->
                         <Frame BackgroundColor="White" CornerRadius="10" Padding="15" HasShadow="True">
                             <VerticalStackLayout Spacing="5">
                                 <Label Text="Location:"
@@ -126,6 +126,20 @@
                                        LineBreakMode="WordWrap"/>
                             </VerticalStackLayout>
                         </Frame>
+
+                        <!-- Divider line -->
+                        <BoxView HeightRequest="1"
+                                 BackgroundColor="White"
+                                 Margin="0,10"/>
+
+
+                        <!-- Posted By -->
+                        <HorizontalStackLayout Spacing="10" >
+                            <Label Text="{Binding DisplayName, StringFormat='Posted by: {0}'}"
+                                   TextColor="White"
+                                   FontSize="12"
+                                   FontFamily="Inter-SemiBold"/>
+                        </HorizontalStackLayout>
 
                     </VerticalStackLayout>
                 </Frame>
