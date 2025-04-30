@@ -47,7 +47,7 @@ namespace A_Connect.ViewModels
 
         public ObservableCollection<string> DayOptions { get; } = new ObservableCollection<string>
     {
-        "M-TH", "T-F", "W", "S", "M", "T", "W", "TH", "F", "S"
+        "M-TH", "T-F","M", "T", "W", "TH", "F","S"
     };
 
         public ObservableCollection<string> TimeOptions { get; } = new ObservableCollection<string>
@@ -74,6 +74,7 @@ namespace A_Connect.ViewModels
 
         private async Task PostTrade()
         {
+            CourseCode = string.IsNullOrWhiteSpace(CourseCode) ? string.Empty : CourseCode.Trim();
             // Validate input fields
             if (string.IsNullOrWhiteSpace(CourseCode) || string.IsNullOrWhiteSpace(SelectedOfferDay) ||
                 string.IsNullOrWhiteSpace(SelectedOfferTime) || string.IsNullOrWhiteSpace(SelectedRequestTime) 
@@ -83,9 +84,10 @@ namespace A_Connect.ViewModels
                 return;
             }
 
-            if (!CourseCode.Contains(" "))
+            var courseCodePattern = @"^[A-Za-z]+ [0-9]+$";
+            if (!System.Text.RegularExpressions.Regex.IsMatch(CourseCode, courseCodePattern))
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Course code subject and number must be separated by a space.", "OK");
+                await Application.Current.MainPage.DisplayAlert("Error", "Course code must contain letters followed by a space and then digits (e.g., CSCI 41).", "OK");
                 return;
             }
 

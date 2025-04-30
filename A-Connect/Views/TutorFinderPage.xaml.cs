@@ -51,6 +51,22 @@ namespace A_Connect.Views
             }
         }
 
+        // Category filter properties
+        private string _selectedCategory = "All";
+        public string SelectedCategory
+        {
+            get => _selectedCategory;
+            set
+            {
+                if (_selectedCategory != value)
+                {
+                    _selectedCategory = value;
+                    OnPropertyChanged();
+                    FilterPosts(); // Apply filter when changed
+                }
+            }
+        }
+
         private List<TutorPost> _displayedPosts;
         public List<TutorPost> DisplayedPosts
         {
@@ -210,6 +226,11 @@ namespace A_Connect.Views
                 filtered = filtered.Where(p => p.PosterName != currentUser);
             }
 
+            if (SelectedCategory != "All")
+            {
+                filtered = filtered.Where(p => p.Category == SelectedCategory);
+            }
+
             // Search filter
             var searchText = searchEntry.Text?.Trim().ToLower() ?? "";
             if (!string.IsNullOrEmpty(searchText))
@@ -227,6 +248,7 @@ namespace A_Connect.Views
 
             // Update the collection
             DisplayedPosts = filtered.ToList();
+            UpdateRadioButtons();
         }
                 private async void OnScheduleTradingClicked(object sender, EventArgs e)
         {
@@ -287,6 +309,23 @@ namespace A_Connect.Views
             await Shell.Current.GoToAsync("//TutorFinderHomePage");
         }
 
+        private void OnCategoryFilterChanged(object sender, CheckedChangedEventArgs e)
+        {
+            if (!e.Value) return; // Only handle when a radio button is checked
+
+            RadioButton radioButton = sender as RadioButton;
+            if (radioButton != null)
+            {
+                SelectedCategory = radioButton.Content?.ToString() ?? "All";
+            }
+        }
+        private void UpdateRadioButtons()
+        {
+            // This will handle setting the checked state of radio buttons based on SelectedCategory
+            AllRadioButton.IsChecked = (SelectedCategory == "All");
+            TutorRadioButton.IsChecked = (SelectedCategory == "Tutor");
+            TuteeRadioButton.IsChecked = (SelectedCategory == "Tutee");
+        }
 
     }
 }
