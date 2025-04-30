@@ -172,6 +172,7 @@
                             <!-- Third App -->
             <Frame Grid.Row="1" Grid.Column="0"
                    BackgroundColor="White"
+                   BorderColor="White"
                    WidthRequest="160" HeightRequest="160"
                    CornerRadius="15" HasShadow="True">
                 <Frame.Shadow>
@@ -194,6 +195,7 @@
             <!-- Fourth App -->
             <Frame Grid.Row="1" Grid.Column="1"
                    BackgroundColor="White"
+                   BorderColor="White"
                    WidthRequest="160" HeightRequest="160"
                    CornerRadius="15" HasShadow="True">
                 <Frame.Shadow>
@@ -216,6 +218,7 @@
             <!-- Fifth App (Jobs and Internships) -->
             <Frame Grid.Row="2" Grid.Column="0"
                    BackgroundColor="White"
+                   BorderColor="White"
                    WidthRequest="160" HeightRequest="160"
                    CornerRadius="15" HasShadow="True"
                    HorizontalOptions="Center">

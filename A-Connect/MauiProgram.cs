@@ -24,6 +24,12 @@ public static class MauiProgram
         string scheddbPath = Path.Combine(FileSystem.AppDataDirectory, "scheduleTrading.db3");
         var connection = new SQLiteAsyncConnection(scheddbPath);
         builder.Services.AddSingleton(new ScheduleTradingService(connection));
+
+				    builder.Services.AddSingleton<TutorFinderDatabase>(s =>
+    {
+        string dbPath = Path.Combine(FileSystem.AppDataDirectory, "tutorfinder.db");
+        return new TutorFinderDatabase(dbPath);
+    });
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

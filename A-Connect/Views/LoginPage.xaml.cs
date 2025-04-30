@@ -33,13 +33,10 @@ namespace A_Connect.Views
                 Preferences.Set("Username", user.Username);
                 Preferences.Set("IsLoggedIn", true);
                 await DisplayAlert("Success", "Logged in successfully", "OK");
-<<<<<<< HEAD
                 await Shell.Current.GoToAsync("//HomePage");
-=======
                 //await Shell.Current.GoToAsync("//MainPage"); this is where we redirect but unavailable pa rn
-                await Shell.Current.GoToAsync("//ScheduleTradingPage");
+                // await Shell.Current.GoToAsync("//ScheduleTradingPage");
 
->>>>>>> 1fd85c8a5cd5e51b8cec819bf599391bd6871904
             }
             else
             {
