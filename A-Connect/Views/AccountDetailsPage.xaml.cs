@@ -23,8 +23,9 @@ namespace A_Connect.Views
             else
             {
                 displayNameLabel.Text = App.CurrentUser?.DisplayName;
-            }
 
+            } 
+                
         }
 
         private async void OnSaveClicked(object sender, EventArgs e)

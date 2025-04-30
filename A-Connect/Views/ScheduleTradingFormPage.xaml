@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="A_Connect.Views.ScheduleTradingFormPage"
+             Title="Add a Trading Post"
+             BackgroundColor="White">
+
+	<ScrollView>
+		<VerticalStackLayout Padding="20" Spacing="10">
+
+			<!-- WANTED inputs -->
+			<Label Text="Desired Course Code" />
+			<Picker x:Name="wantedCourseCodePicker">
+				<!-- Example list of codes -->
+				<Picker.ItemsSource>
+					<x:Array Type="{x:Type x:String}">
+						<x:String>CS101</x:String>
+						<x:String>CS102</x:String>
+						<x:String>MA101</x:String>
+					</x:Array>
+				</Picker.ItemsSource>
+			</Picker>
+
+			<Label Text="Desired Section" />
+			<Entry x:Name="wantedSectionEntry" Placeholder="e.g. A, B, C" />
+
+			<Label Text="Desired Schedule" />
+			<Entry x:Name="wantedScheduleEntry" Placeholder="e.g. MWF 10:00-11:00" />
+
+			<!-- HAVE inputs -->
+			<Label Text="Current Course Code" />
+			<Picker x:Name="haveCourseCodePicker">
+				<Picker.ItemsSource>
+					<x:Array Type="{x:Type x:String}">
+						<x:String>CS101</x:String>
+						<x:String>CS102</x:String>
+						<x:String>MA101</x:String>
+					</x:Array>
+				</Picker.ItemsSource>
+			</Picker>
+
+			<Label Text="Current Section" />
+			<Entry x:Name="haveSectionEntry" Placeholder="e.g. A, B, C" />
+
+			<Label Text="Current Schedule" />
+			<Entry x:Name="haveScheduleEntry" Placeholder="e.g. MWF 8:00-9:00" />
+
+			<!-- Contact Info -->
+			<Label Text="Your Name" />
+			<Entry x:Name="posterNameEntry" />
+
+			<Label Text="Facebook Link" />
+			<Entry x:Name="posterFacebookEntry" />
+
+			<Label Text="Phone Number" />
+			<Entry x:Name="posterPhoneEntry" />
+
+			<!-- Submit -->
+			<Button Text="Submit"
+                    Clicked="OnSubmitClicked" />
+		</VerticalStackLayout>
+	</ScrollView>
+</ContentPage>

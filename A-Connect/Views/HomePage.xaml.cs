@@ -26,12 +26,13 @@ namespace A_Connect.Views
             if (displayName == null)
             {
                 WelcomeLabel.Text = $"Welcome, {username}!";
-            } else
+            }
+            else
             {
                 WelcomeLabel.Text = $"Welcome, {displayName}!";
             }
 
-            
+
         }
 
 
@@ -62,11 +63,11 @@ namespace A_Connect.Views
             await Shell.Current.GoToAsync("MarketplaceNewsFeedPage");
         }
         private async void OnNavIconClicked(object sender, EventArgs e)
-{
-    // Toggle visibility
-    Menu_container.IsVisible = !Menu_container.IsVisible;
-    await Menu_container.TranslateTo(0, 0, 250, Easing.CubicOut);
-}
+        {
+            // Toggle visibility
+            Menu_container.IsVisible = !Menu_container.IsVisible;
+            await Menu_container.TranslateTo(0, 0, 250, Easing.CubicOut);
+        }
 
         private async void OnLogoutClicked(object sender, EventArgs e)
         {
@@ -88,6 +89,11 @@ namespace A_Connect.Views
         private async void OnAccountClicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync(nameof(AccountDetailsPage));
+        }
+
+        private async void TutorFinderClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("//TutorFinderHomePage");
         }
     }
 }
