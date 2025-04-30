@@ -1,0 +1,96 @@
+<ContentPage 
+    x:Class="A_Connect.Views.PostTradePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="New Trade">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid BackgroundColor="{StaticResource DarkBlue}" Padding="20,40,20,20">
+            <Label Text="Schedule Trading"
+                   TextColor="{StaticResource Yellow}"
+                   FontSize="24"
+                   FontFamily="Inter-Black"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+        </Grid>
+
+        <!-- Form Content -->
+        <VerticalStackLayout Grid.Row="1" Padding="20" Spacing="20">
+            <!-- Card for form fields -->
+            <Frame BackgroundColor="{StaticResource Blue}"
+                   CornerRadius="15"
+                   Padding="20">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="TRADE DETAILS"
+                           FontSize="22"
+                           FontFamily="Inter-Black"
+                           TextColor="{StaticResource LightBlue}"
+                           HorizontalOptions="Center"/>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="Course Code:" FontFamily="Inter-Black" TextColor="White" VerticalTextAlignment="Center"/>
+                        <Frame BackgroundColor="White" Padding="20,0">
+                            <Entry Text="{Binding CourseCode}" Placeholder="e.g. CSCI 30" WidthRequest="180"/>
+                        </Frame>
+                    </HorizontalStackLayout>
+
+                    <Label Text="Trade Offer Details:" FontFamily="Inter-Black" TextColor="White" VerticalTextAlignment="Center"/>
+
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="Day:" FontFamily="Inter-Black" TextColor="White" VerticalTextAlignment="Center"/>
+                        <Frame BackgroundColor="White" Padding="20,0">
+                            <Picker Title="Select Day"
+        ItemsSource="{Binding DayOptions}"
+        SelectedItem="{Binding SelectedOfferDay}" WidthRequest="30"/>
+                        </Frame>
+
+                        <Label Text="Time:" FontFamily="Inter-Black" TextColor="White" VerticalTextAlignment="Center"/>
+                        <Frame BackgroundColor="White" Padding="20,0">
+                            <Picker Title="Select Time"
+ItemsSource="{Binding TimeOptions}"
+SelectedItem="{Binding SelectedOfferTime}" WidthRequest="100"/>
+                        </Frame>
+                    </HorizontalStackLayout>
+
+                    <Label Text="Trade Request Details:" FontFamily="Inter-Black" TextColor="White" VerticalTextAlignment="Center"/>
+
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="Day:" FontFamily="Inter-Black" TextColor="White" VerticalTextAlignment="Center"/>
+                        <Frame BackgroundColor="White" Padding="20,0">
+                            <Picker Title="Select Day"
+        ItemsSource="{Binding DayOptions}"
+        SelectedItem="{Binding SelectedRequestDay}" WidthRequest="30"/>
+                        </Frame>
+
+                        <Label Text="Time:" FontFamily="Inter-Black" TextColor="White" VerticalTextAlignment="Center"/>
+                        <Frame BackgroundColor="White" Padding="20,0">
+                            <Picker Title="Select Time"
+ItemsSource="{Binding TimeOptions}"
+SelectedItem="{Binding SelectedRequestTime}" WidthRequest="100" />
+                        </Frame>
+                    </HorizontalStackLayout>
+
+                    <Label Text="Contact Information:" FontFamily="Inter-Black" TextColor="White" VerticalTextAlignment="Center"/>
+                        <Frame BackgroundColor="White" Padding="20,0">
+                            <Editor Text="{Binding ContactInfo}" Placeholder="e.g. FB link, email, phone" AutoSize="TextChanges"/>
+                        </Frame>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- POST button -->
+            <Button Text="POST"
+                    Command="{Binding PostTradeCommand}"
+                    BackgroundColor="{StaticResource Yellow}"
+                    TextColor="Black"
+                    FontFamily="Inter-Black"
+                    CornerRadius="25"
+                    HorizontalOptions="Center"
+                    Padding="40,10" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
