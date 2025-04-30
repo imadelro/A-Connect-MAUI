@@ -119,7 +119,7 @@
                 <StackLayout HorizontalOptions="Center"
                              VerticalOptions="Center"
                              Orientation="Horizontal"
-                             Margin="10"
+                             Margin="-5"
                              Spacing="20">
 
                     <RadioButton Content="All"
