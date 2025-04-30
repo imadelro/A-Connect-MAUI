@@ -1,0 +1,196 @@
+<ContentPage 
+    x:Class="A_Connect.Views.MarketplaceFormPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="New Post">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Blue Header -->
+        <Grid BackgroundColor="{StaticResource DarkBlue}" Padding="20,40,20,20">
+            <Label Text="Marketplace"
+                   TextColor="{StaticResource Yellow}"
+                   FontFamily="Inter-Black"
+                   FontSize="24"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+        </Grid>
+
+        <!-- Main Content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20" Spacing="20">
+
+                <Frame BackgroundColor="#1F6FB7" CornerRadius="15" Padding="20">
+                    <VerticalStackLayout Spacing="15">
+
+                        <!-- Image Upload Section -->
+                        <Frame BackgroundColor="LightGray" CornerRadius="15" Padding="10">
+                            <VerticalStackLayout Spacing="10">
+                                <!-- Image Preview -->
+                                <Frame HeightRequest="200" IsVisible="{Binding HasSelectedImage}" Padding="0" BackgroundColor="White">
+                                    <Image Source="{Binding SelectedImagePath}"
+                                           HeightRequest="200"
+                                           Aspect="AspectFill"/>
+                                </Frame>
+
+                                <!-- Placeholder when no image is selected -->
+                                <!--<Frame HeightRequest="200" IsVisible="{Binding HasSelectedImage, Converter={StaticResource InvertedBoolConverter}}" 
+                                       BackgroundColor="White" Padding="20">
+                                    <Label Text="No image selected" 
+                                           HorizontalOptions="Center" 
+                                           VerticalOptions="Center"
+                                           TextColor="Gray"/>
+                                </Frame>-->
+
+                                <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                                    <Button Text="Upload Image"
+                                            Command="{Binding UploadImageCommand}"
+                                            BackgroundColor="{StaticResource Yellow}"
+                                            TextColor="Black"
+                                            FontFamily="Inter-Black"
+                                            CornerRadius="25"
+                                            HorizontalOptions="Center"/>
+
+                                    <Button Text="Take Photo"
+                                            Command="{Binding TakePhotoCommand}"
+                                            BackgroundColor="{StaticResource Yellow}"
+                                            TextColor="Black"
+                                            FontFamily="Inter-Black"
+                                            CornerRadius="25"
+                                            HorizontalOptions="Center"/>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Label Text="POST DETAILS" 
+                               FontSize="18" 
+                               FontFamily="Inter-Black" 
+                               TextColor="{StaticResource LightBlue}"
+                               HorizontalOptions="Center"/>
+
+                        <!-- Listing Title -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Listing Title:" 
+                                   TextColor="White"
+                                   FontFamily="Inter-Black"
+                                   VerticalTextAlignment="Center"/>
+                            <Frame BackgroundColor="White" Padding="20,0">
+                                <Entry x:Name="ListingTitleEntry"
+                                       Placeholder="Name of your listing"
+                                       Text="{Binding ListingTitle}"
+                                       FontFamily="Inter-Light"/>
+                            </Frame>
+                        </HorizontalStackLayout>
+
+                        <!-- Price -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Price:" 
+                                   TextColor="White"
+                                   FontFamily="Inter-Black"
+                                   VerticalTextAlignment="Center"/>
+                            <Frame BackgroundColor="White" Padding="20,0">
+                                <Entry x:Name="PriceEntry"
+                                       Placeholder="Price of your listing"
+                                       Text="{Binding Price}"
+                                       FontFamily="Inter-Light"/>
+                            </Frame>
+                        </HorizontalStackLayout>
+
+                        <!-- Location -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Location:" 
+                                   TextColor="White"
+                                   FontFamily="Inter-Black"
+                                   VerticalTextAlignment="Center"/>
+                            <Frame BackgroundColor="White" Padding="20,0">
+                                <Entry x:Name="LocationEntry"
+                                       Placeholder="Enter Location"
+                                       Text="{Binding Location}"
+                                       FontFamily="Inter-Light"/>
+                            </Frame>
+                        </HorizontalStackLayout>
+
+                        <!-- Category Picker -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Category:" 
+                                   TextColor="White"
+                                   FontFamily="Inter-Black"
+                                   VerticalTextAlignment="Center"/>
+                            <Frame BackgroundColor="White" Padding="20,0">
+                                <Picker x:Name="CategoryPicker"
+                                        Title="Select Category"
+                                        SelectedItem="{Binding Category}"
+                                        FontFamily="Inter-Light">
+                                    <Picker.Items>
+                                        <x:String>Buyer</x:String>
+                                        <x:String>Seller</x:String>
+                                    </Picker.Items>
+                                </Picker>
+                            </Frame>
+                        </HorizontalStackLayout>
+
+                        <!-- Condition Picker -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Condition:" 
+                                   TextColor="White"
+                                   FontFamily="Inter-Black"
+                                   VerticalTextAlignment="Center"/>
+                            <Frame BackgroundColor="White" Padding="20,0">
+                                <Picker x:Name="ConditionPicker"
+                                        Title="Select Condition"
+                                        SelectedItem="{Binding Condition}"
+                                        FontFamily="Inter-Light">
+                                    <Picker.Items>
+                                        <x:String>Brand New</x:String>
+                                        <x:String>Lightly Used</x:String>
+                                        <x:String>Heavily Used</x:String>
+                                    </Picker.Items>
+                                </Picker>
+                            </Frame>
+                        </HorizontalStackLayout>
+
+                        <!-- Contact Info -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Contact Details:" 
+                                   TextColor="White"
+                                   FontFamily="Inter-Black"
+                                   VerticalTextAlignment="Center"/>
+                            <Frame BackgroundColor="White" Padding="20,0">
+                                <Entry x:Name="ContactDetailsEntry"
+                                       Placeholder="Email or phone"
+                                       Text="{Binding ContactDetails}"
+                                       FontFamily="Inter-Light"/>
+                            </Frame>
+                        </HorizontalStackLayout>
+
+                        <!-- Description -->
+                        <Label Text="Product Description:" 
+                               TextColor="White"
+                               FontFamily="Inter-Black"/>
+                        <Frame BackgroundColor="White" Padding="20,0">
+                            <Editor x:Name="AdditionalInfoEditor"
+                                    AutoSize="TextChanges"
+                                    Text="{Binding Description}"
+                                    Placeholder="Describe what you are selling and include any pertinent details!"
+                                    FontFamily="Inter-Light"/>
+                        </Frame>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Submit Button -->
+                <Button Text="Submit"
+                        Command="{Binding SubmitCommand}"
+                        BackgroundColor="{StaticResource Yellow}"
+                        TextColor="Black"
+                        FontFamily="Inter-Black"
+                        CornerRadius="25"
+                        HorizontalOptions="Center"
+                        Padding="40,10"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
