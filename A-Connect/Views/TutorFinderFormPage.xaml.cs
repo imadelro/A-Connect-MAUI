@@ -19,9 +19,11 @@ namespace A_Connect.Views
         {
             // Basic validation
             if (string.IsNullOrEmpty(courseCodeEntry.Text)
-                || categoryPicker.SelectedItem == null)
+                || categoryPicker.SelectedItem == null
+                        || pricingTypePicker.SelectedItem == null)
+
             {
-                await DisplayAlert("Error", "Course code and category are required.", "OK");
+                await DisplayAlert("Error", "Course code, category, and pricing type are required.", "OK");
                 return;
             }
 
@@ -38,6 +40,7 @@ namespace A_Connect.Views
             {
                 CourseCode = courseCodeEntry.Text.Trim().ToUpper(),
                 Category = categoryPicker.SelectedItem.ToString().Trim(),
+                PricingType = pricingTypePicker.SelectedItem.ToString().Trim(), 
                 PosterName = posterName,
                 PosterContact = contactEntry.Text?.Trim(),
                 AdditionalInfo = additionalInfoEditor.Text?.Trim(),
