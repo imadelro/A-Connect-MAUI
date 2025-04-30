@@ -23,6 +23,7 @@ namespace A_Connect.Views
             else
             {
                 displayNameLabel.Text = App.CurrentUser?.DisplayName;
+
             } 
                 
         }
