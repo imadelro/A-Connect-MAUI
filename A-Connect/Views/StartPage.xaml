@@ -25,7 +25,7 @@
                HorizontalOptions="Center"/>
 
         <!-- Tagline -->
-        <Label Text="Where Ateneans come to connect."
+        <Label Text="Where Ateneans connect."
                FontFamily="Inter-MediumItalic"
                TextColor="White"
                FontSize="16"
