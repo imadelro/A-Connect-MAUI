@@ -166,12 +166,6 @@ namespace A_Connect.ViewModels
             var items = await _database.GetPostsAsync();
             Debug.WriteLine($"Loading {items.Count} items into the feed...");
 
-            foreach (var item in items)
-            {
-                Items.Add(item);
-                Debug.WriteLine($"Loaded item: {item.ListingTitle}");
-            }
-
             FilterItems(); // Apply initial filtering
             Debug.WriteLine("Done loading items.");
         }

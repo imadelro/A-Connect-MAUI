@@ -53,22 +53,18 @@ namespace A_Connect.ViewModels
         private async void LoadPostedByDisplayName()
         {
 
-            PrintAllUsers();
             if (SelectedPost != null)
             {
                 try
                 {
-                    Console.WriteLine($"Loading display name for {SelectedPost.PosterName}...");
                     string displayname = await _userDatabase.GetDisplayNameByUsernameAsync(SelectedPost.PosterName);
                     if (displayname != null)
                     {
                         DisplayName = displayname;
-                        Console.WriteLine($"Display name found: {displayname}");
                     }
                     else
                     {
                         DisplayName = SelectedPost.PosterName; // Fallback if no display name found
-                        Console.WriteLine($"No display name found, using poster name: {SelectedPost.PosterName}");
                     }
                 }
                 catch (Exception ex)
@@ -112,32 +108,7 @@ namespace A_Connect.ViewModels
             }
         }
 
-        private async void PrintAllUsers()
-        {
-            try
-            {
-                // Get all users from the database
-                var users = await _userDatabase.GetUsersAsync();
-
-                if (users != null && users.Count > 0)
-                {
-                    // Print each user
-                    foreach (var user in users)
-                    {
-                        // Assuming User model has properties like 'Username' and 'DisplayName'
-                        Console.WriteLine($"Username: {user.Username}, DisplayName: {user.DisplayName}");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("No users found in the database.");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error fetching users: {ex.Message}");
-            }
-        }
+    
 
     }
 }
