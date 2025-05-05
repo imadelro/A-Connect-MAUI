@@ -11,17 +11,17 @@
             <RowDefinition Height="Auto"/>
             <!-- Header -->
             <RowDefinition Height="Auto"/>
-            <!-- Static Filters -->
+            <!-- Fixed Filters -->
             <RowDefinition Height="*"/>
             <!-- Scrollable Listings -->
             <RowDefinition Height="Auto"/>
             <!-- Post Button -->
             <RowDefinition Height="Auto"/>
-            <!-- Bottom Navigation -->
+            <!-- Bottom Nav -->
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Grid BackgroundColor="{StaticResource DarkBlue}" Padding="20,40,20,20" Grid.Row="0">
+        <Grid BackgroundColor="{StaticResource DarkBlue}" Padding="20,40,20,20">
             <Label Text="Marketplace"
                    TextColor="{StaticResource Yellow}"
                    FontSize="24"
@@ -30,9 +30,8 @@
                    VerticalOptions="Center"/>
         </Grid>
 
-        <!-- Static Filters: Search Bar, Tabs, Radio Buttons -->
-        <StackLayout Grid.Row="1" Spacing="20" Padding="20">
-
+        <!-- Fixed Filter Section (Row 1) -->
+        <StackLayout Grid.Row="1" Spacing="10" Padding="20,10">
             <!-- Search Bar -->
             <Frame CornerRadius="25" BackgroundColor="White" Padding="0">
                 <HorizontalStackLayout Padding="10,0">
@@ -54,7 +53,7 @@
             </Frame>
 
             <!-- Tabs -->
-            <HorizontalStackLayout HorizontalOptions="Center" Spacing="40" Padding="0,10">
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="40">
                 <!-- All Listings Tab -->
                 <VerticalStackLayout HorizontalOptions="Center">
                     <Label Text="All Listings"
@@ -117,93 +116,101 @@
             </HorizontalStackLayout>
 
             <!-- Radio Buttons -->
-            <StackLayout HorizontalOptions="Center" Orientation="Horizontal" Spacing="20" Margin="-5">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20">
                 <RadioButton Content="All"
                              GroupName="PostFilter"
                              IsChecked="{Binding ShowAllItems}"
                              VerticalOptions="Center"
-                             Padding="10,5"
-                             CornerRadius="10"
                              FontFamily="Inter-SemiBold"/>
+
                 <RadioButton Content="Buyer Listings"
                              GroupName="PostFilter"
                              IsChecked="{Binding ShowOnlyBuyers}"
                              VerticalOptions="Center"
-                             Padding="10,5"
-                             CornerRadius="10"
                              FontFamily="Inter-SemiBold"/>
+
                 <RadioButton Content="Seller Listings"
                              GroupName="PostFilter"
                              IsChecked="{Binding ShowOnlySellers}"
                              VerticalOptions="Center"
-                             Padding="10,5"
-                             CornerRadius="10"
                              FontFamily="Inter-SemiBold"/>
             </StackLayout>
         </StackLayout>
 
-        <!-- Scrollable Listings -->
-        <ScrollView Grid.Row="2">
-            <CollectionView x:Name="ListingsCollectionView"
-                            ItemsSource="{Binding FilteredItems}"
-                            SelectionMode="Single">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:MarketplacePost">
-                        <Frame BackgroundColor="White"
-                               CornerRadius="10"
-                               Padding="15"
-                               HasShadow="True"
-                               Margin="20,0,20,20">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnListingTapped" CommandParameter="{Binding .}" />
-                            </Frame.GestureRecognizers>
-                            <VerticalStackLayout Spacing="10">
-                                <Label Text="{Binding ListingTitle}" FontSize="18" FontFamily="Inter-Black" TextColor="Black"/>
-                                <Frame BackgroundColor="WhiteSmoke" Padding="0" IsClippedToBounds="True">
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="OnListingTapped" CommandParameter="{Binding .}" />
-                                    </Frame.GestureRecognizers>
-                                    <Grid HeightRequest="200">
-                                        <Image Source="{Binding ImagePath}"
-                                               Aspect="AspectFit"
-                                               HorizontalOptions="Center"
-                                               VerticalOptions="Center"/>
-                                    </Grid>
+        <!-- Listings (Scrollable) -->
+        <CollectionView Grid.Row="2"
+                        x:Name="ListingsCollectionView"
+                        ItemsSource="{Binding FilteredItems}"
+                        SelectionMode="Single"
+                        Margin="20,0,20,10">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:MarketplacePost">
+                    <Frame BackgroundColor="White"
+                           CornerRadius="10"
+                           Padding="15"
+                           HasShadow="True"
+                           Margin="0,0,0,20">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnListingTapped" CommandParameter="{Binding .}" />
+                        </Frame.GestureRecognizers>
+                        <VerticalStackLayout Spacing="10">
+
+                            <!-- Title -->
+                            <Label Text="{Binding ListingTitle}"
+                                   FontSize="18"
+                                   FontFamily="Inter-Black"
+                                   TextColor="Black"/>
+
+                            <!-- Image -->
+                            <Frame BackgroundColor="WhiteSmoke" Padding="0" IsClippedToBounds="True">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnListingTapped" CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+                                <Grid HeightRequest="200">
+                                    <Image Source="{Binding ImagePath}"
+                                           Aspect="AspectFit"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"/>
+                                </Grid>
+                            </Frame>
+
+                            <!-- Tags -->
+                            <HorizontalStackLayout Spacing="10">
+                                <Frame BackgroundColor="#d1ecf1" Padding="5,2" CornerRadius="10">
+                                    <Label Text="{Binding Category}" TextColor="#0c5460" FontSize="12" FontFamily="Inter-SemiBold"/>
                                 </Frame>
+                                <Frame BackgroundColor="#d4edda" Padding="5,2" CornerRadius="10">
+                                    <Label Text="{Binding Condition}" TextColor="#155724" FontSize="12" FontFamily="Inter-SemiBold"/>
+                                </Frame>
+                                <Frame BackgroundColor="#ebedd4" Padding="5,2" CornerRadius="10">
+                                    <Label Text="{Binding Location}" TextColor="#6d651b" FontSize="12" FontFamily="Inter-SemiBold"/>
+                                </Frame>
+                            </HorizontalStackLayout>
 
-                                <HorizontalStackLayout Spacing="10">
-                                    <Frame BackgroundColor="#d1ecf1" Padding="5,2" CornerRadius="10">
-                                        <Label Text="{Binding Category}" TextColor="#0c5460" FontSize="12" FontFamily="Inter-SemiBold"/>
-                                    </Frame>
-                                    <Frame BackgroundColor="#d4edda" Padding="5,2" CornerRadius="10">
-                                        <Label Text="{Binding Condition}" TextColor="#155724" FontSize="12" FontFamily="Inter-SemiBold"/>
-                                    </Frame>
-                                    <Frame BackgroundColor="#ebedd4" Padding="5,2" CornerRadius="10">
-                                        <Label Text="{Binding Location}" TextColor="#6d651b" FontSize="12" FontFamily="Inter-SemiBold"/>
-                                    </Frame>
-                                </HorizontalStackLayout>
+                            <!-- Price -->
+                            <Label Text="{Binding Price, StringFormat='₱{0:F2}'}"
+                                   FontSize="15"
+                                   TextColor="Black"
+                                   FontFamily="Inter-Black"/>
 
-                                <HorizontalStackLayout Spacing="10">
-                                    <Label Text="{Binding Price, StringFormat='₱{0:F2}'}" FontSize="15" TextColor="Black" FontFamily="Inter-Black"/>
-                                </HorizontalStackLayout>
+                            <!-- Delete Button (for My Listings only) -->
+                            <Button Text="Delete"
+                                    TextColor="White"
+                                    BackgroundColor="{StaticResource Red}"
+                                    CornerRadius="10"
+                                    FontFamily="Inter-SemiBold"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteCommand}"
+                                    CommandParameter="{Binding .}"
+                                    IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.IsMyListingsSelected}" />
 
-                                <Button Text="Delete"
-                                        TextColor="White"
-                                        BackgroundColor="Red"
-                                        CornerRadius="10"
-                                        FontFamily="Inter-SemiBold"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteCommand}"
-                                        CommandParameter="{Binding .}"
-                                        IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.IsMyListingsSelected}" />
-                            </VerticalStackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </ScrollView>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
         <!-- Post Button -->
-        <Grid Grid.Row="3" BackgroundColor="{StaticResource White}" Padding="0" HeightRequest="70">
+        <Grid Grid.Row="3" BackgroundColor="{StaticResource White}" Padding="0" HeightRequest="100">
             <Button Text="Post an Item +"
                     BackgroundColor="{StaticResource Yellow}"
                     TextColor="#111111"
@@ -211,32 +218,8 @@
                     CornerRadius="25"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
-                    Padding="10,10"
+                    Padding="16,10"
                     Clicked="OnPostListingClicked"/>
-        </Grid>
-
-        <!-- Optional Menu -->
-        <Grid x:Name="Menu_container"
-              IsVisible="False"
-              Grid.Row="2"
-              Opacity="1"
-              ZIndex="3"
-              InputTransparent="False">
-            <Frame BackgroundColor="#063970"
-                   WidthRequest="265" HeightRequest="525"
-                   CornerRadius="15" HasShadow="True" BorderColor="#063970"
-                   Margin="25,156,0,0"
-                   HorizontalOptions="Start">
-                <VerticalStackLayout HorizontalOptions="End" VerticalOptions="Start" Spacing="15" Margin="0,25,90,0">
-                    <Label Text="Navigation Bar" FontSize="15" HorizontalOptions="Start" TextColor="White" FontAttributes="Bold" Padding="0"/>
-                    <Button Text="Profs To Pick" TextColor="White" BackgroundColor="#063970" Clicked="OnProfsToPickClicked" HorizontalOptions="Start" Padding="0"/>
-                    <Button Text="Schedule Trading" TextColor="White" BackgroundColor="#063970" Clicked="OnScheduleTradingClicked" HorizontalOptions="Start" Padding="0"/>
-                    <Button Text="Marketplace" TextColor="White" BackgroundColor="#063970" Clicked="OnMarketplaceClicked" HorizontalOptions="Start" Padding="0"/>
-                    <Button Text="Tutor Finder" TextColor="White" BackgroundColor="#063970" Clicked="OnTutorFinderClicked" HorizontalOptions="Start" Padding="0"/>
-                    <Button Text="Jobs and Internships" TextColor="White" BackgroundColor="#063970" Clicked="OnInternNJobsClicked" HorizontalOptions="Start" Padding="0"/>
-                    <Button Text="Logout" TextColor="White" BackgroundColor="#063970" Clicked="OnLogoutClicked" HorizontalOptions="Start" Padding="0"/>
-                </VerticalStackLayout>
-            </Frame>
         </Grid>
 
         <!-- Bottom Navigation -->
