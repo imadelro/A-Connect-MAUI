@@ -149,7 +149,7 @@
                     <Button Text="Delete"
                             Command="{Binding DeletePostCommand}"
                             CommandParameter="{Binding SelectedPost}"
-                            BackgroundColor="Red"
+                            BackgroundColor="{StaticResource Red}"
                             TextColor="White"
                             FontFamily="Inter-Black"
                             CornerRadius="25"

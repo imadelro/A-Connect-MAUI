@@ -32,7 +32,7 @@ namespace A_Connect.Views
                 Debug.Write(user.Username);
                 Preferences.Set("Username", user.Username);
                 Preferences.Set("IsLoggedIn", true);
-                await DisplayAlert("Success", "Logged in successfully", "OK");
+                await DisplayAlert("Success", "Logged in successfully!", "OK");
                 await Shell.Current.GoToAsync("//HomePage");
                 //await Shell.Current.GoToAsync("//MainPage"); this is where we redirect but unavailable pa rn
                 // await Shell.Current.GoToAsync("//ScheduleTradingPage");
