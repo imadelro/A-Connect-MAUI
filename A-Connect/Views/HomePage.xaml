@@ -41,7 +41,7 @@
     >
     <Frame 
                    BackgroundColor="#063970"
-                   WidthRequest="265" HeightRequest="525"
+                   WidthRequest="265" HeightRequest="515"
                    CornerRadius="15" HasShadow="True" BorderColor="#063970"
                    Margin="0,67,0,0"
                    HorizontalOptions="Start" 

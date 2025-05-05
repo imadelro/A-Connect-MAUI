@@ -286,6 +286,46 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
+
+            <!-- "Post" Button  -->
+            <Button Text="Post +"
+                    Command="{Binding SwitchToCreatePostCommand}"
+                    BackgroundColor="{StaticResource Yellow}"
+                    TextColor="Black"
+                    FontFamily="Inter-Black"
+                    CornerRadius="25"
+                    HorizontalOptions="Center"
+                    Padding="10,5"/>
+        </StackLayout>
+
+        <!-- Bottom Nav Bar -->
+        <Grid Grid.Row="2" BackgroundColor="#063970" HeightRequest="60">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ImageButton Source="nav_icon1.png"
+         Grid.Column="0"
+         HorizontalOptions="Center"
+         VerticalOptions="Center"
+         WidthRequest="30" HeightRequest="30"
+         Clicked="OnNavIconClicked"/>
+            <ImageButton Source="nav_home.png"
+                 Grid.Column="1"
+                 HorizontalOptions="Center"
+                 VerticalOptions="Center"
+                 WidthRequest="30" HeightRequest="30"
+                 Clicked="OnHomeButtonClicked"/>
+            <ImageButton Source="nav_profile.png"
+         Grid.Column="2"
+         HorizontalOptions="Center"
+         VerticalOptions="Center"
+         WidthRequest="30" HeightRequest="30"
+         Clicked="OnAccountClicked"/>
+        </Grid>
+        
             <Grid
     x:Name="Menu_container"
     IsVisible="False"
@@ -400,44 +440,6 @@ HorizontalOptions="Start" Margin="0,0,10,0"/>
                     </VerticalStackLayout>
                 </Frame>
     </Grid>
-
-            <!-- "Post" Button  -->
-            <Button Text="Post +"
-                    Command="{Binding SwitchToCreatePostCommand}"
-                    BackgroundColor="{StaticResource Yellow}"
-                    TextColor="Black"
-                    FontFamily="Inter-Black"
-                    CornerRadius="25"
-                    HorizontalOptions="Center"
-                    Padding="10,5"/>
-        </StackLayout>
-
-        <!-- Bottom Nav Bar -->
-        <Grid Grid.Row="2" BackgroundColor="#063970" HeightRequest="60">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <ImageButton Source="nav_icon1.png"
-         Grid.Column="0"
-         HorizontalOptions="Center"
-         VerticalOptions="Center"
-         WidthRequest="30" HeightRequest="30"
-         Clicked="OnNavIconClicked"/>
-            <ImageButton Source="nav_home.png"
-                 Grid.Column="1"
-                 HorizontalOptions="Center"
-                 VerticalOptions="Center"
-                 WidthRequest="30" HeightRequest="30"
-                 Clicked="OnHomeButtonClicked"/>
-            <ImageButton Source="nav_profile.png"
-         Grid.Column="2"
-         HorizontalOptions="Center"
-         VerticalOptions="Center"
-         WidthRequest="30" HeightRequest="30"
-         Clicked="OnAccountClicked"/>
-        </Grid>
     </Grid>
+    
 </ContentPage>
