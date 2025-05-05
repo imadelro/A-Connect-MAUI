@@ -350,7 +350,7 @@
 
 
             <!-- Create Post Button -->
-            <Button Text="Create Post"
+            <Button Text="Post +"
                     BackgroundColor="{StaticResource Yellow}"
                     TextColor="Black"
                     FontFamily="Inter-Black"

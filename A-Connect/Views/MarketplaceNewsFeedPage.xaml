@@ -229,7 +229,7 @@
                                     <!-- Delete Button, only visible in My Listings tab -->
                                     <Button Text="Delete"
                                             TextColor="White"
-                                            BackgroundColor="Red"
+                                            BackgroundColor="{StaticResource Red}"
                                             CornerRadius="10"
                                             FontFamily="Inter-SemiBold"
                                             Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteCommand}"

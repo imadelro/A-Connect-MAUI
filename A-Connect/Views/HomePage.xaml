@@ -52,11 +52,11 @@
             Spacing="15"
             Margin="0,25,90,0"
             >
-                <Label Text="Navigation Bar"
-                    FontSize="15"
+                <Label Text="A-Connect"
+                    FontSize="18"
                     HorizontalOptions="Start"
                     TextColor="White"
-                    FontAttributes="Bold" Padding="0"/>
+                    FontAttributes="Bold" Padding="10,10,10,10"/>
                 
                 
                 <Button Text="Profs To Pick"
