@@ -74,7 +74,7 @@ namespace A_Connect.ViewModels
         {
             // Validate the fields
             if (string.IsNullOrEmpty(ListingTitle) || string.IsNullOrEmpty(Category) ||
-                string.IsNullOrEmpty(Condition) || string.IsNullOrEmpty(ContactDetails))
+                string.IsNullOrEmpty(Condition) || string.IsNullOrEmpty(ContactDetails) || string.IsNullOrEmpty(SelectedImagePath))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Please fill all required fields.", "OK");
                 return;
