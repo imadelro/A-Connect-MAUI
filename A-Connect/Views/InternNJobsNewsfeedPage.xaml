@@ -11,6 +11,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <!-- Blue Header -->
@@ -285,6 +286,70 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
+            <Grid
+    x:Name="Menu_container"
+    IsVisible="False"
+    Grid.Row="1"
+    Opacity="1"
+    ZIndex="3"
+    InputTransparent="False"
+    >
+    <Frame 
+                   BackgroundColor="#063970"
+                   WidthRequest="265" HeightRequest="525"
+                   CornerRadius="15" HasShadow="True" BorderColor="#063970"
+                   Margin="20,56,0,0" 
+                   HorizontalOptions="Start" 
+>
+        <VerticalStackLayout
+            HorizontalOptions="End"
+            VerticalOptions="Start"
+            Spacing="15"
+            Margin="0,25,90,0"
+            >
+                <Label Text="Navigation Bar"
+                    FontSize="15"
+                    HorizontalOptions="Start"
+                    TextColor="White"
+                    FontAttributes="Bold" Padding="0"/>
+                
+                
+                <Button Text="Profs To Pick"
+                        TextColor="White"
+                        BackgroundColor="#063970"
+                        Clicked="OnProfsToPickClicked" HorizontalOptions="Start"
+                        Padding="0"/>
+                <Button Text="Schedule Trading"
+                        TextColor="White"
+                        BackgroundColor="#063970"
+                        Clicked="OnScheduleTradingClicked"
+                        HorizontalOptions="Start" Padding="0"/>
+                <Button Text="Marketplace"
+                        TextColor="White"
+                        BackgroundColor="#063970"
+                        Clicked="OnMarketplaceClicked" 
+                        HorizontalOptions="Start" Padding="0"/>
+                <Button Text="Tutor Finder"
+                        TextColor="White"
+                        BackgroundColor="#063970"
+                        Clicked="OnTutorFinderClicked"
+                        HorizontalOptions="Start" Padding="0"/>
+                <Button Text="Jobs and Internships"
+                        TextColor="White"
+                        BackgroundColor="#063970"
+                        Clicked="OnInternNJobsClicked"
+                        HorizontalOptions="Start" Padding="0"
+                         />
+                <Button Text="Logout"
+                        TextColor="White"
+                        BackgroundColor="#063970"
+                        Clicked="OnLogoutClicked"
+                        HorizontalOptions="Start" Padding="0"/>
+            
+        </VerticalStackLayout>
+        </Frame>
+    </Grid>
+
             <!-- "Post" Button  -->
             <Button Text="Post +"
                     Command="{Binding SwitchToCreatePostCommand}"
@@ -308,7 +373,8 @@
          Grid.Column="0"
          HorizontalOptions="Center"
          VerticalOptions="Center"
-         WidthRequest="30" HeightRequest="30"/>
+         WidthRequest="30" HeightRequest="30"
+         Clicked="OnNavIconClicked"/>
             <ImageButton Source="nav_home.png"
                  Grid.Column="1"
                  HorizontalOptions="Center"
@@ -319,7 +385,8 @@
          Grid.Column="2"
          HorizontalOptions="Center"
          VerticalOptions="Center"
-         WidthRequest="30" HeightRequest="30"/>
+         WidthRequest="30" HeightRequest="30"
+         Clicked="OnAccountClicked"/>
         </Grid>
     </Grid>
 </ContentPage>
