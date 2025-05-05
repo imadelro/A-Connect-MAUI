@@ -199,7 +199,9 @@ namespace A_Connect.ViewModels
             {
                 opportunities = opportunities
                     .Where(o => o.Company.Contains(_searchText, System.StringComparison.OrdinalIgnoreCase) ||
-                                o.Location.Contains(_searchText, System.StringComparison.OrdinalIgnoreCase))
+                                o.Location.Contains(_searchText, System.StringComparison.OrdinalIgnoreCase) ||
+                                 o.Position.Contains(_searchText, System.StringComparison.OrdinalIgnoreCase) ||
+                                o.Title.Contains(_searchText, System.StringComparison.OrdinalIgnoreCase))
                     .ToList();
             }
 
