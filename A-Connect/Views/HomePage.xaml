@@ -52,44 +52,89 @@
             Spacing="15"
             Margin="0,25,90,0"
             >
-                <Label Text="A-Connect"
-                    FontSize="18"
+                    <HorizontalStackLayout>
+                        <Image Source="logo.png"
+HeightRequest="30"
+WidthRequest="30"
+HorizontalOptions="Start"/>
+                        <Label Text="A-Connect"
+                    FontSize="21"
                     HorizontalOptions="Start"
                     TextColor="White"
-                    FontAttributes="Bold" Padding="10,10,10,10"/>
-                
-                
-                <Button Text="Profs To Pick"
+                    FontAttributes="Bold" Padding="10,10,10,10"
+                               FontFamily="Inter-Black"/>
+</HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                    <Image Source="nav_ptp.png"
+HeightRequest="20"
+WidthRequest="20"
+HorizontalOptions="Start"
+                           Margin="0,0,10,0"/>
+                    <Button Text="Profs To Pick"
                         TextColor="White"
                         BackgroundColor="#063970"
                         Clicked="OnProfsToPickClicked" HorizontalOptions="Start"
-                        Padding="0"/>
-                <Button Text="Schedule Trading"
+                        Padding="0"
+                            FontFamily="Inter-Bold"/></HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                    <Image Source="nav_st.png"
+HeightRequest="20"
+WidthRequest="20"
+HorizontalOptions="Start" Margin="0,0,10,0"/>
+                    <Button Text="Schedule Trading"
                         TextColor="White"
                         BackgroundColor="#063970"
                         Clicked="OnScheduleTradingClicked"
-                        HorizontalOptions="Start" Padding="0"/>
-                <Button Text="Marketplace"
+                        HorizontalOptions="Start" Padding="0"
+                        FontFamily="Inter-Bold"/></HorizontalStackLayout>
+
+                    <HorizontalStackLayout>
+                    <Image Source="nav_mp.png"
+HeightRequest="20"
+WidthRequest="20"
+HorizontalOptions="Start" Margin="0,0,10,0"/>
+                    <Button Text="Marketplace"
                         TextColor="White"
                         BackgroundColor="#063970"
                         Clicked="OnMarketplaceClicked" 
-                        HorizontalOptions="Start" Padding="0"/>
-                <Button Text="Tutor Finder"
+                        HorizontalOptions="Start" Padding="0"
+                        FontFamily="Inter-Bold"/></HorizontalStackLayout>
+
+                    <HorizontalStackLayout>
+                    <Image Source="nav_tf.png"
+HeightRequest="20"
+WidthRequest="20"
+HorizontalOptions="Start" Margin="0,0,10,0"/>
+                    <Button Text="Tutor Finder"
                         TextColor="White"
                         BackgroundColor="#063970"
                         Clicked="OnTutorFinderClicked"
-                        HorizontalOptions="Start" Padding="0"/>
-                <Button Text="Jobs and Internships"
+                        HorizontalOptions="Start" Padding="0"
+                        FontFamily="Inter-Bold"/></HorizontalStackLayout>
+
+                    <HorizontalStackLayout>
+                    <Image Source="nav_ji.png"
+HeightRequest="20"
+WidthRequest="20"
+HorizontalOptions="Start" Margin="0,0,10,0"/>
+                    <Button Text="Jobs &amp; Internships"
                         TextColor="White"
                         BackgroundColor="#063970"
                         Clicked="OnInternNJobsClicked"
                         HorizontalOptions="Start" Padding="0"
-                         />
-                <Button Text="Logout"
+                        FontFamily="Inter-Bold" /></HorizontalStackLayout>
+
+                    <HorizontalStackLayout>
+                    <Image Source="nav_logout.png"
+HeightRequest="20"
+WidthRequest="20"
+HorizontalOptions="Start" Margin="0,0,10,0"/>
+                    <Button Text="Logout"
                         TextColor="White"
                         BackgroundColor="#063970"
                         Clicked="OnLogoutClicked"
-                        HorizontalOptions="Start" Padding="0"/>
+                        HorizontalOptions="Start" Padding="0"
+                        FontFamily="Inter-Bold"/></HorizontalStackLayout>
             
         </VerticalStackLayout>
         </Frame>
